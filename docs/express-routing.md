@@ -1,0 +1,107 @@
+# Rounting Express
+
+## Récupérer liste de sport
+
+- **GET** : _api/sports_
+
+---
+
+## Activités
+
+### Récupérer liste d'activités (avec filtre de date)
+
+- **GET** : _api/activities?filter="param"_
+
+---
+
+### Récupérer liste d'activités par sport
+
+- **GET** : _api/activities/sport/:sport_id_
+
+---
+
+### Récupérer liste d'activités par utilisateur
+
+- **GET** : _api/activities/user/:user_id_
+
+---
+
+### Récupérer liste d'activités par lieu
+
+- **GET** : _api/activities/city/:city_name_
+
+---
+
+### Récupérer liste d'activités par géolocalisation
+
+- **GET**: _api/activities/?Xcoordinate="x_value"&Ycoordinate="y_value"_
+
+---
+
+### Poster une activité
+
+- **POST** : _api/activities_
+
+```sql
+        sports_id:INT,
+        creator_id:INT,
+        difficulty:INT,
+        activity_description:VARCHAR(500),
+        adresse:VARCHAR(500),
+        city:VARCHAR(250),
+        gps_coordinate_x:VARCHAR(500),
+        gps_coordinate_y:VARCHAR(500)
+        start_time:DATE,
+        duration:INT,
+        photo:VARCHAR(255),
+        max_participants:INT,
+        creation_time:DATE
+```
+
+---
+
+### Modifier une activité
+
+- **PUT** : _api/activities/id/:activity_id_
+
+---
+
+### Supprimer une activité
+
+- **DELETE** : _api/activities/id/:activity_id_
+
+---
+
+## Utilisateurs
+
+### Se connecter
+
+- **GET** : _api/users_
+
+### Créer un utilisateur
+
+- **POST** : _api/users_
+
+```sql
+    lastname:VARCHAR(255),
+    firstname:VARCHAR(255),
+    gender:VARCHAR(255),
+    pseudo:VARCHAR(255),
+    birthdate:DATE,
+    email:VARCHAR(255),
+    password:VARCHAR(255),
+    photo:VARCHAR(255),
+    level:INT
+```
+
+---
+
+### Afficher le profil d'un utilisateur
+
+- **GET** : _api/users/:user_id_
+
+---
+
+### Modifier le profil d'un utilisateur
+
+- **PUT** : _api/users/:user_id_
