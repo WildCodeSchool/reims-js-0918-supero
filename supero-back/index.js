@@ -23,10 +23,17 @@ app
   .get("/activities", (req, res) => {
     res.send(activitiesjson);
   })
-  .get("/activities/:sports_id", (req, res) => {
+  .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     const result = activitiesjson.activities.filter(
       activity => activity.sports_id.toString() === sportId
+    );
+    res.send(result);
+  })
+  .get("/activities/creators/:creator_id", (req, res) => {
+    const creatorId = req.params.creator_id;
+    const result = activitiesjson.activities.filter(
+      activity => activity.creator_id.toString() === creatorId
     );
     res.send(result);
   });
