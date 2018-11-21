@@ -52,6 +52,41 @@ app
         activity.latitude === latitude && activity.longitude === longitude
     );
     res.send(result).status(200);
+  })
+  .get("/activities/add", (req, res) => {
+    res.send("Aller stp");
+  })
+  .post("/activities/add", (req, res) => {
+    const formData = req.body;
+    const sportId = req.body.sports_id;
+    const creatorId = req.body.creator_id;
+    const duration = req.body.duration;
+
+    const newActivities = {
+      sports_id: sportId,
+      creator_id: creatorId,
+      duration: duration
+    };
+    res.send(console.log(newActivities));
+  })
+  .put("/activities/update/:activity_id", (req, res) => {
+    const formData = req.body;
+    const activityId = req.params.activity_id;
+    const sportId = req.body.sports_id;
+    const creatorId = req.body.creator_id;
+    const duration = req.body.duration;
+
+    const result = activitiesjson.activities.filter(
+      activity => activity.activity_id.toString() === activityId
+    );
+    console.log(result);
+
+    const updateActivities = {
+      sports_id: sportId,
+      creator_id: creatorId,
+      duration: duration
+    };
+    res.send(console.log(updateActivities));
   });
 
 app.listen(port, err => {

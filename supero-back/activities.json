@@ -1,6 +1,7 @@
 {
   "activities": [
     {
+      "activity_id": 1,
       "sports_id": 1,
       "creator_id": 1,
       "difficulty": 3,
@@ -16,6 +17,7 @@
       "creation_time": "01/12/18"
     },
     {
+      "activity_id": 2,
       "sports_id": 1,
       "creator_id": 1,
       "difficulty": 5,
@@ -31,6 +33,7 @@
       "creation_time": "05/12/18"
     },
     {
+      "activity_id": 3,
       "sports_id": 2,
       "creator_id": 2,
       "difficulty": 2,
@@ -46,6 +49,7 @@
       "creation_time": "01/11/18"
     },
     {
+      "activity_id": 4,
       "sports_id": 3,
       "creator_id": 3,
       "difficulty": 1,
@@ -61,6 +65,7 @@
       "creation_time": "15/12/18"
     },
     {
+      "activity_id": 5,
       "sports_id": 3,
       "creator_id": 3,
       "difficulty": 2,
@@ -76,6 +81,7 @@
       "creation_time": "31/12/18"
     },
     {
+      "activity_id": 6,
       "sports_id": 3,
       "creator_id": 3,
       "difficulty": 3,
@@ -91,6 +97,7 @@
       "creation_time": "01/12/18"
     },
     {
+      "activity_id": 7,
       "sports_id": 4,
       "creator_id": 4,
       "difficulty": 5,
@@ -106,6 +113,7 @@
       "creation_time": "02/12/18"
     },
     {
+      "activity_id": 8,
       "sports_id": 5,
       "creator_id": 4,
       "difficulty": 2,
