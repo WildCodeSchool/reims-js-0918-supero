@@ -43,6 +43,15 @@ app
       activity => activity.city === city
     );
     res.send(result);
+  })
+  .get("/activities/geocalisation", (req, res) => {
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
+    const result = activitiesjson.activities.filter(
+      activity =>
+        activity.latitude === latitude && activity.longitude === longitude
+    );
+    res.send(result).status(200);
   });
 
 app.listen(port, err => {
