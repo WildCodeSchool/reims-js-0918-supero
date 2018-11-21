@@ -34,7 +34,7 @@
 
 ### Récupérer liste d'activités par géolocalisation
 
-- **GET**: _api/activities/?Xcoordinate="x_value"&Ycoordinate="y_value"_
+- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"_
 
 ---
 
@@ -49,8 +49,8 @@
         activity_description:VARCHAR(500),
         adresse:VARCHAR(500),
         city:VARCHAR(250),
-        gps_coordinate_x:VARCHAR(500),
-        gps_coordinate_y:VARCHAR(500)
+        latitude:VARCHAR(500),
+        longitude:VARCHAR(500)
         start_time:DATE,
         duration:INT,
         photo:VARCHAR(255),
