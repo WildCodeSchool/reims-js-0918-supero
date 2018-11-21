@@ -17,6 +17,17 @@ app.get("/api/users", (req, res) => {
   );
 });
 
+// USERS -- afficher le profil d'un utilisateur
+
+app.get("/api/users/:user_id", (req, res) => {
+  const requiredProfile = json.users.filter(
+    user => user.id === parseInt(req.params.user_id)
+  );
+  requiredProfile[0]
+    ? res.send(`Your id : ${requiredProfile[0].firstname}`)
+    : res.status(404).send(`There is no such user !`);
+});
+
 app.listen(port, err => {
   if (err) {
     throw new Error("Something Bad Happened ...");
