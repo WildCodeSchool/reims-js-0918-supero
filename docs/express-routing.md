@@ -8,9 +8,11 @@
 
 ## Activités
 
-### Récupérer liste d'activités (avec filtre de date)
+### Récupérer liste d'activités
 
-- **GET** : _api/activities?filter="param"_
+#### OrderBy prend un paramètre "new" ou "start" qui permettra d'afficher les activités créées recemment ou par ordre chronologique de démarrage
+
+- **GET** : _api/activities?orderBy="param"_
 
 ---
 
