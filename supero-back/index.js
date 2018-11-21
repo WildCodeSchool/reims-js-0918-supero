@@ -1,6 +1,16 @@
 const port = 3000;
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
 const json = require("./users.json");
 
 app.get("/", (req, res) => {
@@ -17,6 +27,20 @@ app.get("/api/users", (req, res) => {
   );
 });
 
+// USERS -- créer un utilisateur
+
+app.post("/api/users", (req, res) => {
+  const formData = req.body;
+  connection.query("INSERT INTO users SET ?", formData, err => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Erreur lors de la création d'un utilisateur");
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
 // USERS -- afficher le profil d'un utilisateur
 
 app.get("/api/users/:user_id", (req, res) => {
@@ -27,6 +51,23 @@ app.get("/api/users/:user_id", (req, res) => {
     ? res.send(`Your id : ${requiredProfile[0].firstname}`)
     : res.status(404).send(`There is no such user !`);
 });
+
+// USERS -- modifier le profil d'un utilisateur
+
+app.put('/api/users/:id', (req, res) => {
+  const idUser = req.params.id;
+  const formData = req.body;
+  connection.query('UPDATE user SET ? WHERE id = ?', [formData, idUser], err => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Erreur lors de la modification d'un utilisateur");
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
+
+// USERS -- TERMINE
 
 app.listen(port, err => {
   if (err) {
