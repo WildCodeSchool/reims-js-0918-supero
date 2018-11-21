@@ -36,6 +36,13 @@ app
       activity => activity.creator_id.toString() === creatorId
     );
     res.send(result);
+  })
+  .get("/activities/city/:city", (req, res) => {
+    const city = req.params.city;
+    const result = activitiesjson.activities.filter(
+      activity => activity.city === city
+    );
+    res.send(result);
   });
 
 app.listen(port, err => {
