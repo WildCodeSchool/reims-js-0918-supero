@@ -10,31 +10,31 @@
 
 ### Récupérer liste d'activités (avec filtre de date)
 
-- **GET** : _api/activities?filter="param"_
+- **GET** : _api/activities?filter="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par sport
 
-- **GET** : _api/activities/sport/:sport_id_
+- **GET** : _api/activities/sport/:sport_id?filter="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par utilisateur
 
-- **GET** : _api/activities/user/:user_id_
+- **GET** : _api/activities/user/:user_id?filter="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par lieu
 
-- **GET** : _api/activities/city/:city_name_
+- **GET** : _api/activities/city/:city_name?filter="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par géolocalisation
 
-- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"_
+- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"&filter="param"&limit="nb"&skip="nb"_
 
 ---
 
