@@ -120,13 +120,3 @@ exports.down = function(db) {
 exports._meta = {
   version: 1
 };
-
-// "lastname": "Niveau",
-//       "firstname": "Benoît",
-//       "gender": "M",
-//       "pseudo": "Benoît1521",
-//       "birthdate": "07/10/1980",
-//       "email": "be.niveau@hotmail.fr",
-//       "password": "azerazer",
-//       "photo": "http://www.maphoto.fr/13515134",
-//       "level": 3

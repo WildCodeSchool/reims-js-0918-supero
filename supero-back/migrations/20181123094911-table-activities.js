@@ -53,7 +53,7 @@ exports.up = function(db, callback) {
       duration: "int",
       photo: "string",
       max_participants: "int",
-      creation_time: "date"
+      creation_time: { type: "datetime", defaultValue: new String("NOW()") }
     },
     callback
   );
