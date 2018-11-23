@@ -45,7 +45,7 @@ app
     );
     res.send(result);
   })
-  .get("/activities/geocalisation", (req, res) => {
+  .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     const result = activitiesjson.activities.filter(
@@ -126,17 +126,21 @@ app.get("/api/users/:user_id", (req, res) => {
 
 // USERS -- modifier le profil d'un utilisateur
 
-app.put('/api/users/:id', (req, res) => {
+app.put("/api/users/:id", (req, res) => {
   const idUser = req.params.id;
   const formData = req.body;
-  connection.query('UPDATE user SET ? WHERE id = ?', [formData, idUser], err => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Erreur lors de la modification d'un utilisateur");
-    } else {
-      res.sendStatus(200);
+  connection.query(
+    "UPDATE user SET ? WHERE id = ?",
+    [formData, idUser],
+    err => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Erreur lors de la modification d'un utilisateur");
+      } else {
+        res.sendStatus(200);
+      }
     }
-  });
+  );
 });
 
 // USERS -- TERMINE
