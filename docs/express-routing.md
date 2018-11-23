@@ -10,33 +10,33 @@
 
 ### Récupérer liste d'activités
 
-#### OrderBy prend un paramètre "new" ou "start" qui permettra d'afficher les activités créées recemment ou par ordre chronologique de démarrage
+#### "Sort" prend un paramètre "new" ou "start" qui permettra d'afficher les activités créées recemment ou par ordre chronologique de démarrage
 
-- **GET** : _api/activities?filter="param"&limit="nb"&skip="nb"_
+- **GET** : _api/activities?sort="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par sport
 
-- **GET** : _api/activities/sport/:sport_id?filter="param"&limit="nb"&skip="nb"_
+- **GET** : _api/activities/sport/:sport_id?sort="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par utilisateur
 
-- **GET** : _api/activities/user/:user_id?filter="param"&limit="nb"&skip="nb"_
+- **GET** : _api/activities/user/:user_id?sort="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par lieu
 
-- **GET** : _api/activities/city/:city_name?filter="param"&limit="nb"&skip="nb"_
+- **GET** : _api/activities/city/:city_name?sort="param"&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par géolocalisation
 
-- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"&filter="param"&limit="nb"&skip="nb"_
+- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"&sort="param"&limit="nb"&skip="nb"_
 
 ---
 
