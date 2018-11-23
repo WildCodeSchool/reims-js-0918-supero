@@ -87,7 +87,7 @@ app
     };
     res.send(console.log(updateActivities));
   });
-// USERS -- se connecter
+// USERS -- Liste utilisateurs
 
 app.get("/users", (req, res) => {
   res.send(json.users);
