@@ -2,7 +2,7 @@
 
 ## Récupérer liste de sport
 
-- **GET** : _api/sports_
+- **GET** : _/sports_
 
 ---
 
@@ -10,37 +10,37 @@
 
 ### Récupérer liste d'activités
 
-- **GET** : _api/activities?limit="nb"&skip="nb"_
+- **GET** : _/activities?limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par sport
 
-- **GET** : _api/activities/sport/:sport_id?&limit="nb"&skip="nb"_
+- **GET** : _/activities/sport/:sport_id?&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par utilisateur
 
-- **GET** : _api/activities/user/:user_id?&limit="nb"&skip="nb"_
+- **GET** : _/activities/user/:user_id?&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par lieu
 
-- **GET** : _api/activities/city/:city_name?&limit="nb"&skip="nb"_
+- **GET** : _/activities/city/:city_name?&limit="nb"&skip="nb"_
 
 ---
 
 ### Récupérer liste d'activités par géolocalisation
 
-- **GET**: _api/activities/?latitude="latitude_value"&longitude="longitude_value"&limit="nb"&skip="nb"_
+- **GET**: _/activities/?latitude="latitude_value"&longitude="longitude_value"&limit="nb"&skip="nb"_
 
 ---
 
 ### Poster une activité
 
-- **POST** : _api/activities_
+- **POST** : _/activities_
 
 ```sql
         sports_id:INT,
@@ -62,13 +62,13 @@
 
 ### Modifier une activité
 
-- **PUT** : _api/activities/id/:activity_id_
+- **PUT** : _/activities/id/:activity_id_
 
 ---
 
 ### Supprimer une activité
 
-- **DELETE** : _api/activities/id/:activity_id_
+- **DELETE** : _/activities/id/:activity_id_
 
 ---
 
@@ -76,11 +76,11 @@
 
 ### Se connecter
 
-- **GET** : _api/users_
+- **GET** : _/users_
 
 ### Créer un utilisateur
 
-- **POST** : _api/users_
+- **POST** : _/users_
 
 ```sql
     lastname:VARCHAR(255),
@@ -98,10 +98,10 @@
 
 ### Afficher le profil d'un utilisateur
 
-- **GET** : _api/users/:user_id_
+- **GET** : _/users/:user_id_
 
 ---
 
 ### Modifier le profil d'un utilisateur
 
-- **PUT** : _api/users/:user_id_
+- **PUT** : _/users/:user_id_
