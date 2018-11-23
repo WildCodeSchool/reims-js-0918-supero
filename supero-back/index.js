@@ -1,6 +1,7 @@
 const port = 3000;
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const bodyParser = require("body-parser");
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -126,17 +127,21 @@ app.get("/api/users/:user_id", (req, res) => {
 
 // USERS -- modifier le profil d'un utilisateur
 
-app.put('/api/users/:id', (req, res) => {
+app.put("/api/users/:id", (req, res) => {
   const idUser = req.params.id;
   const formData = req.body;
-  connection.query('UPDATE user SET ? WHERE id = ?', [formData, idUser], err => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Erreur lors de la modification d'un utilisateur");
-    } else {
-      res.sendStatus(200);
+  connection.query(
+    "UPDATE user SET ? WHERE id = ?",
+    [formData, idUser],
+    err => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Erreur lors de la modification d'un utilisateur");
+      } else {
+        res.sendStatus(200);
+      }
     }
-  });
+  );
 });
 
 // USERS -- TERMINE

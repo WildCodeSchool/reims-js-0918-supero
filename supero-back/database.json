@@ -1,7 +1,9 @@
 {
-  "dev": "mysql",
-  "user": { "ENV": "DEV_USER" },
-  "password": { "ENV": "DEV_PASSWORD" },
-  "host": "localhost",
-  "database": "supero"
+  "dev": {
+    "driver": "mysql",
+    "user": { "ENV": "DEV_USER" },
+    "password": { "ENV": "DEV_PASSWORD" },
+    "host": "localhost",
+    "database": "supero"
+  }
 }
