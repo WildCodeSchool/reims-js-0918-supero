@@ -43,6 +43,7 @@
 - **POST** : _/activities_
 
 ```sql
+        activity_id:INT,
         sports_id:INT,
         creator_id:INT,
         difficulty:INT,

@@ -1,6 +1,7 @@
 const port = 3000;
 const express = require("express");
 const app = express();
+require("dotenv").config();
 const bodyParser = require("body-parser");
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
