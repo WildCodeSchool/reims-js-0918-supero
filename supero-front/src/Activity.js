@@ -4,7 +4,7 @@ import "./Activity.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
-import displayDifficultyIcon from "./displayDifficultyIcon";
+import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 
 import {
   faBolt,
@@ -21,18 +21,20 @@ const Activity = activity => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
-        <CardImg
-          width="100%"
-          src="./images/swimming.jpg"
-          alt="Card image cap"
-        />
+        {activity.activity_img ? (
+          <CardImg
+            width="100%"
+            src={`./images/${activity.activity_img}`}
+            alt={activity.sports_id}
+          />
+        ) : (
+          <CardImg width="100%" src="./images/default.jpg" alt="default" />
+        )}
         <CardImgOverlay>
-          <CardTitle>
-            <h2> Session {sports[activity.activity_id - 1]}</h2>
-          </CardTitle>
+          <CardTitle>Session {sports[activity.sports_id - 1]}</CardTitle>
           <CardBody>
-            <span class="difficulty">
-              {displayDifficultyIcon(activity.difficulty).map(icon => icon)}
+            <span className="difficulty">
+              <DisplayDifficultyIcon difficulty={activity.difficulty} />
             </span>
           </CardBody>
           <div className="activity_details">
