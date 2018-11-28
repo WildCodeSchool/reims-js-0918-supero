@@ -40,7 +40,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send("Pas d'utilisateur ou d'activitées");
+          res.status(500).send({ error: "Pas d'utilisateur ou d'activitées" });
         } else {
           res.json(results);
         }
@@ -55,7 +55,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send("Pas d'activité dans cette ville");
+          res.status(500).send({ error: "Pas d'activité dans cette ville" });
         } else {
           res.json(results);
         }
