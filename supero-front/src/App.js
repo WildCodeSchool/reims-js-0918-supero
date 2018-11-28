@@ -18,7 +18,8 @@ const activities = [
     duration: 2,
     photo: "image.png",
     max_participants: 5,
-    creation_time: "01/12/18"
+    creation_time: "01/12/18",
+    activity_img: "running.jpg"
   },
   {
     activity_id: 2,
@@ -34,7 +35,8 @@ const activities = [
     duration: 2,
     photo: "image.png",
     max_participants: 10,
-    creation_time: "05/12/18"
+    creation_time: "05/12/18",
+    activity_img: "running.jpg"
   },
   {
     activity_id: 3,
@@ -50,7 +52,8 @@ const activities = [
     duration: 6,
     photo: "image.png",
     max_participants: 2,
-    creation_time: "01/11/18"
+    creation_time: "01/11/18",
+    activity_img: "bike.jpg"
   },
   {
     activity_id: 4,
@@ -66,7 +69,8 @@ const activities = [
     duration: 2,
     photo: "image.png",
     max_participants: 4,
-    creation_time: "15/12/18"
+    creation_time: "15/12/18",
+    activity_img: "swimming.jpg"
   },
   {
     activity_id: 5,
@@ -82,7 +86,8 @@ const activities = [
     duration: 10,
     photo: "image.png",
     max_participants: 8,
-    creation_time: "31/12/18"
+    creation_time: "31/12/18",
+    activity_img: "football.jpg"
   },
   {
     activity_id: 6,
@@ -98,7 +103,8 @@ const activities = [
     duration: 2,
     photo: "image.png",
     max_participants: 6,
-    creation_time: "01/12/18"
+    creation_time: "01/12/18",
+    activity_img: "football.jpg"
   },
   {
     activity_id: 7,
