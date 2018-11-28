@@ -41,7 +41,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send("Pas d'utilisateur ou d'activitées");
+          res.status(500).send(err);
         } else {
           res.json(results);
         }
@@ -50,33 +50,50 @@ app
   })
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
-    const result = activitiesjson.activities.filter(
-      activity => activity.city === city
+    connection.query(
+      "SELECT * FROM activities WHERE activity_city = ?",
+      [city],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
-    const result = activitiesjson.activities.filter(
-      activity =>
-        activity.latitude === latitude && activity.longitude === longitude
+    connection.query(
+      "SELECT * FROM activities WHERE activity_latitude= ? AND activity_longitude = ?",
+      [latitude, longitude],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result).status(200);
   })
 
   .post("/activities", (req, res) => {
     const formData = req.body;
-    const sportId = req.body.sports_id;
-    const creatorId = req.body.creator_id;
-    const duration = req.body.duration;
-
-    const newActivities = {
-      sports_id: sportId,
-      creator_id: creatorId,
-      duration: duration
-    };
-    res.send(console.log(newActivities));
+    connection.query(
+      "INSERT INTO activities SET ?",
+      formData,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.sendStatus(200);
+        }
+      }
+    );
   })
   .put("/activities/:activity_id", (req, res) => {
     const formData = req.body;
