@@ -43,7 +43,8 @@
   justify-content: center;
 }
 
-.activity .difficulty svg {
+.activity .difficulty i {
+  text-align: center;
   margin: 0 5px;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 30px;
