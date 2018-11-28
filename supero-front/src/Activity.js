@@ -18,7 +18,7 @@ displayDifficultyIcon(2);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 
-const Activity = props => {
+const Activity = activity => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
@@ -29,7 +29,7 @@ const Activity = props => {
         />
         <CardImgOverlay>
           <CardTitle>
-            <h2> Session {sports[props.activity_id - 1]}</h2>
+            <h2> Session {sports[activity.activity_id - 1]}</h2>
           </CardTitle>
           <CardBody>
             <span class="difficulty">
@@ -38,11 +38,11 @@ const Activity = props => {
           </CardBody>
           <div className="activity_details">
             <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-            {props.start_time}
+            {activity.start_time}
             <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-            {props.city}
+            {activity.city}
             <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
-            {props.creator_id}
+            {activity.creator_id}
           </div>
         </CardImgOverlay>
       </Card>
