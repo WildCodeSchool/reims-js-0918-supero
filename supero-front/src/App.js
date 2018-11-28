@@ -141,7 +141,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Test</h1>
         {this.state.activities.length > 0 && (
           <ActivitiesList activities={this.state.activities} />
         )}
