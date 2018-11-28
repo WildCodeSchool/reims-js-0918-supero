@@ -7,9 +7,10 @@ import { faBolt } from "@fortawesome/free-solid-svg-icons";
 library.add(faBolt);
 
 const displayDifficultyIcon = difficultyNumber => {
+  let icon = <FontAwesomeIcon icon="bolt" />;
   let icons = [];
   for (let i = 0; i < difficultyNumber; i++) {
-    icons = [...icons, <FontAwesomeIcon icon="bolt" />];
+    icons = [...icons, icon];
   }
   console.log(icons);
   return icons;

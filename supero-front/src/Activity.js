@@ -1,32 +1,34 @@
 import React from "react";
-import displayDifficultyIcon from "./displayDifficultyIcon";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faBolt,
+  faClock,
+  faMapMarkerAlt,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
-
-const activity = {
-  activity_id: 1,
-  sports_id: 1,
-  creator_id: 1,
-  difficulty: 3,
-  activity_description: "Yolo",
-  adresse: "31 rue de lorem ipsum",
-  city: "lorem ipsum",
-  latitude: "35.123.78",
-  longitude: "654151651",
-  start_time: "05/12/18",
-  duration: 2,
-  photo: "image.png",
-  max_participants: 5,
-  creation_time: "01/12/18"
-};
-
-displayDifficultyIcon(2);
-
-const Activity = activity => {
+console.log(faMapMarkerAlt);
+const Activity = ({ activity }) => {
   return (
-    <div class="activity">
+    <div className="activity">
       <h2> Session {sports[activity.activity_id - 1]}</h2>
-      <span />
+      <span>
+        <FontAwesomeIcon icon="bolt" />
+        <FontAwesomeIcon icon="bolt" />
+        <FontAwesomeIcon icon="bolt" />
+      </span>
+      <div>
+        <FontAwesomeIcon icon="clock" />
+        19/11/2018
+        <FontAwesomeIcon icon="map-marker-alt" />
+        Piscine Talleyrand
+        <FontAwesomeIcon icon="user" />
+        Organisé par Aquaman
+      </div>
     </div>
   );
 };
