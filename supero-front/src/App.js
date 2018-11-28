@@ -142,7 +142,9 @@ class App extends Component {
     return (
       <div>
         <h1>Test</h1>
-        <ActivitiesList activities={this.state.activities} />
+        {this.state.activities.length > 0 && (
+          <ActivitiesList activities={this.state.activities} />
+        )}
       </div>
     );
   }
