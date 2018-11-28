@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 app
   .get("/activities", (req, res) => {
-    connection.query("SELECT * FROM activities", (err, result) => {
+    connection.query("SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, sports.sport_name, users.user_pseudo, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id", (err, result) => {
       if (err) {
         console.log(err);
         res.status(500).send(err);
@@ -36,7 +36,7 @@ app
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
-      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time, sports.sport_id, sports.sport_name, users.user_id, users.user_pseudo FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE sports.sport_id = ?",
+      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, sports.sport_name, users.user_pseudo, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE sports.sport_id = ?",
       [sportId],
       (err, result) => {
         if (err) {
@@ -51,7 +51,7 @@ app
   .get("/activities/creators/:creator_id", (req, res) => {
     const creatorId = req.params.creator_id;
     connection.query(
-      "SELECT * FROM activities WHERE creator_id = ?",
+      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, sports.sport_name, users.user_pseudo, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE creator_id = ?",
       [creatorId],
       (err, results) => {
         if (err) {
@@ -66,7 +66,7 @@ app
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
     connection.query(
-      "SELECT * FROM activities WHERE activity_city = ?",
+      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, sports.sport_name, users.user_pseudo, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE activity_city = ?",
       [city],
       (err, results) => {
         if (err) {
@@ -82,7 +82,7 @@ app
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     connection.query(
-      "SELECT * FROM activities WHERE activity_latitude= ? AND activity_longitude = ?",
+      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, sports.sport_name, users.user_pseudo, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE activity_latitude= ? AND activity_longitude = ?",
       [latitude, longitude],
       (err, results) => {
         if (err) {
