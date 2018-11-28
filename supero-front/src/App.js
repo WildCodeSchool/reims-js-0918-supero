@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import ActivitiesList from "./ActivitiesList";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ActivitiesList from "./ActivitiesList";
 const activities = [
   {
     activity_id: 1,

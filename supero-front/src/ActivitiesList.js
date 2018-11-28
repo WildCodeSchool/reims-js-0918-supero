@@ -1,13 +1,11 @@
 import React from "react";
+import Activity from "./Activity";
 
 const ActivitiesList = props => {
   return (
     <div>
       {props.activities.map(activity => (
-        <p>
-          {activity.adresse}
-          {activity.city}
-        </p>
+        <Activity />
       ))}
     </div>
   );
