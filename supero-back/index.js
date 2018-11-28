@@ -41,11 +41,9 @@ app
       (err, result) => {
         if (err) {
           console.log(err);
-          res
-            .status(500)
-            .send({
-              error: "Erreur lors de l'affichage du sport de cette activité"
-            });
+          res.status(500).send({
+            error: "Pas d'utilisateur ou de sport"
+          });
         } else {
           res.json(result);
         }
