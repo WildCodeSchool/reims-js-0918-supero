@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const port = 3000;
 const express = require("express");
 const app = express();
@@ -27,7 +27,9 @@ app
     connection.query("SELECT * FROM activities", (err, result) => {
       if (err) {
         console.log(err);
-        res.status(500).send("Erreur lors de l'affichage d'une activité");
+        res
+          .status(500)
+          .send({ error: "Erreur lors de l'affichage d'une activité" });
       } else {
         res.json(result).status(200);
       }
