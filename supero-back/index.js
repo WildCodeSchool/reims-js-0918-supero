@@ -23,18 +23,16 @@ app.get("/", (req, res) => {
 // ACTIVITIES
 
 app
-.get("/activities", (req, res) => {
-  connection.query("SELECT * FROM activities", (err, result) => {
-    if (err) {
-      console.log(err);
-      res
-        .status(500)
-        .send({ error: "Erreur lors de l'affichage d'une activité" });
-    } else {
-      res.json(result).status(200);
-    }
-  });
-})
+  .get("/activities", (req, res) => {
+    connection.query("SELECT * FROM activities", (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
@@ -43,11 +41,9 @@ app
       (err, result) => {
         if (err) {
           console.log(err);
-          res.status(500).send({
-            error: "Pas d'utilisateur ou de sport"
-          });
+          res.status(500).send(err);
         } else {
-          res.json(result);
+          res.status(200).json(result);
         }
       }
     );
