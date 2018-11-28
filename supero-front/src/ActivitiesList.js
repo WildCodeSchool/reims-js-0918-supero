@@ -13,7 +13,7 @@ const ActivitiesList = props => {
   );
 };
 
-ActivitiesList.PropTypes = {
+ActivitiesList.propTypes = {
   activities: PropTypes.array.isRequired
 };
 

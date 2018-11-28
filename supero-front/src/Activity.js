@@ -52,7 +52,7 @@ const Activity = activity => {
 };
 
 Activity.propTypes = {
-  sports: PropTypes.string.isRequired,
+  sports_id: PropTypes.string.isRequired,
   difficulty: PropTypes.number.isRequired,
   start_time: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
