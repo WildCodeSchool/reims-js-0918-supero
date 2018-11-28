@@ -15,8 +15,6 @@ import {
 
 library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 
-displayDifficultyIcon(2);
-
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 
 const Activity = activity => {
