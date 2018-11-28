@@ -1,6 +1,8 @@
 import React from "react";
+import "./Activity.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
 
 import {
   faBolt,
@@ -14,28 +16,34 @@ const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 
 const Activity = props => {
   return (
-    <div className="activity">
-      <h2> Session {sports[props.activity_id - 1]}</h2>
-      {props.difficulty}
-      {props.photo}
-      <span>
-        <FontAwesomeIcon icon="bolt" />
-        <FontAwesomeIcon icon="bolt" />
-        <FontAwesomeIcon icon="bolt" />
-      </span>
-      {props.max_participants}
-      <div>
-        <FontAwesomeIcon icon="clock" />
-        {props.start_time}
-        {props.duration}
-        <FontAwesomeIcon icon="map-marker-alt" />
-        {props.adresse}
-        {props.city}
-
-        <FontAwesomeIcon icon="user" />
-        {props.creator_id}
-      </div>
-      <div>{props.activity_description}</div>
+    <div className="activity-container">
+      <Card className="activity" inverse>
+        <CardImg
+          width="100%"
+          src="./images/swimming.jpg"
+          alt="Card image cap"
+        />
+        <CardImgOverlay>
+          <CardTitle>
+            <h2> Session {sports[props.activity_id - 1]}</h2>
+          </CardTitle>
+          <CardBody>
+            <span class="difficulty">
+              <FontAwesomeIcon icon="bolt" />
+              <FontAwesomeIcon icon="bolt" />
+              <FontAwesomeIcon icon="bolt" />
+            </span>
+          </CardBody>
+          <div className="activity_details">
+            <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
+            {props.start_time}
+            <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
+            {props.city}
+            <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
+            {props.creator_id}
+          </div>
+        </CardImgOverlay>
+      </Card>
     </div>
   );
 };
