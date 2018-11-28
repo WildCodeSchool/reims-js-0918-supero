@@ -23,16 +23,18 @@ app.get("/", (req, res) => {
 // ACTIVITIES
 
 app
-  .get("/activities", (req, res) => {
-    connection.query("SELECT * FROM activities", (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Erreur lors de l'affichage d'une activité");
-      } else {
-        res.json(result).status(200);
-      }
-    });
-  })
+.get("/activities", (req, res) => {
+  connection.query("SELECT * FROM activities", (err, result) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(500)
+        .send({ error: "Erreur lors de l'affichage d'une activité" });
+    } else {
+      res.json(result).status(200);
+    }
+  });
+})
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
