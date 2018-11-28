@@ -89,7 +89,7 @@ app
           console.log(err);
           res.status(500).send(err);
         } else {
-          res.json(results);
+          res.sendStatus(200);
         }
       }
     );
