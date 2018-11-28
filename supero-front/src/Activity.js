@@ -17,33 +17,33 @@ library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 
-const Activity = activity => {
+const Activity = props => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
-        {activity.activity_img ? (
+        {props.activity_img ? (
           <CardImg
             width="100%"
-            src={`./images/${activity.activity_img}`}
-            alt={activity.sports_id}
+            src={`./images/${props.activity_img}`}
+            alt={props.sports_id}
           />
         ) : (
           <CardImg width="100%" src="./images/default.jpg" alt="default" />
         )}
         <CardImgOverlay>
-          <CardTitle>Session {sports[activity.sports_id - 1]}</CardTitle>
+          <CardTitle>Session {sports[props.sports_id - 1]}</CardTitle>
           <CardBody>
             <span className="difficulty">
-              <DisplayDifficultyIcon difficulty={activity.difficulty} />
+              <DisplayDifficultyIcon difficulty={props.difficulty} />
             </span>
           </CardBody>
           <div className="activity_details">
             <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-            {activity.start_time}
+            {props.start_time}
             <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-            {activity.city}
+            {props.city}
             <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
-            {activity.creator_id}
+            {props.creator_id}
           </div>
         </CardImgOverlay>
       </Card>
