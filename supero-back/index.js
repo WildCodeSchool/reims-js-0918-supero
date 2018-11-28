@@ -40,7 +40,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send({ error: "Pas d'utilisateur ou d'activitées" });
+          res.status(500).send(err);
         } else {
           res.json(results);
         }
@@ -55,7 +55,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send({ error: "Pas d'activité dans cette ville" });
+          res.status(500).send(err);
         } else {
           res.json(results);
         }
@@ -71,7 +71,7 @@ app
       (err, results) => {
         if (err) {
           console.log(err);
-          res.status(500).send({ error: "Pas d'activité dans cette ville" });
+          res.status(500).send(err);
         } else {
           res.json(results);
         }
@@ -81,16 +81,18 @@ app
 
   .post("/activities", (req, res) => {
     const formData = req.body;
-    const sportId = req.body.sports_id;
-    const creatorId = req.body.creator_id;
-    const duration = req.body.duration;
-
-    const newActivities = {
-      sports_id: sportId,
-      creator_id: creatorId,
-      duration: duration
-    };
-    res.send(console.log(newActivities));
+    connection.query(
+      "INSERT INTO activities SET ?",
+      formData,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
+    );
   })
   .put("/activities/:activity_id", (req, res) => {
     const formData = req.body;
