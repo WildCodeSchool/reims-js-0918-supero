@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const port = 3000;
 const express = require("express");
 const app = express();
@@ -35,6 +35,22 @@ app
   })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
+    connection.query(
+      "SELECT * FROM activities WHERE sport_id = ?",
+      [sportId],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res
+            .status(500)
+            .send({
+              error: "Erreur lors de l'affichage du sport de cette activité"
+            });
+        } else {
+          res.json(result);
+        }
+      }
+    );
     const result = activitiesjson.activities.filter(
       activity => activity.sports_id.toString() === sportId
     );
