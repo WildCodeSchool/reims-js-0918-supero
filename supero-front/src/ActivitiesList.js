@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reactstrap";
 import Activity from "./Activity";
 
 const ActivitiesList = props => {
