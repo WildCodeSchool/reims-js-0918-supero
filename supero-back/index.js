@@ -36,7 +36,7 @@ app
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
-      "SELECT * FROM activities WHERE sport_id = ?",
+      "SELECT activities.activity_id, activities.sport_id AS fk_sport_id, activities.creator_id, activities.activity_difficulty, activities.activity_description, activities.activity_adresse, activities.activity_city, activities.activity_latitude, activities.activity_longitude, activities.activity_start_time, activities.activity_duration, activities.activity_photo, activities.activity_max_participants, activities.activity_creation_time, sports.sport_id, sport_name FROM activities JOIN sports ON activities.sport_id = sports.sport_id WHERE sports.sport_id = ?",
       [sportId],
       (err, result) => {
         if (err) {
