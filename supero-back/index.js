@@ -51,10 +51,6 @@ app
         }
       }
     );
-    const result = activitiesjson.activities.filter(
-      activity => activity.sports_id.toString() === sportId
-    );
-    res.send(result);
   })
   .get("/activities/creators/:creator_id", (req, res) => {
     const creatorId = req.params.creator_id;
