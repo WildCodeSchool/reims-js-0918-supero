@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "reactstrap";
+import PropTypes from "prop-types";
+
 import Activity from "./Activity";
 
 const ActivitiesList = props => {
@@ -10,6 +11,10 @@ const ActivitiesList = props => {
       ))}
     </div>
   );
+};
+
+ActivitiesList.PropTypes = {
+  activities: PropTypes.object.isRequired
 };
 
 export default ActivitiesList;

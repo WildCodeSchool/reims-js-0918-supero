@@ -50,11 +50,11 @@ const Activity = activity => {
 };
 
 Activity.propTypes = {
-  sports: PropTypes.string,
-  difficulty: PropTypes.number,
-  start_time: PropTypes.string,
-  city: PropTypes.string,
-  creator_id: PropTypes.number
+  sports: PropTypes.string.isRequired,
+  difficulty: PropTypes.number.isRequired,
+  start_time: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  creator_id: PropTypes.number.isRequired
 };
 
 export default Activity;
