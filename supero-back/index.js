@@ -1,3 +1,4 @@
+require("dotenv").config();
 const port = 3000;
 const express = require("express");
 const app = express();
