@@ -17,8 +17,8 @@ library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 displayDifficultyIcon(2);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
-console.log(faMapMarkerAlt);
-const Activity = ({ activity }) => {
+
+const Activity = activity => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
@@ -38,11 +38,11 @@ const Activity = ({ activity }) => {
           </CardBody>
           <div className="activity_details">
             <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-            19/11/2018
+            {activity.start_time}
             <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-            Reims
+            {activity.city}
             <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
-            Par Aquaman
+            {activity.creator_id}
           </div>
         </CardImgOverlay>
       </Card>
