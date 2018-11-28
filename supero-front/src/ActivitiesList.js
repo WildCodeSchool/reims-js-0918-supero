@@ -5,7 +5,7 @@ const ActivitiesList = props => {
   return (
     <div>
       {props.activities.map(activity => (
-        <Activity />
+        <Activity {...activity} />
       ))}
     </div>
   );

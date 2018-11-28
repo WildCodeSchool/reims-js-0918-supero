@@ -12,10 +12,11 @@ library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 console.log(faMapMarkerAlt);
-const Activity = ({ activity }) => {
+const Activity = props => {
   return (
     <div className="activity">
-      <h2> Session {sports[activity.activity_id - 1]}</h2>
+      <h2> Session {sports[props.activity_id - 1]}</h2>
+
       <span>
         <FontAwesomeIcon icon="bolt" />
         <FontAwesomeIcon icon="bolt" />
@@ -23,11 +24,13 @@ const Activity = ({ activity }) => {
       </span>
       <div>
         <FontAwesomeIcon icon="clock" />
-        19/11/2018
+        {props.start_time}
         <FontAwesomeIcon icon="map-marker-alt" />
-        Piscine Talleyrand
+        {/* Piscine Talleyrand */}
+        {props.adresse}
         <FontAwesomeIcon icon="user" />
-        Organisé par Aquaman
+        {/* Organisé par Aquaman */}
+        {props.creator_id}
       </div>
     </div>
   );
