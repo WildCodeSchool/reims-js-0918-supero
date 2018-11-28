@@ -22,18 +22,38 @@ const Activity = activity => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
-        <CardImg
-          width="100%"
-          src="./images/swimming.jpg"
-          alt="Card image cap"
-        />
+        {activity.activity_id === 1 ? (
+          <CardImg
+            width="100%"
+            src="./images/swimming.jpg"
+            alt="Card image cap"
+          />
+        ) : activity.activity_id === 2 ? (
+          <CardImg
+            width="100%"
+            src="./images/running.jpg"
+            alt="Card image cap"
+          />
+        ) : activity.activity_id === 3 ? (
+          <CardImg
+            width="100%"
+            src="./images/football.jpg"
+            alt="Card image cap"
+          />
+        ) : (
+          <CardImg
+            width="100%"
+            src="./images/default.jpg"
+            alt="Card image cap"
+          />
+        )}
         <CardImgOverlay>
-          <CardTitle>
-            <h2> Session {sports[activity.activity_id - 1]}</h2>
-          </CardTitle>
+          <CardTitle>Session {sports[activity.activity_id - 1]}</CardTitle>
           <CardBody>
-            <span class="difficulty">
-              {displayDifficultyIcon(activity.difficulty).map(icon => icon)}
+            <span className="difficulty">
+              {displayDifficultyIcon(activity.difficulty).map((icon, index) => (
+                <span key={index}>{icon}</span>
+              ))}
             </span>
           </CardBody>
           <div className="activity_details">

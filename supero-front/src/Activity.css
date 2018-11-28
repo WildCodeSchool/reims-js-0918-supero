@@ -1,7 +1,7 @@
 .activity-container {
   border-radius: 3px;
-  width: 95%;
-  margin: 0 auto;
+  width: 90%;
+  margin: 10px auto;
   -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
@@ -13,10 +13,14 @@
   overflow: hidden;
 }
 
+.activity .card-body {
+  padding: 0;
+}
+
 .activity-container .card-img {
   margin: 8px;
   overflow: hidden;
-  max-height: 200px;
+  max-height: 150px;
   -webkit-filter: blur(3px) grayscale(40%); /* Safari 6.0 - 9.0 */
   filter: blur(3px) grayscale(40%);
   transform: scale(1.5);
@@ -32,9 +36,10 @@
   margin: 0;
 }
 
-.activity h2 {
+.activity h5 {
   text-align: center;
   margin-top: 5px;
+  font-size: 2em;
 }
 
 .activity .difficulty {

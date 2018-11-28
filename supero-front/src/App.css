@@ -1,3 +1,5 @@
 #root {
-  background-color: rgb(99, 150, 88);
+  background: url("/images/default.jpg");
+  background-size: cover;
+  background-position: 25%;
 }
