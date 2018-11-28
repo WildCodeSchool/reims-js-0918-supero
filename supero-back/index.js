@@ -23,18 +23,18 @@ app.get("/", (req, res) => {
 // ACTIVITIES
 
 app
-.get("/activities", (req, res) => {
-  connection.query("SELECT * FROM activities", (err, result) => {
-    if (err) {
-      console.log(err);
-      res
-        .status(500)
-        .send({ error: "Erreur lors de l'affichage d'une activité" });
-    } else {
-      res.json(result).status(200);
-    }
-  });
-})
+  .get("/activities", (req, res) => {
+    connection.query("SELECT * FROM activities", (err, result) => {
+      if (err) {
+        console.log(err);
+        res
+          .status(500)
+          .send({ error: "Erreur lors de l'affichage d'une activité" });
+      } else {
+        res.json(result).status(200);
+      }
+    });
+  })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
@@ -90,24 +90,22 @@ app
     res.send(console.log(newActivities));
   })
   .put("/activities/:activity_id", (req, res) => {
+    const idActivity = req.params.activity_id;
     const formData = req.body;
-    const activityId = req.params.activity_id;
-    const sportId = req.body.sports_id;
-    const creatorId = req.body.creator_id;
-    const duration = req.body.duration;
-
-    const result = activitiesjson.activities.filter(
-      activity => activity.activity_id.toString() === activityId
+    connection.query(
+      "UPDATE activities SET ? WHERE id = ?",
+      [formData, idActivity],
+      err => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.sendStatus(200);
+        }
+      }
     );
-    console.log(result);
-
-    const updateActivities = {
-      sports_id: sportId,
-      creator_id: creatorId,
-      duration: duration
-    };
-    res.send(console.log(updateActivities));
   });
+
 // USERS -- Liste utilisateurs
 
 app.get("/users", (req, res) => {
