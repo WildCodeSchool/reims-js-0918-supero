@@ -46,7 +46,7 @@ app
     );
     res.send(result);
   })
-  .get("/activities/geocalisation", (req, res) => {
+  .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     const result = activitiesjson.activities.filter(
@@ -55,10 +55,8 @@ app
     );
     res.send(result).status(200);
   })
-  .get("/activities/add", (req, res) => {
-    res.send("Aller stp");
-  })
-  .post("/activities/add", (req, res) => {
+
+  .post("/activities", (req, res) => {
     const formData = req.body;
     const sportId = req.body.sports_id;
     const creatorId = req.body.creator_id;
@@ -71,7 +69,7 @@ app
     };
     res.send(console.log(newActivities));
   })
-  .put("/activities/update/:activity_id", (req, res) => {
+  .put("/activities/:activity_id", (req, res) => {
     const formData = req.body;
     const activityId = req.params.activity_id;
     const sportId = req.body.sports_id;
@@ -90,19 +88,15 @@ app
     };
     res.send(console.log(updateActivities));
   });
-// USERS -- se connecter
+// USERS -- Liste utilisateurs
 
-app.get("/api/users", (req, res) => {
-  res.send(
-    `Welcome, you have logged in as : ${
-      json.users[0].pseudo
-    } and you are level ${json.users[0].level}.`
-  );
+app.get("/users", (req, res) => {
+  res.send(json.users);
 });
 
 // USERS -- créer un utilisateur
 
-app.post("/api/users", (req, res) => {
+app.post("/users", (req, res) => {
   const formData = req.body;
   connection.query("INSERT INTO users SET ?", formData, err => {
     if (err) {
@@ -116,7 +110,7 @@ app.post("/api/users", (req, res) => {
 
 // USERS -- afficher le profil d'un utilisateur
 
-app.get("/api/users/:user_id", (req, res) => {
+app.get("/users/:user_id", (req, res) => {
   const requiredProfile = json.users.filter(
     user => user.id === parseInt(req.params.user_id)
   );
@@ -127,7 +121,7 @@ app.get("/api/users/:user_id", (req, res) => {
 
 // USERS -- modifier le profil d'un utilisateur
 
-app.put("/api/users/:id", (req, res) => {
+app.put("/users/:id", (req, res) => {
   const idUser = req.params.id;
   const formData = req.body;
   connection.query(
