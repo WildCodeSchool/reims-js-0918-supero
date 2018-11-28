@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Activity.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -48,6 +49,14 @@ const Activity = activity => {
       </Card>
     </div>
   );
+};
+
+Activity.propTypes = {
+  sports: PropTypes.string,
+  difficulty: PropTypes.number,
+  start_time: PropTypes.string,
+  city: PropTypes.string,
+  creator_id: PropTypes.number
 };
 
 export default Activity;
