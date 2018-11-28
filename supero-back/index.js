@@ -27,11 +27,9 @@ app
     connection.query("SELECT * FROM activities", (err, result) => {
       if (err) {
         console.log(err);
-        res
-          .status(500)
-          .send({ error: "Erreur lors de l'affichage d'une activité" });
+        res.status(500).send(err);
       } else {
-        res.json(result).status(200);
+        res.status(200).json(result);
       }
     });
   })
@@ -43,11 +41,9 @@ app
       (err, result) => {
         if (err) {
           console.log(err);
-          res.status(500).send({
-            error: "Pas d'utilisateur ou de sport"
-          });
+          res.status(500).send(err);
         } else {
-          res.json(result);
+          res.status(200).json(result);
         }
       }
     );
