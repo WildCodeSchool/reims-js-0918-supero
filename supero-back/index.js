@@ -1,7 +1,7 @@
 const port = 3000;
 const express = require("express");
 const app = express();
-require("dotenv").config();
+const connection = require("./conf");
 const bodyParser = require("body-parser");
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -23,7 +23,14 @@ app.get("/", (req, res) => {
 
 app
   .get("/activities", (req, res) => {
-    res.send(activitiesjson);
+    connection.query("SELECT * FROM activities", (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Erreur lors de l'affichage d'un utilisateur");
+      } else {
+        res.json(result).status(200);
+      }
+    });
   })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
