@@ -49,10 +49,18 @@ app
   })
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
-    const result = activitiesjson.activities.filter(
-      activity => activity.city === city
+    connection.query(
+      "SELECT * FROM activities WHERE activity_city = ?",
+      [city],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Pas d'activité dans cette ville");
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
