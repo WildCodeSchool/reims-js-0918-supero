@@ -14,7 +14,7 @@ const ActivitiesList = props => {
 };
 
 ActivitiesList.PropTypes = {
-  activities: PropTypes.object.isRequired
+  activities: PropTypes.array.isRequired
 };
 
 export default ActivitiesList;
