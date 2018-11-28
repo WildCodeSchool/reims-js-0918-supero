@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 const DisplayDifficultyIcon = props => {
   let icons = [];
@@ -6,7 +6,7 @@ const DisplayDifficultyIcon = props => {
     let icon = <i key={i} className="fas fa-bolt" />;
     icons = [...icons, icon];
   }
-  return icons;
+  return <Fragment>{icons}</Fragment>;
 };
 
 export default DisplayDifficultyIcon;
