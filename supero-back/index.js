@@ -65,11 +65,18 @@ app
   .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
-    const result = activitiesjson.activities.filter(
-      activity =>
-        activity.latitude === latitude && activity.longitude === longitude
+    connection.query(
+      "SELECT * FROM activities WHERE activity_latitude= ? AND activity_longitude = ?",
+      [latitude, longitude],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send({ error: "Pas d'activité dans cette ville" });
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result).status(200);
   })
 
   .post("/activities", (req, res) => {
