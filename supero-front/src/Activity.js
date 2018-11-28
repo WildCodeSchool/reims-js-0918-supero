@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import displayDifficultyIcon from "./displayDifficultyIcon";
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
@@ -19,6 +19,8 @@ const activity = {
   max_participants: 5,
   creation_time: "01/12/18"
 };
+
+displayDifficultyIcon(2);
 
 const Activity = activity => {
   return (
