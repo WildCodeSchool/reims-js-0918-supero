@@ -3,6 +3,7 @@ import "./Activity.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
+import displayDifficultyIcon from "./displayDifficultyIcon";
 
 import {
   faBolt,
@@ -10,7 +11,10 @@ import {
   faMapMarkerAlt,
   faUser
 } from "@fortawesome/free-solid-svg-icons";
+
 library.add(faBolt, faClock, faMapMarkerAlt, faUser);
+
+displayDifficultyIcon(2);
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 console.log(faMapMarkerAlt);
@@ -29,9 +33,7 @@ const Activity = ({ activity }) => {
           </CardTitle>
           <CardBody>
             <span class="difficulty">
-              <FontAwesomeIcon icon="bolt" />
-              <FontAwesomeIcon icon="bolt" />
-              <FontAwesomeIcon icon="bolt" />
+              {displayDifficultyIcon(activity.difficulty).map(icon => icon)}
             </span>
           </CardBody>
           <div className="activity_details">
