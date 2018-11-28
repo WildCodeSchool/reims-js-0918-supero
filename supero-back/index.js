@@ -1,7 +1,8 @@
+require("dotenv").config();
 const port = 3000;
 const express = require("express");
 const app = express();
-require("dotenv").config();
+const connection = require("./conf");
 const bodyParser = require("body-parser");
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -34,10 +35,18 @@ app
   })
   .get("/activities/creators/:creator_id", (req, res) => {
     const creatorId = req.params.creator_id;
-    const result = activitiesjson.activities.filter(
-      activity => activity.creator_id.toString() === creatorId
+    connection.query(
+      "SELECT * FROM activities WHERE creator_id = ?",
+      [creatorId],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Pas d'utilisateur ou d'activitées");
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
