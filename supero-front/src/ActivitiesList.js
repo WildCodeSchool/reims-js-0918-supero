@@ -10,9 +10,7 @@ const ActivitiesList = props => {
       {props.activities.map((activity, index) => (
         <Activity key={index} {...activity} />
       ))}
-      <Button className="addActivityButton">
-        <b>+</b>
-      </Button>
+      <Button className="addActivityButton">+</Button>
     </div>
   );
 };
