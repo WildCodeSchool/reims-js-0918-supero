@@ -31,7 +31,11 @@ const Activity = props => {
           <CardImg width="100%" src="./images/default.jpg" alt="default" />
         )}
         <CardImgOverlay>
-          <CardTitle>Session {props.sport_name}</CardTitle>
+          <CardTitle>
+            Session {props.sport_name}
+            <div className="activity_title">{props.activity_title}</div>
+          </CardTitle>
+
           <CardBody>
             <span className="difficulty">
               <DisplayDifficultyIcon difficulty={props.activity_difficulty} />
