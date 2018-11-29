@@ -3,3 +3,27 @@
   background-size: cover;
   background-position: 25%;
 }
+
+.btn.addActivityButton {
+  width: 70px;
+  height: 70px;
+  background-color: #ff6500;
+  border-radius: 50%;
+  box-shadow: 0 5px 5px 0 grey;
+  transition: all 0.1s ease-in-out;
+
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 0;
+
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+
+.btn.addActivityButton:hover {
+  box-shadow: 0 6px 14px 0 grey;
+  transform: scale(1.05);
+}
