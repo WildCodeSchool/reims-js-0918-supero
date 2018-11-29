@@ -1,7 +1,8 @@
-const port = 3000;
+require("dotenv").config();
+const port = 3001;
 const express = require("express");
 const app = express();
-require("dotenv").config();
+const connection = require("./conf");
 const bodyParser = require("body-parser");
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
@@ -11,6 +12,28 @@ app.use(
     extended: true
   })
 );
+
+// Add headers
+app.use(function(req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  // Pass to next layer of middleware
+  next();
+});
+
 // IMPORT JSON
 const activitiesjson = require("./activities.json");
 const json = require("./users.json");
@@ -20,74 +43,157 @@ app.get("/", (req, res) => {
 });
 
 // ACTIVITIES
+// a is alias for table activities,
+// s is alias for table sports,
+// u is alias for table users
+
+const columnsRequiredForActivities = `
+  a.activity_id,
+  a.sport_id AS fk_sport_id,
+  a.creator_id,
+  s.sport_name,
+  u.user_pseudo,
+  a.activity_title,
+  a.activity_difficulty,
+  a.activity_description,
+  a.activity_more_infos,
+  a.activity_adresse,
+  a.activity_city,
+  a.activity_latitude,
+  a.activity_longitude,
+  a.activity_start_time,
+  a.activity_duration,
+  a.activity_photo,
+  a.activity_max_participants,
+  a.activity_creation_time`;
 
 app
   .get("/activities", (req, res) => {
-    res.send(activitiesjson);
+    connection.query(
+      `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
   })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
-    const result = activitiesjson.activities.filter(
-      activity => activity.sports_id.toString() === sportId
+    connection.query(
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE s.sport_id = ?`,
+      [sportId],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/creators/:creator_id", (req, res) => {
     const creatorId = req.params.creator_id;
-    const result = activitiesjson.activities.filter(
-      activity => activity.creator_id.toString() === creatorId
+    connection.query(
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE creator_id = ?`,
+      [creatorId],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
-    const result = activitiesjson.activities.filter(
-      activity => activity.city === city
+    connection.query(
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE activity_city = ?`,
+      [city],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result);
   })
   .get("/activities/geolocalisation", (req, res) => {
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
-    const result = activitiesjson.activities.filter(
-      activity =>
-        activity.latitude === latitude && activity.longitude === longitude
+    connection.query(
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE activity_latitude = ? AND activity_longitude = ?`,
+      [latitude, longitude],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(results);
+        }
+      }
     );
-    res.send(result).status(200);
   })
 
   .post("/activities", (req, res) => {
     const formData = req.body;
-    const sportId = req.body.sports_id;
-    const creatorId = req.body.creator_id;
-    const duration = req.body.duration;
-
-    const newActivities = {
-      sports_id: sportId,
-      creator_id: creatorId,
-      duration: duration
-    };
-    res.send(console.log(newActivities));
+    connection.query(
+      "INSERT INTO activities SET ?",
+      formData,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.sendStatus(200);
+        }
+      }
+    );
   })
   .put("/activities/:activity_id", (req, res) => {
+    const idActivity = req.params.activity_id;
     const formData = req.body;
-    const activityId = req.params.activity_id;
-    const sportId = req.body.sports_id;
-    const creatorId = req.body.creator_id;
-    const duration = req.body.duration;
-
-    const result = activitiesjson.activities.filter(
-      activity => activity.activity_id.toString() === activityId
+    connection.query(
+      "UPDATE activities SET ? WHERE id = ?",
+      [formData, idActivity],
+      err => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.sendStatus(200);
+        }
+      }
     );
-    console.log(result);
-
-    const updateActivities = {
-      sports_id: sportId,
-      creator_id: creatorId,
-      duration: duration
-    };
-    res.send(console.log(updateActivities));
   });
+
 // USERS -- Liste utilisateurs
 
 app.get("/users", (req, res) => {
