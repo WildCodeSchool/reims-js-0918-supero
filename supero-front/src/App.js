@@ -7,7 +7,7 @@ import ActivityDetail from "./ActivityDetail";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { activities, activitiesList: [] };
+    this.state = { activitiesList: [] };
   }
   componentDidMount() {
     axios.get(`http://localhost:3001/activities`).then(res => {
@@ -18,12 +18,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.activities.length > 0 && (
-          <Fragment>
-            <ActivitiesList activities={this.state.activities} />
-            <ActivityDetail />
-          </Fragment>
-        )}
+        <Fragment>
+          <ActivitiesList activities={this.state.activitiesList} />
+          <ActivityDetail />
+        </Fragment>
       </div>
     );
   }

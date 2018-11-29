@@ -10,14 +10,16 @@ import {
   faClock,
   faMapMarkerAlt,
   faUser,
-  faRunning
+  faRunning,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBolt, faClock, faMapMarkerAlt, faUser, faRunning);
+library.add(faBolt, faClock, faMapMarkerAlt, faUser, faRunning, faInfoCircle);
 
 const activity = {
   activity_id: 1,
   sports_id: 1,
+  activity_title: "Cours Forest !",
   creator_id: 1,
   difficulty: 3,
   activity_description:
@@ -31,7 +33,8 @@ const activity = {
   photo: "image.png",
   max_participants: 5,
   creation_time: "01/12/18",
-  activity_img: "running.jpg"
+  activity_img: "running.jpg",
+  activity_more_infos: "Chaussures de Trail"
 };
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
@@ -64,6 +67,7 @@ const ActivityDetail = () => (
           <DisplayDifficultyIcon difficulty={activity.difficulty} />
         </div>
         <h2>Session {sports[activity.sports_id - 1]}</h2>
+        <h3>{activity.activity_title}</h3>
       </div>
       <div className="activity_detail_right">
         <span className="activity_detail_icon">
@@ -73,6 +77,10 @@ const ActivityDetail = () => (
         <span className="activity_detail_icon">
           <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
           {activity.city}
+        </span>
+        <span className="activity_detail_icon">
+          <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
+          {activity.activity_more_infos}
         </span>
         <span className="activity_detail_icon">
           <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
