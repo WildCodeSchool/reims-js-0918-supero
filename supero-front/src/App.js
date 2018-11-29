@@ -37,8 +37,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.activities.length > 0 && (
-          <ActivitiesList activities={this.state.activities} />
+        {this.state.activitiesList.length > 0 && (
+          <ActivitiesList activities={this.state.activitiesList} />
         )}
       </div>
     );

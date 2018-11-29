@@ -21,29 +21,29 @@ const Activity = props => {
   return (
     <div className="activity-container">
       <Card className="activity" inverse>
-        {props.activity_img ? (
+        {props.sport_name ? (
           <CardImg
             width="100%"
-            src={`./images/${props.activity_img}`}
-            alt={props.sports_id}
+            src={`./images/${props.sport_name}.jpg`}
+            alt={props.sport_name}
           />
         ) : (
           <CardImg width="100%" src="./images/default.jpg" alt="default" />
         )}
         <CardImgOverlay>
-          <CardTitle>Session {sports[props.sports_id - 1]}</CardTitle>
+          <CardTitle>Session {props.sport_name}</CardTitle>
           <CardBody>
             <span className="difficulty">
-              <DisplayDifficultyIcon difficulty={props.difficulty} />
+              <DisplayDifficultyIcon difficulty={props.activity_difficulty} />
             </span>
           </CardBody>
           <div className="activity_details">
             <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-            {props.start_time}
+            {props.activity_start_time}
             <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-            {props.city}
+            {props.activity_city}
             <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
-            {props.creator_id}
+            {props.user_pseudo}
           </div>
         </CardImgOverlay>
       </Card>
@@ -52,11 +52,11 @@ const Activity = props => {
 };
 
 Activity.propTypes = {
-  sports_id: PropTypes.number.isRequired,
-  difficulty: PropTypes.number.isRequired,
-  start_time: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  creator_id: PropTypes.number.isRequired
+  sport_name: PropTypes.string.isRequired,
+  activity_difficulty: PropTypes.number.isRequired,
+  activity_start_time: PropTypes.string.isRequired,
+  activity_city: PropTypes.string.isRequired,
+  user_pseudo: PropTypes.number.isRequired
 };
 
 export default Activity;
