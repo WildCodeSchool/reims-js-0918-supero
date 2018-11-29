@@ -71,6 +71,7 @@
   background-size: cover;
   border-radius: 50px;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .activity_profile .activity_creator {
