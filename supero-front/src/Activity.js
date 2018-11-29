@@ -5,6 +5,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
 import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
+import formatDate from "./formatDate.js";
 
 import {
   faBolt,
@@ -43,7 +44,7 @@ const Activity = props => {
           </CardBody>
           <div className="activity_details">
             <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-            {props.activity_start_time}
+            {formatDate(props.activity_start_time)}
             <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
             {props.activity_city}
             <FontAwesomeIcon className="ml-2 mr-1" icon="user" />
@@ -60,7 +61,7 @@ Activity.propTypes = {
   activity_difficulty: PropTypes.number.isRequired,
   activity_start_time: PropTypes.string.isRequired,
   activity_city: PropTypes.string.isRequired,
-  user_pseudo: PropTypes.number.isRequired
+  user_pseudo: PropTypes.string.isRequired
 };
 
 export default Activity;
