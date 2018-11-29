@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
 import axios from "axios";
 import ActivitiesList from "./ActivitiesList";
+import ActivityDetail from "./ActivityDetail";
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +18,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.activitiesList.length > 0 && (
-          <ActivitiesList activities={this.state.activitiesList} />
+        {this.state.activities.length > 0 && (
+          <Fragment>
+            <ActivitiesList activities={this.state.activities} />
+            <ActivityDetail />
+          </Fragment>
         )}
       </div>
     );

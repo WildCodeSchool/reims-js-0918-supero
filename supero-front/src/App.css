@@ -2,6 +2,7 @@
   background: url("/images/default.jpg");
   background-size: cover;
   background-position: 25%;
+  font-family: "Oswald", sans-serif;
 }
 
 .btn.addActivityButton {
