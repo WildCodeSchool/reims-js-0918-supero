@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
 
 import ActivitiesList from "./ActivitiesList";
+import ActivityDetail from "./ActivityDetail";
 
 const activities = [
   {
@@ -149,7 +150,10 @@ class App extends Component {
     return (
       <div>
         {this.state.activities.length > 0 && (
-          <ActivitiesList activities={this.state.activities} />
+          <Fragment>
+            <ActivitiesList activities={this.state.activities} />
+            <ActivityDetail />
+          </Fragment>
         )}
       </div>
     );
