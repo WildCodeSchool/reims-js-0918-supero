@@ -10,7 +10,9 @@ const ActivitiesList = props => {
       {props.activities.map((activity, index) => (
         <Activity key={index} {...activity} />
       ))}
-      <Button color="primary">Ajouter une activité</Button>{" "}
+      <Button className="addActivityButton">
+        <b>+</b>
+      </Button>
     </div>
   );
 };
