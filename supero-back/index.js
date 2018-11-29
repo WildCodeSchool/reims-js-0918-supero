@@ -21,15 +21,35 @@ app.get("/", (req, res) => {
 });
 
 // ACTIVITIES
-const act = "activities.";
-const spt = "sports.";
-const usr = "users.";
-const columnsRequiredForActivities = `${act}activity_id, ${act}sport_id AS fk_sport_id, ${act}creator_id, ${spt}sport_name, ${usr}user_pseudo, ${act}activity_difficulty, ${act}activity_description, ${act}activity_adresse, ${act}activity_city, ${act}activity_latitude, ${act}activity_longitude, ${act}activity_start_time, ${act}activity_duration, ${act}activity_photo, ${act}activity_max_participants, ${act}activity_creation_time`;
+// a is alias for table activities,
+// s is alias for table sports,
+// u is alias for table users
+
+const columnsRequiredForActivities = `
+  a.activity_id,
+  a.sport_id AS fk_sport_id,
+  a.creator_id,
+  s.sport_name,
+  u.user_pseudo,
+  a.activity_difficulty,
+  a.activity_description,
+  a.activity_adresse,
+  a.activity_city,
+  a.activity_latitude,
+  a.activity_longitude,
+  a.activity_start_time,
+  a.activity_duration,
+  a.activity_photo,
+  a.activity_max_participants,
+  a.activity_creation_time`;
 
 app
   .get("/activities", (req, res) => {
     connection.query(
-      `SELECT ${columnsRequiredForActivities} FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id`,
+      `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id`,
       (err, result) => {
         if (err) {
           console.log(err);
@@ -43,7 +63,11 @@ app
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
-      `SELECT ${columnsRequiredForActivities} FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE sports.sport_id = ?`,
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE s.sport_id = ?`,
       [sportId],
       (err, result) => {
         if (err) {
@@ -58,7 +82,11 @@ app
   .get("/activities/creators/:creator_id", (req, res) => {
     const creatorId = req.params.creator_id;
     connection.query(
-      `SELECT ${columnsRequiredForActivities} FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE creator_id = ?`,
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE creator_id = ?`,
       [creatorId],
       (err, results) => {
         if (err) {
@@ -73,7 +101,11 @@ app
   .get("/activities/city/:city", (req, res) => {
     const city = req.params.city;
     connection.query(
-      `SELECT ${columnsRequiredForActivities} FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE activity_city = ?`,
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE activity_city = ?`,
       [city],
       (err, results) => {
         if (err) {
@@ -89,7 +121,11 @@ app
     const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     connection.query(
-      `SELECT ${columnsRequiredForActivities} FROM activities JOIN sports ON activities.sport_id = sports.sport_id JOIN users ON activities.creator_id = users.user_id WHERE activity_latitude= ? AND activity_longitude = ?`,
+      `SELECT ${columnsRequiredForActivities} 
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id 
+      WHERE activity_latitude = ? AND activity_longitude = ?`,
       [latitude, longitude],
       (err, results) => {
         if (err) {
