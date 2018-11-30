@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import axios from "axios";
 import ActivitiesList from "./ActivitiesList";
 import ActivityDetail from "./ActivityDetail";
+import ActivitiesContainer from "./containers/ActivitiesContainer";
 import Header from "./Header";
 
 class App extends Component {
@@ -10,18 +10,13 @@ class App extends Component {
     super(props);
     this.state = { activitiesList: [] };
   }
-  componentDidMount() {
-    axios.get(`http://localhost:3001/activities`).then(res => {
-      this.setState({ activitiesList: res.data });
-      console.log(this.state.activitiesList);
-    });
-  }
+
   render() {
     return (
       <div>
         <Fragment>
           <Header />
-          <ActivitiesList activities={this.state.activitiesList} />
+          <ActivitiesContainer />
           <ActivityDetail />
         </Fragment>
       </div>

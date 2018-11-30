@@ -1,20 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "reactstrap";
-
+import axios from "axios";
 import Activity from "./Activity";
 
-const ActivitiesList = props => {
-  return (
-    <div>
-      {props.activities.map((activity, index) => (
-        <Activity key={index} {...activity} />
-      ))}
-      <Button className="addActivityButton">+</Button>
-    </div>
-  );
-};
+class ActivitiesList extends Component {
+  componentDidMount() {
+    axios
+      .get(`http://localhost:3001/activities`)
+      .then(res => this.props.activitiesReceived(res.data));
+  }
 
+  render() {
+    return (
+      <div>
+        {this.props.activities.map((activity, index) => (
+          <Activity key={index} {...activity} />
+        ))}
+        <Button className="addActivityButton">+</Button>
+      </div>
+    );
+  }
+}
 ActivitiesList.propTypes = {
   activities: PropTypes.array.isRequired
 };
