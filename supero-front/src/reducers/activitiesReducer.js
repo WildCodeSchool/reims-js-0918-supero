@@ -5,7 +5,7 @@ const activitiesReducer = (previousState = [], action) => {
     case ACTIVITIES_RECEIVED:
       return action.activities;
     default:
-      previousState;
+      return previousState;
   }
 };
 

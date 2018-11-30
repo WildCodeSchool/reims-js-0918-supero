@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import App from "./App";
 import {
   activitiesReceivedAction,
   fetchActivitiesAction
 } from "../actions/actions";
+import ActivitiesList from "../ActivitiesList";
 
 const mapStateToProps = state => ({
   activities: state.activities,
@@ -17,6 +17,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapDispatchToProps,
-  mapStateToProps
-)(App);
+  mapStateToProps,
+  mapDispatchToProps
+)(ActivitiesList);
