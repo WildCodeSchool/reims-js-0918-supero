@@ -26,12 +26,11 @@ export default class Example extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ marginBottom: "20px", height: "71px" }}>
         {this.state.collapsed ? (
           <Navbar
-            sticky-top
             color="faded"
-            className="d-flex justify-content-between"
+            className="fixed-top d-flex justify-content-between"
             dark
           >
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
