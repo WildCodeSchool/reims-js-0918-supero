@@ -4,9 +4,19 @@
 }
 
 .navbar {
-  padding: 10px 5% !important;
+  padding: 10px 0 10px 5% !important;
   background-color: #262626;
   color: #fff;
+}
+
+.navbar .navbar-brand {
+  background-image: url("/images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  text-indent: -9999px;
+  width: 50px;
+  height: 50px;
 }
 
 .navbar h2 {
