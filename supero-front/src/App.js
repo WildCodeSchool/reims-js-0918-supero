@@ -10,16 +10,15 @@ class App extends Component {
     this.state = { activitiesList: [] };
   }
   componentDidMount() {
-    axios.get(`http://localhost:3001/activities`).then(res => {
-      this.setState({ activitiesList: res.data });
-      console.log(this.state.activitiesList);
-    });
+    axios
+      .get(`http://localhost:3001/activities`)
+      .then(res => this.props.activitiesReceived(res.data));
   }
   render() {
     return (
       <div>
         <Fragment>
-          <ActivitiesList activities={this.state.activitiesList} />
+          <ActivitiesList activities={this.props.activities} />
           <ActivityDetail />
         </Fragment>
       </div>

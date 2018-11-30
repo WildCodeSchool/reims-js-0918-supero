@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import ActivitiesList from "./ActivitiesList";
+import App from "./App";
 import {
   activitiesReceivedAction,
   fetchActivitiesAction
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapDispatchToProps,
   mapStateToProps
-)(ActivitiesList);
+)(App);
