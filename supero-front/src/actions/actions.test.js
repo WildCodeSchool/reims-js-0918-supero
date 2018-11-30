@@ -5,47 +5,70 @@ import {
   VIEW_ACTIVITIES,
   DISPLAY_MENU,
   HIDE_MENU,
-  VIEW_NEWS
+  VIEW_NEWS,
+  ACTIVITIES_RECEIVED,
+  FETCH_ACTIVITIES
 } from "./actionTypes";
 
-import { addActivityAction } from "./actions";
+import {
+  addActivityAction,
+  activitiesReceivedAction,
+  fetchActivitiesAction
+} from "./actions";
 
-describe("ADD_ACTIVITY action creator", () => {
-  it("should return an ADD_ACTIVITY action and an activity object", () => {
-    const activity = {
-      activity_id: 1,
-      sports_id: 1,
-      creator_id: 1,
-      difficulty: 3,
-      activity_description: "Yolo",
-      adresse: "31 rue de lorem ipsum",
-      city: "lorem ipsum",
-      latitude: "35.123.78",
-      longitude: "654151651",
-      start_time: "05/12/18",
-      duration: 2,
-      photo: "image.png",
-      max_participants: 5,
-      creation_time: "01/12/18"
-    };
+describe("activitiesReceivedAction", () => {
+  it("should return ACTIVITIES_RECEIVED action type and an array", () => {
+    const activities = [
+      {
+        activity_id: 1,
+        sports_id: 1,
+        creator_id: 1,
+        sport_name: "running",
+        user_name: "Benoit",
+        activity_difficulty: 3,
+        activity_description: "Yolo",
+        activity_adresse: "31 rue de lorem ipsum",
+        activity_city: "lorem ipsum",
+        activity_latitude: "35.123.78",
+        activity_longitude: "654151651",
+        activity_start_time: "05/12/18",
+        activity_duration: 2,
+        activity_photo: "image.png",
+        activity_max_participants: 5,
+        activity_creation_time: "01/12/18"
+      },
+      {
+        activity_id: 1,
+        sports_id: 1,
+        creator_id: 1,
+        sport_name: "running",
+        user_name: "Benoit",
+        activity_difficulty: 3,
+        activity_description: "Yolo",
+        activity_adresse: "31 rue de lorem ipsum",
+        activity_city: "lorem ipsum",
+        activity_latitude: "35.123.78",
+        activity_longitude: "654151651",
+        activity_start_time: "05/12/18",
+        activity_duration: 2,
+        activity_photo: "image.png",
+        activity_max_participants: 5,
+        activity_creation_time: "01/12/18"
+      }
+    ];
     const expected = {
-      type: ADD_ACTIVITY,
-      activity_id: 1,
-      sports_id: 1,
-      creator_id: 1,
-      difficulty: 3,
-      activity_description: "Yolo",
-      adresse: "31 rue de lorem ipsum",
-      city: "lorem ipsum",
-      latitude: "35.123.78",
-      longitude: "654151651",
-      start_time: "05/12/18",
-      duration: 2,
-      photo: "image.png",
-      max_participants: 5,
-      creation_time: "01/12/18"
+      type: ACTIVITIES_RECEIVED,
+      activities
     };
+    expect(activitiesReceivedAction(activities)).toEqual(expected);
+  });
+});
 
-    expect(addActivityAction(activity)).toEqual(expected);
+describe("fetchActivitiesAction", () => {
+  it("should return a FETCH_ACTIVITIES action", () => {
+    const expected = {
+      type: FETCH_ACTIVITIES
+    };
+    expect(fetchActivitiesAction()).toEqual(expected);
   });
 });
