@@ -3,6 +3,7 @@ import "./App.css";
 import ActivitiesList from "./ActivitiesList";
 import ActivityDetail from "./ActivityDetail";
 import ActivitiesContainer from "./containers/ActivitiesContainer";
+import Header from "./Header";
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <div>
         <Fragment>
+          <Header />
           <ActivitiesContainer />
           <ActivityDetail />
         </Fragment>

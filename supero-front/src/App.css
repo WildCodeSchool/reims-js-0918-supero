@@ -8,23 +8,23 @@
 .btn.addActivityButton {
   width: 70px;
   height: 70px;
-  background-color: #ff6500;
+  background-color: #e57419;
   border-radius: 50%;
-  box-shadow: 0 5px 5px 0 grey;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.1s ease-in-out;
-
+  border: 0;
   font-size: 50px;
   font-weight: bold;
   color: white;
   text-align: center;
   line-height: 0;
-
+  z-index: 0;
   position: fixed;
   right: 50px;
   bottom: 50px;
 }
 
 .btn.addActivityButton:hover {
-  box-shadow: 0 6px 14px 0 grey;
+  box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }
