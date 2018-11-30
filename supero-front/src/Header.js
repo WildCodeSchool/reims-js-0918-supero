@@ -26,7 +26,7 @@ export default class Example extends React.Component {
   }
   render() {
     return (
-      <div style={{ marginBottom: "20px", height: "71px" }}>
+      <div style={{ marginBottom: "20px" }}>
         {this.state.collapsed ? (
           <Navbar
             color="faded"

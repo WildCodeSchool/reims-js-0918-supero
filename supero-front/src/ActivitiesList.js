@@ -6,7 +6,7 @@ import Activity from "./Activity";
 
 const ActivitiesList = props => {
   return (
-    <div>
+    <div style={{ paddingTop: "60px" }}>
       {props.activities.map((activity, index) => (
         <Activity key={index} {...activity} />
       ))}
