@@ -7,8 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
+import activitiesReducer from "./reducers/activitiesReducer";
+import loadingReducer from "./reducers/loadingReducer";
 
 const rootReducer = combineReducers({
+  activities: activitiesReducer,
+  loading: loadingReducer,
   form: formReducer
 });
 

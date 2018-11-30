@@ -5,10 +5,16 @@ import {
   VIEW_ACTIVITIES,
   DISPLAY_MENU,
   HIDE_MENU,
-  VIEW_NEWS
+  VIEW_NEWS,
+  ACTIVITIES_RECEIVED,
+  FETCH_ACTIVITIES
 } from "./actionTypes";
 
-export const addActivityAction = activity => ({
-  type: ADD_ACTIVITY,
-  ...activity
+export const activitiesReceivedAction = activities => ({
+  type: ACTIVITIES_RECEIVED,
+  activities
+});
+
+export const fetchActivitiesAction = () => ({
+  type: FETCH_ACTIVITIES
 });
