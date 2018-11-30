@@ -1,7 +1,13 @@
 import React from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand } from "reactstrap";
 import "./Header.css";
-import Menu from "./Menu";
+import { Nav, NavItem, NavLink } from "reactstrap";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTimes);
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -35,7 +41,35 @@ export default class Example extends React.Component {
             </NavbarBrand>
           </Navbar>
         ) : (
-          <Menu />
+          <div className="menu-container">
+            <div>
+              <FontAwesomeIcon
+                onClick={this.toggleNavbar}
+                className="close-menu-icon"
+                icon="times"
+              />
+              <Nav navbar>
+                <NavItem>
+                  <NavLink href="#">Mon Compte</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#">Confidentialité</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#">Notification</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#">Aide et assistance</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#">Déconnexion</NavLink>
+                </NavItem>
+              </Nav>
+              <button onClick={this.toggleNavbar} className="close-menu-button">
+                Fermer le menu
+              </button>
+            </div>
+          </div>
         )}
       </div>
     );
