@@ -1,0 +1,24 @@
+.navbar-dark .navbar-brand {
+  margin-right: 0 !important;
+  color: #fff;
+}
+
+.navbar {
+  padding: 10px 5% !important;
+  background-color: #262626;
+  color: #fff;
+}
+
+.navbar h2 {
+  font-family: "Oswald", sans-serif;
+  margin-top: 5px;
+}
+
+.navbar-toggler {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar-collapse {
+  text-align: center;
+}

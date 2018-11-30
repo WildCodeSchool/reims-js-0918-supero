@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import ActivitiesList from "./ActivitiesList";
 import ActivityDetail from "./ActivityDetail";
+import Header from "./Header";
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <Fragment>
+          <Header />
           <ActivitiesList activities={this.state.activitiesList} />
           <ActivityDetail />
         </Fragment>
