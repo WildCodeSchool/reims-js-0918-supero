@@ -3,21 +3,9 @@ import { Field, reduxForm } from "redux-form";
 
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined;
 export const minLength2 = minLength(2);
-const number = value =>
-  value && isNaN(Number(value)) ? "Must be a number" : undefined;
-const minValue = min => value =>
-  value && value < min ? `Must be at least ${min}` : undefined;
-const minValue13 = minValue(13);
-const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
-    : undefined;
 const alphaNumeric = value =>
   value && /[^a-zA-Z0-9 ]/i.test(value)
     ? "Only alphanumeric characters"
@@ -50,23 +38,23 @@ let AddActivityForm = props => {
       <fieldset>
         <legend>Géneral</legend>
         <Field
-          name="session"
+          name="sport_id"
           type="select"
           component="select"
           label="Session"
           validate={[required]}
         >
           <option>Session</option>
-          <option value="running">Running</option>
-          <option value="cycling">Vélo</option>
-          <option value="swimming">Natation</option>
-          <option value="musculation">Musculation</option>
-          <option value="exterieur">Autres sports ext.</option>
-          <option value="interieur">Autres sports int.</option>
+          <option value="1">Running</option>
+          <option value="2">Vélo</option>
+          <option value="3">Natation</option>
+          <option value="4">Musculation</option>
+          <option value="5">Autres sports ext.</option>
+          <option value="6">Autres sports int.</option>
         </Field>
 
         <Field
-          name="city"
+          name="activity_city"
           type="text"
           component={renderField}
           label="Ville"
@@ -76,21 +64,21 @@ let AddActivityForm = props => {
       <fieldset>
         <legend>Description</legend>
         <Field
-          name="about"
+          name="activity_description"
           type="textarea"
           component={renderField}
           label="A propos"
           validate={[required, minLength2]}
         />
         <Field
-          name="date"
+          name="activity_start_time"
           type="text"
           component={renderField}
           label="Date"
           validate={[required, minLength2]}
         />
         <Field
-          name="difficulty"
+          name="activity_difficulty"
           type="select"
           component="select"
           label="Difficulty"
@@ -103,14 +91,14 @@ let AddActivityForm = props => {
           <option value="4">Intense</option>
         </Field>
         <Field
-          name="recommandation"
+          name="activity_more_infos"
           type="text"
           component={renderField}
           label="Recommandation"
           validate={[required, alphaNumeric, minLength2]}
         />
         <Field
-          name="participants"
+          name="activity_max_participants"
           type="text"
           component={renderField}
           label="Limite participants"
