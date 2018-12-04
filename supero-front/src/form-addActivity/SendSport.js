@@ -10,17 +10,17 @@ const SendSport = props => {
       <div>
         <label>Indiquez le sport pratiqué :</label>
       </div>
-      <Field name="session" type="select" component="select" label="Session">
+      <Field name="sport_id" type="select" component="select" label="Session">
         <option>Session</option>
-        <option value="running">Running</option>
-        <option value="cycling">Vélo</option>
-        <option value="swimming">Natation</option>
-        <option value="musculation">Musculation</option>
-        <option value="exterieur">Autres sports ext.</option>
-        <option value="interieur">Autres sports int.</option>
+        <option value="1">Running</option>
+        <option value="2">Vélo</option>
+        <option value="3">Natation</option>
+        <option value="4">Musculation</option>
+        <option value="5">Autres sports ext.</option>
+        <option value="6">Autres sports int.</option>
       </Field>
       <Field
-        name="title"
+        name="activity_title"
         type="text"
         component={renderField}
         label="Nom de l'activité"
@@ -29,7 +29,7 @@ const SendSport = props => {
         <label>Difficulté</label>
       </div>
       <Field
-        name="difficulty"
+        name="activity_difficulty"
         type="select"
         component="select"
         label="Difficulté"

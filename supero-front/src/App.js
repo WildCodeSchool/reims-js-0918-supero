@@ -2,9 +2,8 @@ import React, { Component, Fragment } from "react";
 import "./App.css";
 import ActivityDetail from "./ActivityDetail";
 import ActivitiesContainer from "./containers/ActivitiesContainer";
-import AddActivityPage from "./form-addActivity/AddActivityPage";
+import AddActivityForm from "./form-addActivity/AddActivityForm";
 import Header from "./Header";
-
 class App extends Component {
   render() {
     return (
@@ -13,7 +12,7 @@ class App extends Component {
           <Header />
           <ActivitiesContainer />
           <ActivityDetail />
-          <AddActivityPage />
+          <AddActivityForm />
         </Fragment>
       </div>
     );

@@ -8,26 +8,31 @@ const SendPlace = props => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="address"
+        name="activity_adresse"
         type="text"
         component={renderField}
         label="Adresse"
       />
-      <Field name="city" type="text" component={renderField} label="Ville" />
       <Field
-        name="start_time"
+        name="activity_city"
         type="text"
         component={renderField}
-        label="Heure de début"
+        label="Ville"
       />
       <Field
-        name="duration"
+        name="activity_start_time"
+        type="text"
+        component={renderField}
+        label="Date et heure de début"
+      />
+      <Field
+        name="activity_duration"
         type="text"
         component={renderField}
         label="Durée"
       />
       <Field
-        name="participants"
+        name="activity_max_participants"
         type="text"
         component={renderField}
         label="Limite maximum de participants"

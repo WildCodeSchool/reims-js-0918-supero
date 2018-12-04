@@ -8,18 +8,23 @@ const SendInfo = props => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
-        name="description"
+        name="activity_description"
         type="text"
         component={renderField}
         label="Description"
       />
       <Field
-        name="more_infos"
+        name="activity_more_infos"
         type="text"
         component={renderField}
         label="Plus d'infos"
       />
-      <Field name="photo" type="text" component={renderField} label="Photo" />
+      <Field
+        name="activity_photo"
+        type="text"
+        component={renderField}
+        label="Photo"
+      />
       <div>
         <button type="button" className="previous" onClick={previousPage}>
           Précédent
