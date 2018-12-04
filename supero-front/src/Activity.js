@@ -16,8 +16,6 @@ import {
 
 library.add(faBolt, faClock, faMapMarkerAlt, faUser);
 
-const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
-
 const Activity = props => {
   return (
     <div className="activity-container">

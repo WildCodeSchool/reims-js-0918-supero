@@ -1,5 +1,5 @@
 import React from "react";
-import { Collapse, Navbar, NavbarToggler, NavbarBrand } from "reactstrap";
+import { Navbar, NavbarToggler, NavbarBrand } from "reactstrap";
 import "./Header.css";
 import { Nav, NavItem, NavLink } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
