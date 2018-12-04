@@ -7,18 +7,33 @@ const SendSport = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
+      <Field name="session" type="select" component="select" label="Session">
+        <option>Session</option>
+        <option value="running">Running</option>
+        <option value="cycling">Vélo</option>
+        <option value="swimming">Natation</option>
+        <option value="musculation">Musculation</option>
+        <option value="exterieur">Autres sports ext.</option>
+        <option value="interieur">Autres sports int.</option>
+      </Field>
       <Field
-        name="firstName"
+        name="title"
         type="text"
         component={renderField}
-        label="First Name"
+        label="Nom de l'activité"
       />
       <Field
-        name="lastName"
-        type="text"
-        component={renderField}
-        label="Last Name"
-      />
+        name="difficulty"
+        type="select"
+        component="select"
+        label="Difficulté"
+      >
+        <option>Difficulté</option>
+        <option value="1">Facile</option>
+        <option value="2">Intermediaire</option>
+        <option value="3">Difficile</option>
+        <option value="4">Intense</option>
+      </Field>
       <div>
         <button type="submit" className="next">
           Next

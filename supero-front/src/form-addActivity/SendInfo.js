@@ -1,45 +1,43 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
-const colors = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"];
-
-const renderColorSelector = ({ input, meta: { touched, error } }) => (
-  <div>
-    <select {...input}>
-      <option value="">Select a color...</option>
-      {colors.map(val => (
-        <option value={val} key={val}>
-          {val}
-        </option>
-      ))}
-    </select>
-    {touched && error && <span>{error}</span>}
-  </div>
-);
+import renderField from "./renderField";
 
 const SendInfo = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Favorite Color</label>
-        <Field name="favoriteColor" component={renderColorSelector} />
-      </div>
-      <div>
-        <label htmlFor="employed">Employed</label>
+        <label>Description</label>
         <div>
           <Field
-            name="employed"
-            id="employed"
-            component="input"
-            type="checkbox"
+            name="description"
+            type="text"
+            component={renderField}
+            label="description"
           />
         </div>
       </div>
       <div>
-        <label>Notes</label>
+        <label>Infos complémentaires</label>
         <div>
-          <Field name="notes" component="textarea" placeholder="Notes" />
+          <Field
+            name="more_infos"
+            type="text"
+            component={renderField}
+            label="Plus d'infos"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Photo</label>
+        <div>
+          <Field
+            name="photo"
+            type="text"
+            component={renderField}
+            label="photo"
+          />
         </div>
       </div>
       <div>

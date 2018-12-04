@@ -1,21 +1,31 @@
 const validate = values => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = "Required";
+  if (!values.session) {
+    errors.session = "Required";
   }
-  if (!values.lastName) {
-    errors.lastName = "Required";
+  if (!values.title) {
+    errors.title = "Required";
   }
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+  if (!values.difficulty) {
+    errors.difficulty = "Required";
   }
-  if (!values.sex) {
-    errors.sex = "Required";
+  if (!values.address) {
+    errors.address = "Required";
   }
-  if (!values.favoriteColor) {
-    errors.favoriteColor = "Required";
+  if (!values.city) {
+    errors.city = "Required";
+  }
+  if (!values.participants) {
+    errors.participants = "Required";
+  }
+  if (!values.start_time) {
+    errors.start_time = "Required";
+  }
+  if (!values.duration) {
+    errors.duration = "Required";
+  }
+  if (!values.description) {
+    errors.description = "Required";
   }
   return errors;
 };

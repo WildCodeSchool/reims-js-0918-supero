@@ -10,21 +10,31 @@ const SendPlace = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="email" type="email" component={renderField} label="Email" />
-      <div>
-        <label>Sex</label>
-        <div>
-          <label>
-            <Field name="sex" component="input" type="radio" value="male" />{" "}
-            Male
-          </label>
-          <label>
-            <Field name="sex" component="input" type="radio" value="female" />{" "}
-            Female
-          </label>
-          <Field name="sex" component={renderError} />
-        </div>
-      </div>
+      <Field
+        name="address"
+        type="text"
+        component={renderField}
+        label="Adresse"
+      />
+      <Field name="city" type="text" component={renderField} label="Ville" />
+      <Field
+        name="start_time"
+        type="text"
+        component={renderField}
+        label="heure début"
+      />
+      <Field
+        name="duration"
+        type="text"
+        component={renderField}
+        label="durée"
+      />
+      <Field
+        name="participants"
+        type="text"
+        component={renderField}
+        label="Limite participants"
+      />
       <div>
         <button type="button" className="previous" onClick={previousPage}>
           Previous
