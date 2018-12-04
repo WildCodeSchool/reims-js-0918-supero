@@ -29,8 +29,7 @@ exports.up = function(db, callback) {
       "start_time",
       "duration",
       "photo",
-      "max_participants",
-      "creation_time"
+      "max_participants"
     ],
     [
       "1",
@@ -44,8 +43,7 @@ exports.up = function(db, callback) {
       "2018-11-25 18:00:00",
       "1",
       "photo",
-      "3",
-      "2018-11-24"
+      "3"
     ],
     callback
   );
@@ -63,8 +61,7 @@ exports.up = function(db, callback) {
       "start_time",
       "duration",
       "photo",
-      "max_participants",
-      "creation_time"
+      "max_participants"
     ],
     [
       "3",
@@ -78,8 +75,7 @@ exports.up = function(db, callback) {
       "2018-11-26 16:30:00",
       "1",
       "photo",
-      "3",
-      "2018-11-23"
+      "3"
     ],
     callback
   );
