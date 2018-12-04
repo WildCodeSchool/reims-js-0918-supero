@@ -17,13 +17,9 @@ class App extends Component {
       <div>
         <Fragment>
           <Header />
-          <br />
-          <br />
-          <br />
-          <br />
-          <AddActivityForm />
           <ActivitiesContainer />
           <ActivityDetail />
+          <AddActivityForm />
         </Fragment>
       </div>
     );
