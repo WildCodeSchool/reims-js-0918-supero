@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import WizardFormFirstPage from "./WizardFormFirstPage";
-import WizardFormSecondPage from "./WizardFormSecondPage";
-import WizardFormThirdPage from "./WizardFormThirdPage";
+import SendSport from "./SendSport";
+import SendPlace from "./SendPlace";
+import SendInfo from "./SendInfo";
 
-class WizardForm extends Component {
+class AddActivityForm extends Component {
   constructor(props) {
     super(props);
     this.nextPage = this.nextPage.bind(this);
@@ -26,15 +26,15 @@ class WizardForm extends Component {
     const { page } = this.state;
     return (
       <div>
-        {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage} />}
+        {page === 1 && <SendSport onSubmit={this.nextPage} />}
         {page === 2 && (
-          <WizardFormSecondPage
+          <SendPlace
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
           />
         )}
         {page === 3 && (
-          <WizardFormThirdPage
+          <SendInfo
             previousPage={this.previousPage}
             onSubmit={onSubmit}
           />
@@ -44,8 +44,8 @@ class WizardForm extends Component {
   }
 }
 
-WizardForm.propTypes = {
+AddActivityForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
-export default WizardForm;
+export default AddActivityForm;

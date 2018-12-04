@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
 import renderField from "./renderField";
 
-const WizardFormFirstPage = props => {
+const SendSport = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -29,8 +29,8 @@ const WizardFormFirstPage = props => {
 };
 
 export default reduxForm({
-  form: "wizard", // <------ same form name
+  form: "addactivity", // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate
-})(WizardFormFirstPage);
+})(SendSport);
