@@ -7,45 +7,25 @@ const SendInfo = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Description</label>
-        <div>
-          <Field
-            name="description"
-            type="text"
-            component={renderField}
-            label="description"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Infos complémentaires</label>
-        <div>
-          <Field
-            name="more_infos"
-            type="text"
-            component={renderField}
-            label="Plus d'infos"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Photo</label>
-        <div>
-          <Field
-            name="photo"
-            type="text"
-            component={renderField}
-            label="photo"
-          />
-        </div>
-      </div>
+      <Field
+        name="description"
+        type="text"
+        component={renderField}
+        label="Description"
+      />
+      <Field
+        name="more_infos"
+        type="text"
+        component={renderField}
+        label="Plus d'infos"
+      />
+      <Field name="photo" type="text" component={renderField} label="Photo" />
       <div>
         <button type="button" className="previous" onClick={previousPage}>
-          Previous
+          Précédent
         </button>
         <button type="submit" disabled={pristine || submitting}>
-          Submit
+          Valider
         </button>
       </div>
     </form>

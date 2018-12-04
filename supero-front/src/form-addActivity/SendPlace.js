@@ -21,26 +21,21 @@ const SendPlace = props => {
         name="start_time"
         type="text"
         component={renderField}
-        label="heure début"
+        label="Heure de début"
       />
-      <Field
-        name="duration"
-        type="text"
-        component={renderField}
-        label="durée"
-      />
+      <Field name="duration" type="text" component={renderField} label="Durée" />
       <Field
         name="participants"
         type="text"
         component={renderField}
-        label="Limite participants"
+        label="Limite maximum de participants"
       />
       <div>
         <button type="button" className="previous" onClick={previousPage}>
-          Previous
+          Précédent
         </button>
         <button type="submit" className="next">
-          Next
+          Suivant
         </button>
       </div>
     </form>
