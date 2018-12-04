@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 var dbm;
 var type;
 var seed;
 
 /**
-  * We receive the dbmigrate dependency from dbmigrate initially.
-  * This enables us to not have to rely on NODE_PATH.
-  */
+ * We receive the dbmigrate dependency from dbmigrate initially.
+ * This enables us to not have to rely on NODE_PATH.
+ */
 exports.setup = function(options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
@@ -30,7 +30,6 @@ exports.up = function(db, callback) {
       "activity_duration",
       "activity_photo",
       "activity_max_participants",
-      "activity_creation_time",
       "activity_title",
       "activity_more_infos"
     ],
@@ -47,7 +46,6 @@ exports.up = function(db, callback) {
       "1",
       "photo",
       "3",
-      "2018-11-28",
       "Le Tour de Reims",
       "...plus raisonnable que le Tour de France"
     ],
@@ -68,7 +66,6 @@ exports.up = function(db, callback) {
       "activity_duration",
       "activity_photo",
       "activity_max_participants",
-      "activity_creation_time",
       "activity_title",
       "activity_more_infos"
     ],
@@ -85,7 +82,6 @@ exports.up = function(db, callback) {
       "1",
       "photo",
       "3",
-      "2018-11-29",
       "Le Grand Bleu x(",
       "Appellez les maîtres nageurs vite svp"
     ],
@@ -106,7 +102,6 @@ exports.up = function(db, callback) {
       "activity_duration",
       "activity_photo",
       "activity_max_participants",
-      "activity_creation_time",
       "activity_title",
       "activity_more_infos"
     ],
@@ -123,7 +118,6 @@ exports.up = function(db, callback) {
       "1",
       "photo",
       "3",
-      "2018-11-24",
       "Entrainement Run-In-Reims",
       "Courrez, pauvres fous !"
     ],
@@ -136,5 +130,5 @@ exports.down = function(db) {
 };
 
 exports._meta = {
-  "version": 1
+  version: 1
 };
