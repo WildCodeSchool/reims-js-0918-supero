@@ -39,6 +39,7 @@ class SendPlace extends Component {
           timeIntervals={15}
           dateFormat="MMMM d, yyyy h:mm aa"
           timeCaption="time"
+          placeholderText="Sélectionner une date"
         />
         <Field
           name="activity_duration"
