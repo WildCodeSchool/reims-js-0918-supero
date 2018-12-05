@@ -14,7 +14,7 @@ const SendPlace = props => {
             <h2 className="text-center">Où et quand ?</h2>
             <FormGroup>
               <Field
-                name="activity_adresse"
+                name="address"
                 type="text"
                 component={renderField}
                 label="Adresse"
@@ -22,7 +22,7 @@ const SendPlace = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_city"
+                name="city"
                 type="text"
                 component={renderField}
                 label="Ville"
@@ -30,7 +30,7 @@ const SendPlace = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_start_time"
+                name="start_time"
                 type="text"
                 component={renderField}
                 label="Date et heure de début"
@@ -38,7 +38,7 @@ const SendPlace = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_duration"
+                name="duration"
                 type="text"
                 component={renderField}
                 label="Durée"
@@ -46,7 +46,7 @@ const SendPlace = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_max_participants"
+                name="participants"
                 type="text"
                 component={renderField}
                 label="Limite maximum de participants"

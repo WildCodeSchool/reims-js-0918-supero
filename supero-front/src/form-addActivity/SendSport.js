@@ -23,7 +23,7 @@ const SendSport = props => {
             <FormGroup>
               <Input
                 className="Form-Input"
-                name="sport_id"
+                name="session"
                 tag={Field}
                 type="select"
                 component="select"
@@ -43,7 +43,7 @@ const SendSport = props => {
             <FormGroup>
               <Field
                 className="Form-Input"
-                name="activity_title"
+                name="title"
                 type="text"
                 component={renderField}
                 label="Nom de l'activité"
@@ -52,7 +52,7 @@ const SendSport = props => {
             <FormGroup>
               <Input
                 className="Form-Input"
-                name="activity_difficulty"
+                name="difficulty"
                 type="select"
                 tag={Field}
                 component="select"

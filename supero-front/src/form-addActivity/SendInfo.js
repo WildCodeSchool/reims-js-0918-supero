@@ -14,7 +14,7 @@ const SendInfo = props => {
             <h2 className="text-center">Plus d'infos</h2>
             <FormGroup>
               <Field
-                name="activity_description"
+                name="description"
                 type="textarea"
                 component={renderField}
                 label="Description"
@@ -22,7 +22,7 @@ const SendInfo = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_more_infos"
+                name="more_infos"
                 type="text"
                 component={renderField}
                 label="Infos complémentaire"
@@ -30,7 +30,7 @@ const SendInfo = props => {
             </FormGroup>
             <FormGroup>
               <Field
-                name="activity_photo"
+                name="picture"
                 type="text"
                 component={renderField}
                 label="Photo"
