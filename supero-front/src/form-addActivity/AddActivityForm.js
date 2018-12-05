@@ -22,20 +22,20 @@ class AddActivityForm extends Component {
         "Content-Type": "application/json"
       }),
       body: JSON.stringify({
-        sport_id: values.sport_id,
-        activity_city: values.activity_city,
-        activity_description: values.activity_description,
-        activity_start_time: values.activity_start_time,
-        activity_difficulty: values.activity_difficulty,
-        activity_more_infos: values.activity_more_infos,
-        activity_max_participants: values.activity_max_participants,
+        sport_id: values.session,
+        activity_city: values.city,
+        activity_description: values.description,
+        activity_start_time: values.start_time,
+        activity_difficulty: values.difficulty,
+        activity_more_infos: values.more_infos,
+        activity_max_participants: values.participants,
         creator_id: 3,
-        activity_adresse: values.activity_adresse,
+        activity_adresse: values.address,
         activity_latitude: 49,
         activity_longitude: 78,
-        activity_duration: values.activity_duration,
-        activity_photo: values.activity_photo,
-        activity_title: values.activity_title
+        activity_duration: values.duration,
+        activity_photo: values.picture,
+        activity_title: values.title
       })
     })
       .then(res => res.json())
