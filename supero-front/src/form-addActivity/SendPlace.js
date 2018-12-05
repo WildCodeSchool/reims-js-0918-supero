@@ -10,7 +10,7 @@ const SendPlace = props => {
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Input
-          name="activity_adresse"
+          name="address"
           tag={Field}
           type="text"
           component={renderField}
@@ -19,7 +19,7 @@ const SendPlace = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_city"
+          name="city"
           tag={Field}
           type="text"
           component={renderField}
@@ -28,7 +28,7 @@ const SendPlace = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_start_time"
+          name="start_time"
           tag={Field}
           type="text"
           component={renderField}
@@ -37,7 +37,7 @@ const SendPlace = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_duration"
+          name="duration"
           tag={Field}
           type="text"
           component={renderField}
@@ -46,7 +46,7 @@ const SendPlace = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_max_participants"
+          name="participants"
           tag={Field}
           type="text"
           component={renderField}

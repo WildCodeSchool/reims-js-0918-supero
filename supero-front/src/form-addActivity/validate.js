@@ -9,9 +9,6 @@ const validate = values => {
   if (!values.difficulty) {
     errors.difficulty = "Required";
   }
-  if (!values.address) {
-    errors.address = "Required";
-  }
   if (!values.city) {
     errors.city = "Required";
   }
