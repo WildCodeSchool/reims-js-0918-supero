@@ -4,6 +4,8 @@ import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
 
+const handleInputContent = event => event.target.value.replace(/e/gi, "")
+
 const SendPlace = props => {
   const { handleSubmit, previousPage } = props;
   return (
@@ -50,6 +52,7 @@ const SendPlace = props => {
                 type="number"
                 component={renderField}
                 label="Limite maximum de participants"
+                onChange={handleInputContent}
               />
             </FormGroup>
             <div className="d-flex justify-content-between">
