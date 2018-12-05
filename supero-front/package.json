@@ -11,6 +11,7 @@
     "luxon": "^1.8.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
+    "react-datepicker": "^2.0.0",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-scripts": "2.1.1",

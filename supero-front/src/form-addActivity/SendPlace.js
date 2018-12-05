@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
 import renderField from "./renderField";
 
+
 const SendPlace = props => {
   const { handleSubmit, previousPage } = props;
   return (
