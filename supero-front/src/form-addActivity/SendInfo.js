@@ -1,39 +1,49 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
 
 const SendInfo = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;
   return (
-    <form onSubmit={handleSubmit}>
-      <Field
-        name="activity_description"
-        type="text"
-        component={renderField}
-        label="Description"
-      />
-      <Field
-        name="activity_more_infos"
-        type="text"
-        component={renderField}
-        label="Plus d'infos"
-      />
-      <Field
-        name="activity_photo"
-        type="text"
-        component={renderField}
-        label="Photo"
-      />
+    <Form onSubmit={handleSubmit}>
+      <FormGroup>
+        <Input
+          name="activity_description"
+          tag={Field}
+          type="text"
+          component={renderField}
+          label="Description"
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="activity_more_infos"
+          tag={Field}
+          type="text"
+          component={renderField}
+          label="Plus d'infos"
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="activity_photo"
+          tag={Field}
+          type="text"
+          component={renderField}
+          label="Photo"
+        />
+      </FormGroup>
       <div>
-        <button type="button" className="previous" onClick={previousPage}>
+        <Button type="button" className="previous" onClick={previousPage}>
           Précédent
-        </button>
-        <button type="submit" disabled={pristine || submitting}>
+        </Button>
+        <Button type="submit" disabled={pristine || submitting}>
           Valider
-        </button>
+        </Button>
       </div>
-    </form>
+    </Form>
   );
 };
 export default reduxForm({
