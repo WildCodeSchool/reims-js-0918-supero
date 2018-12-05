@@ -10,7 +10,7 @@ const SendInfo = props => {
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <Input
-          name="activity_description"
+          name="description"
           tag={Field}
           type="text"
           component={renderField}
@@ -19,7 +19,7 @@ const SendInfo = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_more_infos"
+          name="more_infos"
           tag={Field}
           type="text"
           component={renderField}
@@ -28,7 +28,7 @@ const SendInfo = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_photo"
+          name="picture"
           tag={Field}
           type="text"
           component={renderField}

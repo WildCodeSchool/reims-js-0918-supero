@@ -13,7 +13,7 @@ const SendSport = props => {
           <Label>Indiquez le sport pratiqué :</Label>
         </div>
         <Input
-          name="sport_id"
+          name="session"
           tag={Field}
           type="select"
           component="select"
@@ -29,7 +29,7 @@ const SendSport = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_title"
+          name="title"
           type="text"
           tag={Field}
           component={renderField}
@@ -38,7 +38,7 @@ const SendSport = props => {
       </FormGroup>
       <FormGroup>
         <Input
-          name="activity_difficulty"
+          name="difficulty"
           type="select"
           tag={Field}
           component="select"
