@@ -3,6 +3,7 @@ import SendSport from "./SendSport";
 import SendPlace from "./SendPlace";
 import SendInfo from "./SendInfo";
 
+
 class AddActivityForm extends Component {
   constructor(props) {
     super(props);

@@ -1,13 +1,16 @@
-import React from "react";
+import React, {Component} from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
 import renderField from "./renderField";
 
-
-const SendPlace = props => {
-  const { handleSubmit, previousPage } = props;
+class SendPlace extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+     const { handleSubmit, previousPage } = props;}
+     render(){
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={this.props.handleSubmit}>
       <Field
         name="activity_adresse"
         type="text"
@@ -39,7 +42,7 @@ const SendPlace = props => {
         label="Limite maximum de participants"
       />
       <div>
-        <button type="button" className="previous" onClick={previousPage}>
+        <button type="button" className="previous" onClick={this.props.previousPage}>
           Précédent
         </button>
         <button type="submit" className="next">
@@ -47,7 +50,7 @@ const SendPlace = props => {
         </button>
       </div>
     </form>
-  );
+  );}
 };
 
 export default reduxForm({
