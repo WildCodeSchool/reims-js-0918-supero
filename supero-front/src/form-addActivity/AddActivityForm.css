@@ -1,0 +1,72 @@
+.ActivityList-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: url("/images/bg_blur.png");
+  background-size: cover;
+  background-position: 25%;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.Label-text {
+  color: white;
+  font-size: 25px;
+}
+
+input.Form-Input {
+  border-radius: 41px;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.Form-Input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+select.Form-Input {
+  border-radius: 41px;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  padding-right: 20px;
+}
+option {
+  background-color: #222222;
+}
+
+form h2 {
+  color: white !important;
+}
+textarea {
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  padding-right: 20px;
+}
+
+.next,
+.previous {
+  border-radius: 41px !important;
+  background-color: #e57419 !important;
+  padding: 7px 25px !important;
+  text-transform: uppercase !important;
+  border: 0 !important;
+}
+
+.valider {
+  border-radius: 41px !important;
+  background-color: #e57419 !important;
+  padding: 7px 18px !important;
+  text-transform: uppercase !important;
+  border: 0 !important;
+}
+
+.valider:disabled {
+  border-radius: 41px !important;
+  background-color: #94511a !important;
+  padding: 7px 18px !important;
+  text-transform: uppercase !important;
+  border: 0 !important;
+}
