@@ -29,6 +29,9 @@ const SendSport = props => {
                 component="select"
                 label="Session"
               >
+                <option value="" disabled>
+                  Sports
+                </option>
                 <option value="1">Running</option>
                 <option value="2">Vélo</option>
                 <option value="3">Natation</option>
@@ -55,7 +58,9 @@ const SendSport = props => {
                 component="select"
                 label="Difficulté"
               >
-                <option>Difficulté</option>
+                <option value="" disabled>
+                  Difficulté
+                </option>
                 <option value="1">Facile</option>
                 <option value="2">Intermediaire</option>
                 <option value="3">Difficile</option>
