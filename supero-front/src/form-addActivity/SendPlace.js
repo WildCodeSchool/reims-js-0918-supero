@@ -31,7 +31,7 @@ const SendPlace = props => {
             <FormGroup>
               <Field
                 name="start_time"
-                type="text"
+                type="datetime-local"
                 component={renderField}
                 label="Date et heure de début"
               />
@@ -39,7 +39,7 @@ const SendPlace = props => {
             <FormGroup>
               <Field
                 name="duration"
-                type="text"
+                type="time"
                 component={renderField}
                 label="Durée"
               />
@@ -47,7 +47,7 @@ const SendPlace = props => {
             <FormGroup>
               <Field
                 name="participants"
-                type="text"
+                type="number"
                 component={renderField}
                 label="Limite maximum de participants"
               />

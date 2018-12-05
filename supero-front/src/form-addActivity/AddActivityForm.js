@@ -33,7 +33,7 @@ class AddActivityForm extends Component {
         activity_adresse: values.address,
         activity_latitude: 49,
         activity_longitude: 78,
-        activity_duration: values.duration,
+        activity_duration: values.durationFull,
         activity_photo: values.picture,
         activity_title: values.title
       })

@@ -18,6 +18,9 @@ const validate = values => {
   if (!values.duration) {
     errors.duration = "Required";
   }
+  else if (values.duration) {
+    values.durationFull = `${values.duration}:00`
+  }
   if (!values.participants) {
     errors.participants = "Required";
   }
