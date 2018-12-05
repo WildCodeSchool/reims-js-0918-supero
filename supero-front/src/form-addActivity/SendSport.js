@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input } from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
 
@@ -9,16 +9,14 @@ const SendSport = props => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormGroup>
-        <div>
-          <Label>Indiquez le sport pratiqué :</Label>
-        </div>
         <Input
           name="session"
-          tag={Field}
           type="select"
+          tag={Field}
           component="select"
           label="Session"
         >
+          <option value="0">Sports</option>
           <option value="1">Running</option>
           <option value="2">Vélo</option>
           <option value="3">Natation</option>
@@ -44,7 +42,7 @@ const SendSport = props => {
           component="select"
           label="Difficulté"
         >
-          <option>Difficulté</option>
+          <option value="0">Difficulté</option>
           <option value="1">Facile</option>
           <option value="2">Intermediaire</option>
           <option value="3">Difficile</option>

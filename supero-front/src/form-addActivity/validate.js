@@ -1,12 +1,12 @@
 const validate = values => {
   const errors = {};
-  if (!values.session) {
+  if ((!values.session) || (values.session === "0")) {
     errors.session = "Required";
   }
   if (!values.title) {
     errors.title = "Required";
   }
-  if (!values.difficulty) {
+  if ((!values.difficulty) || (values.difficulty === "0")) {
     errors.difficulty = "Required";
   }
   if (!values.city) {
