@@ -2,12 +2,16 @@ import React, {Component} from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
 import renderField from "./renderField";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class SendPlace extends Component {
   constructor(props) {
     super(props);
     this.state = {date: new Date()};
-     const { handleSubmit, previousPage } = props;}
+  
+  }
+   onChange = date => this.setState({ date });
      render(){
   return (
     <form onSubmit={this.props.handleSubmit}>
@@ -23,11 +27,14 @@ class SendPlace extends Component {
         component={renderField}
         label="Ville"
       />
-      <Field
-        name="activity_start_time"
-        type="text"
-        component={renderField}
-        label="Date et heure de début"
+      <DatePicker
+        selected={this.state.startDate}
+        onChange={this.handleChange}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={15}
+        dateFormat="MMMM d, yyyy h:mm aa"
+        timeCaption="time"
       />
       <Field
         name="activity_duration"
