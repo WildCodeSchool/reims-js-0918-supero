@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
+import renderDatePicker from "./renderDatePicker";
 
 const SendPlace = props => {
   const { handleSubmit, previousPage } = props;
@@ -27,12 +28,11 @@ const SendPlace = props => {
         />
       </FormGroup>
       <FormGroup>
-        <Input
-          name="start_time"
-          tag={Field}
+        <Field
+          name="date"
           type="text"
-          component={renderField}
-          label="Date et heure de début"
+          component={renderDatePicker}
+          label="Date"
         />
       </FormGroup>
       <FormGroup>
