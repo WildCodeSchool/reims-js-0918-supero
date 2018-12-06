@@ -17,10 +17,13 @@ const rootReducer = combineReducers({
   loading: loadingReducer,
   selectAddress: selectAddressReducer,
   form: formReducer.plugin({
-    form: (state, action) => {
+    addactivity: (state, action) => {
       switch (action.type) {
         case SELECT_ADDRESS:
-          return action.address;
+          return {
+            ...state,
+            values: { ...state.values, address: action.address }
+          };
         default:
           return state;
       }

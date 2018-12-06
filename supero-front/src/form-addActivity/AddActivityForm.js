@@ -56,7 +56,7 @@ class AddActivityForm extends Component {
   render() {
     const { page } = this.state;
     return (
-      <div className="ActivityList-container">
+      <div className="AddActivity-container">
         {page === 1 && <SendSport onSubmit={this.nextPage} />}
         {page === 2 && (
           <SendPlaceContainer

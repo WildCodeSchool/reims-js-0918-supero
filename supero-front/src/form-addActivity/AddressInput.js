@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 import { Input } from "reactstrap";
+import { Button, InputGroup, InputGroupAddon } from "reactstrap";
 
 const provider = new OpenStreetMapProvider();
 
@@ -9,7 +10,7 @@ class AddressInput extends Component {
     super(props);
     this.state = {
       result: [],
-      adressQuery: "",
+      addressQuery: "",
       resultOpen: false
     };
   }
@@ -22,27 +23,45 @@ class AddressInput extends Component {
         this.setState({
           result: results.slice(0, 5),
           resultOpen: true,
-          adressQuery: request
+          addressQuery: request
         });
       });
   };
 
+  resetQuery = () => {
+    this.setState({
+      addressQuery: ""
+    });
+  };
+
   render() {
+    console.log(this.props.input.name);
     return (
       <div className="adresse-input">
-        <Input
-          className="Form-Input"
-          onChange={event => this.handleInput(event)}
-          placeholder={this.props.label}
-          type={this.props.type}
-          value={
-            this.props.adressSelected.label
-              ? this.props.adressSelected.label
-              : this.props.value
-          }
-        />
+        <InputGroup>
+          <Input
+            className="Form-Input"
+            onChange={event => this.handleInput(event)}
+            placeholder={this.props.label}
+            type={this.props.type}
+            name={this.props.input.name}
+            value={this.state.addressQuery}
+          />
+          {this.state.addressQuery !== "" && (
+            <InputGroupAddon addonType="append">
+              <Button
+                className="reset-address"
+                onClick={() => this.resetQuery()}
+              >
+                <i className="fas fa-times-circle" />
+              </Button>
+            </InputGroupAddon>
+          )}
+        </InputGroup>
         {this.props.touched && this.props.error && (
-          <span>{this.props.error}</span>
+          <span>
+            <i class="fas fa-exclamation-triangle" /> {this.props.error}
+          </span>
         )}
 
         {this.state.resultOpen && (
@@ -51,13 +70,24 @@ class AddressInput extends Component {
               <p
                 className="text-truncate"
                 key={index}
-                onClick={() => this.props.selectAddress(address)}
+                onClick={() => {
+                  this.props.selectAddress(address);
+                  this.setState({
+                    addressQuery: address.label,
+                    resultOpen: false
+                  });
+                }}
               >
                 {address.label}
               </p>
             ))}
           </div>
         )}
+        {/* {this.state.addressQuery !== "" ? (
+
+        ) : (
+          <div />
+        )} */}
       </div>
     );
   }
