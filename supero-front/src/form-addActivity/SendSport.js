@@ -1,62 +1,81 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Container,
+  Col,
+  Row
+} from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
 
 const SendSport = props => {
   const { handleSubmit } = props;
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormGroup>
-        <div>
-          <Label>Indiquez le sport pratiqué :</Label>
-        </div>
-        <Input
-          name="session"
-          tag={Field}
-          type="select"
-          component="select"
-          label="Session"
-        >
-          <option value="1">Running</option>
-          <option value="2">Vélo</option>
-          <option value="3">Natation</option>
-          <option value="4">Musculation</option>
-          <option value="5">Autres sports ext.</option>
-          <option value="6">Autres sports int.</option>
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Input
-          name="title"
-          type="text"
-          tag={Field}
-          component={renderField}
-          label="Nom de l'activité"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Input
-          name="difficulty"
-          type="select"
-          tag={Field}
-          component="select"
-          label="Difficulté"
-        >
-          <option>Difficulté</option>
-          <option value="1">Facile</option>
-          <option value="2">Intermediaire</option>
-          <option value="3">Difficile</option>
-          <option value="4">Intense</option>
-        </Input>
-      </FormGroup>
-      <div>
-        <Button type="submit" className="next">
-          Suivant
-        </Button>
-      </div>
-    </Form>
+    <Container fluid>
+      <Row className="d-flex justify-content-center">
+        <Col xs="10">
+          <Form onSubmit={handleSubmit}>
+            <h2 className="text-center">Activité proposée</h2>
+            <FormGroup>
+              <Input
+                className="Form-Input"
+                name="session"
+                tag={Field}
+                type="select"
+                component="select"
+                label="Session"
+              >
+                <option value="" disabled>
+                  Sports
+                </option>
+                <option value="1">Running</option>
+                <option value="2">Vélo</option>
+                <option value="3">Natation</option>
+                <option value="4">Musculation</option>
+                <option value="5">Autres sports ext.</option>
+                <option value="6">Autres sports int.</option>
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Field
+                className="Form-Input"
+                name="title"
+                type="text"
+                component={renderField}
+                label="Nom de l'activité"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                className="Form-Input"
+                name="difficulty"
+                type="select"
+                tag={Field}
+                component="select"
+                label="Difficulté"
+              >
+                <option value="" disabled>
+                  Difficulté
+                </option>
+                <option value="1">Facile</option>
+                <option value="2">Intermediaire</option>
+                <option value="3">Difficile</option>
+                <option value="4">Intense</option>
+              </Input>
+            </FormGroup>
+            <div className="d-flex justify-content-end">
+              <Button type="submit" className="next">
+                Suivant
+              </Button>
+            </div>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

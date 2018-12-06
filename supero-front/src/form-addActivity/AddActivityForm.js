@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SendSport from "./SendSport";
 import SendPlace from "./SendPlace";
 import SendInfo from "./SendInfo";
+import "./AddActivityForm.css";
 
 class AddActivityForm extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class AddActivityForm extends Component {
         activity_adresse: values.address,
         activity_latitude: 49,
         activity_longitude: 78,
-        activity_duration: values.duration,
+        activity_duration: values.durationFull,
         activity_photo: values.picture,
         activity_title: values.title
       })
@@ -55,7 +56,7 @@ class AddActivityForm extends Component {
   render() {
     const { page } = this.state;
     return (
-      <div>
+      <div className="ActivityList-container">
         {page === 1 && <SendSport onSubmit={this.nextPage} />}
         {page === 2 && (
           <SendPlace
