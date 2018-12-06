@@ -82,11 +82,6 @@ class AddressInput extends Component {
             ))}
           </div>
         )}
-        {/* {this.state.addressQuery !== "" ? (
-
-        ) : (
-          <div />
-        )} */}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { Field } from "redux-form";
 import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
 import renderField from "./renderField";
 import AddressInput from "./AddressInput";
+import ViewAddressOnMap from "./ViewAddressOnMap";
 
 const SendPlace = props => {
   const { handleSubmit, previousPage, selectAddress, addressSelected } = props;
@@ -30,6 +31,9 @@ const SendPlace = props => {
                 adressSelected={addressSelected}
               />
             </FormGroup>
+            {addressSelected.x && (
+              <ViewAddressOnMap addressCoordinates={addressSelected} />
+            )}
             <FormGroup>
               <Field
                 name="city"
