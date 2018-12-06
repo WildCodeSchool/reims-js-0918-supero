@@ -13,6 +13,7 @@ const SendTime = props => {
           <Form onSubmit={handleSubmit}>
             <h2 className="text-center">Quand ?</h2>
             <FormGroup>
+              <label style={{ color: "#fff" }}>Date de l'activité</label>
               <Field
                 name="start_time"
                 type="datetime-local"
@@ -20,6 +21,7 @@ const SendTime = props => {
                 label="Date et heure de début"
               />
             </FormGroup>
+            <label style={{ color: "#fff" }}>Durée</label>
             <FormGroup>
               <Field
                 name="duration"
