@@ -12,15 +12,7 @@ const SendPlace = props => {
       <Row className="d-flex justify-content-center">
         <Col xs="10">
           <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Où et quand ?</h2>
-            {/* <FormGroup>
-              <Field
-                name="address"
-                type="text"
-                component={renderField}
-                label="Adresse"
-              />
-            </FormGroup> */}
+            <h2 className="text-center">Où ?</h2>
             <FormGroup>
               <Field
                 name="address"
@@ -40,30 +32,6 @@ const SendPlace = props => {
                 type="text"
                 component={renderField}
                 label="Ville"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Field
-                name="start_time"
-                type="datetime-local"
-                component={renderField}
-                label="Date et heure de début"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Field
-                name="duration"
-                type="time"
-                component={renderField}
-                label="Durée"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Field
-                name="participants"
-                type="number"
-                component={renderField}
-                label="Limite maximum de participants"
               />
             </FormGroup>
             <div className="d-flex justify-content-between">

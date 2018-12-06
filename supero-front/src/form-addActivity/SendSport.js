@@ -67,6 +67,14 @@ const SendSport = props => {
                 <option value="4">Intense</option>
               </Input>
             </FormGroup>
+            <FormGroup>
+              <Field
+                name="participants"
+                type="number"
+                component={renderField}
+                label="Limite maximum de participants"
+              />
+            </FormGroup>
             <div className="d-flex justify-content-end">
               <Button type="submit" className="next">
                 Suivant

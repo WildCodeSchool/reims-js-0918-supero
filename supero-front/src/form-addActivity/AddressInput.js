@@ -29,9 +29,12 @@ class AddressInput extends Component {
   };
 
   resetQuery = () => {
-    this.setState({
-      addressQuery: ""
-    });
+    return (
+      this.setState({
+        addressQuery: ""
+      }),
+      this.props.selectAddress("")
+    );
   };
 
   render() {
