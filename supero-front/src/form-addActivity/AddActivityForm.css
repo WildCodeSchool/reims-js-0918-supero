@@ -70,3 +70,34 @@ textarea {
   text-transform: uppercase !important;
   border: 0 !important;
 }
+
+.adresse-input {
+  position: relative;
+}
+
+.adresse-result {
+  position: absolute;
+  width: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0),
+    rgba(64, 0, 77, 0.6) 20%,
+    rgb(64, 0, 77)
+  );
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 0% 0% 2% 2%;
+  overflow: hidden;
+  color: #fff;
+  z-index: 9999;
+}
+
+.adresse-result p {
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.adresse-result p:nth-child(even) {
+  background-color: rgba(224, 224, 224, 0.2);
+}

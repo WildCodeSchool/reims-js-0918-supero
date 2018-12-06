@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
 import validate from "./validate";
 import renderField from "./renderField";
+import AdressInput from "./AdressInput";
 
 const SendPlace = props => {
   const { handleSubmit, previousPage } = props;
@@ -12,11 +13,19 @@ const SendPlace = props => {
         <Col xs="10">
           <Form onSubmit={handleSubmit}>
             <h2 className="text-center">Où et quand ?</h2>
-            <FormGroup>
+            {/* <FormGroup>
               <Field
                 name="address"
                 type="text"
                 component={renderField}
+                label="Adresse"
+              />
+            </FormGroup> */}
+            <FormGroup>
+              <Field
+                name="address"
+                type="text"
+                component={AdressInput}
                 label="Adresse"
               />
             </FormGroup>
