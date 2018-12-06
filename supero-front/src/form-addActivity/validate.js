@@ -3,9 +3,8 @@ const validate = values => {
   if (!values.session) {
     errors.session = "Champ obligatoire";
   }
-  console.log(values.address);
 
-  if (!values.address) {
+  if (values.address === undefined) {
     errors.address = "Champ obligatoire";
   }
 

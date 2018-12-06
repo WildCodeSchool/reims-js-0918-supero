@@ -35,7 +35,6 @@ class AddressInput extends Component {
   };
 
   render() {
-    console.log(this.props.input.name);
     return (
       <div className="adresse-input">
         <InputGroup>
