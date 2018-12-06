@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Button } from "reactstrap";
 import axios from "axios";
 import Activity from "./Activity";
+import { Link } from "react-router-dom";
 
 class ActivitiesList extends Component {
   componentDidMount() {
@@ -17,7 +18,9 @@ class ActivitiesList extends Component {
         {this.props.activities.map((activity, index) => (
           <Activity key={index} {...activity} />
         ))}
-        <Button className="addActivityButton">+</Button>
+        <Link to="AddActivity">
+          <Button className="addActivityButton">+</Button>
+        </Link>
       </div>
     );
   }

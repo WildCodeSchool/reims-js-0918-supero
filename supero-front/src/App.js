@@ -1,19 +1,18 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
-import ActivityDetail from "./ActivityDetail";
 import ActivitiesContainer from "./containers/ActivitiesContainer";
-import AddActivityForm from "./form-addActivity/AddActivityForm";
+import { Route, Switch } from "react-router";
 import Header from "./Header";
+import AddActivityForm from "./form-addActivity/AddActivityForm";
 class App extends Component {
   render() {
     return (
       <div>
-        <Fragment>
-          <Header />
-          <ActivitiesContainer />
-          <ActivityDetail />
-          <AddActivityForm />
-        </Fragment>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={ActivitiesContainer} />
+          <Route exact path="/AddActivity" component={AddActivityForm} />
+        </Switch>
       </div>
     );
   }
