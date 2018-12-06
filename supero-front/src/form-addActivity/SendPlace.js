@@ -1,12 +1,11 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
-import validate from "./validate";
 import renderField from "./renderField";
-import AdressInput from "./AdressInput";
+import AddressInput from "./AddressInput";
 
 const SendPlace = props => {
-  const { handleSubmit, previousPage } = props;
+  const { handleSubmit, previousPage, selectAddress, addressSelected } = props;
   return (
     <Container fluid>
       <Row className="d-flex justify-content-center">
@@ -25,8 +24,10 @@ const SendPlace = props => {
               <Field
                 name="address"
                 type="text"
-                component={AdressInput}
+                component={AddressInput}
                 label="Adresse"
+                selectAddress={selectAddress}
+                adressSelected={addressSelected}
               />
             </FormGroup>
             <FormGroup>
@@ -76,9 +77,4 @@ const SendPlace = props => {
   );
 };
 
-export default reduxForm({
-  form: "addactivity", //Form name is same
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  validate
-})(SendPlace);
+export default SendPlace;

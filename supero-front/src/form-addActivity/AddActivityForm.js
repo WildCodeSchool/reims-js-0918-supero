@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SendSport from "./SendSport";
-import SendPlace from "./SendPlace";
+import SendPlaceContainer from "./SendPlaceContainer";
 import SendInfo from "./SendInfo";
 import "./AddActivityForm.css";
 
@@ -59,7 +59,7 @@ class AddActivityForm extends Component {
       <div className="ActivityList-container">
         {page === 1 && <SendSport onSubmit={this.nextPage} />}
         {page === 2 && (
-          <SendPlace
+          <SendPlaceContainer
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
           />

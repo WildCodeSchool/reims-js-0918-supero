@@ -4,7 +4,7 @@ import { Input } from "reactstrap";
 
 const provider = new OpenStreetMapProvider();
 
-class AdressInput extends Component {
+class AddressInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class AdressInput extends Component {
   handleInput = event => {
     const request = event.target.value;
     provider
-      .search({ query: request != "" ? request + ", France" : request })
+      .search({ query: request !== "" ? request + ", France" : request })
       .then(results => {
         this.setState({
           result: results.slice(0, 5),
@@ -35,6 +35,11 @@ class AdressInput extends Component {
           onChange={event => this.handleInput(event)}
           placeholder={this.props.label}
           type={this.props.type}
+          value={
+            this.props.adressSelected.label
+              ? this.props.adressSelected.label
+              : this.props.value
+          }
         />
         {this.props.touched && this.props.error && (
           <span>{this.props.error}</span>
@@ -42,13 +47,13 @@ class AdressInput extends Component {
 
         {this.state.resultOpen && (
           <div className="adresse-result">
-            {this.state.result.map((adress, index) => (
+            {this.state.result.map((address, index) => (
               <p
                 className="text-truncate"
                 key={index}
-                onClick={() => this.props.chooseAdress(adress.label)}
+                onClick={() => this.props.selectAddress(address)}
               >
-                {adress.label}
+                {address.label}
               </p>
             ))}
           </div>
@@ -58,4 +63,4 @@ class AdressInput extends Component {
   }
 }
 
-export default AdressInput;
+export default AddressInput;
