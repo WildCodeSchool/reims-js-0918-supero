@@ -17,7 +17,6 @@ import { SELECT_ADDRESS } from "./actions/actionTypes";
 import selectAddressReducer from "./reducers/selectAddressReducer";
 
 const history = createBrowserHistory();
-console.log(history);
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = history =>

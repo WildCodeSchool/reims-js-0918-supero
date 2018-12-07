@@ -48,7 +48,7 @@ export default class ViewAddressOnMap extends Component {
         />
         <Marker position={position}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            Votre activité. <br /> Easily customizable.
           </Popup>
         </Marker>
       </Map>

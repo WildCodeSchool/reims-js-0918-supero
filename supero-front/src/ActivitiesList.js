@@ -16,7 +16,9 @@ class ActivitiesList extends Component {
     return (
       <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
         {this.props.activities.map((activity, index) => (
-          <Activity key={index} {...activity} />
+          <Link to="ActivityDetail">
+            <Activity key={index} {...activity} />
+          </Link>
         ))}
         <Link to="AddActivity">
           <Button className="addActivityButton">+</Button>
