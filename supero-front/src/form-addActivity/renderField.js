@@ -10,7 +10,11 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
         placeholder={label}
         type={type}
       />
-      {touched && error && <span>{error}</span>}
+      {touched && error && (
+        <span>
+          <i className="fas fa-exclamation-triangle" /> {error}
+        </span>
+      )}
     </div>
   </div>
 );

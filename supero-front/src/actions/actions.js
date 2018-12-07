@@ -7,7 +7,8 @@ import {
   // HIDE_MENU,
   // VIEW_NEWS,
   ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES
+  FETCH_ACTIVITIES,
+  SELECT_ADDRESS
 } from "./actionTypes";
 
 export const activitiesReceivedAction = activities => ({
@@ -17,4 +18,9 @@ export const activitiesReceivedAction = activities => ({
 
 export const fetchActivitiesAction = () => ({
   type: FETCH_ACTIVITIES
+});
+
+export const selectAddressAction = address => ({
+  type: SELECT_ADDRESS,
+  address
 });
