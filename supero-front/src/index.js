@@ -9,11 +9,26 @@ import { createStore, combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import activitiesReducer from "./reducers/activitiesReducer";
 import loadingReducer from "./reducers/loadingReducer";
+import { SELECT_ADDRESS } from "./actions/actionTypes";
+import selectAddressReducer from "./reducers/selectAddressReducer";
 
 const rootReducer = combineReducers({
   activities: activitiesReducer,
   loading: loadingReducer,
-  form: formReducer
+  selectAddress: selectAddressReducer,
+  form: formReducer.plugin({
+    addactivity: (state, action) => {
+      switch (action.type) {
+        case SELECT_ADDRESS:
+          return {
+            ...state,
+            values: { ...state.values, address: action.address }
+          };
+        default:
+          return state;
+      }
+    }
+  })
 });
 
 const store = createStore(

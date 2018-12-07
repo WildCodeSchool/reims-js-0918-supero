@@ -1,31 +1,35 @@
 const validate = values => {
   const errors = {};
   if (!values.session) {
-    errors.session = "Required";
+    errors.session = "Champ obligatoire";
   }
+
+  if (values.address === undefined) {
+    errors.address = "Champ obligatoire";
+  }
+
   if (!values.title) {
-    errors.title = "Required";
+    errors.title = "Champ obligatoire";
   }
   if (!values.difficulty) {
-    errors.difficulty = "Required";
+    errors.difficulty = "Champ obligatoire";
   }
   if (!values.city) {
-    errors.city = "Required";
+    errors.city = "Champ obligatoire";
   }
   if (!values.start_time) {
-    errors.start_time = "Required";
+    errors.start_time = "Champ obligatoire";
   }
   if (!values.duration) {
-    errors.duration = "Required";
-  }
-  else if (values.duration) {
-    values.durationFull = `${values.duration}:00`
+    errors.duration = "Champ obligatoire";
+  } else if (values.duration) {
+    values.durationFull = `${values.duration}:00`;
   }
   if (!values.participants) {
-    errors.participants = "Required";
+    errors.participants = "Champ obligatoire";
   }
   if (!values.description) {
-    errors.description = "Required";
+    errors.description = "Champ obligatoire";
   }
   return errors;
 };
