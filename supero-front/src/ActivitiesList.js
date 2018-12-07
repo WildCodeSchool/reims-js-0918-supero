@@ -14,7 +14,7 @@ class ActivitiesList extends Component {
 
   render() {
     return (
-      <div style={{ paddingTop: "60px" }}>
+      <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
         {this.props.activities.map((activity, index) => (
           <Activity key={index} {...activity} />
         ))}
