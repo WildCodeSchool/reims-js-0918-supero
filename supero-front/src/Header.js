@@ -34,7 +34,7 @@ export default class Example extends React.Component {
             dark
           >
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <h2>Flux</h2>
+            <h2>{this.props.title}</h2>
             <NavbarBrand href="/" className="mr-auto">
               Supero
             </NavbarBrand>

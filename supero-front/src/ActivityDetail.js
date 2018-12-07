@@ -4,6 +4,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Media } from "reactstrap";
 import "./ActivityDetail.css";
+import Header from "./Header";
 
 import {
   faBolt,
@@ -42,6 +43,7 @@ const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 
 const ActivityDetail = () => (
   <div className="activity_profile">
+    <Header title="Détail" />
     <div style={{ position: "relative", marginBottom: "40px" }}>
       <div
         style={{
