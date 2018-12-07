@@ -15,7 +15,6 @@ import { routerMiddleware } from "connected-react-router";
 import { connectRouter, ConnectedRouter } from "connected-react-router";
 
 const history = createBrowserHistory();
-console.log(history);
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = history =>
