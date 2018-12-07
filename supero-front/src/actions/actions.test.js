@@ -7,13 +7,15 @@ import {
   HIDE_MENU,
   VIEW_NEWS,
   ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES
+  FETCH_ACTIVITIES,
+  SELECT_ADDRESS
 } from "./actionTypes";
 
 import {
   addActivityAction,
   activitiesReceivedAction,
-  fetchActivitiesAction
+  fetchActivitiesAction,
+  selectAddressAction
 } from "./actions";
 
 describe("activitiesReceivedAction", () => {
@@ -70,5 +72,20 @@ describe("fetchActivitiesAction", () => {
       type: FETCH_ACTIVITIES
     };
     expect(fetchActivitiesAction()).toEqual(expected);
+  });
+});
+
+describe("selectAdressAction", () => {
+  it("should return a adress object", () => {
+    const address = {
+      label: "Reims, Marne, Grand Est, France métropolitaine, 51100, France",
+      x: "4.031926",
+      y: "49.2577886"
+    };
+    const expected = {
+      type: SELECT_ADDRESS,
+      address
+    };
+    expect(selectAddressAction(address)).toEqual(expected);
   });
 });
