@@ -9,36 +9,48 @@ import { createStore, combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 import activitiesReducer from "./reducers/activitiesReducer";
 import loadingReducer from "./reducers/loadingReducer";
+import { createBrowserHistory } from "history";
+import { applyMiddleware, compose } from "redux";
+import { routerMiddleware } from "connected-react-router";
+import { connectRouter, ConnectedRouter } from "connected-react-router";
 import { SELECT_ADDRESS } from "./actions/actionTypes";
 import selectAddressReducer from "./reducers/selectAddressReducer";
 
-const rootReducer = combineReducers({
-  activities: activitiesReducer,
-  loading: loadingReducer,
-  selectAddress: selectAddressReducer,
-  form: formReducer.plugin({
-    addactivity: (state, action) => {
-      switch (action.type) {
-        case SELECT_ADDRESS:
-          return {
-            ...state,
-            values: { ...state.values, address: action.address }
-          };
-        default:
-          return state;
+const history = createBrowserHistory();
+console.log(history);
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = history =>
+  combineReducers({
+    activities: activitiesReducer,
+    loading: loadingReducer,
+    selectAddress: selectAddressReducer,
+    form: formReducer.plugin({
+      addactivity: (state, action) => {
+        switch (action.type) {
+          case SELECT_ADDRESS:
+            return {
+              ...state,
+              values: { ...state.values, address: action.address }
+            };
+          default:
+            return state;
+        }
       }
-    }
-  })
-});
+    }),
+    router: connectRouter(history)
+  });
 
 const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer(history),
+  composeEnhancer(applyMiddleware(routerMiddleware(history)))
 );
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );
