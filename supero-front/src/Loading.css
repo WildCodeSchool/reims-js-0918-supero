@@ -1,0 +1,31 @@
+.loading {
+  animation-name: boltScale;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  margin-top: 75%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 80px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+@keyframes boltScale {
+  0% {
+    transform: scale(0.5);
+  }
+  20% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0.5);
+  }
+}
