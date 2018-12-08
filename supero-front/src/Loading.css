@@ -3,7 +3,7 @@
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   transform-origin: 50% 50%;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   width: 100px;
   height: 100px;
   margin-top: 75%;
@@ -15,15 +15,19 @@
 @keyframes boltScale {
   0% {
     transform: scale(0.5);
+    box-shadow: 0 0 0px #fff;
   }
   20% {
     transform: scale(0.7);
+    box-shadow: 0 0 30px #fff;
   }
   50% {
     transform: scale(0.7);
+    box-shadow: 0 0 0px #fff;
   }
   50% {
     transform: scale(1.5);
+    box-shadow: 0 0 30px #fff;
   }
   100% {
     transform: scale(0.5);
