@@ -1,6 +1,6 @@
 import React from "react";
 import "./Loading.css";
-import { Row, Col, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 const Loading = () => {
   return (
