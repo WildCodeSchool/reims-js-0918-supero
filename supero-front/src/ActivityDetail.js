@@ -101,10 +101,12 @@ class ActivityDetail extends React.Component {
                 <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
                 {this.state.oneActivity.activity_city}
               </span>
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
-                {this.state.oneActivity.activity_more_infos}
-              </span>
+              {this.state.oneActivity.activity_more_infos && (
+                <span className="activity_detail_icon">
+                  <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
+                  {this.state.oneActivity.activity_more_infos}
+                </span>
+              )}
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
                 Niveau {difficulty[this.state.oneActivity.activity_difficulty]}
