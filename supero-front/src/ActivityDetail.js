@@ -27,29 +27,6 @@ library.add(
   faBicycle,
   faInfoCircle
 );
-
-const activity = {
-  activity_id: 1,
-  sports_id: 1,
-  activity_title: "Cours Forest !",
-  creator_id: 1,
-  difficulty: 3,
-  activity_description:
-    "Bonjour à tous ! J'organise une session Trail dans les vignes autour de Reuil. Tous le monde est le bievenue pour parcourir 20km dans la bonne humeur !",
-  adresse: "31 rue de lorem ipsum",
-  city: "Reims",
-  latitude: "35.123.78",
-  longitude: "654151651",
-  start_time: "05/12/18",
-  duration: 2,
-  photo: "image.png",
-  max_participants: 5,
-  creation_time: "01/12/18",
-  activity_img: "running.jpg",
-  activity_more_infos: "Chaussures de Trail"
-};
-
-const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 
 class ActivityDetail extends React.Component {
@@ -129,7 +106,8 @@ class ActivityDetail extends React.Component {
               )}
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
-                Niveau {difficulty[this.state.oneActivity.activity_difficulty]}
+                Niveau{" "}
+                {difficulty[this.state.oneActivity.activity_difficulty - 1]}
               </span>
             </div>
           </div>
@@ -159,7 +137,7 @@ class ActivityDetail extends React.Component {
             {this.state.oneActivity.activity_description}
           </div>
           <span className="nb_participants">
-            4/{activity.max_participants} participants
+            1/{this.state.oneActivity.activity_max_participants} participants
           </span>
           <button className="activity_participation_button">Participer</button>
           <iframe
