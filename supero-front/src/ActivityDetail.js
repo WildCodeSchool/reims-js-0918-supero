@@ -51,7 +51,7 @@ class ActivityDetail extends React.Component {
               style={{
                 width: "100%",
                 overflow: "hidden",
-                maxHeight: "200px"
+                maxHeight: "220px"
               }}
             >
               <img
