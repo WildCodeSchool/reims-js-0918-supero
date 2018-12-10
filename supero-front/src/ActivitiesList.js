@@ -21,7 +21,7 @@ class ActivitiesList extends Component {
         <Header title="Flux" />
         <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
           {this.props.activities.map((activity, index) => (
-            <Link key={index} to="ActivityDetail">
+            <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
               <Activity key={index} {...activity} />
             </Link>
           ))}

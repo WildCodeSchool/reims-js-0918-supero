@@ -13,7 +13,7 @@ class App extends Component {
           <Route exact path="/" component={LoginHome} />
           <Route exact path="/ActivitiesList" component={ActivitiesContainer} />
           <Route exact path="/AddActivity" component={AddActivityForm} />
-          <Route exact path="/ActivityDetail" component={ActivityDetail} />
+          <Route exact path="/ActivityDetail/:id" component={ActivityDetail} />
         </Switch>
       </div>
     );
