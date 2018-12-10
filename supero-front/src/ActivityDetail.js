@@ -105,7 +105,11 @@ class ActivityDetail extends React.Component {
                   difficulty={this.state.oneActivity.activity_difficulty}
                 />
               </div>
-              <h2>Session {sports[this.state.oneActivity.sports_id - 1]}</h2>
+              <h2>
+                Session{" "}
+                {this.state.oneActivity.sport_name.charAt(0).toUpperCase() +
+                  this.state.oneActivity.sport_name.slice(1)}
+              </h2>
               <h3>{this.state.oneActivity.activity_title}</h3>
             </div>
             <div className="activity_detail_right">
