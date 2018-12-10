@@ -14,10 +14,19 @@ import {
   faMapMarkerAlt,
   faUser,
   faRunning,
-  faInfoCircle
+  faInfoCircle,
+  faBicycle
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faBolt, faClock, faMapMarkerAlt, faUser, faRunning, faInfoCircle);
+library.add(
+  faBolt,
+  faClock,
+  faMapMarkerAlt,
+  faUser,
+  faRunning,
+  faBicycle,
+  faInfoCircle
+);
 
 const activity = {
   activity_id: 1,
@@ -79,7 +88,14 @@ class ActivityDetail extends React.Component {
               />
             </div>
             <div className="activity_profile_pastille_orange rounded-circle">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="running" />
+              <FontAwesomeIcon
+                className="ml-2 mr-1"
+                icon={`${
+                  this.state.oneActivity.sport_name === "velo"
+                    ? "bicycle"
+                    : this.state.oneActivity.sport_name
+                }`}
+              />
             </div>
           </div>
           <div className="activity_detail">
