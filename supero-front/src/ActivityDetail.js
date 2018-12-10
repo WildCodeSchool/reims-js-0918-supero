@@ -15,7 +15,8 @@ import {
   faUser,
   faRunning,
   faInfoCircle,
-  faBicycle
+  faBicycle,
+  faCalendarAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -25,7 +26,8 @@ library.add(
   faUser,
   faRunning,
   faBicycle,
-  faInfoCircle
+  faInfoCircle,
+  faCalendarAlt
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 
@@ -91,8 +93,12 @@ class ActivityDetail extends React.Component {
             </div>
             <div className="activity_detail_right">
               <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
+                {formatDate(this.state.oneActivity.activity_start_time)}
+              </span>
+              <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-                {formatDate(this.state.oneActivity.activity_creation_time)}
+                {this.state.oneActivity.activity_duration}
               </span>
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
