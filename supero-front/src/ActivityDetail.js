@@ -7,6 +7,7 @@ import "./ActivityDetail.css";
 import Header from "./Header";
 import axios from "axios";
 import formatDate from "./formatDate";
+import { DateTime } from "luxon";
 
 import {
   faBolt,
@@ -98,7 +99,15 @@ class ActivityDetail extends React.Component {
               </span>
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-                {this.state.oneActivity.activity_duration}
+                {
+                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                    .hour
+                }
+                h
+                {DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                  .minute > 0 &&
+                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                    .minute}
               </span>
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
