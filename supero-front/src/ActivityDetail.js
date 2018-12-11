@@ -33,9 +33,17 @@ library.add(
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 
 class ActivityDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.goBack = this.goBack.bind(this);
+  }
   state = {
     oneActivity: null
   };
+
+  goBack() {
+    this.props.history.goBack();
+  }
 
   componentDidMount() {
     const activity_id = this.props.match.params.id;
@@ -49,6 +57,7 @@ class ActivityDetail extends React.Component {
       this.state.oneActivity != null && (
         <div className="activity_profile">
           <Header title="Détail" />
+
           <div style={{ position: "relative", marginBottom: "40px" }}>
             <div
               style={{
@@ -80,11 +89,13 @@ class ActivityDetail extends React.Component {
           </div>
           <div className="activity_detail">
             <div className="activity_detail_left">
+              <button onClick={this.goBack}>Go Back</button>
               <div className="difficulty">
                 <DisplayDifficultyIcon
                   difficulty={this.state.oneActivity.activity_difficulty}
                 />
               </div>
+
               <h2>
                 Session{" "}
                 {this.state.oneActivity.sport_name.charAt(0).toUpperCase() +
