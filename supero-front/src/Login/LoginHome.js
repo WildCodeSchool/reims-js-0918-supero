@@ -23,7 +23,7 @@ const LoginHome = () => {
           <button className="button-home facebook">
             Se connecter avec <span>Facebook</span>
           </button>
-          <Link to="ActivitiesList">
+          <Link to="SignInForm">
             <button className="button-home">
               Rejoindre <span>les Dieux !</span>
             </button>
