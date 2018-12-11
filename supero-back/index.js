@@ -73,7 +73,7 @@ app
       `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id`,
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC`,
       (err, result) => {
         if (err) {
           console.log(err);

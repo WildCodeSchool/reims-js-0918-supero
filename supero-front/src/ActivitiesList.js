@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { Button } from "reactstrap";
 import axios from "axios";
 import Activity from "./Activity";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 class ActivitiesList extends Component {
   componentDidMount() {
@@ -14,16 +15,19 @@ class ActivitiesList extends Component {
 
   render() {
     return (
-      <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
-        {this.props.activities.map((activity, index) => (
-          <Link to="ActivityDetail">
-            <Activity key={index} {...activity} />
+      <Fragment>
+        <Header title="Flux" />
+        <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
+          {this.props.activities.map((activity, index) => (
+            <Link to="ActivityDetail">
+              <Activity key={index} {...activity} />
+            </Link>
+          ))}
+          <Link to="AddActivity">
+            <Button className="addActivityButton">+</Button>
           </Link>
-        ))}
-        <Link to="AddActivity">
-          <Button className="addActivityButton">+</Button>
-        </Link>
-      </div>
+        </div>
+      </Fragment>
     );
   }
 }

@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import SendSport from "./SendSport";
 import SendPlaceContainer from "./SendPlaceContainer";
 import SendInfo from "./SendInfo";
 import SendTime from "./SendTime";
 import "./AddActivityForm.css";
+import Header from "../Header";
 
 class AddActivityForm extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class AddActivityForm extends Component {
         activity_difficulty: values.difficulty,
         activity_more_infos: values.more_infos,
         activity_max_participants: values.participants,
-        creator_id: 3,
+        creator_id: 1,
         activity_adresse: values.address,
         activity_latitude: 49,
         activity_longitude: 78,
@@ -57,21 +58,27 @@ class AddActivityForm extends Component {
   render() {
     const { page } = this.state;
     return (
-      <div className="AddActivity-container">
-        {page === 1 && <SendSport onSubmit={this.nextPage} />}
-        {page === 2 && (
-          <SendTime previousPage={this.previousPage} onSubmit={this.nextPage} />
-        )}
-        {page === 3 && (
-          <SendPlaceContainer
-            previousPage={this.previousPage}
-            onSubmit={this.nextPage}
-          />
-        )}
-        {page === 4 && (
-          <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
-        )}
-      </div>
+      <Fragment>
+        <Header title="Nouvelle activité" />
+        <div className="AddActivity-container">
+          {page === 1 && <SendSport onSubmit={this.nextPage} />}
+          {page === 2 && (
+            <SendTime
+              previousPage={this.previousPage}
+              onSubmit={this.nextPage}
+            />
+          )}
+          {page === 3 && (
+            <SendPlaceContainer
+              previousPage={this.previousPage}
+              onSubmit={this.nextPage}
+            />
+          )}
+          {page === 4 && (
+            <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
+          )}
+        </div>
+      </Fragment>
     );
   }
 }
