@@ -14,7 +14,7 @@ const SendInfo = props => {
             <h2 className="text-center">Plus d'infos</h2>
             <FormGroup>
               <Field
-                name="more_info"
+                name="about"
                 type="textarea"
                 component={renderField}
                 label="Plus d'infos sur vous"

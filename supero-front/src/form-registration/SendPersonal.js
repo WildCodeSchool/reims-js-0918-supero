@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Container, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Input, Container, Row, Col } from "reactstrap";
 import validate from "./validate";
 import renderField from "../renderField";
 
@@ -31,13 +31,21 @@ const SendPersonal = props => {
               />
             </FormGroup>
             <FormGroup>
-              <Field
+              <Input
                 className="Form-Input"
                 name="gender"
-                type="text"
-                component={renderField}
+                type="select"
+                tag={Field}
+                component="select"
                 label="Genre"
-              />
+              >
+                <option value="" disabled>
+                  Genre
+                </option>
+                <option value="Femme">Femme</option>
+                <option value="Homme">Homme</option>
+                <option value="Autre">Autre</option>
+              </Input>
             </FormGroup>
             <FormGroup>
               <Field
