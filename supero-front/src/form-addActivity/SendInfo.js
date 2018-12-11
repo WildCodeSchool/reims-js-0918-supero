@@ -2,7 +2,7 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Container, Row, Col } from "reactstrap";
 import validate from "./validate";
-import renderField from "./renderField";
+import renderField from "../renderField";
 
 const SendInfo = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;
