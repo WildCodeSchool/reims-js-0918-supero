@@ -37,9 +37,9 @@ class AddActivityForm extends Component {
         activity_more_infos: values.more_infos,
         activity_max_participants: values.participants,
         creator_id: 1,
-        activity_adresse: values.address,
-        activity_latitude: 49,
-        activity_longitude: 78,
+        activity_adresse: values.address.label,
+        activity_latitude: values.address.y,
+        activity_longitude: values.address.x,
         activity_duration: values.durationFull,
         activity_photo: values.picture,
         activity_title: values.title
