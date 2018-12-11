@@ -1,28 +1,9 @@
 require("dotenv").config();
-const express = require("express");
-const passport = require("passport");
-
-require("./passport-strategy");
-const auth = require("./auth");
-
 const port = 3001;
-
+const express = require("express");
 const app = express();
 const connection = require("./conf");
 const bodyParser = require("body-parser");
-app.use(bodyParser.json())
-
-app.use(express.static("public"));
-app.use("/auth", auth);
-
-app.get(
-  "/test",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-  res.send(`authorized for user req.user.usernamewithid{req.user.username} with id req.user.usernamewithid{req.user.id}`);
-  }
-  ); 
-
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 // Support URL-encoded bodies
@@ -236,12 +217,19 @@ app.post("/users", (req, res) => {
 // USERS -- afficher le profil d'un utilisateur
 
 app.get("/users/:user_id", (req, res) => {
-  const requiredProfile = json.users.filter(
-    user => user.id === parseInt(req.params.user_id)
+  const idUser = req.params.user_id;
+  connection.query(
+    `SELECT * FROM users WHERE user_id = ?`,
+    [idUser],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        res.status(200).json(result);
+      }
+    }
   );
-  requiredProfile[0]
-    ? res.send(`Your id : ${requiredProfile[0].firstname}`)
-    : res.status(404).send(`There is no such user !`);
 });
 
 // USERS -- modifier le profil d'un utilisateur
