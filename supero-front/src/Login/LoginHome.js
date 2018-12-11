@@ -28,9 +28,11 @@ const LoginHome = () => {
               Rejoindre <span>les Dieux !</span>
             </button>
           </Link>
-          <button className="button-home">
-            Pas encore <span>un dieu ?</span>
-          </button>
+          <Link to="UserRegistration">
+            <button className="button-home">
+              Pas encore <span>un dieu ?</span>
+            </button>
+          </Link>
           <a className="password-forgotten" href="#">
             Mot de passe oublié ?
           </a>

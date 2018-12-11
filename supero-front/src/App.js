@@ -5,6 +5,8 @@ import { Route, Switch } from "react-router";
 import AddActivityForm from "./form-addActivity/AddActivityForm";
 import LoginHome from "./Login/LoginHome";
 import ActivityDetail from "./ActivityDetail";
+import UserRegistration from "./form-registration/UserRegistration";
+
 class App extends Component {
   render() {
     return (
@@ -14,6 +16,7 @@ class App extends Component {
           <Route exact path="/ActivitiesList" component={ActivitiesContainer} />
           <Route exact path="/AddActivity" component={AddActivityForm} />
           <Route exact path="/ActivityDetail" component={ActivityDetail} />
+          <Route exact path="/UserRegistration" component={UserRegistration} />
         </Switch>
       </div>
     );

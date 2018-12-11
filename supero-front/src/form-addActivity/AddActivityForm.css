@@ -1,4 +1,4 @@
-.AddActivity-container {
+.AddActivity-container, .UserRegistration-container {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -102,7 +102,7 @@ textarea {
   background-color: rgba(224, 224, 224, 0.2);
 }
 
-.AddActivity-container span {
+.AddActivity-container span, .UserRegistration-container span {
   color: rgb(245, 0, 0);
 }
 
