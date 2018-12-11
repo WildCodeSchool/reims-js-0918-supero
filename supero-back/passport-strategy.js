@@ -11,7 +11,6 @@ passport.use(
       passwordField: "password"
     },
     function(username, password, cb) {
-    
       //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
 
       if (password !== "supero") {
@@ -23,6 +22,19 @@ passport.use(
           { message: "Logged In Successfully" }
         );
       }
+    }
+  )
+);
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "your_jwt_secret"
+    },
+    function(jwtPayload, cb) {
+      const user = jwtPayload;
+      //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+      return cb(null, user);
     }
   )
 );
