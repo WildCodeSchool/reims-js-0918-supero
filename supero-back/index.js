@@ -197,7 +197,14 @@ app
 // USERS -- Liste utilisateurs
 
 app.get("/users", (req, res) => {
-  res.send(json.users);
+  connection.query(`SELECT * FROM users`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).json(result);
+    }
+  });
 });
 
 // USERS -- créer un utilisateur
