@@ -1,7 +1,7 @@
 import React from "react";
 import { Field } from "redux-form";
 import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
-import renderField from "./renderField";
+import renderField from "../renderField";
 import AddressInput from "./AddressInput";
 import ViewAddressOnMap from "./ViewAddressOnMap";
 

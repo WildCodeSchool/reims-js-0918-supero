@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Container, Row, Col } from "reactstrap";
+import { Button, Form, FormGroup, Input, Container, Row, Col } from "reactstrap";
 import validate from "./validate";
 import renderField from "../renderField";
 
@@ -14,19 +14,29 @@ const SendInfo = props => {
             <h2 className="text-center">Plus d'infos</h2>
             <FormGroup>
               <Field
-                name="description"
+                name="more_info"
                 type="textarea"
                 component={renderField}
-                label="Description"
+                label="Plus d'infos sur vous"
               />
             </FormGroup>
             <FormGroup>
-              <Field
-                name="more_infos"
-                type="text"
-                component={renderField}
-                label="Infos complémentaire"
-              />
+              <Input
+                className="Form-Input"
+                name="level"
+                type="select"
+                tag={Field}
+                component="select"
+                label="Niveau"
+              >
+                <option value="" disabled>
+                  Niveau
+                </option>
+                <option value="1">Péon</option>
+                <option value="2">Amateur</option>
+                <option value="3">Héros</option>
+                <option value="4">Demi-dieu</option>
+              </Input>
             </FormGroup>
             <FormGroup>
               <Field
@@ -58,8 +68,9 @@ const SendInfo = props => {
     </Container>
   );
 };
+
 export default reduxForm({
-  form: "addactivity", //Form name is same
+  form: "userregistration", //Form name is same
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   validate

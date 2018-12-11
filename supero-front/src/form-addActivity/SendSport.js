@@ -10,7 +10,7 @@ import {
   Row
 } from "reactstrap";
 import validate from "./validate";
-import renderField from "./renderField";
+import renderField from "../renderField";
 
 const SendSport = props => {
   const { handleSubmit } = props;
