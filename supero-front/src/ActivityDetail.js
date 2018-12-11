@@ -8,6 +8,7 @@ import Header from "./Header";
 import axios from "axios";
 import formatDate from "./formatDate";
 import { DateTime } from "luxon";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
 import {
   faBolt,
@@ -31,6 +32,13 @@ library.add(
   faCalendarAlt
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
+const position = ["49", "4"];
+const latlngValue = {
+  latlng: {
+    lat: "49",
+    lng: "4"
+  }
+};
 
 class ActivityDetail extends React.Component {
   state = {
@@ -155,15 +163,22 @@ class ActivityDetail extends React.Component {
             1/{this.state.oneActivity.activity_max_participants} participants
           </span>
           <button className="activity_participation_button">Participer</button>
-          <iframe
-            title="googlemap"
-            className="mt-4"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20903.9567524646!2d3.79478039730804!3d49.08674302586148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e910e2662d0e6b%3A0x40a5fb99a3b4590!2sReuil!5e0!3m2!1sfr!2sfr!4v1543485906679"
-            height="250"
-            frameBorder="0"
-            style={{ border: "0", width: "100%" }}
-            allowFullScreen
-          />
+          <Map
+            style={{ height: "250px", marginTop: "15px" }}
+            center={latlngValue.latlng}
+            length={4}
+            zoom={13}
+          >
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={position}>
+              <Popup>
+                Votre activité. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </Map>
         </div>
       )
     );
