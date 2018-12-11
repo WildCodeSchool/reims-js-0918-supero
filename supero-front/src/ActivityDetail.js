@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Media } from "reactstrap";
 import "./ActivityDetail.css";
 import Header from "./Header";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 
 import {
   faBolt,
@@ -27,8 +28,8 @@ const activity = {
     "Bonjour à tous ! J'organise une session Trail dans les vignes autour de Reuil. Tous le monde est le bievenue pour parcourir 20km dans la bonne humeur !",
   adresse: "31 rue de lorem ipsum",
   city: "Reims",
-  latitude: "35.123.78",
-  longitude: "654151651",
+  latitude: "49.263396",
+  longitude: "4.019872",
   start_time: "05/12/18",
   duration: 2,
   photo: "image.png",
@@ -40,6 +41,14 @@ const activity = {
 
 const sports = ["Running", "Vélo", "Football", "Sport Ext.", "Sport Int."];
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
+const position = [activity.latitude, activity.longitude];
+const latlngValue = {
+  latlng: {
+    lat: activity.latitude,
+    lng: activity.longitude
+  }
+};
+console.log(latlngValue.latlng);
 
 const ActivityDetail = () => (
   <div className="activity_profile">
@@ -115,15 +124,22 @@ const ActivityDetail = () => (
       4/{activity.max_participants} participants
     </span>
     <button className="activity_participation_button">Participer</button>
-    <iframe
-      title="googlemap"
-      className="mt-4"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20903.9567524646!2d3.79478039730804!3d49.08674302586148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e910e2662d0e6b%3A0x40a5fb99a3b4590!2sReuil!5e0!3m2!1sfr!2sfr!4v1543485906679"
-      height="250"
-      frameBorder="0"
-      style={{ border: "0", width: "100%" }}
-      allowFullScreen
-    />
+    <Map
+      style={{ height: "250px", marginTop: "15px" }}
+      center={latlngValue.latlng}
+      length={4}
+      zoom={13}
+    >
+      <TileLayer
+        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={position}>
+        <Popup>
+          Votre activité. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+    </Map>
   </div>
 );
 export default ActivityDetail;
