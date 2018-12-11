@@ -20,6 +20,28 @@ class UserRegistration extends Component {
 
   submit = values => {
     console.log(values);
+    fetch("http://localhost:3001/users", {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({
+        user_pseudo: values.pseudo,
+        user_email: values.email,
+        user_password: values.password,
+        user_firstname: values.firstName,
+        user_lastname: values.lastName,
+        user_gender: values.gender,
+        user_birthdate: values.birthdate,
+        user_photo: values.picture,
+        user_level: values.level
+      })
+    })
+      .then(res => res.json())
+      .then(
+        res => this.setState({ flash: res.flash }),
+        err => this.setState({ flash: err.flash })
+      );
   };
 
   nextPage() {
