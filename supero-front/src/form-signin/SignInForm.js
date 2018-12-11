@@ -1,16 +1,29 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import "./SignInForm.css";
-import submit from "./submit";
-import { Button, Container, Col, Row, FormGroup } from "reactstrap";
+import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
 import { Link } from "react-router-dom";
 
+const required = value =>
+  value || typeof value === "number" ? undefined : "Required";
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? "Invalid email address"
+    : undefined;
+const aol = value =>
+  value && /.+@aol\.com/.test(value)
+    ? "Really? You still use AOL for your email?"
+    : undefined;
+
 const SignInForm = props => {
-  const { error, handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <Container fluid>
-      <form onSubmit={handleSubmit(submit)} className="SignIn-container">
+      <Form
+        onSubmit={handleSubmit(values => console.log(values))}
+        className="SignIn-container"
+      >
         <Row className="d-flex justify-content-center">
           <Col xs="6">
             <div className="logo mb-5">
@@ -24,13 +37,15 @@ const SignInForm = props => {
               </Link>
             </div>
           </Col>
-          <Col xs="12">
+          <Col xs="10">
             <FormGroup>
               <Field
                 name="email"
                 type="text"
                 component={renderField}
                 label="E-mail"
+                validate={[email, required]}
+                warn={aol}
               />
             </FormGroup>
             <FormGroup>
@@ -38,10 +53,10 @@ const SignInForm = props => {
                 name="password"
                 type="password"
                 component={renderField}
-                label="Password"
+                label="Mots de passe"
+                validate={required}
               />
             </FormGroup>
-            {error && <span className="error">{error}</span>}
             <div className="d-flex justify-content-center">
               <Button
                 className="button mr-4"
@@ -58,11 +73,11 @@ const SignInForm = props => {
             </div>
           </Col>
         </Row>
-      </form>
+      </Form>
     </Container>
   );
 };
 
 export default reduxForm({
-  form: "SignInForm" // a unique identifier for this form
+  form: "SignInForm"
 })(SignInForm);
