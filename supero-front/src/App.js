@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import ActivitiesContainer from "./containers/ActivitiesContainer";
 import { Route, Switch } from "react-router";
-import Header from "./Header";
 import AddActivityForm from "./form-addActivity/AddActivityForm";
 import LoginHome from "./Login/LoginHome";
 import ActivityDetail from "./ActivityDetail";

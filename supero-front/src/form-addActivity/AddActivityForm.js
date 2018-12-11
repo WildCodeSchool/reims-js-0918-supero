@@ -6,6 +6,11 @@ import SendTime from "./SendTime";
 import "./AddActivityForm.css";
 import Header from "../Header";
 
+const SENDSPORT_PAGE = 1;
+const SENDTIME_PAGE = 2;
+const SENDPLACE_PAGE = 3;
+const SENDINFO_PAGE = 4;
+
 class AddActivityForm extends Component {
   constructor(props) {
     super(props);
@@ -61,20 +66,20 @@ class AddActivityForm extends Component {
       <Fragment>
         <Header title="Nouvelle activité" />
         <div className="AddActivity-container">
-          {page === 1 && <SendSport onSubmit={this.nextPage} />}
-          {page === 2 && (
+          {page === SENDSPORT_PAGE && <SendSport onSubmit={this.nextPage} />}
+          {page === SENDTIME_PAGE && (
             <SendTime
               previousPage={this.previousPage}
               onSubmit={this.nextPage}
             />
           )}
-          {page === 3 && (
+          {page === SENDPLACE_PAGE && (
             <SendPlaceContainer
               previousPage={this.previousPage}
               onSubmit={this.nextPage}
             />
           )}
-          {page === 4 && (
+          {page === SENDINFO_PAGE && (
             <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
           )}
         </div>
