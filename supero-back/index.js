@@ -11,7 +11,11 @@ const app = express();
 const connection = require("./conf");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(express.static("public"));
 app.use("/auth", auth);
 
@@ -23,14 +27,6 @@ app.get(
       `authorized for user req.user.usernamewithid{req.user.username} with id req.user.usernamewithid{req.user.id}`
     );
   }
-);
-// Support JSON-encoded bodies
-app.use(bodyParser.json());
-// Support URL-encoded bodies
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
 );
 
 // Add headers
@@ -53,10 +49,6 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
-// IMPORT JSON
-const activitiesjson = require("./activities.json");
-const json = require("./users.json");
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
