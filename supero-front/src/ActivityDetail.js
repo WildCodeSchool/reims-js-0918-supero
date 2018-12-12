@@ -10,6 +10,7 @@ import formatDate from "./formatDate";
 import { DateTime } from "luxon";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 import {
   faBolt,
@@ -155,7 +156,9 @@ class ActivityDetail extends React.Component {
               </Media>
               <Media className="ml-2" body>
                 <Media heading>Organisé par</Media>
-                {this.props.activityDetail.user_pseudo}
+                <Link to="/UserProfile">
+                  {this.props.activityDetail.user_pseudo}
+                </Link>
               </Media>
             </Media>
           </div>

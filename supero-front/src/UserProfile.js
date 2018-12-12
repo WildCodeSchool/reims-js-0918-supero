@@ -1,38 +1,44 @@
 import React from "react";
-import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Media } from "reactstrap";
-import "./ActivityDetail.css";
+import { DateTime } from "luxon";
+import "./UserProfile.css";
 import Header from "./Header";
 import axios from "axios";
 import Loading from "./Loading";
+import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 
-class ActivityDetail extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
+    this.state = { user: {} };
   }
   goBack() {
     this.props.history.goBack();
   }
 
   componentDidMount() {
-    const activity_id = this.props.match.params.id;
-    this.props.fetchActivity();
+    const activity_id = 2;
+
     axios
-      .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]));
+      .get(`http://localhost:3001/users/${activity_id}`)
+      .then(res => this.setState({ user: res.data[0] }));
   }
 
   render() {
-    return !this.props.activityDetail.sport_name ? (
+    return !this.state.user.user_firstname ? (
       <Loading />
     ) : (
-      <div className="activity_profile">
+      <div className="user_profile" style={{ height: "100vh" }}>
         <Header title="Profil" goBack={this.goBack} />
 
-        <div style={{ position: "relative", marginBottom: "40px" }}>
+        <div
+          style={{
+            marginBottom: "-40px",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            display: "flex"
+          }}
+        >
           <div
             style={{
               width: "100%",
@@ -42,121 +48,77 @@ class ActivityDetail extends React.Component {
           >
             <img
               style={{ width: "100%" }}
-              src={
-                process.env.PUBLIC_URL +
-                `/images/${this.props.activityDetail.sport_name}.jpg`
-              }
+              src={process.env.PUBLIC_URL + `/images/running.jpg`}
               alt="sport"
               align="bottom"
             />
           </div>
-          <div className="activity_profile_pastille_orange rounded-circle">
-            <FontAwesomeIcon
-              className="ml-2 mr-1"
-              icon={`${
-                this.props.activityDetail.sport_name === "velo"
-                  ? "bicycle"
-                  : this.props.activityDetail.sport_name
-              }`}
-            />
-          </div>
-        </div>
-        <div className="activity_detail">
-          <div className="activity_detail_left">
-            <div className="difficulty">
-              <DisplayDifficultyIcon
-                difficulty={this.props.activityDetail.activity_difficulty}
+          <div className="avatar rounded-circle">
+            {this.state.user.user_photo !== "photo" ? (
+              <img
+                src={this.state.user.user_photo}
+                alt="avatar"
+                align="bottom"
               />
-            </div>
-
-            <h2>
-              Session{" "}
-              {this.props.activityDetail.sport_name.charAt(0).toUpperCase() +
-                this.props.activityDetail.sport_name.slice(1)}
-            </h2>
-            <h3>{this.props.activityDetail.activity_title}</h3>
-          </div>
-          <div className="activity_detail_right">
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
-              {formatDate(this.props.activityDetail.activity_start_time)}
-            </span>
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-              {
-                DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                  .hour
-              }
-              h
-              {DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                .minute > 0 &&
-                DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                  .minute}
-            </span>
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-              {this.props.activityDetail.activity_city}
-            </span>
-            {this.props.activityDetail.activity_more_infos && (
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
-                {this.props.activityDetail.activity_more_infos}
-              </span>
+            ) : (
+              <img
+                src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
+                alt="avatar"
+                align="bottom"
+              />
             )}
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
-              Niveau{" "}
-              {difficulty[this.props.activityDetail.activity_difficulty - 1]}
+          </div>
+        </div>
+        <div className="user_name">
+          <h2>
+            {this.state.user.user_firstname}{" "}
+            <span>{this.state.user.user_lastname}</span>
+          </h2>
+          <h4 className="user_age">
+            {2018 - DateTime.fromISO(this.state.user.user_birthdate).c.year} ans
+          </h4>
+        </div>
+        <div className="user_detail">
+          <div>
+            <h5>Niveau</h5>
+            <span className="level">
+              <DisplayDifficultyIcon difficulty={this.state.user.user_level} />
             </span>
           </div>
-        </div>
-        <div className="activity_creator d-flex justify-content-between">
-          <div className="activity_creator_left">
-            <Media className="mt-1">
-              <Media left middle href="#">
-                <img
-                  className="activity_creator_photo"
-                  src={process.env.PUBLIC_URL + "/images/richardvirenque.jpg"}
-                  alt="sport"
-                />
-              </Media>
-              <Media className="ml-2" body>
-                <Media heading>Organisé par</Media>
-                {this.props.activityDetail.user_pseudo}
-              </Media>
-            </Media>
-          </div>
-          <div className="activity_creator_right">
-            <button className="activity_creator_button">
-              Envoyer un message
-            </button>
+          <div>
+            <h5>Activités</h5>
+            <p>
+              Organisés : <span>10</span> | Participés : <span>7</span>
+            </p>
           </div>
         </div>
-        <div className="activity_description">
-          {this.props.activityDetail.activity_description}
-        </div>
-        <span className="nb_participants">
-          1/{this.props.activityDetail.activity_max_participants} participants
-        </span>
-        <button className="activity_participation_button">Participer</button>
-        <Map
-          style={{ height: "250px", marginTop: "15px" }}
-          center={latlngValue.latlng}
-          length={4}
-          zoom={13}
-        >
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={position}>
-            <Popup>
-              Votre activité. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </Map>
+        <div className="user_about">{this.state.user.user_about}</div>
+        <button className="send_message">Envoyer un message</button>
       </div>
     );
   }
 }
-export default ActivityDetail;
+export default UserProfile;
+
+// user_about:
+// "Petite description OKLM"
+// user_birthdate:
+// "1990-08-08T22:00:00.000Z"
+// user_email:
+// "wsdrtyuik@gmail.com"
+// user_firstname:
+// "Fabien"
+// user_gender:
+// null
+// user_id:
+// 2
+// user_lastname:
+// "Raymond"
+// user_level:
+// 5
+// user_password:
+// "sdfghjk"
+// user_photo:
+// "photo"
+// user_pseudo:
+// "vortex"
