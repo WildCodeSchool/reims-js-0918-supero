@@ -33,13 +33,14 @@ library.add(
   faCalendarAlt
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
-
+const position = ["49", "4"];
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
   }
+
   goBack() {
     this.props.history.goBack();
   }
@@ -49,10 +50,13 @@ class ActivityDetail extends React.Component {
     this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]));
+      .then(res => this.props.activityDetailReceived(res.data[0]))
+
   }
 
+  
   render() {
+    console.log(this.props.activityDetail)
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
@@ -171,7 +175,7 @@ class ActivityDetail extends React.Component {
           // center={latlngValue.latlng}
           center={{
             lat: this.props.activityDetail.activity_latitude,
-            long: this.props.activityDetail.activity_longitude
+            lng: this.props.activityDetail.activity_longitude
           }}
           length={4}
           zoom={13}
@@ -180,7 +184,9 @@ class ActivityDetail extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={this.props.activityDetail.position}>
+          <Marker
+            position={[this.props.activityDetail.activity_latitude, this.props.activityDetail.activity_longitude]}
+          >
             <Popup>
               Votre activité. <br /> Easily customizable.
             </Popup>
