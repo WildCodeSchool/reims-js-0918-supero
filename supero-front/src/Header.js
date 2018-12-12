@@ -4,15 +4,15 @@ import "./Header.css";
 import { Nav, NavItem, NavLink } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faTimes);
+library.add(faTimes, faAngleLeft);
 
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true
@@ -26,14 +26,24 @@ export default class Example extends React.Component {
   }
   render() {
     return (
-      <div style={{ marginBottom: "20px" }}>
+      <div>
         {this.state.collapsed ? (
           <Navbar
             color="faded"
             className="fixed-top d-flex justify-content-between"
             dark
           >
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            {!this.props.activitiesView ? (
+              <FontAwesomeIcon
+                onClick={this.props.goBack}
+                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                icon="angle-left"
+              />
+            ) : (
+              <Link to="ActivitiesList">
+                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+              </Link>
+            )}
             <h2>{this.props.title}</h2>
             <NavbarBrand href="/" className="mr-auto">
               Supero

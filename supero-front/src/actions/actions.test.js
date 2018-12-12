@@ -8,14 +8,18 @@ import {
   VIEW_NEWS,
   ACTIVITIES_RECEIVED,
   FETCH_ACTIVITIES,
-  SELECT_ADDRESS
+  SELECT_ADDRESS,
+  ACTIVITY_DETAIL_RECEIVED,
+  FETCH_ACTIVITY_DETAIL
 } from "./actionTypes";
 
 import {
   addActivityAction,
   activitiesReceivedAction,
   fetchActivitiesAction,
-  selectAddressAction
+  selectAddressAction,
+  fetchActivityDetailAction,
+  activityDetailReceivedAction
 } from "./actions";
 
 describe("activitiesReceivedAction", () => {
@@ -87,5 +91,44 @@ describe("selectAdressAction", () => {
       address
     };
     expect(selectAddressAction(address)).toEqual(expected);
+  });
+});
+
+describe("fetchActivityDetailAction", () => {
+  it("should return a FETCH_ACTIVITY_DETAIL action", () => {
+    const id = 5;
+    const expected = {
+      type: FETCH_ACTIVITY_DETAIL,
+      id
+    };
+    expect(fetchActivityDetailAction(id)).toEqual(expected);
+  });
+});
+
+describe("activityDetailReceivedAction", () => {
+  it("should return ACTIVITY_DETAIL_RECEIVED action type and an array", () => {
+    const activityDetail = {
+      activity_id: 1,
+      sports_id: 1,
+      creator_id: 1,
+      sport_name: "running",
+      user_name: "Benoit",
+      activity_difficulty: 3,
+      activity_description: "Yolo",
+      activity_adresse: "31 rue de lorem ipsum",
+      activity_city: "lorem ipsum",
+      activity_latitude: "35.123.78",
+      activity_longitude: "654151651",
+      activity_start_time: "05/12/18",
+      activity_duration: 2,
+      activity_photo: "image.png",
+      activity_max_participants: 5,
+      activity_creation_time: "01/12/18"
+    };
+    const expected = {
+      type: ACTIVITY_DETAIL_RECEIVED,
+      activityDetail
+    };
+    expect(activityDetailReceivedAction(activityDetail)).toEqual(expected);
   });
 });

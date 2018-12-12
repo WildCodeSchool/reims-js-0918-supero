@@ -6,14 +6,24 @@ import SendTime from "./SendTime";
 import "./AddActivityForm.css";
 import Header from "../Header";
 
+const SENDSPORT_PAGE = 1;
+const SENDTIME_PAGE = 2;
+const SENDPLACE_PAGE = 3;
+const SENDINFO_PAGE = 4;
+
 class AddActivityForm extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.state = {
       page: 1
     };
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   submit = values => {
@@ -32,9 +42,9 @@ class AddActivityForm extends Component {
         activity_more_infos: values.more_infos,
         activity_max_participants: values.participants,
         creator_id: 1,
-        activity_adresse: values.address,
-        activity_latitude: 49,
-        activity_longitude: 78,
+        activity_adresse: values.address.label,
+        activity_latitude: values.address.y,
+        activity_longitude: values.address.x,
         activity_duration: values.durationFull,
         activity_photo: values.picture,
         activity_title: values.title
@@ -59,22 +69,22 @@ class AddActivityForm extends Component {
     const { page } = this.state;
     return (
       <Fragment>
-        <Header title="Nouvelle activité" />
+        <Header title="Nouvelle activité" goBack={this.goBack} />
         <div className="AddActivity-container">
-          {page === 1 && <SendSport onSubmit={this.nextPage} />}
-          {page === 2 && (
+          {page === SENDSPORT_PAGE && <SendSport onSubmit={this.nextPage} />}
+          {page === SENDTIME_PAGE && (
             <SendTime
               previousPage={this.previousPage}
               onSubmit={this.nextPage}
             />
           )}
-          {page === 3 && (
+          {page === SENDPLACE_PAGE && (
             <SendPlaceContainer
               previousPage={this.previousPage}
               onSubmit={this.nextPage}
             />
           )}
-          {page === 4 && (
+          {page === SENDINFO_PAGE && (
             <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
           )}
         </div>

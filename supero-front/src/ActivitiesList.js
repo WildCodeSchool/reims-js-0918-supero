@@ -18,8 +18,8 @@ class ActivitiesList extends Component {
   render() {
     return !this.props.loading ? (
       <Fragment>
-        <Header title="Flux" />
-        <div style={{ paddingTop: "60px", paddingBottom: "10px" }}>
+        <Header activitiesView={true} title="Flux" />
+        <div style={{ paddingTop: "80px", paddingBottom: "10px" }}>
           {this.props.activities.map((activity, index) => (
             <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
               <Activity key={index} {...activity} />

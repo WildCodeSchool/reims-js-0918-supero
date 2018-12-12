@@ -8,6 +8,8 @@ import Header from "./Header";
 import axios from "axios";
 import formatDate from "./formatDate";
 import { DateTime } from "luxon";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import Loading from "./Loading";
 
 import {
   faBolt,
@@ -31,152 +33,162 @@ library.add(
   faCalendarAlt
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
+const position = ["49", "4"];
+const latlngValue = {
+  latlng: {
+    lat: "49",
+    lng: "4"
+  }
+};
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
   }
-  state = {
-    oneActivity: null
-  };
-
   goBack() {
     this.props.history.goBack();
   }
 
   componentDidMount() {
     const activity_id = this.props.match.params.id;
+    this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.setState({ oneActivity: res.data[0] }));
+      .then(res => this.props.activityDetailReceived(res.data[0]));
   }
 
   render() {
-    return (
-      this.state.oneActivity != null && (
-        <div className="activity_profile">
-          <Header title="Détail" />
+    return !this.props.activityDetail.sport_name ? (
+      <Loading />
+    ) : (
+      <div className="activity_profile">
+        <Header title="Détail" goBack={this.goBack} />
 
-          <div style={{ position: "relative", marginBottom: "40px" }}>
-            <div
-              style={{
-                width: "100%",
-                overflow: "hidden",
-                maxHeight: "220px"
-              }}
-            >
-              <img
-                style={{ width: "100%" }}
-                src={
-                  process.env.PUBLIC_URL +
-                  `/images/${this.state.oneActivity.sport_name}.jpg`
-                }
-                alt="sport"
-                align="bottom"
-              />
-            </div>
-            <div className="activity_profile_pastille_orange rounded-circle">
-              <FontAwesomeIcon
-                className="ml-2 mr-1"
-                icon={`${
-                  this.state.oneActivity.sport_name === "velo"
-                    ? "bicycle"
-                    : this.state.oneActivity.sport_name
-                }`}
-              />
-            </div>
+        <div style={{ position: "relative", marginBottom: "40px" }}>
+          <div
+            style={{
+              width: "100%",
+              overflow: "hidden",
+              maxHeight: "220px"
+            }}
+          >
+            <img
+              style={{ width: "100%" }}
+              src={
+                process.env.PUBLIC_URL +
+                `/images/${this.props.activityDetail.sport_name}.jpg`
+              }
+              alt="sport"
+              align="bottom"
+            />
           </div>
-          <div className="activity_detail">
-            <div className="activity_detail_left">
-              <button onClick={this.goBack}>Go Back</button>
-              <div className="difficulty">
-                <DisplayDifficultyIcon
-                  difficulty={this.state.oneActivity.activity_difficulty}
-                />
-              </div>
-
-              <h2>
-                Session{" "}
-                {this.state.oneActivity.sport_name.charAt(0).toUpperCase() +
-                  this.state.oneActivity.sport_name.slice(1)}
-              </h2>
-              <h3>{this.state.oneActivity.activity_title}</h3>
-            </div>
-            <div className="activity_detail_right">
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
-                {formatDate(this.state.oneActivity.activity_start_time)}
-              </span>
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-                {
-                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
-                    .hour
-                }
-                h
-                {DateTime.fromSQL(this.state.oneActivity.activity_duration)
-                  .minute > 0 &&
-                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
-                    .minute}
-              </span>
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-                {this.state.oneActivity.activity_city}
-              </span>
-              {this.state.oneActivity.activity_more_infos && (
-                <span className="activity_detail_icon">
-                  <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
-                  {this.state.oneActivity.activity_more_infos}
-                </span>
-              )}
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
-                Niveau{" "}
-                {difficulty[this.state.oneActivity.activity_difficulty - 1]}
-              </span>
-            </div>
+          <div className="activity_profile_pastille_orange rounded-circle">
+            <FontAwesomeIcon
+              className="ml-2 mr-1"
+              icon={`${
+                this.props.activityDetail.sport_name === "velo"
+                  ? "bicycle"
+                  : this.props.activityDetail.sport_name
+              }`}
+            />
           </div>
-          <div className="activity_creator d-flex justify-content-between">
-            <div className="activity_creator_left">
-              <Media className="mt-1">
-                <Media left middle href="#">
-                  <img
-                    className="activity_creator_photo"
-                    src={process.env.PUBLIC_URL + "/images/richardvirenque.jpg"}
-                    alt="sport"
-                  />
-                </Media>
-                <Media className="ml-2" body>
-                  <Media heading>Organisé par</Media>
-                  {this.state.oneActivity.user_pseudo}
-                </Media>
-              </Media>
-            </div>
-            <div className="activity_creator_right">
-              <button className="activity_creator_button">
-                Envoyer un message
-              </button>
-            </div>
-          </div>
-          <div className="activity_description">
-            {this.state.oneActivity.activity_description}
-          </div>
-          <span className="nb_participants">
-            1/{this.state.oneActivity.activity_max_participants} participants
-          </span>
-          <button className="activity_participation_button">Participer</button>
-          <iframe
-            title="googlemap"
-            className="mt-4"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20903.9567524646!2d3.79478039730804!3d49.08674302586148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e910e2662d0e6b%3A0x40a5fb99a3b4590!2sReuil!5e0!3m2!1sfr!2sfr!4v1543485906679"
-            height="250"
-            frameBorder="0"
-            style={{ border: "0", width: "100%" }}
-            allowFullScreen
-          />
         </div>
-      )
+        <div className="activity_detail">
+          <div className="activity_detail_left">
+            <div className="difficulty">
+              <DisplayDifficultyIcon
+                difficulty={this.props.activityDetail.activity_difficulty}
+              />
+            </div>
+
+            <h2>
+              Session{" "}
+              {this.props.activityDetail.sport_name.charAt(0).toUpperCase() +
+                this.props.activityDetail.sport_name.slice(1)}
+            </h2>
+            <h3>{this.props.activityDetail.activity_title}</h3>
+          </div>
+          <div className="activity_detail_right">
+            <span className="activity_detail_icon">
+              <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
+              {formatDate(this.props.activityDetail.activity_start_time)}
+            </span>
+            <span className="activity_detail_icon">
+              <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
+              {
+                DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                  .hour
+              }
+              h
+              {DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                .minute > 0 &&
+                DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                  .minute}
+            </span>
+            <span className="activity_detail_icon">
+              <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
+              {this.props.activityDetail.activity_city}
+            </span>
+            {this.props.activityDetail.activity_more_infos && (
+              <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
+                {this.props.activityDetail.activity_more_infos}
+              </span>
+            )}
+            <span className="activity_detail_icon">
+              <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
+              Niveau{" "}
+              {difficulty[this.props.activityDetail.activity_difficulty - 1]}
+            </span>
+          </div>
+        </div>
+        <div className="activity_creator d-flex justify-content-between">
+          <div className="activity_creator_left">
+            <Media className="mt-1">
+              <Media left middle href="#">
+                <img
+                  className="activity_creator_photo"
+                  src={process.env.PUBLIC_URL + "/images/richardvirenque.jpg"}
+                  alt="sport"
+                />
+              </Media>
+              <Media className="ml-2" body>
+                <Media heading>Organisé par</Media>
+                {this.props.activityDetail.user_pseudo}
+              </Media>
+            </Media>
+          </div>
+          <div className="activity_creator_right">
+            <button className="activity_creator_button">
+              Envoyer un message
+            </button>
+          </div>
+        </div>
+        <div className="activity_description">
+          {this.props.activityDetail.activity_description}
+        </div>
+        <span className="nb_participants">
+          1/{this.props.activityDetail.activity_max_participants} participants
+        </span>
+        <button className="activity_participation_button">Participer</button>
+        <Map
+          style={{ height: "250px", marginTop: "15px" }}
+          center={latlngValue.latlng}
+          length={4}
+          zoom={13}
+        >
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={position}>
+            <Popup>
+              Votre activité. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </Map>
+      </div>
     );
   }
 }

@@ -15,6 +15,7 @@ import { routerMiddleware } from "connected-react-router";
 import { connectRouter, ConnectedRouter } from "connected-react-router";
 import { SELECT_ADDRESS } from "./actions/actionTypes";
 import selectAddressReducer from "./reducers/selectAddressReducer";
+import activityReducer from "./reducers/activityReducer";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -22,6 +23,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = history =>
   combineReducers({
     activities: activitiesReducer,
+    activityDetail:activityReducer,
     loading: loadingReducer,
     selectAddress: selectAddressReducer,
     form: formReducer.plugin({
