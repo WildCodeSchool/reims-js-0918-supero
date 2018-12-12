@@ -25,7 +25,9 @@ const SignInForm = props => {
         onSubmit={handleSubmit(values =>
           axios
             .post("http://localhost:3001/auth/login", values)
-            .then(res => localStorage.setItem("user", JSON.stringify(res.data)))
+            .then(res =>
+              localStorage.setItem("superoUser", JSON.stringify(res.data))
+            )
         )}
         className="SignIn-container"
       >
