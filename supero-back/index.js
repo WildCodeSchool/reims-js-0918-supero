@@ -1,6 +1,12 @@
 require("dotenv").config();
-const port = 3001;
 const express = require("express");
+const passport = require("passport");
+
+require("./passport-strategy");
+const auth = require("./auth");
+
+const port = 3001;
+
 const app = express();
 const connection = require("./conf");
 const bodyParser = require("body-parser");
@@ -18,7 +24,6 @@ app.get(
     );
   }
 );
-
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 // Support URL-encoded bodies
