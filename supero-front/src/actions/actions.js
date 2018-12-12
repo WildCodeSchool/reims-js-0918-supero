@@ -1,25 +1,25 @@
 import {
-  ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES,
   SELECT_ADDRESS,
-  ACTIVITY_DETAIL_RECEIVED,
+  FETCH_ACTIVITIES,
+  ACTIVITIES_RECEIVED,
   FETCH_ACTIVITY_DETAIL,
+  ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
   VIEW_USER_PROFILE
 } from "./actionTypes";
 
-export const activitiesReceivedAction = activities => ({
-  type: ACTIVITIES_RECEIVED,
-  activities
+export const selectAddressAction = address => ({
+  type: SELECT_ADDRESS,
+  address
 });
 
 export const fetchActivitiesAction = () => ({
   type: FETCH_ACTIVITIES
 });
 
-export const selectAddressAction = address => ({
-  type: SELECT_ADDRESS,
-  address
+export const activitiesReceivedAction = activities => ({
+  type: ACTIVITIES_RECEIVED,
+  activities
 });
 
 export const fetchActivityDetailAction = () => ({

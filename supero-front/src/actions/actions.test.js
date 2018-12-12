@@ -1,22 +1,46 @@
 import {
-  ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES,
   SELECT_ADDRESS,
-  ACTIVITY_DETAIL_RECEIVED,
+  FETCH_ACTIVITIES,
+  ACTIVITIES_RECEIVED,
   FETCH_ACTIVITY_DETAIL,
+  ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
   VIEW_USER_PROFILE
 } from "./actionTypes";
 
 import {
-  activitiesReceivedAction,
-  fetchActivitiesAction,
   selectAddressAction,
+  fetchActivitiesAction,
+  activitiesReceivedAction,
   fetchActivityDetailAction,
   activityDetailReceivedAction,
   fetchUserProfileAction,
   viewUserProfileAction
 } from "./actions";
+
+describe("selectAdressAction", () => {
+  it("should return a adress object", () => {
+    const address = {
+      label: "Reims, Marne, Grand Est, France métropolitaine, 51100, France",
+      x: "4.031926",
+      y: "49.2577886"
+    };
+    const expected = {
+      type: SELECT_ADDRESS,
+      address
+    };
+    expect(selectAddressAction(address)).toEqual(expected);
+  });
+});
+
+describe("fetchActivitiesAction", () => {
+  it("should return a FETCH_ACTIVITIES action", () => {
+    const expected = {
+      type: FETCH_ACTIVITIES
+    };
+    expect(fetchActivitiesAction()).toEqual(expected);
+  });
+});
 
 describe("activitiesReceivedAction", () => {
   it("should return ACTIVITIES_RECEIVED action type and an array", () => {
@@ -63,30 +87,6 @@ describe("activitiesReceivedAction", () => {
       activities
     };
     expect(activitiesReceivedAction(activities)).toEqual(expected);
-  });
-});
-
-describe("fetchActivitiesAction", () => {
-  it("should return a FETCH_ACTIVITIES action", () => {
-    const expected = {
-      type: FETCH_ACTIVITIES
-    };
-    expect(fetchActivitiesAction()).toEqual(expected);
-  });
-});
-
-describe("selectAdressAction", () => {
-  it("should return a adress object", () => {
-    const address = {
-      label: "Reims, Marne, Grand Est, France métropolitaine, 51100, France",
-      x: "4.031926",
-      y: "49.2577886"
-    };
-    const expected = {
-      type: SELECT_ADDRESS,
-      address
-    };
-    expect(selectAddressAction(address)).toEqual(expected);
   });
 });
 
