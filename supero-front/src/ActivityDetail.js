@@ -33,13 +33,7 @@ library.add(
   faCalendarAlt
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
-const position = ["49", "4"];
-const latlngValue = {
-  latlng: {
-    lat: "49",
-    lng: "4"
-  }
-};
+
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -174,7 +168,11 @@ class ActivityDetail extends React.Component {
         <button className="activity_participation_button">Participer</button>
         <Map
           style={{ height: "250px", marginTop: "15px" }}
-          center={latlngValue.latlng}
+          // center={latlngValue.latlng}
+          center={{
+            lat: this.props.activityDetail.activity_latitude,
+            long: this.props.activityDetail.activity_longitude
+          }}
           length={4}
           zoom={13}
         >
@@ -182,7 +180,7 @@ class ActivityDetail extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position}>
+          <Marker position={this.props.activityDetail.position}>
             <Popup>
               Votre activité. <br /> Easily customizable.
             </Popup>
