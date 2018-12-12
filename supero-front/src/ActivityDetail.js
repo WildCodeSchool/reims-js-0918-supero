@@ -9,6 +9,7 @@ import axios from "axios";
 import formatDate from "./formatDate";
 import { DateTime } from "luxon";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import Loading from "./Loading"
 
 import {
   faBolt,
@@ -20,6 +21,7 @@ import {
   faBicycle,
   faCalendarAlt
 } from "@fortawesome/free-solid-svg-icons";
+
 
 library.add(
   faBolt,
@@ -41,20 +43,17 @@ const latlngValue = {
 };
 
 class ActivityDetail extends React.Component {
-  state = {
-    oneActivity: null
-  };
-
   componentDidMount() {
     const activity_id = this.props.match.params.id;
+    this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.setState({ oneActivity: res.data[0] }));
+      .then(res => this.props.activityDetailReceived(res.data[0]));
   }
 
   render() {
     return (
-      this.state.oneActivity != null && (
+      !this.props.activityDetail.sport_name ? <Loading/> :(
         <div className="activity_profile">
           <Header title="Détail" />
           <div style={{ position: "relative", marginBottom: "40px" }}>
@@ -69,7 +68,7 @@ class ActivityDetail extends React.Component {
                 style={{ width: "100%" }}
                 src={
                   process.env.PUBLIC_URL +
-                  `/images/${this.state.oneActivity.sport_name}.jpg`
+                  `/images/${this.props.activityDetail.sport_name}.jpg`
                 }
                 alt="sport"
                 align="bottom"
@@ -79,9 +78,9 @@ class ActivityDetail extends React.Component {
               <FontAwesomeIcon
                 className="ml-2 mr-1"
                 icon={`${
-                  this.state.oneActivity.sport_name === "velo"
+                  this.props.activityDetail.sport_name === "velo"
                     ? "bicycle"
-                    : this.state.oneActivity.sport_name
+                    : this.props.activityDetail.sport_name
                 }`}
               />
             </div>
@@ -90,47 +89,47 @@ class ActivityDetail extends React.Component {
             <div className="activity_detail_left">
               <div className="difficulty">
                 <DisplayDifficultyIcon
-                  difficulty={this.state.oneActivity.activity_difficulty}
+                  difficulty={this.props.activityDetail.activity_difficulty}
                 />
               </div>
               <h2>
                 Session{" "}
-                {this.state.oneActivity.sport_name.charAt(0).toUpperCase() +
-                  this.state.oneActivity.sport_name.slice(1)}
+                {this.props.activityDetail.sport_name.charAt(0).toUpperCase() +
+                  this.props.activityDetail.sport_name.slice(1)}
               </h2>
-              <h3>{this.state.oneActivity.activity_title}</h3>
+              <h3>{this.props.activityDetail.activity_title}</h3>
             </div>
             <div className="activity_detail_right">
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
-                {formatDate(this.state.oneActivity.activity_start_time)}
+                {formatDate(this.props.activityDetail.activity_start_time)}
               </span>
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
                 {
-                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                  DateTime.fromSQL(this.props.activityDetail.activity_duration)
                     .hour
                 }
                 h
-                {DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                {DateTime.fromSQL(this.props.activityDetail.activity_duration)
                   .minute > 0 &&
-                  DateTime.fromSQL(this.state.oneActivity.activity_duration)
+                  DateTime.fromSQL(this.props.activityDetail.activity_duration)
                     .minute}
               </span>
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-                {this.state.oneActivity.activity_city}
+                {this.props.activityDetail.activity_city}
               </span>
-              {this.state.oneActivity.activity_more_infos && (
+              {this.props.activityDetail.activity_more_infos && (
                 <span className="activity_detail_icon">
                   <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
-                  {this.state.oneActivity.activity_more_infos}
+                  {this.props.activityDetail.activity_more_infos}
                 </span>
               )}
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
                 Niveau{" "}
-                {difficulty[this.state.oneActivity.activity_difficulty - 1]}
+                {difficulty[this.props.activityDetail.activity_difficulty - 1]}
               </span>
             </div>
           </div>
@@ -146,7 +145,7 @@ class ActivityDetail extends React.Component {
                 </Media>
                 <Media className="ml-2" body>
                   <Media heading>Organisé par</Media>
-                  {this.state.oneActivity.user_pseudo}
+                  {this.props.activityDetail.user_pseudo}
                 </Media>
               </Media>
             </div>
@@ -157,10 +156,10 @@ class ActivityDetail extends React.Component {
             </div>
           </div>
           <div className="activity_description">
-            {this.state.oneActivity.activity_description}
+            {this.props.activityDetail.activity_description}
           </div>
           <span className="nb_participants">
-            1/{this.state.oneActivity.activity_max_participants} participants
+            1/{this.props.activityDetail.activity_max_participants} participants
           </span>
           <button className="activity_participation_button">Participer</button>
           <Map

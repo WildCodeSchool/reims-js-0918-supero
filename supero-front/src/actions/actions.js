@@ -27,13 +27,11 @@ export const selectAddressAction = address => ({
   address
 });
 
-export const fetchActivityDetailAction= id => ({
-  type: FETCH_ACTIVITY_DETAIL,
-  id
+export const fetchActivityDetailAction = () => ({
+  type: FETCH_ACTIVITY_DETAIL
 });
 
 export const activityDetailReceivedAction = activityDetail => ({
   type: ACTIVITY_DETAIL_RECEIVED,
   activityDetail
 });
-
