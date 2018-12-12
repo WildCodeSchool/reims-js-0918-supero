@@ -20,7 +20,8 @@ import {
   faRunning,
   faInfoCircle,
   faBicycle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -31,7 +32,8 @@ library.add(
   faRunning,
   faBicycle,
   faInfoCircle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 const position = ["49", "4"];
@@ -90,6 +92,8 @@ class ActivityDetail extends React.Component {
               icon={`${
                 this.props.activityDetail.sport_name === "velo"
                   ? "bicycle"
+                  : this.props.activityDetail.sport_name === "natation"
+                  ? "swimmer"
                   : this.props.activityDetail.sport_name
               }`}
             />
