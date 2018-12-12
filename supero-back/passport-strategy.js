@@ -1,4 +1,5 @@
 const passport = require("passport");
+const connection = require("./conf");
 const LocalStrategy = require("passport-local").Strategy;
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
@@ -7,21 +8,26 @@ const ExtractJWT = passportJWT.ExtractJwt;
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password"
     },
-    function(username, password, cb) {
-      //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
-
-      if (password !== "supero") {
-        return cb(null, false, { message: "Incorrect username or password." });
-      } else {
-        return cb(
-          null,
-          { id: 1, username },
-          { message: "Logged In Successfully" }
-        );
-      }
+    function(email, password, cb) {
+      connection.query(
+        `SELECT * FROM users WHERE user_email = '${email}' AND user_password='${password}'`,
+        (err, result) => {
+          if (err) {
+            return cb(null, false, {
+              message: "E-mail ou mot de passe incorrects."
+            });
+          } else {
+            return cb(
+              null,
+              { id: result[0].user_id, email: result[0].user_email },
+              { message: "Logged In Successfully" }
+            );
+          }
+        }
+      );
     }
   )
 );
