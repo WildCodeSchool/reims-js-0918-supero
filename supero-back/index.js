@@ -84,6 +84,23 @@ app
       }
     );
   })
+  .get("/activities/:activity_id", (req, res) => {
+    const activityId = req.params.activity_id;
+    connection.query(
+      `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_id = ${activityId}`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
+  })
   .get("/activities/sports/:sports_id", (req, res) => {
     const sportId = req.params.sports_id;
     connection.query(
