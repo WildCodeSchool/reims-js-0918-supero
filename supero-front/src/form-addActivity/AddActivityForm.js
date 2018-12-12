@@ -14,6 +14,7 @@ const SENDINFO_PAGE = 4;
 class AddActivityForm extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.state = {
@@ -21,8 +22,11 @@ class AddActivityForm extends Component {
     };
   }
 
+  goBack() {
+    this.props.history.goBack();
+  }
+
   submit = values => {
-    console.log(values);
     fetch("http://localhost:3001/activities", {
       method: "POST",
       headers: new Headers({
@@ -64,7 +68,7 @@ class AddActivityForm extends Component {
     const { page } = this.state;
     return (
       <Fragment>
-        <Header title="Nouvelle activité" />
+        <Header title="Nouvelle activité" goBack={this.goBack} />
         <div className="AddActivity-container">
           {page === SENDSPORT_PAGE && <SendSport onSubmit={this.nextPage} />}
           {page === SENDTIME_PAGE && (

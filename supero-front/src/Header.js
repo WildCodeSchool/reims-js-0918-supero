@@ -13,7 +13,6 @@ library.add(faTimes, faAngleLeft);
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true
@@ -35,13 +34,11 @@ export default class Example extends React.Component {
             dark
           >
             {!this.props.activitiesView ? (
-              <Link to="ActivitiesList">
-                <FontAwesomeIcon
-                  onClick={this.toggleNavbar}
-                  style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
-                  icon="angle-left"
-                />
-              </Link>
+              <FontAwesomeIcon
+                onClick={this.props.goBack}
+                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                icon="angle-left"
+              />
             ) : (
               <Link to="ActivitiesList">
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />

@@ -1,16 +1,32 @@
 require("dotenv").config();
-const port = 3001;
 const express = require("express");
+const passport = require("passport");
+
+require("./passport-strategy");
+const auth = require("./auth");
+
+const port = 3001;
+
 const app = express();
 const connection = require("./conf");
 const bodyParser = require("body-parser");
-// Support JSON-encoded bodies
 app.use(bodyParser.json());
-// Support URL-encoded bodies
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
+);
+app.use(express.static("public"));
+app.use("/auth", auth);
+
+app.get(
+  "/test",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.send(
+      `authorized for user req.user.usernamewithid{req.user.username} with id req.user.usernamewithid{req.user.id}`
+    );
+  }
 );
 
 // Add headers
@@ -33,10 +49,6 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
-// IMPORT JSON
-const activitiesjson = require("./activities.json");
-const json = require("./users.json");
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
