@@ -27,7 +27,6 @@ class AddActivityForm extends Component {
   }
 
   submit = values => {
-    console.log(values);
     fetch("http://localhost:3001/activities", {
       method: "POST",
       headers: new Headers({

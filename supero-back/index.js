@@ -10,7 +10,7 @@ const port = 3001;
 const app = express();
 const connection = require("./conf");
 const bodyParser = require("body-parser");
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static("public"));
 app.use("/auth", auth);
@@ -19,9 +19,11 @@ app.get(
   "/test",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  res.send(`authorized for user req.user.usernamewithid{req.user.username} with id req.user.usernamewithid{req.user.id}`);
+    res.send(
+      `authorized for user req.user.usernamewithid{req.user.username} with id req.user.usernamewithid{req.user.id}`
+    );
   }
-  ); 
+);
 
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
