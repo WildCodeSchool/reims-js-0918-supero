@@ -7,6 +7,8 @@ const validate = values => {
   }
   if (!values.password) {
     errors.password = "Champ obligatoire";
+  } else if (values.password !== values.passwordBis) {
+    errors.passwordBis = "Vos mots de passe ne correspondent pas"
   }
   if (!values.firstName) {
     errors.firstName = "Champ obligatoire";
