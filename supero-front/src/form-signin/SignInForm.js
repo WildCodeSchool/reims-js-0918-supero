@@ -4,6 +4,7 @@ import "./SignInForm.css";
 import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
@@ -21,7 +22,11 @@ const SignInForm = props => {
   return (
     <Container fluid>
       <Form
-        onSubmit={handleSubmit(values => console.log(values))}
+        onSubmit={handleSubmit(values =>
+          axios
+            .post("http://localhost:3001/auth/login", values)
+            .then(res => localStorage.setItem("user", JSON.stringify(res.data)))
+        )}
         className="SignIn-container"
       >
         <Row className="d-flex justify-content-center">
