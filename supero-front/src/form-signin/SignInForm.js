@@ -18,7 +18,7 @@ const aol = value =>
     : undefined;
 
 const SignInForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props;
+  const { handleSubmit, pristine, reset, submitting, history } = props;
   return (
     <Container fluid>
       <Form
@@ -28,6 +28,7 @@ const SignInForm = props => {
             .then(res =>
               localStorage.setItem("superoUser", JSON.stringify(res.data))
             )
+            .then(history.push("/ActivitiesList"))
         )}
         className="SignIn-container"
       >
