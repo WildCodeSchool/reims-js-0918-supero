@@ -20,7 +20,7 @@ const user = {
   user_id: 1,
   user_lastname: "Niveau",
   user_firstname: "Benoît",
-  user_gender: "Masculin",
+  user_gender: "Homme",
   user_pseudo: "Benoit1521",
   user_birthdate: "1980-10-07",
   user_email: "zertyuio@hotmail.fr",
