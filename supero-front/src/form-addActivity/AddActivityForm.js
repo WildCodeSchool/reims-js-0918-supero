@@ -53,7 +53,8 @@ class AddActivityForm extends Component {
       .then(
         res => this.setState({ flash: res.flash }),
         err => this.setState({ flash: err.flash })
-      );
+      )
+      .then(this.props.history.push("/ActivitiesList"));
   };
 
   nextPage() {

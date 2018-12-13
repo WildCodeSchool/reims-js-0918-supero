@@ -16,16 +16,18 @@ import { connectRouter, ConnectedRouter } from "connected-react-router";
 import { SELECT_ADDRESS } from "./actions/actionTypes";
 import selectAddressReducer from "./reducers/selectAddressReducer";
 import activityReducer from "./reducers/activityReducer";
+import viewUserProfileReducer from "./reducers/viewUserProfileReducer";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = history =>
   combineReducers({
-    activities: activitiesReducer,
-    activityDetail:activityReducer,
-    loading: loadingReducer,
     selectAddress: selectAddressReducer,
+    loading: loadingReducer,
+    activities: activitiesReducer,
+    activityDetail: activityReducer,
+    userProfile: viewUserProfileReducer,
     form: formReducer.plugin({
       addactivity: (state, action) => {
         switch (action.type) {

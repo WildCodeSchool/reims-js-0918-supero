@@ -10,6 +10,7 @@ import formatDate from "./formatDate";
 import { DateTime } from "luxon";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 import {
   faBolt,
@@ -19,7 +20,8 @@ import {
   faRunning,
   faInfoCircle,
   faBicycle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -30,22 +32,18 @@ library.add(
   faRunning,
   faBicycle,
   faInfoCircle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 const position = ["49", "4"];
-const latlngValue = {
-  latlng: {
-    lat: "49",
-    lng: "4"
-  }
-};
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
   }
+
   goBack() {
     this.props.history.goBack();
   }
@@ -55,10 +53,13 @@ class ActivityDetail extends React.Component {
     this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]));
+      .then(res => this.props.activityDetailReceived(res.data[0]))
+
   }
 
+  
   render() {
+    console.log(this.props.activityDetail)
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
@@ -89,6 +90,8 @@ class ActivityDetail extends React.Component {
               icon={`${
                 this.props.activityDetail.sport_name === "velo"
                   ? "bicycle"
+                  : this.props.activityDetail.sport_name === "natation"
+                  ? "swimmer"
                   : this.props.activityDetail.sport_name
               }`}
             />
@@ -155,7 +158,9 @@ class ActivityDetail extends React.Component {
               </Media>
               <Media className="ml-2" body>
                 <Media heading>Organisé par</Media>
-                {this.props.activityDetail.user_pseudo}
+                <Link to="/UserProfile">
+                  {this.props.activityDetail.user_pseudo}
+                </Link>
               </Media>
             </Media>
           </div>
@@ -174,7 +179,11 @@ class ActivityDetail extends React.Component {
         <button className="activity_participation_button">Participer</button>
         <Map
           style={{ height: "250px", marginTop: "15px" }}
-          center={latlngValue.latlng}
+          // center={latlngValue.latlng}
+          center={{
+            lat: this.props.activityDetail.activity_latitude,
+            lng: this.props.activityDetail.activity_longitude
+          }}
           length={4}
           zoom={13}
         >
@@ -182,7 +191,9 @@ class ActivityDetail extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position}>
+          <Marker
+            position={[this.props.activityDetail.activity_latitude, this.props.activityDetail.activity_longitude]}
+          >
             <Popup>
               Votre activité. <br /> Easily customizable.
             </Popup>
