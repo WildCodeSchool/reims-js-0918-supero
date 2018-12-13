@@ -1,6 +1,5 @@
 import activitiesReducer from "./activitiesReducer";
 
-import { activitiesReceivedAction } from "../actions/actions";
 import { ACTIVITIES_RECEIVED } from "../actions/actionTypes";
 
 describe("activitiesReducer", () => {
