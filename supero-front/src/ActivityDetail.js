@@ -53,13 +53,10 @@ class ActivityDetail extends React.Component {
     this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]))
-
+      .then(res => this.props.activityDetailReceived(res.data[0]));
   }
 
-  
   render() {
-    console.log(this.props.activityDetail)
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
@@ -158,7 +155,9 @@ class ActivityDetail extends React.Component {
               </Media>
               <Media className="ml-2" body>
                 <Media heading>Organisé par</Media>
-                <Link to="/UserProfile">
+                <Link
+                  to={`/UserProfile/${this.props.activityDetail.creator_id}`}
+                >
                   {this.props.activityDetail.user_pseudo}
                 </Link>
               </Media>
@@ -192,7 +191,10 @@ class ActivityDetail extends React.Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker
-            position={[this.props.activityDetail.activity_latitude, this.props.activityDetail.activity_longitude]}
+            position={[
+              this.props.activityDetail.activity_latitude,
+              this.props.activityDetail.activity_longitude
+            ]}
           >
             <Popup>
               Votre activité. <br /> Easily customizable.

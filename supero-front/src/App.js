@@ -7,7 +7,7 @@ import LoginHome from "./Login/LoginHome";
 import ActivityDetailContainer from "./containers/ActivityDetailContainer";
 import UserRegistration from "./form-registration/UserRegistration";
 import SignInForm from "./form-signin/SignInForm";
-import UserProfile from "./UserProfile";
+import UserProfileContainer from "./containers/UserProfileContainer";
 
 class App extends Component {
   render() {
@@ -24,7 +24,7 @@ class App extends Component {
           />
           <Route exact path="/SignInForm" component={SignInForm} />
           <Route exact path="/UserRegistration" component={UserRegistration} />
-          <Route exact path="/UserProfile" component={UserProfile} />
+          <Route exact path="/UserProfile/:id" component={UserProfileContainer} />
         </Switch>
       </div>
     );

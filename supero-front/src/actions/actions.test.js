@@ -138,7 +138,7 @@ describe("fetchUserProfileAction", () => {
 
 describe("viewUserProfileAction", () => {
   it("should return VIEW_USER_PROFILE action type and an object", () => {
-    const viewUserProfile = {
+    const userProfile = {
       user_id: 1,
       user_lastname: "Niveau",
       user_firstname: "Benoît",
@@ -154,8 +154,8 @@ describe("viewUserProfileAction", () => {
     };
     const expected = {
       type: VIEW_USER_PROFILE,
-      viewUserProfile
+      userProfile
     };
-    expect(viewUserProfileAction(viewUserProfile)).toEqual(expected);
+    expect(viewUserProfileAction(userProfile)).toEqual(expected);
   });
 });
