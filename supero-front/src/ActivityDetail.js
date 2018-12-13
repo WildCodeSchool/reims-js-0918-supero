@@ -34,18 +34,13 @@ library.add(
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 const position = ["49", "4"];
-const latlngValue = {
-  latlng: {
-    lat: "49",
-    lng: "4"
-  }
-};
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
   }
+
   goBack() {
     this.props.history.goBack();
   }
@@ -55,10 +50,13 @@ class ActivityDetail extends React.Component {
     this.props.fetchActivity();
     axios
       .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]));
+      .then(res => this.props.activityDetailReceived(res.data[0]))
+
   }
 
+  
   render() {
+    console.log(this.props.activityDetail)
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
@@ -174,7 +172,11 @@ class ActivityDetail extends React.Component {
         <button className="activity_participation_button">Participer</button>
         <Map
           style={{ height: "250px", marginTop: "15px" }}
-          center={latlngValue.latlng}
+          // center={latlngValue.latlng}
+          center={{
+            lat: this.props.activityDetail.activity_latitude,
+            lng: this.props.activityDetail.activity_longitude
+          }}
           length={4}
           zoom={13}
         >
@@ -182,7 +184,9 @@ class ActivityDetail extends React.Component {
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position}>
+          <Marker
+            position={[this.props.activityDetail.activity_latitude, this.props.activityDetail.activity_longitude]}
+          >
             <Popup>
               Votre activité. <br /> Easily customizable.
             </Popup>
