@@ -7,7 +7,7 @@ describe("activityReducer", () => {
       const fakeState = [];
       const action = {
         type: ACTIVITY_DETAIL_RECEIVED,
-        activity: [
+        activityDetail: [
           {
             activity_id: 1,
             sports_id: 1,

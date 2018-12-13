@@ -1,6 +1,5 @@
 import selectAddressReducer from "./selectAddressReducer";
 
-import { selectAddressAction } from "../actions/actions";
 import { SELECT_ADDRESS } from "../actions/actionTypes";
 
 describe("selectAdressReducer", () => {

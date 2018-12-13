@@ -1,26 +1,46 @@
 import {
-  VIEW_ACTIVITIES_FORM,
-  ADD_ACTIVITY,
-  VIEW_ACTIVITY_DETAILS,
-  VIEW_ACTIVITIES,
-  DISPLAY_MENU,
-  HIDE_MENU,
-  VIEW_NEWS,
-  ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES,
   SELECT_ADDRESS,
+  FETCH_ACTIVITIES,
+  ACTIVITIES_RECEIVED,
+  FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
-  FETCH_ACTIVITY_DETAIL
+  FETCH_USER_PROFILE,
+  VIEW_USER_PROFILE
 } from "./actionTypes";
 
 import {
-  addActivityAction,
-  activitiesReceivedAction,
-  fetchActivitiesAction,
   selectAddressAction,
+  fetchActivitiesAction,
+  activitiesReceivedAction,
   fetchActivityDetailAction,
-  activityDetailReceivedAction
+  activityDetailReceivedAction,
+  fetchUserProfileAction,
+  viewUserProfileAction
 } from "./actions";
+
+describe("selectAdressAction", () => {
+  it("should return a adress object", () => {
+    const address = {
+      label: "Reims, Marne, Grand Est, France métropolitaine, 51100, France",
+      x: "4.031926",
+      y: "49.2577886"
+    };
+    const expected = {
+      type: SELECT_ADDRESS,
+      address
+    };
+    expect(selectAddressAction(address)).toEqual(expected);
+  });
+});
+
+describe("fetchActivitiesAction", () => {
+  it("should return a FETCH_ACTIVITIES action", () => {
+    const expected = {
+      type: FETCH_ACTIVITIES
+    };
+    expect(fetchActivitiesAction()).toEqual(expected);
+  });
+});
 
 describe("activitiesReceivedAction", () => {
   it("should return ACTIVITIES_RECEIVED action type and an array", () => {
@@ -70,43 +90,17 @@ describe("activitiesReceivedAction", () => {
   });
 });
 
-describe("fetchActivitiesAction", () => {
-  it("should return a FETCH_ACTIVITIES action", () => {
-    const expected = {
-      type: FETCH_ACTIVITIES
-    };
-    expect(fetchActivitiesAction()).toEqual(expected);
-  });
-});
-
-describe("selectAdressAction", () => {
-  it("should return a adress object", () => {
-    const address = {
-      label: "Reims, Marne, Grand Est, France métropolitaine, 51100, France",
-      x: "4.031926",
-      y: "49.2577886"
-    };
-    const expected = {
-      type: SELECT_ADDRESS,
-      address
-    };
-    expect(selectAddressAction(address)).toEqual(expected);
-  });
-});
-
 describe("fetchActivityDetailAction", () => {
   it("should return a FETCH_ACTIVITY_DETAIL action", () => {
-    const id = 5;
     const expected = {
-      type: FETCH_ACTIVITY_DETAIL,
-      id
+      type: FETCH_ACTIVITY_DETAIL
     };
-    expect(fetchActivityDetailAction(id)).toEqual(expected);
+    expect(fetchActivityDetailAction()).toEqual(expected);
   });
 });
 
 describe("activityDetailReceivedAction", () => {
-  it("should return ACTIVITY_DETAIL_RECEIVED action type and an array", () => {
+  it("should return ACTIVITY_DETAIL_RECEIVED action type and an object", () => {
     const activityDetail = {
       activity_id: 1,
       sports_id: 1,
@@ -130,5 +124,38 @@ describe("activityDetailReceivedAction", () => {
       activityDetail
     };
     expect(activityDetailReceivedAction(activityDetail)).toEqual(expected);
+  });
+});
+
+describe("fetchUserProfileAction", () => {
+  it("should return a FETCH_USER_PROFILE action", () => {
+    const expected = {
+      type: FETCH_USER_PROFILE
+    };
+    expect(fetchUserProfileAction()).toEqual(expected);
+  });
+});
+
+describe("viewUserProfileAction", () => {
+  it("should return VIEW_USER_PROFILE action type and an object", () => {
+    const viewUserProfile = {
+      user_id: 1,
+      user_lastname: "Niveau",
+      user_firstname: "Benoît",
+      user_gender: "Homme",
+      user_pseudo: "Benoit1521",
+      user_birthdate: "1980-10-07",
+      user_email: "zertyuio@hotmail.fr",
+      user_password: "tutjyujt",
+      user_photo:
+        "https://kawacke.github.io/Projet-1-LeBookDesWilders/photos/Benoit300.jpg",
+      user_level: "3",
+      user_about: "La première phrase qui me vient en tête"
+    };
+    const expected = {
+      type: VIEW_USER_PROFILE,
+      viewUserProfile
+    };
+    expect(viewUserProfileAction(viewUserProfile)).toEqual(expected);
   });
 });

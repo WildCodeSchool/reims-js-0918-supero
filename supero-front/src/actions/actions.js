@@ -1,30 +1,25 @@
 import {
-  // VIEW_ACTIVITIES_FORM,
-  // ADD_ACTIVITY,
-  // VIEW_ACTIVITY_DETAILS,
-  // VIEW_ACTIVITIES,
-  // DISPLAY_MENU,
-  // HIDE_MENU,
-  // VIEW_NEWS,
-  ACTIVITIES_RECEIVED,
-  FETCH_ACTIVITIES,
   SELECT_ADDRESS,
+  FETCH_ACTIVITIES,
+  ACTIVITIES_RECEIVED,
+  FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
-  FETCH_ACTIVITY_DETAIL
+  FETCH_USER_PROFILE,
+  VIEW_USER_PROFILE
 } from "./actionTypes";
 
-export const activitiesReceivedAction = activities => ({
-  type: ACTIVITIES_RECEIVED,
-  activities
+export const selectAddressAction = address => ({
+  type: SELECT_ADDRESS,
+  address
 });
 
 export const fetchActivitiesAction = () => ({
   type: FETCH_ACTIVITIES
 });
 
-export const selectAddressAction = address => ({
-  type: SELECT_ADDRESS,
-  address
+export const activitiesReceivedAction = activities => ({
+  type: ACTIVITIES_RECEIVED,
+  activities
 });
 
 export const fetchActivityDetailAction = () => ({
@@ -34,4 +29,13 @@ export const fetchActivityDetailAction = () => ({
 export const activityDetailReceivedAction = activityDetail => ({
   type: ACTIVITY_DETAIL_RECEIVED,
   activityDetail
+});
+
+export const fetchUserProfileAction = () => ({
+  type: FETCH_USER_PROFILE
+});
+
+export const viewUserProfileAction = viewUserProfile => ({
+  type: VIEW_USER_PROFILE,
+  viewUserProfile
 });
