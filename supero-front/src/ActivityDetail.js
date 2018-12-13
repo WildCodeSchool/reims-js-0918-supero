@@ -10,6 +10,7 @@ import formatDate from "./formatDate";
 import { DateTime } from "luxon";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Loading from "./Loading";
+import { Link } from "react-router-dom";
 
 import {
   faBolt,
@@ -19,7 +20,8 @@ import {
   faRunning,
   faInfoCircle,
   faBicycle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -30,7 +32,8 @@ library.add(
   faRunning,
   faBicycle,
   faInfoCircle,
-  faCalendarAlt
+  faCalendarAlt,
+  faSwimmer
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 const position = ["49", "4"];
@@ -87,6 +90,8 @@ class ActivityDetail extends React.Component {
               icon={`${
                 this.props.activityDetail.sport_name === "velo"
                   ? "bicycle"
+                  : this.props.activityDetail.sport_name === "natation"
+                  ? "swimmer"
                   : this.props.activityDetail.sport_name
               }`}
             />
@@ -153,7 +158,9 @@ class ActivityDetail extends React.Component {
               </Media>
               <Media className="ml-2" body>
                 <Media heading>Organisé par</Media>
-                {this.props.activityDetail.user_pseudo}
+                <Link to="/UserProfile">
+                  {this.props.activityDetail.user_pseudo}
+                </Link>
               </Media>
             </Media>
           </div>
