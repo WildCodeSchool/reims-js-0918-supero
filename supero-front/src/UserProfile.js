@@ -1,10 +1,10 @@
 import React from "react";
-import { DateTime } from "luxon";
 import "./UserProfile.css";
 import Header from "./Header";
 import axios from "axios";
 import Loading from "./Loading";
 import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
+import ageCalculation from "./ageCalculation";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class UserProfile extends React.Component {
             <span>{this.state.user.user_lastname}</span>
           </h2>
           <h4 className="user_age">
-            {2018 - DateTime.fromISO(this.state.user.user_birthdate).c.year} ans
+            {ageCalculation(this.state.user.user_birthdate)} ans
           </h4>
         </div>
         <div className="user_detail">
