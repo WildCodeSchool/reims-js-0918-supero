@@ -14,18 +14,18 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
+exports.up = function(db, callback) {
   db.runSql(
-    `ALTER TABLE activities MODIFY COLUMN activity_longitude DECIMAL (10,5)`,
+    `ALTER TABLE activities MODIFY COLUMN activity_longitude DECIMAL (10,6)`,
     callback
   );
   db.runSql(
-    `ALTER TABLE activities MODIFY COLUMN activity_latitude DECIMAL (10,5)`,
+    `ALTER TABLE activities MODIFY COLUMN activity_latitude DECIMAL (10,6)`,
     callback
   );
 };
 
-exports.down = function(db) {
+exports.down = function(db, callback) {
   db.runSql(
     `ALTER TABLE activities MODIFY COLUMN activity_longitude INT`,
     callback
