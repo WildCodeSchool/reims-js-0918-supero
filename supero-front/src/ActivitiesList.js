@@ -7,11 +7,20 @@ import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import Header from "./Header";
 
+const token = localStorage.getItem("superoUser");
+console.log(token);
+
 class ActivitiesList extends Component {
   componentDidMount() {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities`)
+      .get(`http://localhost:3001/activities`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + token
+        }
+      })
       .then(res => this.props.activitiesReceived(res.data));
   }
 
