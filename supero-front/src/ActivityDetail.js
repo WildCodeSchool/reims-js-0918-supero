@@ -159,7 +159,9 @@ class ActivityDetail extends React.Component {
               </Media>
               <Media className="ml-2" body>
                 <Media heading>Organisé par</Media>
-                <Link to="/UserProfile">
+                <Link
+                  to={`/UserProfile/${this.props.activityDetail.creator_id}`}
+                >
                   {this.props.activityDetail.user_pseudo}
                 </Link>
               </Media>

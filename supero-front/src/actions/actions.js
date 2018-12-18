@@ -35,7 +35,7 @@ export const fetchUserProfileAction = () => ({
   type: FETCH_USER_PROFILE
 });
 
-export const viewUserProfileAction = viewUserProfile => ({
+export const viewUserProfileAction = userProfile => ({
   type: VIEW_USER_PROFILE,
-  viewUserProfile
+  userProfile
 });
