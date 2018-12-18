@@ -4,6 +4,7 @@ const passport = require("passport");
 
 require("./passport-strategy");
 const auth = require("./auth");
+const cors = require("cors");
 
 const port = 3001;
 
@@ -18,6 +19,7 @@ app.use(
 );
 app.use(express.static("public"));
 app.use("/auth", auth);
+app.use(cors());
 
 app.get(
   "/test",
@@ -219,7 +221,11 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      let user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      req.body.creator_id = req.user.id;
       const formData = req.body;
+
       connection.query(
         "INSERT INTO activities SET ?",
         formData,
@@ -344,4 +350,11 @@ app.listen(port, err => {
     throw new Error("Something Bad Happened ...");
   }
   console.log(`server is listening on ${port}`);
+});
+
+app.get("/profile", passport.authenticate("jwt", { session: false }), function(
+  req,
+  res
+) {
+  res.send(req.user);
 });
