@@ -18,8 +18,13 @@ class UserProfile extends React.Component {
   componentDidMount() {
     const user_id = this.props.match.params.id;
     this.props.fetchUserProfile();
+    const token = localStorage.getItem("superoUser");
     axios
-      .get(`http://localhost:3001/users/${user_id}`)
+      .get(`http://localhost:3001/users/${user_id}`, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
       .then(res => this.props.viewUserProfile(res.data[0]));
   }
 

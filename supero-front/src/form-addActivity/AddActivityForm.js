@@ -30,7 +30,9 @@ class AddActivityForm extends Component {
     fetch("http://localhost:3001/activities", {
       method: "POST",
       headers: new Headers({
-        "Content-Type": "application/json"
+        accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("superoUser")}`
       }),
       body: JSON.stringify({
         sport_id: values.session,
@@ -40,7 +42,6 @@ class AddActivityForm extends Component {
         activity_difficulty: values.difficulty,
         activity_more_infos: values.more_infos,
         activity_max_participants: values.participants,
-        creator_id: 1,
         activity_adresse: values.address.label,
         activity_latitude: values.address.y,
         activity_longitude: values.address.x,

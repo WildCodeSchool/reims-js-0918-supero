@@ -36,7 +36,6 @@ library.add(
   faSwimmer
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
-const position = ["49", "4"];
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -49,10 +48,15 @@ class ActivityDetail extends React.Component {
   }
 
   componentDidMount() {
+    const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
     this.props.fetchActivity();
     axios
-      .get(`http://localhost:3001/activities/${activity_id}`)
+      .get(`http://localhost:3001/activities/${activity_id}`, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
       .then(res => this.props.activityDetailReceived(res.data[0]));
   }
 
