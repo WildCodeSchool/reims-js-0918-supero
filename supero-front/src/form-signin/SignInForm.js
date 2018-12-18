@@ -33,14 +33,12 @@ const SignInForm = props => {
         <Row className="d-flex justify-content-center">
           <Col xs="6">
             <div className="logo mb-5">
-              <Link to="ActivitiesList">
-                <img
-                  style={{ width: "100%" }}
-                  src={process.env.PUBLIC_URL + "/images/logo.png"}
-                  alt="sport"
-                  align="bottom"
-                />
-              </Link>
+              <img
+                style={{ width: "100%" }}
+                src={process.env.PUBLIC_URL + "/images/logo.png"}
+                alt="sport"
+                align="bottom"
+              />
             </div>
           </Col>
           <Col xs="10">
