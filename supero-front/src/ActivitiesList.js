@@ -19,7 +19,6 @@ class ActivitiesList extends Component {
       })
       .then(res => {
         this.props.activitiesReceived(res.data);
-        console.log(res.data);
       });
   }
 
