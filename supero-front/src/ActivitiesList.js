@@ -9,15 +9,18 @@ import Header from "./Header";
 
 class ActivitiesList extends Component {
   componentDidMount() {
-    const token = localStorage.getItem("superoUser");
     this.props.fetchActivities();
     axios
       .get(`http://localhost:3001/activities`, {
         headers: {
-          authorization: "Bearer " + token
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
         }
       })
-      .then(res => this.props.activitiesReceived(res.data));
+      .then(res => {
+        this.props.activitiesReceived(res.data);
+        console.log(res.data);
+      });
   }
 
   render() {

@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import "./SignInForm.css";
 import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 
 const required = value =>
@@ -23,10 +23,10 @@ const SignInForm = props => {
     <Container fluid>
       <Form
         onSubmit={handleSubmit(values =>
-          axios
-            .post("http://localhost:3001/auth/login", values)
-            .then(res => localStorage.setItem("superoUser", res.data.token))
-            .then(history.push("/ActivitiesList"))
+          axios.post("http://localhost:3001/auth/login", values).then(res => {
+            localStorage.setItem("superoUser", res.data.token);
+            history.push("/ActivitiesList");
+          })
         )}
         className="SignIn-container"
       >
@@ -84,6 +84,8 @@ const SignInForm = props => {
   );
 };
 
-export default reduxForm({
-  form: "SignInForm"
-})(SignInForm);
+export default withRouter(
+  reduxForm({
+    form: "SignInForm"
+  })(SignInForm)
+);
