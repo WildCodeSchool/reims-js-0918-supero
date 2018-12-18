@@ -278,21 +278,17 @@ app.get(
 
 // USERS -- créer un utilisateur
 
-app.post(
-  "/users",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const formData = req.body;
-    connection.query("INSERT INTO users SET ?", formData, err => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Erreur lors de la création d'un utilisateur");
-      } else {
-        res.sendStatus(200);
-      }
-    });
-  }
-);
+app.post("/users", (req, res) => {
+  const formData = req.body;
+  connection.query("INSERT INTO users SET ?", formData, err => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Erreur lors de la création d'un utilisateur");
+    } else {
+      res.sendStatus(200);
+    }
+  });
+});
 
 // USERS -- afficher le profil d'un utilisateur
 
@@ -348,11 +344,4 @@ app.listen(port, err => {
     throw new Error("Something Bad Happened ...");
   }
   console.log(`server is listening on ${port}`);
-});
-
-app.get("/profile", passport.authenticate("jwt", { session: false }), function(
-  req,
-  res
-) {
-  res.send(req.user);
 });
