@@ -221,9 +221,7 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      let user = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
-      req.body.creator_id = req.user.id;
+      req.body = Object.assign({ creator_id: req.user.id }, req.body);
       const formData = req.body;
 
       connection.query(
