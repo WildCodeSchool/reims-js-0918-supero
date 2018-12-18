@@ -8,6 +8,7 @@ import ActivityDetailContainer from "./containers/ActivityDetailContainer";
 import UserRegistration from "./form-registration/UserRegistration";
 import SignInForm from "./form-signin/SignInForm";
 import UserProfileContainer from "./containers/UserProfileContainer";
+import ReduxToastr from "react-redux-toastr";
 
 class App extends Component {
   render() {
@@ -24,8 +25,22 @@ class App extends Component {
           />
           <Route exact path="/SignInForm" component={SignInForm} />
           <Route exact path="/UserRegistration" component={UserRegistration} />
-          <Route exact path="/UserProfile/:id" component={UserProfileContainer} />
+          <Route
+            exact
+            path="/UserProfile/:id"
+            component={UserProfileContainer}
+          />
         </Switch>
+        <ReduxToastr
+          timeOut={3000}
+          newestOnTop={false}
+          preventDuplicates
+          position="bottom-center"
+          transitionIn="bounceIn"
+          transitionOut="bounceOut"
+          progressBar
+          closeOnToastrClick
+        />
       </div>
     );
   }

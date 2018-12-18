@@ -5,6 +5,7 @@ import SendInfo from "./SendInfo";
 import SendTime from "./SendTime";
 import "./AddActivityForm.css";
 import Header from "../Header";
+import { toastr } from "react-redux-toastr";
 
 const SENDSPORT_PAGE = 1;
 const SENDTIME_PAGE = 2;
@@ -55,7 +56,10 @@ class AddActivityForm extends Component {
         res => this.setState({ flash: res.flash }),
         err => this.setState({ flash: err.flash })
       )
-      .then(this.props.history.push("/ActivitiesList"));
+      .then(
+        toastr.success("Succès", "Nouvelle activité créée"),
+        this.props.history.push("/ActivitiesList")
+      );
   };
 
   nextPage() {

@@ -5,6 +5,7 @@ import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
+import { toastr } from "react-redux-toastr";
 
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
@@ -25,6 +26,7 @@ const SignInForm = props => {
         onSubmit={handleSubmit(values =>
           axios.post("http://localhost:3001/auth/login", values).then(res => {
             localStorage.setItem("superoUser", res.data.token);
+            toastr.success("Succès", "Connection Réussie");
             history.push("/ActivitiesList");
           })
         )}
