@@ -36,7 +36,6 @@ library.add(
   faSwimmer
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
-const position = ["49", "4"];
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -49,17 +48,19 @@ class ActivityDetail extends React.Component {
   }
 
   componentDidMount() {
+    const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
     this.props.fetchActivity();
     axios
-      .get(`http://localhost:3001/activities/${activity_id}`)
-      .then(res => this.props.activityDetailReceived(res.data[0]))
-
+      .get(`http://localhost:3001/activities/${activity_id}`, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
+      .then(res => this.props.activityDetailReceived(res.data[0]));
   }
 
-  
   render() {
-    console.log(this.props.activityDetail)
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
@@ -192,7 +193,10 @@ class ActivityDetail extends React.Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker
-            position={[this.props.activityDetail.activity_latitude, this.props.activityDetail.activity_longitude]}
+            position={[
+              this.props.activityDetail.activity_latitude,
+              this.props.activityDetail.activity_longitude
+            ]}
           >
             <Popup>
               Votre activité. <br /> Easily customizable.

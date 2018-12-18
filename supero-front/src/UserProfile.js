@@ -18,9 +18,13 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     const activity_id = 2;
-
+    const token = localStorage.getItem("superoUser");
     axios
-      .get(`http://localhost:3001/users/${activity_id}`)
+      .get(`http://localhost:3001/users/${activity_id}`, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
       .then(res => this.setState({ user: res.data[0] }));
   }
 
