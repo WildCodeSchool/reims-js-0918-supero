@@ -44,7 +44,7 @@ class UserRegistration extends Component {
         res => this.setState({ flash: res.flash }),
         err => this.setState({ flash: err.flash })
       )
-      .then(this.props.history.push("/ActivitiesList"));
+      .then(this.props.history.push("/SignInForm"));
   };
 
   nextPage() {
