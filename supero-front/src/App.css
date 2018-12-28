@@ -5,7 +5,8 @@
   font-family: "Oswald", sans-serif;
 }
 
-.btn.addActivityButton {
+.btn.addActivityButton,
+.btn.goToGeoloc {
   width: 70px;
   height: 70px;
   background-color: #e57419;
@@ -24,7 +25,13 @@
   bottom: 50px;
 }
 
-.btn.addActivityButton:hover {
+.btn.goToGeoloc {
+  font-size: 35px;
+  bottom: 135px;
+}
+
+.btn.addActivityButton:hover,
+.btn.goToGeoloc {
   box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
 }
