@@ -6,7 +6,6 @@ import Activity from "./Activity";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import Header from "./Header";
-import ActivitiesOnMap from "./ActivitiesOnMap";
 
 class ActivitiesList extends Component {
   componentDidMount() {
@@ -20,7 +19,6 @@ class ActivitiesList extends Component {
       })
       .then(res => {
         this.props.activitiesReceived(res.data);
-        console.log(res.data);
       });
   }
 

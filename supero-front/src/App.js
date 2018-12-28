@@ -8,7 +8,7 @@ import ActivityDetailContainer from "./containers/ActivityDetailContainer";
 import UserRegistration from "./form-registration/UserRegistration";
 import SignInForm from "./form-signin/SignInForm";
 import UserProfileContainer from "./containers/UserProfileContainer";
-import ActivitiesOnMap from "./ActivitiesOnMap";
+import ActivitiesOnMapContainer from "./containers/ActivitiesOnMapContainer";
 
 class App extends Component {
   render() {
@@ -17,7 +17,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LoginHome} />
           <Route exact path="/ActivitiesList" component={ActivitiesContainer} />
-          <Route exact path="/ActivitiesOnMap" component={ActivitiesOnMap} />
+          <Route
+            exact
+            path="/ActivitiesOnMap"
+            component={ActivitiesOnMapContainer}
+          />
           <Route exact path="/AddActivity" component={AddActivityForm} />
           <Route
             exact
