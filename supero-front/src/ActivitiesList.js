@@ -6,6 +6,7 @@ import Activity from "./Activity";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import Header from "./Header";
+import ActivitiesOnMap from "./ActivitiesOnMap";
 
 class ActivitiesList extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class ActivitiesList extends Component {
       <Fragment>
         <Header activitiesView={true} title="Flux" />
         <div style={{ paddingTop: "80px", paddingBottom: "10px" }}>
+          <Link to="ActivitiesOnMap">Map</Link>
           {this.props.activities.map((activity, index) => (
             <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
               <Activity key={index} {...activity} />
