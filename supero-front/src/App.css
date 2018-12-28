@@ -36,6 +36,11 @@
   transform: scale(1.05);
 }
 
+.mapByGeoloc .leaflet-top {
+  top: auto;
+  bottom: 30px !important;
+}
+
 .iconOnGeoloc {
   text-align: center;
   color: #fff;
