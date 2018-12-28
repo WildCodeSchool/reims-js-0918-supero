@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
-import { Map, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { geolocated } from "react-geolocated";
 import { Button } from "reactstrap";
 import axios from "axios";
