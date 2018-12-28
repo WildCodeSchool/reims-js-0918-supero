@@ -102,6 +102,29 @@ app
       );
     }
   )
+
+  .get(
+    "/search/:request",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const request = req.params.request;
+      connection.query(
+        `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_title LIKE "%${request}%" OR sport_name LIKE "%${request}%" OR activity_city LIKE "%${request}%" ORDER BY activity_creation_time DESC`,
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send(err);
+          } else {
+            res.status(200).json(result);
+          }
+        }
+      );
+    }
+  )
+
   .get(
     "/activities/:activity_id",
     passport.authenticate("jwt", { session: false }),
