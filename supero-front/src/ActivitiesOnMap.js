@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Header from "./Header";
 import { Link } from "react-router-dom";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import { geolocated } from "react-geolocated";
 import { Button } from "reactstrap";
 import axios from "axios";
@@ -9,6 +9,7 @@ import formatDate from "./formatDate";
 import { DateTime } from "luxon";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { iconActivityMap } from "./iconActivityMap";
 
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
@@ -47,7 +48,6 @@ class ActivitiesOnMap extends Component {
           <div
             style={{
               height: "100vh",
-              marginTop: "71px",
               display: "flex",
               justifyContent: "center",
               flexWrap: "wrap",
@@ -107,7 +107,9 @@ class ActivitiesOnMap extends Component {
               style={{ height: "100vh", marginTop: "71px" }}
               center={[this.props.coords.latitude, this.props.coords.longitude]}
               zoom={13}
+              zoomControl={false}
             >
+              <ZoomControl position="bottomleft" />
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -119,6 +121,7 @@ class ActivitiesOnMap extends Component {
                     activity.activity_latitude,
                     activity.activity_longitude
                   ]}
+                  icon={iconActivityMap}
                 >
                   <Popup>
                     <h3
