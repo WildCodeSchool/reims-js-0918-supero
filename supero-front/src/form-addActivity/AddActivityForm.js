@@ -58,7 +58,7 @@ class AddActivityForm extends Component {
           this.props.history.push("/ActivitiesList");
         },
 
-        err => toastr.error("Erreur", err.message)
+        err => toastr.error("Erreur", err)
       );
   };
 
