@@ -25,7 +25,6 @@ const SignInForm = props => {
       <Form
         onSubmit={handleSubmit(values =>
           axios.post("http://localhost:3001/auth/login", values).then(res => {
-            console.log(res);
             if (res.data.toastType !== "error") {
               localStorage.setItem("superoUser", res.data.token);
               toastr.success("Succès", res.data.message);
