@@ -53,12 +53,12 @@ class AddActivityForm extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
-      )
-      .then(
-        toastr.success("Succès", "Nouvelle activité créée"),
-        this.props.history.push("/ActivitiesList")
+        res => {
+          toastr.success("Succès", res.message);
+          this.props.history.push("/ActivitiesList");
+        },
+
+        err => toastr.error("Erreur", err.message)
       );
   };
 

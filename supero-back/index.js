@@ -232,7 +232,7 @@ app
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.sendStatus(200);
+            res.status(200).json({ message: "Nouvelle activité créée" });
           }
         }
       );
@@ -282,10 +282,13 @@ app.post("/users", (req, res) => {
   const formData = req.body;
   connection.query("INSERT INTO users SET ?", formData, err => {
     if (err) {
-      res.status(500).json({
-        toastType: "error",
-        message: "Erreur lors de la création d'un utilisateur"
-      });
+      res
+        .status(500)
+        .send(err)
+        .json({
+          toastType: "error",
+          message: "Erreur lors de la création d'un utilisateur"
+        });
     } else {
       res.status(200).json({ message: "Creation d'un nouvel utilisateur" });
     }

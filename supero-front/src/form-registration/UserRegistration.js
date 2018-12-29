@@ -48,8 +48,7 @@ class UserRegistration extends Component {
         },
 
         err => toastr.error("Erreur", err.message)
-      )
-      .then(this.props.history.push("/SignInForm"));
+      );
   };
 
   nextPage() {
