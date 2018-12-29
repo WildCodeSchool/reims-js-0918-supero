@@ -3,6 +3,7 @@ import SendIdentifiers from "./SendIdentifiers";
 import SendPersonal from "./SendPersonal";
 import SendInfo from "./SendInfo";
 import Header from "../Header";
+import { toastr } from "react-redux-toastr";
 
 const SENDIDENTIFIERS_PAGE = 1;
 const SENDPERSONAL_PAGE = 2;
@@ -41,8 +42,12 @@ class UserRegistration extends Component {
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => {
+          toastr.success("Succès", res.message);
+          this.props.history.push("/SignInForm");
+        },
+
+        err => toastr.error("Erreur", err.message)
       )
       .then(this.props.history.push("/SignInForm"));
   };
