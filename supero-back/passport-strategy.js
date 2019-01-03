@@ -15,7 +15,7 @@ passport.use(
       connection.query(
         `SELECT * FROM users WHERE user_email = '${email}' AND user_password='${password}'`,
         (err, result) => {
-          if (err) {
+          if (err || result.length === 0) {
             return cb(null, false, {
               message: "E-mail ou mot de passe incorrects."
             });

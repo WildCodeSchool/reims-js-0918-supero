@@ -4,13 +4,14 @@ import "./Header.css";
 import { Nav, NavItem, NavLink } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { toastr } from "react-redux-toastr";
 
 import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTimes, faAngleLeft);
 
-export default class Example extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -23,6 +24,12 @@ export default class Example extends React.Component {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  }
+
+  disconnect() {
+    localStorage.removeItem("superoUser");
+    toastr.success("Succès", "Déconnection Réussie");
+    this.props.history.push("/");
   }
   render() {
     return (
@@ -71,7 +78,9 @@ export default class Example extends React.Component {
                   <NavLink href="#">Aide et assistance</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Déconnexion</NavLink>
+                  <NavLink onClick={() => this.disconnect()}>
+                    Déconnexion
+                  </NavLink>
                 </NavItem>
               </Nav>
               <button onClick={this.toggleNavbar} className="close-menu-button">
@@ -84,3 +93,5 @@ export default class Example extends React.Component {
     );
   }
 }
+
+export default withRouter(Header);
