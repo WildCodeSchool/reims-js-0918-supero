@@ -31,7 +31,8 @@ router.post("/login", function(req, res, next) {
       return res.json({
         user: user,
         toastType: "error",
-        message: info.message
+        message: info.message,
+        error: info.error
       });
     }
     req.login(user, { session: false }, err => {
@@ -40,7 +41,7 @@ router.post("/login", function(req, res, next) {
       }
       // generate a signed son web token with the contents of user object and return it in the response
       const token = jwt.sign(user, "your_jwt_secret");
-      return res.json({ token, message: "Connection réussie" });
+      return res.json({ token, message: info.message });
     });
   })(req, res);
 });
