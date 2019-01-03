@@ -18,8 +18,12 @@ passport.use(
       connection.query(
         `SELECT * FROM users WHERE user_email = '${email}'`,
         (err, result) => {
-          if (
-            err ||
+          if (err) {
+            return cb(null, false, {
+              message: "Une erreur est survenue...",
+              error: err
+            });
+          } else if (
             result.length === 0 ||
             !bcrypt.compareSync(password, result[0].user_password)
           ) {
@@ -30,7 +34,7 @@ passport.use(
             return cb(
               null,
               { id: result[0].user_id, email: result[0].user_email },
-              { message: "Logged In Successfully" }
+              { message: "Connection réussie !" }
             );
           }
         }
