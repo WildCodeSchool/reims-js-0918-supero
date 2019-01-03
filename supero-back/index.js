@@ -305,9 +305,7 @@ app.get(
 
 app.post("/users", (req, res) => {
   const formData = req.body;
-  let hash = bcrypt.hashSync(formData.user_password, 10);
-  formData.user_password = hash;
-  console.log(formData.user_password);
+  formData.user_password = bcrypt.hashSync(formData.user_password, 10);
   connection.query("INSERT INTO users SET ?", formData, err => {
     if (err) {
       res
