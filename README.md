@@ -8,6 +8,15 @@ Alexandre, Benjamin, Alexis et Eugène, third year students at Neoma Business Sc
 
 ---
 
+## REQUIREMENTS
+
+In order to use this app, you need the following :
+- node : v8.10.0
+- nodejs : v8.10.0
+- npm : v3.5.2
+
+---
+
 ## SETUP
 
 - First of all, clone the repository from github :
@@ -33,6 +42,22 @@ DEV_PASSWORD=ton_mdp_mysql
 
 ```
 npm run migrate up
+```
+
+---
+
+## HOW TO START
+
+- In _supero-back_ folder, start your server with Node with the following line of command :
+
+```
+node index.js
+```
+
+- In _supero-front_ folder, start React with npm :
+
+```
+npm start
 ```
 
 ---
