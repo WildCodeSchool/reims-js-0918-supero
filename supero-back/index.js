@@ -367,6 +367,34 @@ app.put(
   }
 );
 
+// USER -- AJOUT AVATAR
+app.put("/users/:id", upload.single("image"), (req, res) => {
+  const formData = req.body;
+  const idUser = req.params.id;
+  console.log(req.file);
+  fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
+    err
+  ) {
+    if (err) {
+      res.send("problème durant le déplacement");
+    } else {
+      res.send("Fichier uploadé avec succès");
+    }
+  });
+  connection.query(
+    "UPDATE user SET ? WHERE id = ?",
+    [formData, idUser],
+    err => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Erreur lors de la modification d'un utilisateur");
+      } else {
+        res.sendStatus(200);
+      }
+    }
+  );
+});
+
 // USERS -- TERMINE
 
 app.listen(port, err => {
