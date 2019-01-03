@@ -67,9 +67,9 @@ class ActivitiesList extends Component {
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
-        <div style={{ paddingTop: "80px", paddingBottom: "10px" }}>
+        <div style={{ paddingBottom: "10px" }}>
           <Header activitiesView={true} title="Flux" />
-          <div style={{ position: "relative", marginTop: "5px" }}>
+          <div style={{ position: "relative" }}>
             <Input
               style={{ width: "90%", margin: "0 auto" }}
               className="Form-Input"
