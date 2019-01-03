@@ -66,7 +66,9 @@ class Header extends React.Component {
               />
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="#">Mon Compte</NavLink>
+                  <Link to="Avatar">
+                    <NavLink href="#">Mon Compte</NavLink>
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Confidentialité</NavLink>
