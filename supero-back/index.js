@@ -5,7 +5,7 @@ const passport = require("passport");
 require("./passport-strategy");
 const auth = require("./auth");
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 const port = 3001;
 
 const app = express();
@@ -305,6 +305,9 @@ app.get(
 
 app.post("/users", (req, res) => {
   const formData = req.body;
+  let hash = bcrypt.hashSync(formData.user_password, 10);
+  formData.user_password = hash;
+  console.log(formData.user_password);
   connection.query("INSERT INTO users SET ?", formData, err => {
     if (err) {
       res
