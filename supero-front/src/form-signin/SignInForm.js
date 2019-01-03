@@ -3,8 +3,9 @@ import { Field, reduxForm } from "redux-form";
 import "./SignInForm.css";
 import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { toastr } from "react-redux-toastr";
 
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
@@ -24,8 +25,13 @@ const SignInForm = props => {
       <Form
         onSubmit={handleSubmit(values =>
           axios.post("http://localhost:3001/auth/login", values).then(res => {
-            localStorage.setItem("superoUser", res.data.token);
-            history.push("/ActivitiesList");
+            if (res.data.toastType !== "error") {
+              localStorage.setItem("superoUser", res.data.token);
+              toastr.success("Succès", res.data.message);
+              history.push("/ActivitiesList");
+            } else {
+              toastr.error("Erreur", res.data.message);
+            }
           })
         )}
         className="SignIn-container"
@@ -33,14 +39,12 @@ const SignInForm = props => {
         <Row className="d-flex justify-content-center">
           <Col xs="6">
             <div className="logo mb-5">
-              <Link to="ActivitiesList">
-                <img
-                  style={{ width: "100%" }}
-                  src={process.env.PUBLIC_URL + "/images/logo.png"}
-                  alt="sport"
-                  align="bottom"
-                />
-              </Link>
+              <img
+                style={{ width: "100%" }}
+                src={process.env.PUBLIC_URL + "/images/logo.png"}
+                alt="sport"
+                align="bottom"
+              />
             </div>
           </Col>
           <Col xs="10">

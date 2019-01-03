@@ -17,13 +17,13 @@ class AddressInput extends Component {
 
   handleInput = event => {
     const request = event.target.value;
+    this.setState({ addressQuery: request });
     provider
       .search({ query: request !== "" ? request + ", France" : request })
       .then(results => {
         this.setState({
           result: results.slice(0, 5),
-          resultOpen: true,
-          addressQuery: request
+          resultOpen: true
         });
       });
   };

@@ -9,6 +9,7 @@ import UserRegistration from "./form-registration/UserRegistration";
 import SignInForm from "./form-signin/SignInForm";
 import UserProfileContainer from "./containers/UserProfileContainer";
 import ActivitiesOnMapContainer from "./containers/ActivitiesOnMapContainer";
+import ReduxToastr from "react-redux-toastr";
 
 class App extends Component {
   render() {
@@ -36,6 +37,16 @@ class App extends Component {
             component={UserProfileContainer}
           />
         </Switch>
+        <ReduxToastr
+          timeOut={3000}
+          newestOnTop={false}
+          preventDuplicates
+          position="bottom-center"
+          transitionIn="bounceIn"
+          transitionOut="bounceOut"
+          progressBar
+          closeOnToastrClick
+        />
       </div>
     );
   }

@@ -17,6 +17,8 @@ import { SELECT_ADDRESS } from "./actions/actionTypes";
 import selectAddressReducer from "./reducers/selectAddressReducer";
 import activityReducer from "./reducers/activityReducer";
 import viewUserProfileReducer from "./reducers/viewUserProfileReducer";
+import { reducer as toastrReducer } from "react-redux-toastr";
+import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -28,6 +30,7 @@ const rootReducer = history =>
     activities: activitiesReducer,
     activityDetail: activityReducer,
     userProfile: viewUserProfileReducer,
+    toastr: toastrReducer,
     form: formReducer.plugin({
       addactivity: (state, action) => {
         switch (action.type) {
