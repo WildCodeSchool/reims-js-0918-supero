@@ -33,7 +33,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className={this.props.activitiesView && "addHeightOnHeader"}>
         {this.state.collapsed ? (
           <Navbar
             color="faded"
