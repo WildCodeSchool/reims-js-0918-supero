@@ -5,8 +5,6 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const bcrypt = require("bcrypt");
-// let isSame = bcrypt.compareSync('somePassword', hash)
-// `SELECT * FROM users WHERE user_email = '${email}' AND user_password='${password}'`,
 
 passport.use(
   new LocalStrategy(
