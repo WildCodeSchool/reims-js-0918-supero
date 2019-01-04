@@ -29,7 +29,7 @@ class ActivitiesList extends Component {
   getAllActivities = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities`, {
+      .get(`http://localhost:3001/activities?page=${this.props.activePage}`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -64,6 +64,11 @@ class ActivitiesList extends Component {
     );
   };
 
+  async changePage(page) {
+    await this.props.changeActivePage(page);
+    this.getAllActivities();
+  }
+
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
@@ -92,6 +97,7 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
+            <Button onClick={() => this.changePage(2)}>2</Button>
             {this.props.activities.map((activity, index) => (
               <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
                 <Activity key={index} {...activity} />
