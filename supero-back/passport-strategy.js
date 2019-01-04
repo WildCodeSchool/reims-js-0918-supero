@@ -4,6 +4,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+const bcrypt = require("bcrypt");
 
 passport.use(
   new LocalStrategy(
@@ -13,9 +14,17 @@ passport.use(
     },
     function(email, password, cb) {
       connection.query(
-        `SELECT * FROM users WHERE user_email = '${email}' AND user_password='${password}'`,
+        `SELECT * FROM users WHERE user_email = '${email}'`,
         (err, result) => {
-          if (err || result.length === 0) {
+          if (err) {
+            return cb(null, false, {
+              message: "Une erreur est survenue...",
+              error: err
+            });
+          } else if (
+            result.length === 0 ||
+            !bcrypt.compareSync(password, result[0].user_password)
+          ) {
             return cb(null, false, {
               message: "E-mail ou mot de passe incorrects."
             });
@@ -23,7 +32,7 @@ passport.use(
             return cb(
               null,
               { id: result[0].user_id, email: result[0].user_email },
-              { message: "Logged In Successfully" }
+              { message: "Connection réussie !" }
             );
           }
         }
