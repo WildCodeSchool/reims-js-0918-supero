@@ -86,11 +86,12 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      const offset = req.query.page * 1;
       connection.query(
         `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC`,
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC LIMIT ${offset},1`,
         (err, result) => {
           if (err) {
             console.log(err);
