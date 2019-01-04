@@ -5,7 +5,8 @@ import {
   FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
-  VIEW_USER_PROFILE
+  VIEW_USER_PROFILE,
+  CHANGE_ACTIVE_PAGE
 } from "./actionTypes";
 
 export const selectAddressAction = address => ({
@@ -38,4 +39,9 @@ export const fetchUserProfileAction = () => ({
 export const viewUserProfileAction = userProfile => ({
   type: VIEW_USER_PROFILE,
   userProfile
+});
+
+export const changeActivePageAction = page => ({
+  type: CHANGE_ACTIVE_PAGE,
+  page
 });
