@@ -97,6 +97,7 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
+            <Button onClick={() => this.changePage(1)}>1</Button>
             <Button onClick={() => this.changePage(2)}>2</Button>
             {this.props.activities.map((activity, index) => (
               <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
