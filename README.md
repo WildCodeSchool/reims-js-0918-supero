@@ -11,9 +11,8 @@ Alexandre, Benjamin, Alexis et Eugène, third year students at Neoma Business Sc
 ## REQUIREMENTS
 
 In order to use this app, you need the following :
-- node : v8.10.0
 - nodejs : v8.10.0
-- npm : v3.5.2
+- npm : v6.5.0
 
 ---
 
