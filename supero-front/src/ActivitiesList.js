@@ -50,7 +50,7 @@ class ActivitiesList extends Component {
         }
       })
       .then(res => {
-        this.props.activitiesReceived(res.data);
+        this.props.activitiesReceived(res.data.activities);
       });
   };
 
@@ -97,13 +97,13 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
-            <Button onClick={() => this.changePage(1)}>1</Button>
             <Button onClick={() => this.changePage(2)}>2</Button>
-            {this.props.activities.map((activity, index) => (
-              <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
-                <Activity key={index} {...activity} />
-              </Link>
-            ))}
+            {this.props.activities.activities &&
+              this.props.activities.activities.map((activity, index) => (
+                <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
+                  <Activity key={index} {...activity} />
+                </Link>
+              ))}
             <Link to="AddActivity">
               <Button className="addActivityButton">+</Button>
             </Link>
@@ -123,7 +123,7 @@ class ActivitiesList extends Component {
   }
 }
 ActivitiesList.propTypes = {
-  activities: PropTypes.array.isRequired
+  activities: PropTypes.object.isRequired
 };
 
 export default ActivitiesList;

@@ -18,9 +18,10 @@ export const fetchActivitiesAction = () => ({
   type: FETCH_ACTIVITIES
 });
 
-export const activitiesReceivedAction = activities => ({
+export const activitiesReceivedAction = result => ({
   type: ACTIVITIES_RECEIVED,
-  activities
+  activities: result.activities,
+  activitiesTotal: result.activitiesTotal
 });
 
 export const fetchActivityDetailAction = () => ({

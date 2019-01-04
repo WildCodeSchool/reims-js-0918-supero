@@ -89,16 +89,27 @@ app
       const limit = 5;
       const offset = (req.query.page - 1) * limit;
       connection.query(
-        `SELECT ${columnsRequiredForActivities}
-      FROM activities AS a 
-      JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC LIMIT ${limit} OFFSET ${offset}`,
+        `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
         (err, result) => {
           if (err) {
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activitiesTotal = result[0].activitiesTotal;
+            connection.query(
+              `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC LIMIT ${limit} OFFSET ${offset}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  res.status(200).json({ activities: result, activitiesTotal });
+                }
+              }
+            );
           }
         }
       );
