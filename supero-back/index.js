@@ -10,6 +10,22 @@ const port = 3001;
 
 const app = express();
 const connection = require("./conf");
+
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({
+  dest: "tmp/",
+  // fileFilter: function(req, file, cb) {
+  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
+  //     return cb(null, false);
+  //   } else {
+  //     cb(null, true);
+  //   }
+  // },
+  limits: {
+    fileSize: 3 * 1024 * 1024
+  }
+});
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(
@@ -351,7 +367,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE user SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE id = ?",
       [formData, idUser],
       err => {
         if (err) {
@@ -368,31 +384,32 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.put("/users/:id", upload.single("image"), (req, res) => {
-  const formData = req.body;
+app.post("/avatar/:id", upload.single("monfichier"), function(req, res, next) {
   const idUser = req.params.id;
-  console.log(req.file);
+  const fileName = req.file.originalname;
+  console.log(req.file.originalname);
   fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
     err
   ) {
     if (err) {
       res.send("problème durant le déplacement");
     } else {
-      res.send("Fichier uploadé avec succès");
+      connection.query(
+        `UPDATE users SET user_photo = ? WHERE user_id = ?`,
+        [fileName, idUser],
+        err => {
+          if (err) {
+            console.log(err);
+            res
+              .status(500)
+              .send("Erreur lors de la modification d'un utilisateur");
+          } else {
+            res.sendStatus(200);
+          }
+        }
+      );
     }
   });
-  connection.query(
-    "UPDATE user SET ? WHERE id = ?",
-    [formData, idUser],
-    err => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Erreur lors de la modification d'un utilisateur");
-      } else {
-        res.sendStatus(200);
-      }
-    }
-  );
 });
 
 // USERS -- TERMINE
