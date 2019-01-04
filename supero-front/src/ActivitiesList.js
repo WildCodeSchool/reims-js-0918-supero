@@ -9,6 +9,7 @@ import Header from "./Header";
 import { Input } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Pagination from "react-js-pagination";
 
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,6 +21,8 @@ class ActivitiesList extends Component {
     this.state = {
       activitiesQuery: ""
     };
+
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
@@ -97,7 +100,6 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
-            <Button onClick={() => this.changePage(2)}>2</Button>
             {this.props.activities.activities &&
               this.props.activities.activities.map((activity, index) => (
                 <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
@@ -112,6 +114,14 @@ class ActivitiesList extends Component {
                 <FontAwesomeIcon className="" icon="map-marked-alt" />
               </Button>
             </Link>
+            <Pagination
+              hideDisabled
+              activePage={this.state.activePage}
+              itemsCountPerPage={5}
+              totalItemsCount={this.props.activities.activitiesTotal}
+              pageRangeDisplayed={5}
+              onChange={this.changePage}
+            />
           </Fragment>
         ) : (
           <Fragment>
