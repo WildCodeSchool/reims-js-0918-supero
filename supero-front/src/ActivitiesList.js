@@ -116,7 +116,7 @@ class ActivitiesList extends Component {
             </Link>
             <Pagination
               hideDisabled
-              activePage={this.state.activePage}
+              activePage={this.props.activePage}
               itemsCountPerPage={5}
               totalItemsCount={this.props.activities.activitiesTotal}
               pageRangeDisplayed={5}
