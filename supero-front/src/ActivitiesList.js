@@ -53,7 +53,7 @@ class ActivitiesList extends Component {
         }
       })
       .then(res => {
-        this.props.activitiesReceived(res.data.activities);
+        this.props.activitiesReceived(res.data);
       });
   };
 
