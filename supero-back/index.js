@@ -300,11 +300,14 @@ app
     }
   )
   .post(
-    "/subscribe",
+    "/subscribe/:activity_id",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      req.body = Object.assign({ user_id: req.user.id }, req.body);
-      const formData = req.body;
+      const activityId = req.params.activity_id;
+      const formData = Object.assign({
+        user_id: req.user.id,
+        activity_id: activityId
+      });
 
       connection.query("INSERT INTO events SET ?", formData, (err, results) => {
         if (err) {
