@@ -405,7 +405,7 @@ app.get(
   }
 );
 
-//USERS -- afficher les activités d'un utilisateur
+//USERS -- Récupérer les activités de l'utilisateur connecté
 app.get(
   "/userActivities",
   passport.authenticate("jwt", { session: false }),
