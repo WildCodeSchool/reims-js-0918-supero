@@ -177,7 +177,24 @@ app
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activityDetail = result[0];
+            console.log(activityDetail);
+            connection.query(
+              `SELECT COUNT(id) AS nb_participants
+            FROM user_has_activities WHERE activity_id = ${activityId}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  result = Object.assign(
+                    { nb_participants: result[0].nb_participants },
+                    activityDetail
+                  );
+                  res.status(200).json([{ ...result }]);
+                }
+              }
+            );
           }
         }
       );

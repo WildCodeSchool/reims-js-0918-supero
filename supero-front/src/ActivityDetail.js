@@ -49,6 +49,10 @@ class ActivityDetail extends React.Component {
   }
 
   componentDidMount() {
+    this.getActivityDetail();
+  }
+
+  getActivityDetail() {
     const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
     this.props.fetchActivity();
@@ -77,7 +81,8 @@ class ActivityDetail extends React.Component {
           toastr.error("Erreur", res.data.message);
         }
       })
-      .then(this.getUserActivities());
+      .then(this.getUserActivities())
+      .then(this.getActivityDetail());
   }
 
   unsubscribeToActivity() {
@@ -96,7 +101,8 @@ class ActivityDetail extends React.Component {
           toastr.error("Erreur", res.data.message);
         }
       })
-      .then(this.getUserActivities());
+      .then(this.getUserActivities())
+      .then(this.getActivityDetail());
   }
 
   getUserActivities = () => {
@@ -229,7 +235,8 @@ class ActivityDetail extends React.Component {
           {this.props.activityDetail.activity_description}
         </div>
         <span className="nb_participants">
-          1/{this.props.activityDetail.activity_max_participants} participants
+          {this.props.activityDetail.nb_participants}/
+          {this.props.activityDetail.activity_max_participants} participants
         </span>
         {this.props.userActivities.filter(
           activity =>
