@@ -32,12 +32,17 @@ class ActivitiesList extends Component {
   getAllActivities = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities?page=${this.props.activePage}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `http://localhost:3001/activities?page=${this.props.activePage}&order=${
+          this.props.order
+        }`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.props.activitiesReceived(res.data);
       });

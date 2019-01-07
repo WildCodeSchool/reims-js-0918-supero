@@ -5,7 +5,8 @@ import {
   FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
-  VIEW_USER_PROFILE
+  VIEW_USER_PROFILE,
+  CHANGE_ACTIVITIES_ORDER
 } from "./actionTypes";
 
 import {
@@ -15,7 +16,8 @@ import {
   fetchActivityDetailAction,
   activityDetailReceivedAction,
   fetchUserProfileAction,
-  viewUserProfileAction
+  viewUserProfileAction,
+  changeActivitiesOrderAction
 } from "./actions";
 
 describe("selectAdressAction", () => {
@@ -157,5 +159,14 @@ describe("viewUserProfileAction", () => {
       userProfile
     };
     expect(viewUserProfileAction(userProfile)).toEqual(expected);
+  });
+});
+
+describe("changeActivitiesOrderAction", () => {
+  it("should return a CHANGE_ACTIVITIES_ORDER action", () => {
+    const expected = {
+      type: CHANGE_ACTIVITIES_ORDER
+    };
+    expect(changeActivitiesOrderAction()).toEqual(expected);
   });
 });

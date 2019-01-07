@@ -88,6 +88,7 @@ app
     (req, res) => {
       const limit = 5;
       const offset = (req.query.page - 1) * limit;
+      const order = req.query.order;
       connection.query(
         `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
         (err, result) => {
@@ -100,7 +101,7 @@ app
               `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC LIMIT ${limit} OFFSET ${offset}`,
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY ${order} DESC LIMIT ${limit} OFFSET ${offset}`,
               (err, result) => {
                 if (err) {
                   console.log(err);
