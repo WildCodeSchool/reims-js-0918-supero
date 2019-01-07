@@ -9,6 +9,7 @@ import Header from "./Header";
 import { Input } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Pagination from "react-js-pagination";
 
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,6 +21,8 @@ class ActivitiesList extends Component {
     this.state = {
       activitiesQuery: ""
     };
+
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +32,7 @@ class ActivitiesList extends Component {
   getAllActivities = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities`, {
+      .get(`http://localhost:3001/activities?page=${this.props.activePage}`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -64,12 +67,17 @@ class ActivitiesList extends Component {
     );
   };
 
+  async changePage(page) {
+    await this.props.changeActivePage(page);
+    this.getAllActivities();
+  }
+
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
-        <div style={{ paddingTop: "80px", paddingBottom: "10px" }}>
+        <div style={{ paddingBottom: "10px" }}>
           <Header activitiesView={true} title="Flux" />
-          <div style={{ position: "relative", marginTop: "5px" }}>
+          <div style={{ position: "relative" }}>
             <Input
               style={{ width: "90%", margin: "0 auto" }}
               className="Form-Input"
@@ -92,11 +100,12 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
-            {this.props.activities.map((activity, index) => (
-              <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
-                <Activity key={index} {...activity} />
-              </Link>
-            ))}
+            {this.props.activities.activities &&
+              this.props.activities.activities.map((activity, index) => (
+                <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
+                  <Activity key={index} {...activity} />
+                </Link>
+              ))}
             <Link to="AddActivity">
               <Button className="addActivityButton">+</Button>
             </Link>
@@ -105,6 +114,14 @@ class ActivitiesList extends Component {
                 <FontAwesomeIcon className="" icon="map-marked-alt" />
               </Button>
             </Link>
+            <Pagination
+              hideDisabled
+              activePage={this.props.activePage}
+              itemsCountPerPage={5}
+              totalItemsCount={this.props.activities.activitiesTotal}
+              pageRangeDisplayed={5}
+              onChange={this.changePage}
+            />
           </Fragment>
         ) : (
           <Fragment>
@@ -116,7 +133,7 @@ class ActivitiesList extends Component {
   }
 }
 ActivitiesList.propTypes = {
-  activities: PropTypes.array.isRequired
+  activities: PropTypes.object.isRequired
 };
 
 export default ActivitiesList;
