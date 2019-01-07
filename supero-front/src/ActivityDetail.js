@@ -11,6 +11,7 @@ import { DateTime } from "luxon";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import { toastr } from "react-redux-toastr";
 
 import {
   faBolt,
@@ -58,6 +59,25 @@ class ActivityDetail extends React.Component {
         }
       })
       .then(res => this.props.activityDetailReceived(res.data[0]));
+  }
+
+  subscribeToActivity() {
+    const token = localStorage.getItem("superoUser");
+    const activity_id = { activity_id: this.props.match.params.id };
+    axios
+      .post(`http://localhost:3001/subscribe/`, activity_id, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
+      .then(res => {
+        if (res.data.toastType !== "error") {
+          localStorage.setItem("superoUser", res.data.token);
+          toastr.success("Succès", res.data.message);
+        } else {
+          toastr.error("Erreur", res.data.message);
+        }
+      });
   }
 
   render() {
@@ -179,10 +199,14 @@ class ActivityDetail extends React.Component {
         <span className="nb_participants">
           1/{this.props.activityDetail.activity_max_participants} participants
         </span>
-        <button className="activity_participation_button">Participer</button>
+        <button
+          onClick={() => this.subscribeToActivity()}
+          className="activity_participation_button"
+        >
+          Participer
+        </button>
         <Map
           style={{ height: "250px", marginTop: "15px" }}
-          // center={latlngValue.latlng}
           center={{
             lat: this.props.activityDetail.activity_latitude,
             lng: this.props.activityDetail.activity_longitude
