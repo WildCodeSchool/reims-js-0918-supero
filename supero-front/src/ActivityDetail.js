@@ -72,7 +72,6 @@ class ActivityDetail extends React.Component {
       })
       .then(res => {
         if (res.data.toastType !== "error") {
-          localStorage.setItem("superoUser", res.data.token);
           toastr.success("Succès", res.data.message);
         } else {
           toastr.error("Erreur", res.data.message);

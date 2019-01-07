@@ -300,7 +300,7 @@ app
     }
   )
   .post(
-    "/subscribe/",
+    "/subscribe",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       req.body = Object.assign(
@@ -310,7 +310,6 @@ app
         req.body
       );
       const formData = req.body;
-
       connection.query("INSERT INTO events SET ?", formData, (err, results) => {
         if (err) {
           console.log(err);
