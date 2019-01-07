@@ -299,6 +299,23 @@ app
       );
     }
   )
+  .post(
+    "/subscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      req.body = Object.assign({ user_id: req.user.id }, req.body);
+      const formData = req.body;
+
+      connection.query("INSERT INTO events SET ?", formData, (err, results) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ message: "Erreur lors de l'inscription" });
+        } else {
+          res.status(200).json({ message: "Vous êtes bien inscrit" });
+        }
+      });
+    }
+  )
   .put(
     "/activities/:activity_id",
     passport.authenticate("jwt", { session: false }),
