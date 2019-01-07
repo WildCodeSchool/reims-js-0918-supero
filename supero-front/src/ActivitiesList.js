@@ -77,6 +77,11 @@ class ActivitiesList extends Component {
     this.getAllActivities();
   }
 
+  async changeOrder(order) {
+    await this.props.changeActivitiesOrder(order);
+    this.getAllActivities();
+  }
+
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
@@ -105,6 +110,31 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_creation_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_creation_time")}
+              >
+                Nouveautés
+              </Button>
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_start_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_start_time")}
+              >
+                Prochainement
+              </Button>
+            </div>
             {this.props.activities.activities &&
               this.props.activities.activities.map((activity, index) => (
                 <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
