@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   activitiesReceived: activities =>
     dispatch(activitiesReceivedAction(activities)),
   fetchActivities: () => dispatch(fetchActivitiesAction()),
-  connectedUser: connectedUser =>
+  getConnectedUser: connectedUser =>
     dispatch(connectedUserReceivedAction(connectedUser))
 });
 
