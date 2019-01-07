@@ -343,6 +343,28 @@ app.get(
   }
 );
 
+// USERS -- afficher l'utilisateur connecté
+
+app.get(
+  "/connecteduser",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const idUser = req.user.id;
+    connection.query(
+      `SELECT * FROM users WHERE user_id = ${idUser}`,
+      [idUser],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
+  }
+);
+
 // USERS -- modifier le profil d'un utilisateur
 
 app.put(
