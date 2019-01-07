@@ -5,7 +5,7 @@ import {
   FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
-  FETCH_CONNECTED_USER,
+  CONNECTED_USER_RECEIVED,
   VIEW_USER_PROFILE
 } from "./actionTypes";
 
@@ -16,7 +16,7 @@ import {
   fetchActivityDetailAction,
   activityDetailReceivedAction,
   fetchUserProfileAction,
-  fetchConnectedUserAction,
+  connectedUserReceivedAction,
   viewUserProfileAction
 } from "./actions";
 
@@ -138,15 +138,6 @@ describe("fetchUserProfileAction", () => {
   });
 });
 
-describe("fetchConnectedUserAction", () => {
-  it("should return a FETCH_CONNECTED_USER action", () => {
-    const expected = {
-      type: FETCH_CONNECTED_USER
-    };
-    expect(fetchConnectedUserAction()).toEqual(expected);
-  });
-});
-
 describe("viewUserProfileAction", () => {
   it("should return VIEW_USER_PROFILE action type and an object", () => {
     const userProfile = {
@@ -168,5 +159,16 @@ describe("viewUserProfileAction", () => {
       userProfile
     };
     expect(viewUserProfileAction(userProfile)).toEqual(expected);
+  });
+});
+
+describe("connectedUserReceivedAction", () => {
+  it("should return a CONNECTED_USER_RECEIVED action", () => {
+    const connectedUser = { id: 1, nom: "test" };
+    const expected = {
+      type: CONNECTED_USER_RECEIVED,
+      connectedUser
+    };
+    expect(connectedUserReceivedAction(connectedUser)).toEqual(expected);
   });
 });

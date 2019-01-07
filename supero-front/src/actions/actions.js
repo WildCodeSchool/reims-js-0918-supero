@@ -5,8 +5,8 @@ import {
   FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
-  FETCH_CONNECTED_USER,
-  VIEW_USER_PROFILE
+  VIEW_USER_PROFILE,
+  CONNECTED_USER_RECEIVED
 } from "./actionTypes";
 
 export const selectAddressAction = address => ({
@@ -36,11 +36,12 @@ export const fetchUserProfileAction = () => ({
   type: FETCH_USER_PROFILE
 });
 
-export const fetchConnectedUserAction = () => ({
-  type: FETCH_CONNECTED_USER
-});
-
 export const viewUserProfileAction = userProfile => ({
   type: VIEW_USER_PROFILE,
   userProfile
+});
+
+export const connectedUserReceivedAction = connectedUser => ({
+  type: CONNECTED_USER_RECEIVED,
+  connectedUser
 });
