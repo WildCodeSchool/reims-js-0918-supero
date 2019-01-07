@@ -76,8 +76,22 @@ class ActivityDetail extends React.Component {
         } else {
           toastr.error("Erreur", res.data.message);
         }
-      });
+      })
+      .then(this.getUserActivities());
   }
+
+  getUserActivities = () => {
+    axios
+      .get(`http://localhost:3001/userActivities`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getUserActivities(res.data);
+      });
+  };
 
   render() {
     return !this.props.activityDetail.sport_name ? (
@@ -198,12 +212,29 @@ class ActivityDetail extends React.Component {
         <span className="nb_participants">
           1/{this.props.activityDetail.activity_max_participants} participants
         </span>
-        <button
-          onClick={() => this.subscribeToActivity()}
-          className="activity_participation_button"
-        >
-          Participer
-        </button>
+        {this.props.userActivities.filter(
+          activity =>
+            activity.activity_id === this.props.activityDetail.activity_id
+        ).length > 0 ? (
+          <button
+            style={{
+              color: "#e57419",
+              backgroundColor: "#fff"
+            }}
+            onClick={() => this.subscribeToActivity()}
+            className="activity_participation_button"
+          >
+            Se désinscrire
+          </button>
+        ) : (
+          <button
+            onClick={() => this.subscribeToActivity()}
+            className="activity_participation_button"
+          >
+            Participer
+          </button>
+        )}
+
         <Map
           style={{ height: "250px", marginTop: "15px" }}
           center={{
