@@ -5,6 +5,7 @@ import {
   FETCH_ACTIVITY_DETAIL,
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
+  FETCH_CONNECTED_USER,
   VIEW_USER_PROFILE
 } from "./actionTypes";
 
@@ -33,6 +34,10 @@ export const activityDetailReceivedAction = activityDetail => ({
 
 export const fetchUserProfileAction = () => ({
   type: FETCH_USER_PROFILE
+});
+
+export const fetchConnectedUserAction = () => ({
+  type: FETCH_CONNECTED_USER
 });
 
 export const viewUserProfileAction = userProfile => ({
