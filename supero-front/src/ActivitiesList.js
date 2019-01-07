@@ -32,12 +32,17 @@ class ActivitiesList extends Component {
   getAllActivities = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities?page=${this.props.activePage}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `http://localhost:3001/activities?page=${this.props.activePage}&order=${
+          this.props.order
+        }`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.props.activitiesReceived(res.data);
       });
@@ -46,12 +51,15 @@ class ActivitiesList extends Component {
   searchActivities = request => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/search/${request}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `http://localhost:3001/search/${request}?order=${this.props.order}`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.props.activitiesReceived(res.data);
       });
@@ -70,6 +78,13 @@ class ActivitiesList extends Component {
   async changePage(page) {
     await this.props.changeActivePage(page);
     this.getAllActivities();
+  }
+
+  async changeOrder(order) {
+    await this.props.changeActivitiesOrder(order);
+    this.state.activitiesQuery.length > 0
+      ? this.searchActivities(this.state.activitiesQuery)
+      : this.getAllActivities();
   }
 
   render() {
@@ -100,6 +115,31 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_creation_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_creation_time")}
+              >
+                Nouveautés
+              </Button>
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_start_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_start_time")}
+              >
+                Prochainement
+              </Button>
+            </div>
             {this.props.activities.activities &&
               this.props.activities.activities.map((activity, index) => (
                 <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>

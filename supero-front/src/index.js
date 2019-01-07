@@ -20,6 +20,7 @@ import viewUserProfileReducer from "./reducers/viewUserProfileReducer";
 import { reducer as toastrReducer } from "react-redux-toastr";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import changePageReducer from "./reducers/changePageReducer";
+import changeActivitiesOrderReducer from "./reducers/changeActivitiesOrderReducer";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -27,6 +28,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = history =>
   combineReducers({
     activePage: changePageReducer,
+    order: changeActivitiesOrderReducer,
     selectAddress: selectAddressReducer,
     loading: loadingReducer,
     activities: activitiesReducer,
