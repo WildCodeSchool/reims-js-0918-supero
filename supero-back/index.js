@@ -10,6 +10,22 @@ const port = 3001;
 
 const app = express();
 const connection = require("./conf");
+
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({
+  dest: "tmp/",
+  // fileFilter: function(req, file, cb) {
+  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
+  //     return cb(null, false);
+  //   } else {
+  //     cb(null, true);
+  //   }
+  // },
+  limits: {
+    fileSize: 3 * 1024 * 1024
+  }
+});
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(
@@ -86,17 +102,32 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      const limit = 5;
+      const offset = (req.query.page - 1) * limit;
+      const order = req.query.order;
+      const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       connection.query(
-        `SELECT ${columnsRequiredForActivities}
-      FROM activities AS a 
-      JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC`,
+        `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
         (err, result) => {
           if (err) {
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activitiesTotal = result[0].activitiesTotal;
+            connection.query(
+              `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  res.status(200).json({ activities: result, activitiesTotal });
+                }
+              }
+            );
           }
         }
       );
@@ -108,17 +139,22 @@ app
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const request = req.params.request;
+      const order = req.query.order;
+      const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       connection.query(
-        `SELECT ${columnsRequiredForActivities}
+        `SELECT ${columnsRequiredForActivities}, COUNT(activity_id) AS activitiesTotal
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_title LIKE "%${request}%" OR sport_name LIKE "%${request}%" OR activity_city LIKE "%${request}%" ORDER BY activity_creation_time DESC`,
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_title LIKE "%${request}%" OR sport_name LIKE "%${request}%" OR activity_city LIKE "%${request}%" GROUP BY activity_id ORDER BY ${order} ${ascDesc}`,
         (err, result) => {
           if (err) {
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            res.status(200).json({
+              activities: result,
+              activitiesTotal: result.activitiesTotal
+            });
           }
         }
       );
@@ -343,6 +379,28 @@ app.get(
   }
 );
 
+// USERS -- afficher l'utilisateur connecté
+
+app.get(
+  "/connecteduser",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const idUser = req.user.id;
+    connection.query(
+      `SELECT * FROM users WHERE user_id = ${idUser}`,
+      [idUser],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
+  }
+);
+
 // USERS -- modifier le profil d'un utilisateur
 
 app.put(
@@ -352,7 +410,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE user SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE id = ?",
       [formData, idUser],
       err => {
         if (err) {
@@ -367,6 +425,35 @@ app.put(
     );
   }
 );
+
+// USER -- AJOUT AVATAR
+app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
+  const emailUser = req.params.email;
+  const fileName = req.file.originalname;
+  console.log(req.file.originalname);
+  fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
+    err
+  ) {
+    if (err) {
+      res.send("problème durant le déplacement");
+    } else {
+      connection.query(
+        `UPDATE users SET user_photo = ? WHERE user_email = ?`,
+        [fileName, emailUser],
+        err => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ toastType: "error" });
+          } else {
+            res
+              .status(200)
+              .json({ toastType: "success", message: "Avatar modifié" });
+          }
+        }
+      );
+    }
+  });
+});
 
 // USERS -- TERMINE
 

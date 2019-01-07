@@ -10,6 +10,7 @@ import SignInForm from "./form-signin/SignInForm";
 import UserProfileContainer from "./containers/UserProfileContainer";
 import ActivitiesOnMapContainer from "./containers/ActivitiesOnMapContainer";
 import ReduxToastr from "react-redux-toastr";
+import Avatar from "./Avatar";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             path="/ActivitiesOnMap"
             component={ActivitiesOnMapContainer}
           />
+          <Route exact path="/Avatar" component={Avatar} />
           <Route exact path="/AddActivity" component={AddActivityForm} />
           <Route
             exact

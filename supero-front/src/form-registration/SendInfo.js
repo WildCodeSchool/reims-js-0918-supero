@@ -1,6 +1,14 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Form, FormGroup, Input, Container, Row, Col } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
 import validate from "./validate";
 import renderField from "../renderField";
 
@@ -37,14 +45,6 @@ const SendInfo = props => {
                 <option value="3">Héros</option>
                 <option value="4">Demi-dieu</option>
               </Input>
-            </FormGroup>
-            <FormGroup>
-              <Field
-                name="picture"
-                type="text"
-                component={renderField}
-                label="Photo"
-              />
             </FormGroup>
             <div className="d-flex justify-content-between">
               <Button

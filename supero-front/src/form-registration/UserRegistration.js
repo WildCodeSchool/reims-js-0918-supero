@@ -35,7 +35,6 @@ class UserRegistration extends Component {
         user_lastname: values.lastName,
         user_gender: values.gender,
         user_birthdate: values.birthdate,
-        user_photo: values.picture,
         user_level: values.level,
         user_about: values.about
       })
@@ -44,7 +43,10 @@ class UserRegistration extends Component {
       .then(
         res => {
           toastr.success("Succès", res.message);
-          this.props.history.push("/SignInForm");
+          this.props.history.push({
+            pathname: "/avatar",
+            state: { email: values.email }
+          });
         },
 
         err => toastr.error("Erreur", err.message)

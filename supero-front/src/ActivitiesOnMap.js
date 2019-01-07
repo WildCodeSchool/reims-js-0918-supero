@@ -116,7 +116,7 @@ class ActivitiesOnMap extends Component {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
               <MarkerClusterGroup>
-                {this.props.activities.map((activity, index) => (
+                {this.props.activities.activities.map((activity, index) => (
                   <Marker
                     key={index}
                     position={[
