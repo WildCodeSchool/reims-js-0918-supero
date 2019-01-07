@@ -15,13 +15,12 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
   dest: "tmp/",
-  // fileFilter: function(req, file, cb) {
-  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
-  //     return cb(null, false);
-  //   } else {
-  //     cb(null, true);
-  //   }
-  // },
+  fileFilter: function(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error("Only image files are allowed!"));
+    }
+    cb(null, true);
+  },
   limits: {
     fileSize: 3 * 1024 * 1024
   }
