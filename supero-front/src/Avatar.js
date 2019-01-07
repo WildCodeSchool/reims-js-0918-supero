@@ -61,8 +61,11 @@ class Avatar extends Component {
             <Col xs="12" className="d-flex justify-content-center mb-2">
               {!this.state.enable ? (
                 <i
-                  style={{ fontSize: "150px", color: "white" }}
-                  class="fas fa-user"
+                  style={{
+                    fontSize: "150px",
+                    color: "rgba(255, 255, 255,0.5)"
+                  }}
+                  className="fas fa-user"
                 />
               ) : (
                 <img
@@ -71,6 +74,7 @@ class Avatar extends Component {
                     height: "150px",
                     borderRadius: "150px"
                   }}
+                  alt="profile"
                   src={this.preview}
                 />
               )}
