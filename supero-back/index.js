@@ -384,7 +384,7 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/avatar/:id", upload.single("monfichier"), function(req, res, next) {
+app.post("/avatar/:id", upload.single("avatar"), function(req, res, next) {
   const idUser = req.params.id;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
