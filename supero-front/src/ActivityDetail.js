@@ -80,19 +80,24 @@ class ActivityDetail extends React.Component {
       .then(this.getUserActivities());
   }
 
-  unsubscribeToActivity = () => {
+  unsubscribeToActivity() {
+    const token = localStorage.getItem("superoUser");
     const activity_id = { activity_id: this.props.match.params.id };
     axios
-      .get(`http://localhost:3001/unsubscribe`, activity_id, {
+      .post(`http://localhost:3001/unsubscribe/`, activity_id, {
         headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+          authorization: "Bearer " + token
         }
       })
       .then(res => {
-        this.props.getUserActivities(res.data);
-      });
-  };
+        if (res.data.toastType !== "error") {
+          toastr.success("Succès", res.data.message);
+        } else {
+          toastr.error("Erreur", res.data.message);
+        }
+      })
+      .then(this.getUserActivities());
+  }
 
   getUserActivities = () => {
     axios
@@ -235,7 +240,7 @@ class ActivityDetail extends React.Component {
               color: "#e57419",
               backgroundColor: "#fff"
             }}
-            onClick={() => this.subscribeToActivity()}
+            onClick={() => this.unsubscribeToActivity()}
             className="activity_participation_button"
           >
             Se désinscrire
