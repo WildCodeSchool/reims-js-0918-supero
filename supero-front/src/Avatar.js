@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios, { post } from "axios";
+import { toastr } from "react-redux-toastr";
 class Avatar extends Component {
   constructor(props) {
     super(props);
@@ -10,8 +11,13 @@ class Avatar extends Component {
   }
   onFormSubmit(e) {
     e.preventDefault(); // Stop form submit
-    this.fileUpload(this.file).then(response => {
-      console.log(response.data);
+    this.fileUpload(this.file).then(res => {
+      if (res.data.toastType !== "error") {
+        toastr.success("Succès", res.data.message);
+        this.props.history.push("/ActivitiesList");
+      } else {
+        toastr.error("Erreur", res.data.message);
+      }
     });
   }
   onChange(e) {

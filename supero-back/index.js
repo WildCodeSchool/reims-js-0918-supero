@@ -400,11 +400,11 @@ app.post("/avatar/:id", upload.single("avatar"), function(req, res, next) {
         err => {
           if (err) {
             console.log(err);
-            res
-              .status(500)
-              .send("Erreur lors de la modification d'un utilisateur");
+            res.status(500).json({ toastType: "error" });
           } else {
-            res.sendStatus(200);
+            res
+              .status(200)
+              .json({ toastType: "success", message: "Avatar modifié" });
           }
         }
       );
