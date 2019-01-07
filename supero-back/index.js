@@ -300,6 +300,7 @@ app
       );
     }
   )
+  // S'inscrire à une activité
   .post(
     "/subscribe",
     passport.authenticate("jwt", { session: false }),
@@ -320,6 +321,28 @@ app
             res.status(500).json({ message: "Erreur lors de l'inscription" });
           } else {
             res.status(200).json({ message: "Vous êtes bien inscrit" });
+          }
+        }
+      );
+    }
+  )
+  // Se désinscrire
+  .post(
+    "/unsubscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const user_id = req.user.id;
+      const activity_id = req.body.activity_id;
+      connection.query(
+        `DELETE FROM user_has_activities WHERE user_id = ${user_id} AND activity_id = ${activity_id}`,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res
+              .status(500)
+              .json({ message: "Erreur lors de la désinscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien désinscrit" });
           }
         }
       );

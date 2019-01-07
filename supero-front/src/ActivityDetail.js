@@ -80,6 +80,20 @@ class ActivityDetail extends React.Component {
       .then(this.getUserActivities());
   }
 
+  unsubscribeToActivity = () => {
+    const activity_id = { activity_id: this.props.match.params.id };
+    axios
+      .get(`http://localhost:3001/unsubscribe`, activity_id, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getUserActivities(res.data);
+      });
+  };
+
   getUserActivities = () => {
     axios
       .get(`http://localhost:3001/userActivities`, {
