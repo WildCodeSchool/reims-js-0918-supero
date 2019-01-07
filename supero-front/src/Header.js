@@ -62,10 +62,12 @@ class Header extends React.Component {
               <div className="menu-user-container">
                 <div className="avatar rounded-circle">
                   <img
-                    src={`http://localhost:3001/images/${this.props.connectedUser.user_photo}`}
+                    src={`http://localhost:3001/images/${
+                      this.props.connectedUser.user_photo
+                    }`}
                     alt="avatar"
                     align="bottom"
-                    style = {{height:"120px", width:"120px"}}
+                    style={{ height: "120px", width: "120px" }}
                   />
                 </div>
                 <p className="pseudo">{this.props.connectedUser.user_pseudo}</p>
@@ -77,9 +79,11 @@ class Header extends React.Component {
               />
               <Nav navbar>
                 <NavItem>
-                  <Link to="Avatar">
-                    <NavLink href="#">Mon Compte</NavLink>
-                  </Link>
+                  <NavLink
+                    href={`/UserProfile/${this.props.connectedUser.user_id}`}
+                  >
+                    Mon Compte
+                  </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Confidentialité</NavLink>
