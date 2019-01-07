@@ -59,7 +59,7 @@ class ActivitiesList extends Component {
         }
       })
       .then(res => {
-        this.props.connectedUser(res.data);
+        this.props.getConnectedUser(res.data);
       });
   };
 
@@ -106,7 +106,11 @@ class ActivitiesList extends Component {
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
-          <Header activitiesView={true} title="Flux" />
+          <Header
+            activitiesView={true}
+            connectedUser={this.props.connectedUser}
+            title="Flux"
+          />
           <div style={{ position: "relative" }}>
             <Input
               style={{ width: "90%", margin: "0 auto" }}

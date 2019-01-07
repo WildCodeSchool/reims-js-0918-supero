@@ -36,6 +36,7 @@ app.use(
 app.use(express.static("public"));
 app.use("/auth", auth);
 app.use(cors());
+app.use(express.static("public"));
 
 app.get(
   "/test",
