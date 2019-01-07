@@ -9,6 +9,7 @@ import Header from "./Header";
 import { Input } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Pagination from "react-js-pagination";
 
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,35 +21,60 @@ class ActivitiesList extends Component {
     this.state = {
       activitiesQuery: ""
     };
+
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
     this.getAllActivities();
+    this.getUserConnected();
   }
 
   getAllActivities = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities`, {
+      .get(
+        `http://localhost:3001/activities?page=${this.props.activePage}&order=${
+          this.props.order
+        }`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
+        }
+      )
+      .then(res => {
+        this.props.activitiesReceived(res.data);
+      });
+  };
+
+  getUserConnected = () => {
+    this.props.fetchActivities();
+    axios
+      .get(`http://localhost:3001/connecteduser`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
         }
       })
       .then(res => {
-        this.props.activitiesReceived(res.data);
+        this.props.getConnectedUser(res.data);
       });
   };
 
   searchActivities = request => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/search/${request}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `http://localhost:3001/search/${request}?order=${this.props.order}`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.props.activitiesReceived(res.data);
       });
@@ -64,11 +90,27 @@ class ActivitiesList extends Component {
     );
   };
 
+  async changePage(page) {
+    await this.props.changeActivePage(page);
+    this.getAllActivities();
+  }
+
+  async changeOrder(order) {
+    await this.props.changeActivitiesOrder(order);
+    this.state.activitiesQuery.length > 0
+      ? this.searchActivities(this.state.activitiesQuery)
+      : this.getAllActivities();
+  }
+
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
-          <Header activitiesView={true} title="Flux" />
+          <Header
+            activitiesView={true}
+            connectedUser={this.props.connectedUser}
+            title="Flux"
+          />
           <div style={{ position: "relative" }}>
             <Input
               style={{ width: "90%", margin: "0 auto" }}
@@ -92,11 +134,37 @@ class ActivitiesList extends Component {
         </div>
         {!this.props.loading ? (
           <Fragment>
-            {this.props.activities.map((activity, index) => (
-              <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
-                <Activity key={index} {...activity} />
-              </Link>
-            ))}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_creation_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_creation_time")}
+              >
+                Nouveautés
+              </Button>
+              <Button
+                className={
+                  "orderButton " +
+                  (this.props.order === "activity_start_time" && "active")
+                }
+                onClick={() => this.changeOrder("activity_start_time")}
+              >
+                Prochainement
+              </Button>
+            </div>
+            {this.props.activities.activities &&
+              this.props.activities.activities.map((activity, index) => (
+                <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
+                  <Activity key={index} {...activity} />
+                </Link>
+              ))}
             <Link to="AddActivity">
               <Button className="addActivityButton">+</Button>
             </Link>
@@ -105,6 +173,14 @@ class ActivitiesList extends Component {
                 <FontAwesomeIcon className="" icon="map-marked-alt" />
               </Button>
             </Link>
+            <Pagination
+              hideDisabled
+              activePage={this.props.activePage}
+              itemsCountPerPage={5}
+              totalItemsCount={this.props.activities.activitiesTotal}
+              pageRangeDisplayed={5}
+              onChange={this.changePage}
+            />
           </Fragment>
         ) : (
           <Fragment>
@@ -116,7 +192,7 @@ class ActivitiesList extends Component {
   }
 }
 ActivitiesList.propTypes = {
-  activities: PropTypes.array.isRequired
+  activities: PropTypes.object.isRequired
 };
 
 export default ActivitiesList;
