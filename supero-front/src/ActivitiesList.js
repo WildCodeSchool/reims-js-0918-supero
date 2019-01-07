@@ -51,12 +51,15 @@ class ActivitiesList extends Component {
   searchActivities = request => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/search/${request}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `http://localhost:3001/search/${request}?order=${this.props.order}`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.props.activitiesReceived(res.data);
       });
@@ -79,7 +82,9 @@ class ActivitiesList extends Component {
 
   async changeOrder(order) {
     await this.props.changeActivitiesOrder(order);
-    this.getAllActivities();
+    this.state.activitiesQuery.length > 0
+      ? this.searchActivities(this.state.activitiesQuery)
+      : this.getAllActivities();
   }
 
   render() {
