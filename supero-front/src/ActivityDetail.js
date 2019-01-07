@@ -49,6 +49,7 @@ class ActivityDetail extends React.Component {
   }
 
   componentDidMount() {
+    this.getUserActivities();
     this.getActivityDetail();
   }
 
@@ -251,6 +252,17 @@ class ActivityDetail extends React.Component {
             className="activity_participation_button"
           >
             Se désinscrire
+          </button>
+        ) : this.props.activityDetail.nb_participants ===
+          this.props.activityDetail.activity_max_participants ? (
+          <button
+            style={{
+              color: "#7c7c7c",
+              backgroundColor: "#fff"
+            }}
+            className="activity_participation_button"
+          >
+            COMPLET
           </button>
         ) : (
           <button
