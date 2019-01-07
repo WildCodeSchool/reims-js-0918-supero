@@ -86,17 +86,32 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      const limit = 5;
+      const offset = (req.query.page - 1) * limit;
+      const order = req.query.order;
+      const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       connection.query(
-        `SELECT ${columnsRequiredForActivities}
-      FROM activities AS a 
-      JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY activity_creation_time DESC`,
+        `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
         (err, result) => {
           if (err) {
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activitiesTotal = result[0].activitiesTotal;
+            connection.query(
+              `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  res.status(200).json({ activities: result, activitiesTotal });
+                }
+              }
+            );
           }
         }
       );
@@ -108,17 +123,22 @@ app
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const request = req.params.request;
+      const order = req.query.order;
+      const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       connection.query(
-        `SELECT ${columnsRequiredForActivities}
+        `SELECT ${columnsRequiredForActivities}, COUNT(activity_id) AS activitiesTotal
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_title LIKE "%${request}%" OR sport_name LIKE "%${request}%" OR activity_city LIKE "%${request}%" ORDER BY activity_creation_time DESC`,
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_title LIKE "%${request}%" OR sport_name LIKE "%${request}%" OR activity_city LIKE "%${request}%" GROUP BY activity_id ORDER BY ${order} ${ascDesc}`,
         (err, result) => {
           if (err) {
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            res.status(200).json({
+              activities: result,
+              activitiesTotal: result.activitiesTotal
+            });
           }
         }
       );

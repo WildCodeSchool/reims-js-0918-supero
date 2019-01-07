@@ -6,7 +6,9 @@ import {
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
   VIEW_USER_PROFILE,
-  CONNECTED_USER_RECEIVED
+  CONNECTED_USER_RECEIVED,
+  CHANGE_ACTIVE_PAGE,
+  CHANGE_ACTIVITIES_ORDER
 } from "./actionTypes";
 
 export const selectAddressAction = address => ({
@@ -18,9 +20,10 @@ export const fetchActivitiesAction = () => ({
   type: FETCH_ACTIVITIES
 });
 
-export const activitiesReceivedAction = activities => ({
+export const activitiesReceivedAction = result => ({
   type: ACTIVITIES_RECEIVED,
-  activities
+  activities: result.activities,
+  activitiesTotal: result.activitiesTotal
 });
 
 export const fetchActivityDetailAction = () => ({
@@ -44,4 +47,14 @@ export const viewUserProfileAction = userProfile => ({
 export const connectedUserReceivedAction = connectedUser => ({
   type: CONNECTED_USER_RECEIVED,
   connectedUser
+});
+
+export const changeActivePageAction = page => ({
+  type: CHANGE_ACTIVE_PAGE,
+  page
+});
+
+export const changeActivitiesOrderAction = order => ({
+  type: CHANGE_ACTIVITIES_ORDER,
+  order
 });

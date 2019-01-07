@@ -6,7 +6,8 @@ import {
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
   CONNECTED_USER_RECEIVED,
-  VIEW_USER_PROFILE
+  VIEW_USER_PROFILE,
+  CHANGE_ACTIVITIES_ORDER
 } from "./actionTypes";
 
 import {
@@ -17,7 +18,8 @@ import {
   activityDetailReceivedAction,
   fetchUserProfileAction,
   connectedUserReceivedAction,
-  viewUserProfileAction
+  viewUserProfileAction,
+  changeActivitiesOrderAction
 } from "./actions";
 
 describe("selectAdressAction", () => {
@@ -170,5 +172,14 @@ describe("connectedUserReceivedAction", () => {
       connectedUser
     };
     expect(connectedUserReceivedAction(connectedUser)).toEqual(expected);
+  });
+});
+
+describe("changeActivitiesOrderAction", () => {
+  it("should return a CHANGE_ACTIVITIES_ORDER action", () => {
+    const expected = {
+      type: CHANGE_ACTIVITIES_ORDER
+    };
+    expect(changeActivitiesOrderAction()).toEqual(expected);
   });
 });
