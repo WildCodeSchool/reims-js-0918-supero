@@ -407,10 +407,10 @@ app.get(
 
 //USERS -- afficher les activités d'un utilisateur
 app.get(
-  "/users/activities/:user_id",
+  "/userActivities",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const idUser = req.params.user_id;
+    const idUser = req.user.id;
     connection.query(
       `SELECT activities.activity_id,activity_start_time, activity_title,sport_name FROM user_has_activities JOIN activities ON activities.activity_id = user_has_activities.activity_id JOIN users ON users.user_id = user_has_activities.user_id JOIN sports ON activities.sport_id = sports.sport_id WHERE users.user_id = ?`,
       [idUser],

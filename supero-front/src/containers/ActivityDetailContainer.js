@@ -11,7 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  activityDetailReceived: activity => dispatch(activityDetailReceivedAction(activity)),
+  activityDetailReceived: activity =>
+    dispatch(activityDetailReceivedAction(activity)),
   fetchActivity: () => dispatch(fetchActivityDetailAction())
 });
 

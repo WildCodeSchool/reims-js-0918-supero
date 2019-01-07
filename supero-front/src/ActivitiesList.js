@@ -25,9 +25,10 @@ class ActivitiesList extends Component {
     this.changePage = this.changePage.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getAllActivities();
     this.getUserConnected();
+    this.getUserActivities();
   }
 
   getAllActivities = () => {
@@ -60,6 +61,19 @@ class ActivitiesList extends Component {
       })
       .then(res => {
         this.props.getConnectedUser(res.data);
+      });
+  };
+
+  getUserActivities = () => {
+    axios
+      .get(`http://localhost:3001/userActivities`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getUserActivities(res.data);
       });
   };
 
