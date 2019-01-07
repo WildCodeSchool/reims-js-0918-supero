@@ -6,6 +6,7 @@ import {
   ACTIVITY_DETAIL_RECEIVED,
   FETCH_USER_PROFILE,
   VIEW_USER_PROFILE,
+  CONNECTED_USER_RECEIVED,
   CHANGE_ACTIVE_PAGE,
   CHANGE_ACTIVITIES_ORDER
 } from "./actionTypes";
@@ -41,6 +42,11 @@ export const fetchUserProfileAction = () => ({
 export const viewUserProfileAction = userProfile => ({
   type: VIEW_USER_PROFILE,
   userProfile
+});
+
+export const connectedUserReceivedAction = connectedUser => ({
+  type: CONNECTED_USER_RECEIVED,
+  connectedUser
 });
 
 export const changeActivePageAction = page => ({

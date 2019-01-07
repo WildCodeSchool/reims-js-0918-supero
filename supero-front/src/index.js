@@ -19,6 +19,7 @@ import activityReducer from "./reducers/activityReducer";
 import viewUserProfileReducer from "./reducers/viewUserProfileReducer";
 import { reducer as toastrReducer } from "react-redux-toastr";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
+import viewConnectedUserReducer from "./reducers/viewConnectedUserReducer";
 import changePageReducer from "./reducers/changePageReducer";
 import changeActivitiesOrderReducer from "./reducers/changeActivitiesOrderReducer";
 
@@ -34,6 +35,7 @@ const rootReducer = history =>
     activities: activitiesReducer,
     activityDetail: activityReducer,
     userProfile: viewUserProfileReducer,
+    connectedUser: viewConnectedUserReducer,
     toastr: toastrReducer,
     form: formReducer.plugin({
       addactivity: (state, action) => {

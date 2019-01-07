@@ -27,6 +27,7 @@ class ActivitiesList extends Component {
 
   componentDidMount() {
     this.getAllActivities();
+    this.getUserConnected();
   }
 
   getAllActivities = () => {
@@ -45,6 +46,20 @@ class ActivitiesList extends Component {
       )
       .then(res => {
         this.props.activitiesReceived(res.data);
+      });
+  };
+
+  getUserConnected = () => {
+    this.props.fetchActivities();
+    axios
+      .get(`http://localhost:3001/connecteduser`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.connectedUser(res.data);
       });
   };
 
