@@ -24,7 +24,7 @@ class App extends Component {
             path="/ActivitiesOnMap"
             component={ActivitiesOnMapContainer}
           />
-          <Route exact path="/MonCompte" component={Avatar} />
+          <Route exact path="/Avatar" component={Avatar} />
           <Route exact path="/AddActivity" component={AddActivityForm} />
           <Route
             exact

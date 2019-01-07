@@ -14,7 +14,7 @@ class Avatar extends Component {
     this.fileUpload(this.file).then(res => {
       if (res.data.toastType !== "error") {
         toastr.success("Succès", res.data.message);
-        this.props.history.push("/ActivitiesList");
+        this.props.history.push("/SignInForm");
       } else {
         toastr.error("Erreur", res.data.message);
       }
@@ -24,7 +24,9 @@ class Avatar extends Component {
     this.file = e.target.files[0];
   }
   fileUpload(file) {
-    const url = "http://localhost:3001/Avatar/1";
+    const url = `http://localhost:3001/Avatar/${
+      this.props.location.state.email
+    }`;
     const formData = new FormData();
     formData.append("avatar", file);
     const config = {

@@ -401,8 +401,8 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/avatar/:id", upload.single("avatar"), function(req, res, next) {
-  const idUser = req.params.id;
+app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
+  const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
   fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
@@ -412,8 +412,8 @@ app.post("/avatar/:id", upload.single("avatar"), function(req, res, next) {
       res.send("problème durant le déplacement");
     } else {
       connection.query(
-        `UPDATE users SET user_photo = ? WHERE user_id = ?`,
-        [fileName, idUser],
+        `UPDATE users SET user_photo = ? WHERE user_email = ?`,
+        [fileName, emailUser],
         err => {
           if (err) {
             console.log(err);
