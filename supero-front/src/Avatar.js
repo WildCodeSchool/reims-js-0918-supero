@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios, { post } from "axios";
 import { toastr } from "react-redux-toastr";
 import {
@@ -95,7 +96,14 @@ class Avatar extends Component {
           </Row>
 
           <Row>
-            <Col xs="12" className="d-flex justify-content-center">
+            <Col xs="6" className="d-flex justify-content-center">
+              <Link to="/SignInForm">
+                <Button disabled={this.state.enable} className="button">
+                  Plus-tard
+                </Button>
+              </Link>
+            </Col>
+            <Col xs="6" className="d-flex justify-content-center">
               <Button
                 className="button"
                 disabled={!this.state.enable}

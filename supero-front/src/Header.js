@@ -65,6 +65,7 @@ class Header extends React.Component {
                     src={this.props.connectedUser[0].user_photo}
                     alt="avatar"
                     align="bottom"
+                    style = {{height:"120px", width:"120px"}}
                   />
                 </div>
                 <p className="pseudo">{this.props.connectedUser[0].user_pseudo}</p>
