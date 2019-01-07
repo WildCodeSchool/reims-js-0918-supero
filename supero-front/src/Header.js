@@ -59,6 +59,16 @@ class Header extends React.Component {
         ) : (
           <div className="menu-container">
             <div>
+              <div className="menu-user-container">
+                <div className="avatar rounded-circle">
+                  <img
+                    src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
+                    alt="avatar"
+                    align="bottom"
+                  />
+                </div>
+                <p className="pseudo">Pseudo</p>
+              </div>
               <FontAwesomeIcon
                 onClick={this.toggleNavbar}
                 className="close-menu-icon"
