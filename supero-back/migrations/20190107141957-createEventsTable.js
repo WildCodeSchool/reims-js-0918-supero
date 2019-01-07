@@ -16,9 +16,9 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.createTable(
-    "events",
+    "user_has_activities",
     {
-      event_id: { type: "int", primaryKey: true, autoIncrement: true },
+      id: { type: "int", primaryKey: true, autoIncrement: true },
       activity_id: { type: "int" },
       user_id: { type: "int" }
     },

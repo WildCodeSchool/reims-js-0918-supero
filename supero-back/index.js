@@ -310,14 +310,18 @@ app
         req.body
       );
       const formData = req.body;
-      connection.query("INSERT INTO events SET ?", formData, (err, results) => {
-        if (err) {
-          console.log(err);
-          res.status(500).json({ message: "Erreur lors de l'inscription" });
-        } else {
-          res.status(200).json({ message: "Vous êtes bien inscrit" });
+      connection.query(
+        "INSERT INTO user_has_activities SET ?",
+        formData,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de l'inscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien inscrit" });
+          }
         }
-      });
+      );
     }
   )
   .put(
