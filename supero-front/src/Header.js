@@ -62,7 +62,7 @@ class Header extends React.Component {
               <div className="menu-user-container">
                 <div className="avatar rounded-circle">
                   <img
-                    src={this.props.connectedUser[0].user_photo}
+                    src={`http://localhost:3001/images/${this.props.connectedUser[0].user_photo}`}
                     alt="avatar"
                     align="bottom"
                     style = {{height:"120px", width:"120px"}}
