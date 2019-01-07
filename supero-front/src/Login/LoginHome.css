@@ -1,0 +1,53 @@
+.loginHome {
+  height: 100vh;
+  padding-top: 60px;
+  text-align: center;
+  color: #fff;
+}
+
+.loginHome p {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  font-style: italic;
+}
+
+.loginHome .logo {
+}
+
+.loginHome .button-home {
+  background-color: #e57419;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  width: 70%;
+  font-size: 25px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.loginHome .button-home span {
+  font-weight: 300;
+}
+
+.loginHome .button-home.facebook {
+  background-color: #3b5998;
+  text-transform: initial;
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  padding: 12px 0;
+  margin-top: 50px;
+}
+
+.loginHome .button-home.facebook span {
+  font-weight: bold;
+}
+
+.password-forgotten {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  text-decoration: underline;
+}

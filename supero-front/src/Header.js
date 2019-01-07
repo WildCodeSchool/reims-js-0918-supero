@@ -4,15 +4,16 @@ import "./Header.css";
 import { Nav, NavItem, NavLink } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, withRouter } from "react-router-dom";
+import { toastr } from "react-redux-toastr";
 
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faTimes);
+library.add(faTimes, faAngleLeft);
 
-export default class Example extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true
@@ -24,17 +25,33 @@ export default class Example extends React.Component {
       collapsed: !this.state.collapsed
     });
   }
+
+  disconnect() {
+    localStorage.removeItem("superoUser");
+    toastr.success("Succès", "Déconnection Réussie");
+    this.props.history.push("/");
+  }
   render() {
     return (
-      <div style={{ marginBottom: "20px" }}>
+      <div className={this.props.activitiesView && "addHeightOnHeader"}>
         {this.state.collapsed ? (
           <Navbar
             color="faded"
             className="fixed-top d-flex justify-content-between"
             dark
           >
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <h2>Flux</h2>
+            {!this.props.activitiesView ? (
+              <FontAwesomeIcon
+                onClick={this.props.goBack}
+                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                icon="angle-left"
+              />
+            ) : (
+              <Link to="ActivitiesList">
+                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+              </Link>
+            )}
+            <h2>{this.props.title}</h2>
             <NavbarBrand href="/" className="mr-auto">
               Supero
             </NavbarBrand>
@@ -42,6 +59,17 @@ export default class Example extends React.Component {
         ) : (
           <div className="menu-container">
             <div>
+              <div className="menu-user-container">
+                <div className="avatar rounded-circle">
+                  <img
+                    src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
+                    alt="avatar"
+                    align="bottom"
+                    style = {{height:"120px", width:"120px"}}
+                  />
+                </div>
+                <p className="pseudo">Pseudo</p>
+              </div>
               <FontAwesomeIcon
                 onClick={this.toggleNavbar}
                 className="close-menu-icon"
@@ -49,7 +77,9 @@ export default class Example extends React.Component {
               />
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="#">Mon Compte</NavLink>
+                  <Link to="Avatar">
+                    <NavLink href="#">Mon Compte</NavLink>
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Confidentialité</NavLink>
@@ -61,7 +91,9 @@ export default class Example extends React.Component {
                   <NavLink href="#">Aide et assistance</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Déconnexion</NavLink>
+                  <NavLink onClick={() => this.disconnect()}>
+                    Déconnexion
+                  </NavLink>
                 </NavItem>
               </Nav>
               <button onClick={this.toggleNavbar} className="close-menu-button">
@@ -74,3 +106,5 @@ export default class Example extends React.Component {
     );
   }
 }
+
+export default withRouter(Header);

@@ -1,11 +1,12 @@
 #root {
-  background: url("/images/default.jpg");
+  background: url("/images/bg_blur.png");
   background-size: cover;
   background-position: 25%;
   font-family: "Oswald", sans-serif;
 }
 
-.btn.addActivityButton {
+.btn.addActivityButton,
+.btn.goToGeoloc {
   width: 70px;
   height: 70px;
   background-color: #e57419;
@@ -24,7 +25,31 @@
   bottom: 50px;
 }
 
-.btn.addActivityButton:hover {
+.btn.goToGeoloc {
+  font-size: 35px;
+  bottom: 135px;
+}
+
+.btn.addActivityButton:hover,
+.btn.goToGeoloc {
   box-shadow: 0 5px 14px 0 rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
+}
+
+.mapByGeoloc .leaflet-top {
+  top: auto;
+  bottom: 30px !important;
+}
+
+.iconOnGeoloc {
+  text-align: center;
+  color: #fff;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  padding: 4px;
+  padding-top: 5px;
+  width: 25px;
+  height: 25px;
 }

@@ -10,7 +10,7 @@ import {
   Row
 } from "reactstrap";
 import validate from "./validate";
-import renderField from "./renderField";
+import renderField from "../renderField";
 
 const SendSport = props => {
   const { handleSubmit } = props;
@@ -23,7 +23,7 @@ const SendSport = props => {
             <FormGroup>
               <Input
                 className="Form-Input"
-                name="sport_id"
+                name="session"
                 tag={Field}
                 type="select"
                 component="select"
@@ -43,7 +43,7 @@ const SendSport = props => {
             <FormGroup>
               <Field
                 className="Form-Input"
-                name="activity_title"
+                name="title"
                 type="text"
                 component={renderField}
                 label="Nom de l'activité"
@@ -52,7 +52,7 @@ const SendSport = props => {
             <FormGroup>
               <Input
                 className="Form-Input"
-                name="activity_difficulty"
+                name="difficulty"
                 type="select"
                 tag={Field}
                 component="select"
@@ -66,6 +66,14 @@ const SendSport = props => {
                 <option value="3">Difficile</option>
                 <option value="4">Intense</option>
               </Input>
+            </FormGroup>
+            <FormGroup>
+              <Field
+                name="participants"
+                type="number"
+                component={renderField}
+                label="Limite maximum de participants"
+              />
             </FormGroup>
             <div className="d-flex justify-content-end">
               <Button type="submit" className="next">

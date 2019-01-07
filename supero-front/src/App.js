@@ -1,19 +1,54 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
-import ActivityDetail from "./ActivityDetail";
 import ActivitiesContainer from "./containers/ActivitiesContainer";
+import { Route, Switch } from "react-router";
 import AddActivityForm from "./form-addActivity/AddActivityForm";
-import Header from "./Header";
+import LoginHome from "./Login/LoginHome";
+import ActivityDetailContainer from "./containers/ActivityDetailContainer";
+import UserRegistration from "./form-registration/UserRegistration";
+import SignInForm from "./form-signin/SignInForm";
+import UserProfileContainer from "./containers/UserProfileContainer";
+import ActivitiesOnMapContainer from "./containers/ActivitiesOnMapContainer";
+import ReduxToastr from "react-redux-toastr";
+import Avatar from "./Avatar";
+
 class App extends Component {
   render() {
     return (
       <div>
-        <Fragment>
-          <Header />
-          <ActivitiesContainer />
-          <ActivityDetail />
-          <AddActivityForm />
-        </Fragment>
+        <Switch>
+          <Route exact path="/" component={LoginHome} />
+          <Route exact path="/ActivitiesList" component={ActivitiesContainer} />
+          <Route
+            exact
+            path="/ActivitiesOnMap"
+            component={ActivitiesOnMapContainer}
+          />
+          <Route exact path="/Avatar" component={Avatar} />
+          <Route exact path="/AddActivity" component={AddActivityForm} />
+          <Route
+            exact
+            path="/ActivityDetail/:id"
+            component={ActivityDetailContainer}
+          />
+          <Route exact path="/SignInForm" component={SignInForm} />
+          <Route exact path="/UserRegistration" component={UserRegistration} />
+          <Route
+            exact
+            path="/UserProfile/:id"
+            component={UserProfileContainer}
+          />
+        </Switch>
+        <ReduxToastr
+          timeOut={3000}
+          newestOnTop={false}
+          preventDuplicates
+          position="bottom-center"
+          transitionIn="bounceIn"
+          transitionOut="bounceOut"
+          progressBar
+          closeOnToastrClick
+        />
       </div>
     );
   }

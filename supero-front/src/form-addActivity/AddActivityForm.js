@@ -1,12 +1,21 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import SendSport from "./SendSport";
-import SendPlace from "./SendPlace";
+import SendPlaceContainer from "./SendPlaceContainer";
 import SendInfo from "./SendInfo";
+import SendTime from "./SendTime";
 import "./AddActivityForm.css";
+import Header from "../Header";
+import { toastr } from "react-redux-toastr";
+
+const SENDSPORT_PAGE = 1;
+const SENDTIME_PAGE = 2;
+const SENDPLACE_PAGE = 3;
+const SENDINFO_PAGE = 4;
 
 class AddActivityForm extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.state = {
@@ -14,12 +23,17 @@ class AddActivityForm extends Component {
     };
   }
 
+  goBack() {
+    this.props.history.goBack();
+  }
+
   submit = values => {
-    console.log(values);
     fetch("http://localhost:3001/activities", {
       method: "POST",
       headers: new Headers({
-        "Content-Type": "application/json"
+        accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("superoUser")}`
       }),
       body: JSON.stringify({
         sport_id: values.session,
@@ -29,19 +43,22 @@ class AddActivityForm extends Component {
         activity_difficulty: values.difficulty,
         activity_more_infos: values.more_infos,
         activity_max_participants: values.participants,
-        creator_id: 3,
-        activity_adresse: values.address,
-        activity_latitude: 49,
-        activity_longitude: 78,
-        activity_duration: values.duration,
+        activity_adresse: values.address.label,
+        activity_latitude: values.address.y,
+        activity_longitude: values.address.x,
+        activity_duration: values.durationFull,
         activity_photo: values.picture,
         activity_title: values.title
       })
     })
       .then(res => res.json())
       .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
+        res => {
+          toastr.success("Succès", res.message);
+          this.props.history.push("/ActivitiesList");
+        },
+
+        err => toastr.error("Erreur", err)
       );
   };
 
@@ -56,18 +73,27 @@ class AddActivityForm extends Component {
   render() {
     const { page } = this.state;
     return (
-      <div className="ActivityList-container">
-        {page === 1 && <SendSport onSubmit={this.nextPage} />}
-        {page === 2 && (
-          <SendPlace
-            previousPage={this.previousPage}
-            onSubmit={this.nextPage}
-          />
-        )}
-        {page === 3 && (
-          <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
-        )}
-      </div>
+      <Fragment>
+        <Header title="Nouvelle activité" goBack={this.goBack} />
+        <div className="AddActivity-container">
+          {page === SENDSPORT_PAGE && <SendSport onSubmit={this.nextPage} />}
+          {page === SENDTIME_PAGE && (
+            <SendTime
+              previousPage={this.previousPage}
+              onSubmit={this.nextPage}
+            />
+          )}
+          {page === SENDPLACE_PAGE && (
+            <SendPlaceContainer
+              previousPage={this.previousPage}
+              onSubmit={this.nextPage}
+            />
+          )}
+          {page === SENDINFO_PAGE && (
+            <SendInfo previousPage={this.previousPage} onSubmit={this.submit} />
+          )}
+        </div>
+      </Fragment>
     );
   }
 }

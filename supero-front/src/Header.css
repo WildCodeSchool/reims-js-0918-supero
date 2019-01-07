@@ -35,13 +35,15 @@
 
 .menu-container {
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
-  background: url("/images/default.jpg");
+  background: url("/images/bg_blur.png");
   background-size: cover;
   background-position: 25%;
   align-items: center;
   justify-content: center;
+  position: fixed;
   z-index: 9999;
 }
 
@@ -69,7 +71,7 @@
 
 .menu-container .close-menu-button {
   background-color: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255);
   color: #fff;
   padding: 5px 40px;
   border-radius: 25px;
@@ -78,4 +80,35 @@
   margin: 20px auto;
   display: block;
   cursor: pointer;
+}
+
+.pseudo {
+  color: white;
+  padding: 5px 90px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 20px auto;
+  margin-top: 10px;
+  display: block;
+  font-size: 20px;
+}
+
+.avatar {
+  margin: 0px auto;
+  border: 1px solid rgba(255, 255, 255);
+  bottom: 60px;
+  font-size: 45px;
+  color: #fff;
+  display: block;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  border-radius: 50px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.menu-user-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-bottom: 15px;
 }
