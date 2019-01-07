@@ -419,7 +419,7 @@ app.get(
           console.log(err);
           res.status(500).send(err);
         } else {
-          res.status(200).json(result);
+          res.status(200).json(result[0]);
         }
       }
     );
