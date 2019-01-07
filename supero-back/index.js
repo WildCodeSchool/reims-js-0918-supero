@@ -10,6 +10,22 @@ const port = 3001;
 
 const app = express();
 const connection = require("./conf");
+
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({
+  dest: "tmp/",
+  // fileFilter: function(req, file, cb) {
+  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
+  //     return cb(null, false);
+  //   } else {
+  //     cb(null, true);
+  //   }
+  // },
+  limits: {
+    fileSize: 3 * 1024 * 1024
+  }
+});
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(
@@ -394,7 +410,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE user SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE id = ?",
       [formData, idUser],
       err => {
         if (err) {
@@ -409,6 +425,35 @@ app.put(
     );
   }
 );
+
+// USER -- AJOUT AVATAR
+app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
+  const emailUser = req.params.email;
+  const fileName = req.file.originalname;
+  console.log(req.file.originalname);
+  fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
+    err
+  ) {
+    if (err) {
+      res.send("problème durant le déplacement");
+    } else {
+      connection.query(
+        `UPDATE users SET user_photo = ? WHERE user_email = ?`,
+        [fileName, emailUser],
+        err => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ toastType: "error" });
+          } else {
+            res
+              .status(200)
+              .json({ toastType: "success", message: "Avatar modifié" });
+          }
+        }
+      );
+    }
+  });
+});
 
 // USERS -- TERMINE
 
