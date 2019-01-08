@@ -7,7 +7,6 @@ import "./Redirection.css";
 
 class Redirection extends Component {
   render() {
-      console.log(this.props)
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
@@ -23,10 +22,13 @@ class Redirection extends Component {
                 principal ?
               </CardBody>
               <Button tag={Link} to="/ActivitiesList">
-                Retour vers l'activité
+                Retour au flux
               </Button>
-              <Button tag={Link} to="/ActivityDetail/1">
-                Flux
+              <Button
+                tag={Link}
+                to={`/ActivityDetail/${this.props.location.state.activityId}`}
+              >
+                Voir l'activité
               </Button>
             </CardImgOverlay>
           </Card>
