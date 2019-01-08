@@ -15,13 +15,12 @@ const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
   dest: "tmp/",
-  // fileFilter: function(req, file, cb) {
-  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
-  //     return cb(null, false);
-  //   } else {
-  //     cb(null, true);
-  //   }
-  // },
+  fileFilter: function(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error("Only image files are allowed!"));
+    }
+    cb(null, true);
+  },
   limits: {
     fileSize: 3 * 1024 * 1024
   }
@@ -36,6 +35,7 @@ app.use(
 app.use(express.static("public"));
 app.use("/auth", auth);
 app.use(cors());
+app.use(express.static("public"));
 
 app.get(
   "/test",
@@ -299,6 +299,31 @@ app
       );
     }
   )
+  .post(
+    "/subscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      req.body = Object.assign(
+        {
+          user_id: req.user.id
+        },
+        req.body
+      );
+      const formData = req.body;
+      connection.query(
+        "INSERT INTO user_has_activities SET ?",
+        formData,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de l'inscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien inscrit" });
+          }
+        }
+      );
+    }
+  )
   .put(
     "/activities/:activity_id",
     passport.authenticate("jwt", { session: false }),
@@ -394,7 +419,7 @@ app.get(
           console.log(err);
           res.status(500).send(err);
         } else {
-          res.status(200).json(result);
+          res.status(200).json(result[0]);
         }
       }
     );
