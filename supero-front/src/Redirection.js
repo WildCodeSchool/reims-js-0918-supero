@@ -7,6 +7,7 @@ import "./Redirection.css";
 
 class Redirection extends Component {
   render() {
+      console.log(this.props)
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
