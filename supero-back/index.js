@@ -310,7 +310,30 @@ app
               .status(500)
               .json({ message: "Erreur lors de la création de l'activité" });
           } else {
-            res.status(200).json({ message: "Nouvelle activité créée", activityId: results.insertId });
+            res.status(200).json({
+              message: "Nouvelle activité créée",
+              activityId: results.insertId
+            });
+          }
+        }
+      );
+    }
+  )
+
+  .post(
+    "/activityDelete/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const id = req.body.activity_id;
+      connection.query(
+        "DELETE FROM activities WHERE activity_id =  ?",
+        id,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de la suppression" });
+          } else {
+            res.status(200).json({ message: "Activité supprimée" });
           }
         }
       );
