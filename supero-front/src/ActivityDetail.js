@@ -115,7 +115,7 @@ class ActivityDetail extends React.Component {
         }
       })
       .then(res => {
-        this.props.getUserActivities(res.data);
+        this.props.getConnectedUserActivities(res.data);
       });
   };
 

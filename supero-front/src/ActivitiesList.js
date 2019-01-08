@@ -61,10 +61,10 @@ class ActivitiesList extends Component {
       .then(res => {
         this.props.getConnectedUser(res.data);
       })
-      .then(this.getUserActivities());
+      .then(this.getConnectedUserActivities());
   };
 
-  getUserActivities = () => {
+  getConnectedUserActivities = () => {
     axios
       .get(`http://localhost:3001/userActivities`, {
         headers: {
@@ -73,7 +73,7 @@ class ActivitiesList extends Component {
         }
       })
       .then(res => {
-        this.props.getUserActivities(res.data);
+        this.props.getConnectedUserActivities(res.data);
       });
   };
 

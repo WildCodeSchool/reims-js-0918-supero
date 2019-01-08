@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
   activityDetailReceived: activity =>
     dispatch(activityDetailReceivedAction(activity)),
   fetchActivity: () => dispatch(fetchActivityDetailAction()),
-  getUserActivities: connectedUserActivities =>
+  getConnectedUserActivities: connectedUserActivities =>
     dispatch(connectedUserActivitiesReceivedAction(connectedUserActivities))
 });
 

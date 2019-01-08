@@ -17,6 +17,7 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     const user_id = this.props.match.params.id;
+    this.getUserActivities(user_id);
     this.props.fetchUserProfile();
     const token = localStorage.getItem("superoUser");
     axios
@@ -27,6 +28,19 @@ class UserProfile extends React.Component {
       })
       .then(res => this.props.viewUserProfile(res.data[0]));
   }
+
+  getUserActivities = user_id => {
+    axios
+      .get(`http://localhost:3001/userActivities?userId=${user_id}`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getUserActivities(res.data);
+      });
+  };
 
   render() {
     return !this.props.userProfile ? (
