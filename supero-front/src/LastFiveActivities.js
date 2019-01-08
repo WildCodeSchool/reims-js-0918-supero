@@ -32,8 +32,10 @@ const LastFiveActivities = props => {
                   : activity.sport_name
               }`}
             />
-            {formatDate(activity.activity_start_time)} -
-            {activity.activity_title}
+            <span style={{ fontWeight: 300 }}>
+              {formatDate(activity.activity_start_time)}
+            </span>{" "}
+            - {activity.activity_title}
           </p>
           <Button>
             <Link to={`/ActivityDetail/${activity.activity_id}`}>Voir</Link>
