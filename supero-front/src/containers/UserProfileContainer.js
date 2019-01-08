@@ -7,7 +7,8 @@ import UserProfile from "../UserProfile";
 
 const mapStateToProps = state => ({
   userProfile: state.userProfile,
-  loading: state.loading
+  loading: state.loading,
+  connectedUser: state.connectedUser
 });
 
 const mapDispatchToProps = dispatch => ({

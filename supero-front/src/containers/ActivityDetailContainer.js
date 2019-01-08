@@ -7,11 +7,13 @@ import ActivityDetail from "../ActivityDetail";
 
 const mapStateToProps = state => ({
   activityDetail: state.activityDetail,
-  loading: state.loading
+  loading: state.loading,
+  connectedUser: state.connectedUser
 });
 
 const mapDispatchToProps = dispatch => ({
-  activityDetailReceived: activity => dispatch(activityDetailReceivedAction(activity)),
+  activityDetailReceived: activity =>
+    dispatch(activityDetailReceivedAction(activity)),
   fetchActivity: () => dispatch(fetchActivityDetailAction())
 });
 
