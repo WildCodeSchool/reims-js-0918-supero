@@ -41,11 +41,15 @@ class Header extends React.Component {
             dark
           >
             {!this.props.activitiesView ? (
-              <FontAwesomeIcon
-                onClick={this.props.goBack}
-                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
-                icon="angle-left"
-              />
+              this.props.redirection ? (
+                <div style={{ width: "38px" }} />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={this.props.goBack}
+                  style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                  icon="angle-left"
+                />
+              )
             ) : (
               <Link to="ActivitiesList">
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -82,13 +86,18 @@ class Header extends React.Component {
                 icon="times"
               />
               <Nav navbar>
-                <NavItem style={{ textAlign: "center" }}>
-                  <Link to={`/UserProfile/${this.props.connectedUser.user_id}`}>
+                <NavItem>
+                  <Link
+                    className="nav-link"
+                    to={`/UserProfile/${this.props.connectedUser.user_id}`}
+                  >
                     Mon Compte
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Confidentialité</NavLink>
+                  <Link className="nav-link" to={`/MyActivities`}>
+                    Mes activités
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Notification</NavLink>
