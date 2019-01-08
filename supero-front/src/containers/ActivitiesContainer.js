@@ -4,7 +4,8 @@ import {
   fetchActivitiesAction,
   connectedUserReceivedAction,
   changeActivePageAction,
-  changeActivitiesOrderAction
+  changeActivitiesOrderAction,
+  connectedUserActivitiesReceivedAction
 } from "../actions/actions";
 import ActivitiesList from "../ActivitiesList";
 
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
   loading: state.loading,
   connectedUser: state.connectedUser,
   activePage: state.activePage,
-  order: state.order
+  order: state.order,
+  connectedUserActivities: state.connectedUserActivities
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,7 +25,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(activitiesReceivedAction(activities)),
   fetchActivities: () => dispatch(fetchActivitiesAction()),
   getConnectedUser: connectedUser =>
-    dispatch(connectedUserReceivedAction(connectedUser))
+    dispatch(connectedUserReceivedAction(connectedUser)),
+  getConnectedUserActivities: userActivities =>
+    dispatch(connectedUserActivitiesReceivedAction(userActivities))
 });
 
 export default connect(

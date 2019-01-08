@@ -1,17 +1,21 @@
 import { connect } from "react-redux";
 import {
   viewUserProfileAction,
-  fetchUserProfileAction
+  fetchUserProfileAction,
+  userActivitiesReceivedAction
 } from "../actions/actions";
 import UserProfile from "../UserProfile";
 
 const mapStateToProps = state => ({
   userProfile: state.userProfile,
   loading: state.loading,
+  userActivities: state.userActivities,
   connectedUser: state.connectedUser
 });
 
 const mapDispatchToProps = dispatch => ({
+  getUserActivities: userActivities =>
+    dispatch(userActivitiesReceivedAction(userActivities)),
   viewUserProfile: userProfile => dispatch(viewUserProfileAction(userProfile)),
   fetchUserProfile: () => dispatch(fetchUserProfileAction())
 });
