@@ -1,0 +1,28 @@
+.lastFiveActivities {
+  padding: 20px;
+}
+
+.lastFiveActivities .btn {
+  background-color: #fff !important;
+  border: none;
+  margin: 0 !important;
+  color: #7c7c7c !important;
+  border-radius: 20px !important;
+  text-transform: uppercase !important;
+  font-size: 15px;
+  padding: 3px 15px;
+  margin: 0 auto;
+  font-family: "Oswald", sans-serif;
+  cursor: pointer;
+}
+
+.lastFiveActivities .lastActivity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.lastFiveActivities p {
+  margin-bottom: 0;
+}

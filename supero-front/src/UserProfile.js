@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "./Loading";
 import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 import ageCalculation from "./ageCalculation";
+import LastFiveActivities from "./LastFiveActivities";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -46,7 +47,10 @@ class UserProfile extends React.Component {
     return !this.props.userProfile ? (
       <Loading />
     ) : (
-      <div className="user_profile" style={{ height: "100vh" }}>
+      <div
+        className="user_profile"
+        style={{ height: "100%", paddingBottom: "20px" }}
+      >
         <Header title="Profil" goBack={this.goBack} />
 
         <div
@@ -113,6 +117,9 @@ class UserProfile extends React.Component {
           </div>
         </div>
         <div className="user_about">{this.props.userProfile.user_about}</div>
+        {this.props.userActivities.length > 0 && (
+          <LastFiveActivities activities={this.props.userActivities} />
+        )}
         <button className="send_message">Envoyer un message</button>
       </div>
     );
