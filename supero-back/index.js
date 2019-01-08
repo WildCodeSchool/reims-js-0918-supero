@@ -310,7 +310,7 @@ app
               .status(500)
               .json({ message: "Erreur lors de la création de l'activité" });
           } else {
-            res.status(200).json({ message: "Nouvelle activité créée" });
+            res.status(200).json({ message: "Nouvelle activité créée", activityId: results.insertId });
           }
         }
       );
