@@ -28,7 +28,6 @@ class ActivitiesList extends Component {
   async componentDidMount() {
     this.getAllActivities();
     this.getUserConnected();
-    this.getUserActivities();
   }
 
   getAllActivities = () => {
@@ -61,7 +60,8 @@ class ActivitiesList extends Component {
       })
       .then(res => {
         this.props.getConnectedUser(res.data);
-      });
+      })
+      .then(this.getUserActivities());
   };
 
   getUserActivities = () => {
