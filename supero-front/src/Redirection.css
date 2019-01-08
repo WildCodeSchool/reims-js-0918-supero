@@ -1,4 +1,4 @@
-.activity-container {
+.redirection-container {
   border-radius: 3px;
   width: 90%;
   margin: 10px auto;
@@ -9,24 +9,8 @@
   padding: 8px;
 }
 
-.activity-container:last-child {
-  margin-bottom: 0;
-  padding-bottom: 10px;
-  display: block;
-}
-
-.activity {
-  overflow: hidden;
-}
-
-.activity .card-body {
-  padding: 0;
-}
-
-.activity-container .card-img {
+.redirection-container .card-img {
   margin: 8px;
-  overflow: hidden;
-  max-height: 150px;
   -webkit-filter: blur(3px) grayscale(40%); /* Safari 6.0 - 9.0 */
   filter: blur(1.5px) grayscale(40%);
   transform: scale(1.5);
@@ -40,6 +24,10 @@
   box-shadow: none;
   border: 0;
   margin: 0;
+}
+
+.activity .card-body {
+  padding: 0;
 }
 
 .addHeightOnHeader {
