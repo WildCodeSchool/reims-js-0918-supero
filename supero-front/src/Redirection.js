@@ -1,37 +1,36 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import { Button } from "reactstrap";
-import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./Redirection.css";
 
 class Redirection extends Component {
   render() {
     return (
-      <div style={{ minHeight: "100vh" }}>
+      <div
+        style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
+      >
         <div style={{ paddingBottom: "10px" }}>
-          <Header activitiesView={true} title="Activité créée !" />
+          <Header redirection={true} title="Succès !" />
         </div>
         <div className="redirection-container">
-          <Card className="activity" inverse>
-            <CardImg width="100%" src="./images/default.jpg" alt="default" />
-            <CardImgOverlay>
-              <CardTitle>Félicitations, votre activité a été créée !</CardTitle>
-              <CardBody>
-                Souhaitez-vous retourner vers votre activité ou afficher le flux
-                principal ?
-              </CardBody>
-              <Button tag={Link} to="/ActivitiesList">
-                Retour au flux
-              </Button>
-              <Button
-                tag={Link}
-                to={`/ActivityDetail/${this.props.location.state.activityId}`}
-              >
-                Voir l'activité
-              </Button>
-            </CardImgOverlay>
-          </Card>
+          <h3>Félicitations !</h3>
+          <h5>Votre activité a bien été ajoutée !</h5>
+          <p>
+            Souhaitez-vous afficher le flux principal ou revoir votre activité ?
+          </p>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Button className="button" tag={Link} to="/ActivitiesList">
+              Retour au flux
+            </Button>
+            <Button
+              className="button"
+              tag={Link}
+              to={`/ActivityDetail/${this.props.location.state.activityId}`}
+            >
+              Voir l'activité
+            </Button>
+          </div>
         </div>
       </div>
     );

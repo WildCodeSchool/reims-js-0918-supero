@@ -41,11 +41,15 @@ class Header extends React.Component {
             dark
           >
             {!this.props.activitiesView ? (
-              <FontAwesomeIcon
-                onClick={this.props.goBack}
-                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
-                icon="angle-left"
-              />
+              this.props.redirection ? (
+                <div style={{ width: "38px" }} />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={this.props.goBack}
+                  style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                  icon="angle-left"
+                />
+              )
             ) : (
               <Link to="ActivitiesList">
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -62,10 +66,12 @@ class Header extends React.Component {
               <div className="menu-user-container">
                 <div className="avatar rounded-circle">
                   <img
-                    src={`http://localhost:3001/images/${this.props.connectedUser.user_photo}`}
+                    src={`http://localhost:3001/images/${
+                      this.props.connectedUser.user_photo
+                    }`}
                     alt="avatar"
                     align="bottom"
-                    style = {{height:"120px", width:"120px"}}
+                    style={{ height: "120px", width: "120px" }}
                   />
                 </div>
                 <p className="pseudo">{this.props.connectedUser.user_pseudo}</p>
