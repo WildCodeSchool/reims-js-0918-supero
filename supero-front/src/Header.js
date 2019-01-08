@@ -82,13 +82,18 @@ class Header extends React.Component {
                 icon="times"
               />
               <Nav navbar>
-                <NavItem style={{ textAlign: "center" }}>
-                  <Link to={`/UserProfile/${this.props.connectedUser.user_id}`}>
+                <NavItem>
+                  <Link
+                    className="nav-link"
+                    to={`/UserProfile/${this.props.connectedUser.user_id}`}
+                  >
                     Mon Compte
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Confidentialité</NavLink>
+                  <Link className="nav-link" to={`/MyActivities`}>
+                    Mes activités
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Notification</NavLink>
