@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import "./SignInForm.css";
 import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import { toastr } from "react-redux-toastr";
 
@@ -76,10 +76,14 @@ const SignInForm = props => {
               >
                 Reset
               </Button>
-
               <Button className="button" type="submit" disabled={submitting}>
                 Connection
               </Button>
+            </div>
+            <div className="d-flex justify-content-center">
+              <Link to="UserRegistration" className="password-forgotten">
+                Pas encore inscrit ?
+              </Link>
             </div>
           </Col>
         </Row>
