@@ -2,26 +2,17 @@ import React, { Component } from "react";
 import Header from "./Header";
 import { Button } from "reactstrap";
 import { Card, CardTitle, CardBody, CardImg, CardImgOverlay } from "reactstrap";
-import "./Activity.css";
+import "./Redirection.css";
 
 class Redirection extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.goBack = this.goBack.bind(this);
-  //   }
-
-  //   goBack() {
-  //     this.props.history.goBack();
-  //   }
-
   render() {
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
           <Header activitiesView={true} title="Activité créée !" />
         </div>
-        <div className="activity-container">
-          <Card className="activity" inverse>
+        <div className="redirection-container">
+          <Card className="redirection" inverse>
             <CardImg width="100%" src="./images/default.jpg" alt="default" />
             <CardImgOverlay>
               <CardTitle>
