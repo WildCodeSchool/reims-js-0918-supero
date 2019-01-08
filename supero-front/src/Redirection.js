@@ -11,8 +11,8 @@ class Redirection extends Component {
         <div style={{ paddingBottom: "10px" }}>
           <Header activitiesView={true} title="Activité créée !" />
         </div>
-        <div className="redirection-container">
-          <Card className="redirection" inverse>
+        <div className="activity-container">
+          <Card className="activity" inverse>
             <CardImg width="100%" src="./images/default.jpg" alt="default" />
             <CardImgOverlay>
               <CardTitle>

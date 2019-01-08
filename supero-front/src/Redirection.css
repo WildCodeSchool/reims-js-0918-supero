@@ -1,4 +1,4 @@
-.redirection-container {
+.activity-container {
   border-radius: 3px;
   width: 90%;
   margin: 10px auto;
@@ -9,21 +9,21 @@
   padding: 8px;
 }
 
-.redirection-container:last-child {
+.activity-container:last-child {
   margin-bottom: 0;
   padding-bottom: 10px;
   display: block;
 }
 
-.redirection {
+.activity {
   overflow: hidden;
 }
 
-.redirection .card-body {
+.activity .card-body {
   padding: 0;
 }
 
-.redirection-container .card-img {
+.activity-container .card-img {
   margin: 8px;
   overflow: hidden;
   max-height: 150px;
@@ -32,7 +32,7 @@
   transform: scale(1.5);
 }
 
-.redirection.card {
+.activity.card {
   font-family: "Oswald", sans-serif;
   color: #fff;
   -webkit-box-shadow: none;
@@ -40,4 +40,9 @@
   box-shadow: none;
   border: 0;
   margin: 0;
+}
+
+.addHeightOnHeader {
+  height: 71px;
+  margin-bottom: 15px;
 }
