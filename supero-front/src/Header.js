@@ -41,11 +41,15 @@ class Header extends React.Component {
             dark
           >
             {!this.props.activitiesView ? (
-              <FontAwesomeIcon
-                onClick={this.props.goBack}
-                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
-                icon="angle-left"
-              />
+              this.props.redirection ? (
+                <div style={{ width: "38px" }} />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={this.props.goBack}
+                  style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                  icon="angle-left"
+                />
+              )
             ) : (
               <Link to="ActivitiesList">
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
