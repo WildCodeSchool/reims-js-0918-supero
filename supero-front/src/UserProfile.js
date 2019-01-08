@@ -108,14 +108,20 @@ class UserProfile extends React.Component {
             <h5>Activités</h5>
             <p>
               Organisés : <span>10</span> | Participés :{" "}
-              <span>{this.props.userActivities.length}</span>
+              <span>
+                {this.props.userActivities.participation &&
+                  this.props.userActivities.participation.length}
+              </span>
             </p>
           </div>
         </div>
         <div className="user_about">{this.props.userProfile.user_about}</div>
-        {this.props.userActivities.length > 0 && (
-          <LastFiveActivities activities={this.props.userActivities} />
-        )}
+        {this.props.userActivities.participation &&
+          this.props.userActivities.participation.length > 0 && (
+            <LastFiveActivities
+              activities={this.props.userActivities.participation}
+            />
+          )}
         <button className="send_message">Envoyer un message</button>
       </div>
     );
