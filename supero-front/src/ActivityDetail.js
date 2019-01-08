@@ -153,12 +153,12 @@ class ActivityDetail extends React.Component {
               <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
               {this.props.activityDetail.activity_city}
             </span>
-            {this.props.activityDetail.activity_more_infos && (
+            {/* {this.props.activityDetail.activity_more_infos && (
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
                 {this.props.activityDetail.activity_more_infos}
               </span>
-            )}
+            )} */}
             <span className="activity_detail_icon">
               <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
               Niveau{" "}
@@ -194,7 +194,14 @@ class ActivityDetail extends React.Component {
         </div>
         <div className="activity_description">
           {this.props.activityDetail.activity_description}
+          {this.props.activityDetail.activity_more_infos && (
+            <div className="activity_detail_icon">
+              <FontAwesomeIcon className="mr-1" icon="info-circle" />
+              {this.props.activityDetail.activity_more_infos}
+            </div>
+          )}
         </div>
+
         <span className="nb_participants">
           1/{this.props.activityDetail.activity_max_participants} participants
         </span>
