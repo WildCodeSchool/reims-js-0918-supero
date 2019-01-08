@@ -16,11 +16,13 @@ class MyActivities extends Component {
         </div>
         <Fragment>
           {this.props.connectedUserActivities &&
-            this.props.connectedUserActivities.map((activity, index) => (
-              <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
-                <Activity key={index} {...activity} />
-              </Link>
-            ))}
+            this.props.connectedUserActivities.participation.map(
+              (activity, index) => (
+                <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
+                  <Activity key={index} {...activity} />
+                </Link>
+              )
+            )}
         </Fragment>
       </div>
     );

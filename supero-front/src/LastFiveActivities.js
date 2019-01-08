@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import formatDate from "./formatDate";
@@ -16,10 +16,9 @@ library.add(faRunning, faBicycle, faSwimmer);
 
 const LastFiveActivities = props => {
   return (
-    <div className="lastFiveActivities">
-      <h5>Dernières activités participés</h5>
+    <div>
       {props.activities.slice(0, 5).map((activity, index) => (
-        <div className="lastActivity" key={index}>
+        <div className="lastActivity">
           <p>
             <FontAwesomeIcon
               className="mr-1"
@@ -41,7 +40,7 @@ const LastFiveActivities = props => {
             <Link to={`/ActivityDetail/${activity.activity_id}`}>Voir</Link>
           </Button>
         </div>
-      ))}
+      ))}{" "}
     </div>
   );
 };
