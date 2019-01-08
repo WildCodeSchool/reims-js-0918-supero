@@ -185,11 +185,12 @@ app
                   console.log(err);
                   res.status(500).send(err);
                 } else {
-                  result = Object.assign(
-                    { nb_participants: result[0].nb_participants },
-                    activityDetail
-                  );
-                  res.status(200).json([{ ...result }]);
+                  res.status(200).json({
+                    result: {
+                      nb_participants: result[0].nb_participants,
+                      ...activityDetail
+                    }
+                  });
                 }
               }
             );

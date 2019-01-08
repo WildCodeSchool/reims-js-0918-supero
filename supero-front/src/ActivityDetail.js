@@ -63,7 +63,7 @@ class ActivityDetail extends React.Component {
           authorization: "Bearer " + token
         }
       })
-      .then(res => this.props.activityDetailReceived(res.data[0]));
+      .then(res => this.props.activityDetailReceived(res.data.result));
   }
 
   subscribeToActivity() {
