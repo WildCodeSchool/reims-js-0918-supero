@@ -55,7 +55,7 @@ class AddActivityForm extends Component {
       .then(
         res => {
           toastr.success("Succès", res.message);
-          this.props.history.push("/ActivitiesList");
+          this.props.history.push("/Redirection");
         },
 
         err => toastr.error("Erreur", err)

@@ -11,6 +11,7 @@ import UserProfileContainer from "./containers/UserProfileContainer";
 import ActivitiesOnMapContainer from "./containers/ActivitiesOnMapContainer";
 import ReduxToastr from "react-redux-toastr";
 import Avatar from "./Avatar";
+import Redirection from "./Redirection";
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
           />
           <Route exact path="/Avatar" component={Avatar} />
           <Route exact path="/AddActivity" component={AddActivityForm} />
+          <Route exact path="/Redirection" component={Redirection} />
           <Route
             exact
             path="/ActivityDetail/:id"
