@@ -17,7 +17,7 @@ const LastFiveActivities = props => {
   return (
     <div className="lastFiveActivities">
       <h5>Dernières activités</h5>
-      {props.activities.map(activity => (
+      {props.activities.slice(0, 5).map(activity => (
         <div className="lastActivity">
           <p>
             <FontAwesomeIcon
