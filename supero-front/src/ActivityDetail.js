@@ -172,7 +172,9 @@ class ActivityDetail extends React.Component {
               <Media left middle href="#">
                 <img
                   className="activity_creator_photo"
-                  src={process.env.PUBLIC_URL + "/images/richardvirenque.jpg"}
+                  src={`http://localhost:3001/images/${
+                    this.props.connectedUser.user_photo
+                  }`}
                   alt="sport"
                 />
               </Media>
