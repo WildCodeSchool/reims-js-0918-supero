@@ -4,6 +4,7 @@
 }
 
 .user_profile .avatar {
+  background-color: white;
   position: relative;
   bottom: 60px;
   font-size: 45px;

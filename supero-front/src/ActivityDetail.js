@@ -193,12 +193,12 @@ class ActivityDetail extends React.Component {
               <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
               {this.props.activityDetail.activity_city}
             </span>
-            {this.props.activityDetail.activity_more_infos && (
+            {/* {this.props.activityDetail.activity_more_infos && (
               <span className="activity_detail_icon">
                 <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
                 {this.props.activityDetail.activity_more_infos}
               </span>
-            )}
+            )} */}
             <span className="activity_detail_icon">
               <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
               Niveau{" "}
@@ -212,7 +212,9 @@ class ActivityDetail extends React.Component {
               <Media left middle href="#">
                 <img
                   className="activity_creator_photo"
-                  src={process.env.PUBLIC_URL + "/images/richardvirenque.jpg"}
+                  src={`http://localhost:3001/images/${
+                    this.props.connectedUser.user_photo
+                  }`}
                   alt="sport"
                 />
               </Media>
@@ -234,7 +236,14 @@ class ActivityDetail extends React.Component {
         </div>
         <div className="activity_description">
           {this.props.activityDetail.activity_description}
+          {this.props.activityDetail.activity_more_infos && (
+            <div className="activity_detail_icon">
+              <FontAwesomeIcon className="mr-1" icon="info-circle" />
+              {this.props.activityDetail.activity_more_infos}
+            </div>
+          )}
         </div>
+
         <span className="nb_participants">
           {this.props.activityDetail.nb_participants}/
           {this.props.activityDetail.activity_max_participants} participants

@@ -48,49 +48,90 @@ describe("fetchActivitiesAction", () => {
 
 describe("activitiesReceivedAction", () => {
   it("should return ACTIVITIES_RECEIVED action type and an array", () => {
-    const activities = [
-      {
-        activity_id: 1,
-        sports_id: 1,
-        creator_id: 1,
-        sport_name: "running",
-        user_name: "Benoit",
-        activity_difficulty: 3,
-        activity_description: "Yolo",
-        activity_adresse: "31 rue de lorem ipsum",
-        activity_city: "lorem ipsum",
-        activity_latitude: "35.123.78",
-        activity_longitude: "654151651",
-        activity_start_time: "05/12/18",
-        activity_duration: 2,
-        activity_photo: "image.png",
-        activity_max_participants: 5,
-        activity_creation_time: "01/12/18"
-      },
-      {
-        activity_id: 1,
-        sports_id: 1,
-        creator_id: 1,
-        sport_name: "running",
-        user_name: "Benoit",
-        activity_difficulty: 3,
-        activity_description: "Yolo",
-        activity_adresse: "31 rue de lorem ipsum",
-        activity_city: "lorem ipsum",
-        activity_latitude: "35.123.78",
-        activity_longitude: "654151651",
-        activity_start_time: "05/12/18",
-        activity_duration: 2,
-        activity_photo: "image.png",
-        activity_max_participants: 5,
-        activity_creation_time: "01/12/18"
-      }
-    ];
+    const result = {
+      activities: [
+        {
+          activity_id: 1,
+          sports_id: 1,
+          creator_id: 1,
+          sport_name: "running",
+          user_name: "Benoit",
+          activity_difficulty: 3,
+          activity_description: "Yolo",
+          activity_adresse: "31 rue de lorem ipsum",
+          activity_city: "lorem ipsum",
+          activity_latitude: "35.123.78",
+          activity_longitude: "654151651",
+          activity_start_time: "05/12/18",
+          activity_duration: 2,
+          activity_photo: "image.png",
+          activity_max_participants: 5,
+          activity_creation_time: "01/12/18"
+        },
+        {
+          activity_id: 1,
+          sports_id: 1,
+          creator_id: 1,
+          sport_name: "running",
+          user_name: "Benoit",
+          activity_difficulty: 3,
+          activity_description: "Yolo",
+          activity_adresse: "31 rue de lorem ipsum",
+          activity_city: "lorem ipsum",
+          activity_latitude: "35.123.78",
+          activity_longitude: "654151651",
+          activity_start_time: "05/12/18",
+          activity_duration: 2,
+          activity_photo: "image.png",
+          activity_max_participants: 5,
+          activity_creation_time: "01/12/18"
+        }
+      ],
+      activitiesTotal: 8
+    };
     const expected = {
       type: ACTIVITIES_RECEIVED,
-      activities
+      activities: [
+        {
+          activity_id: 1,
+          sports_id: 1,
+          creator_id: 1,
+          sport_name: "running",
+          user_name: "Benoit",
+          activity_difficulty: 3,
+          activity_description: "Yolo",
+          activity_adresse: "31 rue de lorem ipsum",
+          activity_city: "lorem ipsum",
+          activity_latitude: "35.123.78",
+          activity_longitude: "654151651",
+          activity_start_time: "05/12/18",
+          activity_duration: 2,
+          activity_photo: "image.png",
+          activity_max_participants: 5,
+          activity_creation_time: "01/12/18"
+        },
+        {
+          activity_id: 1,
+          sports_id: 1,
+          creator_id: 1,
+          sport_name: "running",
+          user_name: "Benoit",
+          activity_difficulty: 3,
+          activity_description: "Yolo",
+          activity_adresse: "31 rue de lorem ipsum",
+          activity_city: "lorem ipsum",
+          activity_latitude: "35.123.78",
+          activity_longitude: "654151651",
+          activity_start_time: "05/12/18",
+          activity_duration: 2,
+          activity_photo: "image.png",
+          activity_max_participants: 5,
+          activity_creation_time: "01/12/18"
+        }
+      ],
+      activitiesTotal: 8
     };
-    expect(activitiesReceivedAction(activities)).toEqual(expected);
+    expect(activitiesReceivedAction(result)).toEqual(expected);
   });
 });
 

@@ -76,19 +76,14 @@ class UserProfile extends React.Component {
             />
           </div>
           <div className="avatar rounded-circle">
-            {this.props.userProfile.user_photo !== "photo" ? (
-              <img
-                src={this.props.userProfile.user_photo}
-                alt="avatar"
-                align="bottom"
-              />
-            ) : (
-              <img
-                src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
-                alt="avatar"
-                align="bottom"
-              />
-            )}
+            <img
+              style={{ objectFit: "cover", height: "100%", width: "100%" }}
+              src={`http://localhost:3001/images/${
+                this.props.connectedUser.user_photo
+              }`}
+              alt="avatar"
+              align="bottom"
+            />
           </div>
         </div>
         <div className="user_name">

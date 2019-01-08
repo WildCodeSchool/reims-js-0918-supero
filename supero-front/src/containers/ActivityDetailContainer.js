@@ -9,7 +9,8 @@ import ActivityDetail from "../ActivityDetail";
 const mapStateToProps = state => ({
   activityDetail: state.activityDetail,
   loading: state.loading,
-  connectedUserActivities: state.connectedUserActivities
+  connectedUserActivities: state.connectedUserActivities,
+  connectedUser: state.connectedUser
 });
 
 const mapDispatchToProps = dispatch => ({
