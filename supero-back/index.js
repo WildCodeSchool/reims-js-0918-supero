@@ -177,7 +177,6 @@ app
             res.status(500).send(err);
           } else {
             const activityDetail = result[0];
-            console.log(activityDetail);
             connection.query(
               `SELECT COUNT(id) AS nb_participants
             FROM user_has_activities WHERE activity_id = ${activityId}`,
