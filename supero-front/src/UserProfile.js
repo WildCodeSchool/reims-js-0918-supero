@@ -49,7 +49,7 @@ class UserProfile extends React.Component {
     ) : (
       <div
         className="user_profile"
-        style={{ height: "100%", paddingBottom: "20px" }}
+        style={{ minHeight: "100vh", paddingBottom: "20px" }}
       >
         <Header title="Profil" goBack={this.goBack} />
 

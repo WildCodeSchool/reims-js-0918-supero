@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import formatDate from "./formatDate";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,9 +17,9 @@ library.add(faRunning, faBicycle, faSwimmer);
 const LastFiveActivities = props => {
   return (
     <div className="lastFiveActivities">
-      <h5>Dernières activités</h5>
-      {props.activities.slice(0, 5).map(activity => (
-        <div className="lastActivity">
+      <h5>Dernières activités participés</h5>
+      {props.activities.slice(0, 5).map((activity, index) => (
+        <div className="lastActivity" key={index}>
           <p>
             <FontAwesomeIcon
               className="mr-1"
@@ -34,7 +35,9 @@ const LastFiveActivities = props => {
             {formatDate(activity.activity_start_time)} -
             {activity.activity_title}
           </p>
-          <Button>Voir</Button>
+          <Button>
+            <Link to={`/ActivityDetail/${activity.activity_id}`}>Voir</Link>
+          </Button>
         </div>
       ))}
     </div>

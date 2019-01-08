@@ -6,7 +6,6 @@
   background-color: #fff !important;
   border: none;
   margin: 0 !important;
-  color: #7c7c7c !important;
   border-radius: 20px !important;
   text-transform: uppercase !important;
   font-size: 15px;
@@ -14,6 +13,10 @@
   margin: 0 auto;
   font-family: "Oswald", sans-serif;
   cursor: pointer;
+}
+
+.lastFiveActivities .btn a {
+  color: #e57419 !important;
 }
 
 .lastFiveActivities .lastActivity {
