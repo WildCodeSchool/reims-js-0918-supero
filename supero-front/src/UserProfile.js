@@ -5,6 +5,7 @@ import axios from "axios";
 import Loading from "./Loading";
 import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 import ageCalculation from "./ageCalculation";
+import LastFiveActivities from "./LastFiveActivities";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class UserProfile extends React.Component {
 
   componentDidMount() {
     const user_id = this.props.match.params.id;
+    this.getUserActivities(user_id);
     this.props.fetchUserProfile();
     const token = localStorage.getItem("superoUser");
     axios
@@ -28,11 +30,27 @@ class UserProfile extends React.Component {
       .then(res => this.props.viewUserProfile(res.data[0]));
   }
 
+  getUserActivities = user_id => {
+    axios
+      .get(`http://localhost:3001/userActivities?userId=${user_id}`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getUserActivities(res.data);
+      });
+  };
+
   render() {
     return !this.props.userProfile ? (
       <Loading />
     ) : (
-      <div className="user_profile" style={{ height: "100vh" }}>
+      <div
+        className="user_profile"
+        style={{ minHeight: "100vh", paddingBottom: "20px" }}
+      >
         <Header title="Profil" goBack={this.goBack} />
 
         <div
@@ -58,19 +76,14 @@ class UserProfile extends React.Component {
             />
           </div>
           <div className="avatar rounded-circle">
-            {this.props.userProfile.user_photo !== "photo" ? (
-              <img
-                src={this.props.userProfile.user_photo}
-                alt="avatar"
-                align="bottom"
-              />
-            ) : (
-              <img
-                src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
-                alt="avatar"
-                align="bottom"
-              />
-            )}
+            <img
+              style={{ objectFit: "cover", height: "100%", width: "100%" }}
+              src={`http://localhost:3001/images/${
+                this.props.connectedUser.user_photo
+              }`}
+              alt="avatar"
+              align="bottom"
+            />
           </div>
         </div>
         <div className="user_name">
@@ -94,11 +107,15 @@ class UserProfile extends React.Component {
           <div>
             <h5>Activités</h5>
             <p>
-              Organisés : <span>10</span> | Participés : <span>7</span>
+              Organisés : <span>10</span> | Participés :{" "}
+              <span>{this.props.userActivities.length}</span>
             </p>
           </div>
         </div>
         <div className="user_about">{this.props.userProfile.user_about}</div>
+        {this.props.userActivities.length > 0 && (
+          <LastFiveActivities activities={this.props.userActivities} />
+        )}
         <button className="send_message">Envoyer un message</button>
       </div>
     );

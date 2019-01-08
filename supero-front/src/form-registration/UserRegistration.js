@@ -36,7 +36,8 @@ class UserRegistration extends Component {
         user_gender: values.gender,
         user_birthdate: values.birthdate,
         user_level: values.level,
-        user_about: values.about
+        user_about: values.about,
+        user_photo: "logo.png"
       })
     })
       .then(res => res.json())

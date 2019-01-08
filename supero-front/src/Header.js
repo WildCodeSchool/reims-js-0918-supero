@@ -71,7 +71,11 @@ class Header extends React.Component {
                     }`}
                     alt="avatar"
                     align="bottom"
-                    style={{ height: "120px", width: "120px" }}
+                    style={{
+                      height: "120px",
+                      width: "120px",
+                      objectFit: "cover"
+                    }}
                   />
                 </div>
                 <p className="pseudo">{this.props.connectedUser.user_pseudo}</p>
@@ -82,9 +86,9 @@ class Header extends React.Component {
                 icon="times"
               />
               <Nav navbar>
-                <NavItem>
-                  <Link to="Avatar">
-                    <NavLink href="#">Mon Compte</NavLink>
+                <NavItem style={{ textAlign: "center" }}>
+                  <Link to={`/UserProfile/${this.props.connectedUser.user_id}`}>
+                    Mon Compte
                   </Link>
                 </NavItem>
                 <NavItem>
