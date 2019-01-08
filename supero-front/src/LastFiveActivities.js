@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import formatDate from "./formatDate";
