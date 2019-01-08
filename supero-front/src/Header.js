@@ -65,7 +65,7 @@ class Header extends React.Component {
                     src={process.env.PUBLIC_URL + `/images/avatar_fabien.jpeg`}
                     alt="avatar"
                     align="bottom"
-                    style = {{height:"120px", width:"120px"}}
+                    style = {{height:"120px", width:"120px", objectFit:"cover"}}
                   />
                 </div>
                 <p className="pseudo">Pseudo</p>
