@@ -112,7 +112,8 @@ class UserProfile extends React.Component {
           <div>
             <h5>Activités</h5>
             <p>
-              Organisés : <span>10</span> | Participés : <span>7</span>
+              Organisés : <span>10</span> | Participés :{" "}
+              <span>{this.props.userActivities.length}</span>
             </p>
           </div>
         </div>
