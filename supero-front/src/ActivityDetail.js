@@ -239,7 +239,7 @@ class ActivityDetail extends React.Component {
           {this.props.activityDetail.nb_participants}/
           {this.props.activityDetail.activity_max_participants} participants
         </span>
-        {this.props.userActivities.filter(
+        {this.props.connectedUserActivities.filter(
           activity =>
             activity.activity_id === this.props.activityDetail.activity_id
         ).length > 0 ? (

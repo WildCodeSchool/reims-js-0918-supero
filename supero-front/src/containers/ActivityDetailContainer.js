@@ -9,15 +9,15 @@ import ActivityDetail from "../ActivityDetail";
 const mapStateToProps = state => ({
   activityDetail: state.activityDetail,
   loading: state.loading,
-  userActivities: state.userActivities
+  connectedUserActivities: state.connectedUserActivities
 });
 
 const mapDispatchToProps = dispatch => ({
   activityDetailReceived: activity =>
     dispatch(activityDetailReceivedAction(activity)),
   fetchActivity: () => dispatch(fetchActivityDetailAction()),
-  getUserActivities: userActivities =>
-    dispatch(connectedUserActivitiesReceivedAction(userActivities))
+  getUserActivities: connectedUserActivities =>
+    dispatch(connectedUserActivitiesReceivedAction(connectedUserActivities))
 });
 
 export default connect(

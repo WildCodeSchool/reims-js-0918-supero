@@ -60,7 +60,7 @@ export const changeActivitiesOrderAction = order => ({
   order
 });
 
-export const connectedUserActivitiesReceivedAction = userActivities => ({
+export const connectedUserActivitiesReceivedAction = connectedUserActivities => ({
   type: CONNECTED_USER_ACTIVITIES_RECEIVED,
-  userActivities
+  connectedUserActivities
 });

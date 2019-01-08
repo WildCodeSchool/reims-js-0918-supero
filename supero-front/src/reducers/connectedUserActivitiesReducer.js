@@ -1,12 +1,12 @@
 import { CONNECTED_USER_ACTIVITIES_RECEIVED } from "../actions/actionTypes";
 
-const userActivitiesReducer = (previousState = [], action) => {
+const connectedUserActivitiesReducer = (previousState = [], action) => {
   switch (action.type) {
     case CONNECTED_USER_ACTIVITIES_RECEIVED:
-      return action.userActivities;
+      return action.connectedUserActivities;
     default:
       return previousState;
   }
 };
 
-export default userActivitiesReducer;
+export default connectedUserActivitiesReducer;

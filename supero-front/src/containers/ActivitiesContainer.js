@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   connectedUser: state.connectedUser,
   activePage: state.activePage,
   order: state.order,
-  userActivities: state.userActivities
+  connectedUserActivities: state.connectedUserActivities
 });
 
 const mapDispatchToProps = dispatch => ({
