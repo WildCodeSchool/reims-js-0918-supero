@@ -452,7 +452,7 @@ app.get(
     let idUser = req.user.id;
     req.query.userId !== undefined && (idUser = req.query.userId);
     connection.query(
-      `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM user_has_activities JOIN activities ON activities.activity_id = user_has_activities.activity_id JOIN users ON users.user_id = user_has_activities.user_id JOIN sports ON activities.sport_id = sports.sport_id WHERE user_has_activities.user_id = ?`,
+      `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM user_has_activities JOIN activities ON activities.activity_id = user_has_activities.activity_id JOIN users ON users.user_id = user_has_activities.user_id JOIN sports ON activities.sport_id = sports.sport_id WHERE user_has_activities.user_id = ?`,
       [idUser],
       (err, result) => {
         if (err) {
