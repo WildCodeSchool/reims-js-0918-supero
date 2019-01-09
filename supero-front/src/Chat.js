@@ -5,7 +5,6 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
 import "./Chat.css";
 import { toastr } from "react-redux-toastr";
-import groupMessagesByUser from "./groupMessagesByUser";
 
 //make connection
 let socket = null;
@@ -39,10 +38,7 @@ class Chat extends Component {
         }
       })
       .then(res => {
-        this.setState(
-          { messages: res.data },
-          console.log(groupMessagesByUser(res.data))
-        );
+        this.setState({ messages: res.data });
       });
   }
 
