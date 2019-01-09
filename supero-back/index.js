@@ -69,7 +69,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.get("/api", (req, res) => {
+app.use("/api", (req, res) => {
   res.send("hello World 2 !!")
 });
 
