@@ -13,9 +13,14 @@ library.add(faMapMarkedAlt);
 class MyActivities extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.toggleParticipation = this.toggleParticipation.bind(this);
     this.toggleCreated = this.toggleCreated.bind(this);
     this.state = { collapseParticipation: false, collapseCreated: false };
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   toggleParticipation() {
@@ -29,10 +34,10 @@ class MyActivities extends Component {
     return (
       <div style={{ minHeight: "100vh" }}>
         <div style={{ paddingBottom: "10px" }}>
-          <Header activitiesView={true} title="Mes activités" />
+          <Header title="Mes activités" goBack={this.goBack} />
         </div>
         <Fragment>
-          <div>
+          <div style={{ paddingTop: "80px" }}>
             <h4
               onClick={this.toggleParticipation}
               style={{ display: "flex", justifyContent: "space-between" }}
@@ -40,7 +45,7 @@ class MyActivities extends Component {
                 active: this.state.collapseParticipation === true
               })}
             >
-              <span>Participés</span> <i class="fas fa-chevron-up" />
+              <span>Participés</span> <i className="fas fa-chevron-up" />
             </h4>
 
             <Collapse isOpen={this.state.collapseParticipation}>
@@ -65,7 +70,7 @@ class MyActivities extends Component {
                 active: this.state.collapseCreated === true
               })}
             >
-              <span>Organisés</span> <i class="fas fa-chevron-up" />
+              <span>Organisés</span> <i className="fas fa-chevron-up" />
             </h4>
 
             <Collapse isOpen={this.state.collapseCreated}>
