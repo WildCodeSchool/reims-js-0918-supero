@@ -4,6 +4,7 @@ import Header from "./Header";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
 import "./Chat.css";
+import { toastr } from "react-redux-toastr";
 
 //make connection
 let socket = null;
@@ -11,6 +12,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      messages: [],
       message: "Test",
       connect: null
     };
@@ -24,10 +26,41 @@ class Chat extends Component {
   componentDidMount() {
     this.connection();
     this.getUserConnected();
+    this.getMessagesFromAPI();
+  }
+
+  getMessagesFromAPI() {
+    axios
+      .get(`http://localhost:3001/messages/${this.props.match.params.roomID}`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.setState({ messages: res.data });
+      });
   }
 
   //emit message
   sendMessage() {
+    const newMessage = {
+      activity_id: this.props.match.params.roomID,
+      user_id: this.props.connectedUser.user_id,
+      message: this.state.message
+    };
+    axios
+      .post("http://localhost:3001/messages", newMessage, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        if (res.data.toastType === "error") {
+          toastr.error("Erreur", res.data.message);
+        }
+      });
     socket.emit("new_message", {
       username: this.props.connectedUser.user_pseudo,
       message: this.state.message
@@ -48,8 +81,6 @@ class Chat extends Component {
     });
     //listen on new_message
     socket.on("new_message", data => {
-      console.log(data.message);
-      console.log(data.username);
       const message = document.createElement("p"); // is a node
       message.innerHTML = `${data.username}: ${data.message}`;
       chat.appendChild(message);
@@ -84,6 +115,13 @@ class Chat extends Component {
           }}
           id="chat"
         >
+          <div className="messagesContainer">
+            {this.state.messages.map(message => (
+              <p>
+                {message.user_id}: {message.message}
+              </p>
+            ))}
+          </div>
           <Form className="sendMessage">
             <FormGroup>
               <Input
