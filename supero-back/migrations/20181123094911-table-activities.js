@@ -64,7 +64,7 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db, callback) {
-  return db.dropTable(activities, callback);
+  return db.dropTable("activities", callback);
 };
 
 exports._meta = {

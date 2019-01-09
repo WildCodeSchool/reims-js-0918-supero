@@ -19,15 +19,37 @@ exports.up = function(db, callback) {
     "user_has_activities",
     {
       id: { type: "int", primaryKey: true, autoIncrement: true },
-      activity_id: { type: "int" },
-      user_id: { type: "int" }
+      activity_id: {
+        type: "int",
+        foreignKey: {
+          name: "user_has_activities_activity_id_fk",
+          table: "activities",
+          rules: {
+            onDelete: "CASCADE",
+            onUpdate: "RESTRICT"
+          },
+          mapping: "activity_id"
+        }
+      },
+      user_id: {
+        type: "int",
+        foreignKey: {
+          name: "user_has_activities_user_id_fk",
+          table: "users",
+          rules: {
+            onDelete: "CASCADE",
+            onUpdate: "RESTRICT"
+          },
+          mapping: "user_id"
+        }
+      }
     },
     callback
   );
 };
 
 exports.down = function(db) {
-  return db.dropTable(events, callback);
+  return db.dropTable("user_has_activities");
 };
 
 exports._meta = {

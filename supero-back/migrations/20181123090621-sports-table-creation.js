@@ -26,7 +26,7 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db) {
-  return db.dropTable(sports, callback);
+  return db.dropTable("sports");
 };
 
 exports._meta = {

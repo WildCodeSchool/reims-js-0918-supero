@@ -1,16 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const passport = require("passport");
+const http = require("http");
 
 require("./passport-strategy");
 const auth = require("./auth");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const port = 3001;
-
 const app = express();
 const connection = require("./conf");
-
+const SocketIO = require("socket.io");
+//require("socketio");
+const server = http.createServer(app);
+const io = SocketIO(server);
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -35,7 +38,6 @@ app.use(
 app.use(express.static("public"));
 app.use("/auth", auth);
 app.use(cors());
-app.use(express.static("public"));
 
 app.get(
   "/test",
@@ -310,7 +312,10 @@ app
               .status(500)
               .json({ message: "Erreur lors de la création de l'activité" });
           } else {
-            res.status(200).json({ message: "Nouvelle activité créée", activityId: results.insertId });
+            res.status(200).json({
+              message: "Nouvelle activité créée",
+              activityId: results.insertId
+            });
           }
         }
       );
@@ -542,9 +547,32 @@ app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
   });
 });
 
+//Chat
+
+let room = "";
+io.on("connection", socket => {
+  console.log("New user connected");
+  socket.on("room", data => {
+    room = data.roomID;
+    socket.join(room);
+    console.log(`Join room - ${room}`);
+  });
+
+  //default username
+  socket.username = "Anonymous";
+
+  //listen on new_message
+  socket.on("new_message", data => {
+    io.sockets.in(room).emit("new_message", {
+      message: data.message,
+      username: data.username
+    });
+  });
+});
+
 // USERS -- TERMINE
 
-app.listen(port, err => {
+server.listen(port, err => {
   if (err) {
     throw new Error("Something Bad Happened ...");
   }
