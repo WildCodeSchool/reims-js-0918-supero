@@ -570,6 +570,50 @@ io.on("connection", socket => {
   });
 });
 
+//Poster un message
+app.post(
+  "/messages",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const formData = req.body;
+    connection.query("INSERT INTO messages SET ?", formData, err => {
+      if (err) {
+        res
+          .status(500)
+          .send(err)
+          .json({
+            toastType: "error",
+            message: "Erreur lors du post d'un message"
+          });
+      } else {
+        res.status(200).json({ message: "Message envoyé" });
+      }
+    });
+  }
+);
+
+//Récupérer les messages
+
+app.get(
+  "/messages/:activity_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const activity_id = req.params.activity_id;
+    connection.query(
+      `SELECT * FROM messages WHERE activity_id = ?`,
+      [activity_id],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(result);
+        }
+      }
+    );
+  }
+);
+
 // USERS -- TERMINE
 
 server.listen(port, err => {
