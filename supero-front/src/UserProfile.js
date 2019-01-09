@@ -3,14 +3,36 @@ import "./UserProfile.css";
 import Header from "./Header";
 import axios from "axios";
 import Loading from "./Loading";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  Col
+} from "reactstrap";
 import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 import ageCalculation from "./ageCalculation";
 import LastFiveActivities from "./LastFiveActivities";
+import classnames from "classnames";
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.goBack = this.goBack.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      activeTab: "1"
+    };
+  }
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
   goBack() {
     this.props.history.goBack();
@@ -105,17 +127,75 @@ class UserProfile extends React.Component {
             </span>
           </div>
           <div>
-            <h5>Activités</h5>
+            <h5>Activitées</h5>
             <p>
-              Organisés : <span>10</span> | Participés :{" "}
-              <span>{this.props.userActivities.length}</span>
+              Organisées :{" "}
+              <span>
+                {this.props.userActivities.created &&
+                  this.props.userActivities.created.length}
+              </span>{" "}
+              | Participées :{" "}
+              <span>
+                {this.props.userActivities.participation &&
+                  this.props.userActivities.participation.length}
+              </span>
             </p>
           </div>
         </div>
         <div className="user_about">{this.props.userProfile.user_about}</div>
-        {this.props.userActivities.length > 0 && (
-          <LastFiveActivities activities={this.props.userActivities} />
-        )}
+        <div className="lastFiveActivities">
+          {" "}
+          <h5>Dernières activités</h5>
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "1" })}
+                onClick={() => {
+                  this.toggle("1");
+                }}
+              >
+                Participées
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "2" })}
+                onClick={() => {
+                  this.toggle("2");
+                }}
+              >
+                Organisées
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={this.state.activeTab}>
+            <TabPane tabId="1">
+              <Row>
+                <Col sm="12">
+                  {this.props.userActivities.participation &&
+                    this.props.userActivities.participation.length > 0 && (
+                      <LastFiveActivities
+                        activities={this.props.userActivities.participation}
+                      />
+                    )}
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="2">
+              <Row>
+                <Col sm="12">
+                  {this.props.userActivities.created &&
+                    this.props.userActivities.created.length > 0 && (
+                      <LastFiveActivities
+                        activities={this.props.userActivities.created}
+                      />
+                    )}
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
+        </div>
+
         <button className="send_message">Envoyer un message</button>
       </div>
     );

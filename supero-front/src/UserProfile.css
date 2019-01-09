@@ -113,3 +113,8 @@
 .user_profile .level i:first-child {
   margin-left: 0;
 }
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-color: #fff !important;
+}
