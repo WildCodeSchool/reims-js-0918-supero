@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
 import "./Chat.css";
 import { toastr } from "react-redux-toastr";
+import formatDate from "./formatDate.js";
 
 //make connection
 let socket = null;
@@ -12,6 +13,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activity: { activity_title: "", activity_start_time: "25/12/2018" },
       messages: [],
       message: "",
       connect: null
@@ -38,7 +40,7 @@ class Chat extends Component {
         }
       })
       .then(res => {
-        this.setState({ messages: res.data });
+        this.setState({ ...res.data });
       });
   }
 
@@ -85,7 +87,6 @@ class Chat extends Component {
     });
     //listen on new_message
     socket.on("new_message", data => {
-      console.log(data);
       const newMessage = {
         message: data.message,
         user_pseudo: data.username,
@@ -124,13 +125,32 @@ class Chat extends Component {
           }}
           id="chat"
         >
-          <div className="messagesContainer">
+          <div
+            className="conversationStatus"
+            style={{
+              position: "fixed",
+              top: "100px",
+              width: "100%",
+              textAlign: "center",
+              fontWeight: "300",
+              marginBottom: "15px"
+            }}
+          >
+            <h6 style={{ marginBottom: "0" }}>
+              {this.state.activity.activity_title}
+            </h6>
+            <h7>{formatDate(this.state.activity.activity_start_time)}</h7>
+          </div>
+          <div
+            className="messagesContainer"
+            style={{ marginTop: "75px", height: "64vh", overflowX: "scroll" }}
+          >
             {this.state.messages.map((message, index) => (
               <div
                 key={index}
                 style={{
                   display: "flex",
-                  marginBottom: "15px",
+                  paddingBottom: "15px",
                   justifyContent:
                     message.user_id !== this.props.connectedUser.user_id
                       ? "flex-start"
@@ -153,29 +173,33 @@ class Chat extends Component {
                         : "0"
                   }}
                 >
-                  <div
-                    className="user_photo"
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      backgroundSize: "cover",
-                      borderRadius: "50px",
-                      overflow: "hidden",
-                      objectFit: "cover",
-                      marginRight: "10px"
-                    }}
-                  >
-                    <img
+                  {this.props.connectedUser.user_id !== message.user_id && (
+                    <div
+                      className="user_photo"
                       style={{
+                        width: "25px",
+                        height: "25px",
+                        backgroundSize: "cover",
+                        borderRadius: "50px",
+                        overflow: "hidden",
                         objectFit: "cover",
-                        height: "100%",
-                        width: "100%"
+                        marginRight: "10px"
                       }}
-                      src={`http://localhost:3001/images/${message.user_photo}`}
-                      alt="avatar"
-                      align="bottom"
-                    />
-                  </div>
+                    >
+                      <img
+                        style={{
+                          objectFit: "cover",
+                          height: "100%",
+                          width: "100%"
+                        }}
+                        src={`http://localhost:3001/images/${
+                          message.user_photo
+                        }`}
+                        alt="avatar"
+                        align="bottom"
+                      />
+                    </div>
+                  )}
                   <p
                     style={{
                       marginBottom: "0",
@@ -186,8 +210,7 @@ class Chat extends Component {
                     }}
                   >
                     {this.props.connectedUser.user_id !== message.user_id &&
-                      message.user_pseudo}{" "}
-                    |{" "}
+                      `${message.user_pseudo} | `}
                     <span style={{ fontWeight: "300" }}>{message.message}</span>
                   </p>
                 </span>

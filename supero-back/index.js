@@ -602,14 +602,26 @@ app.get(
   (req, res) => {
     const activity_id = req.params.activity_id;
     connection.query(
-      `SELECT message, user_pseudo,user_photo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id WHERE activity_id = ?`,
+      `SELECT message,user_pseudo,user_photo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id WHERE messages.activity_id = ?`,
       [activity_id],
       (err, result) => {
         if (err) {
           console.log(err);
           res.status(500).send(err);
         } else {
-          res.status(200).json(result);
+          const messages = result;
+          connection.query(
+            `SELECT activity_title,activity_start_time FROM activities WHERE activity_id = ?`,
+            [activity_id],
+            (err, activity) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                res.json({ messages, activity: activity[0] });
+              }
+            }
+          );
         }
       }
     );
