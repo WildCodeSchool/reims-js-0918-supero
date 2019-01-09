@@ -173,9 +173,6 @@ class ActivitiesList extends Component {
                 Prochainement
               </Button>
             </div>
-            <div>
-              <Link to="/Chat">Go to chat</Link>
-            </div>
             {this.props.activities.activities &&
               this.props.activities.activities.map((activity, index) => (
                 <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
