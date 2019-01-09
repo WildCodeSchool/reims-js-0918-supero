@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "./Header";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
 
@@ -13,6 +14,10 @@ class Chat extends Component {
       connect: null
     };
     this.handleTyping = this.handleTyping.bind(this);
+    this.goBack = this.goBack.bind(this);
+  }
+  goBack() {
+    this.props.history.goBack();
   }
 
   componentDidMount() {
@@ -50,19 +55,30 @@ class Chat extends Component {
 
   render() {
     return (
-      <div style={{ height: "100vh", color: "#fff" }}>
-        <h4>Chat</h4>
-        <div id="chat" />
-        <Form>
-          <FormGroup>
-            <Input
-              onChange={event => this.handleTyping(event)}
-              type="text"
-              value={this.state.message}
-            />
-          </FormGroup>
-          <Button onClick={() => this.sendMessage()}>Envoyer</Button>
-        </Form>
+      <div style={{ minHeight: "100vh" }}>
+        <div style={{ paddingBottom: "10px" }}>
+          <Header title="Chat" goBack={this.goBack} />
+        </div>
+        <div
+          style={{
+            paddingTop: "80px",
+            color: "#fff",
+            width: "90%",
+            margin: "0 auto"
+          }}
+          id="chat"
+        >
+          <Form>
+            <FormGroup>
+              <Input
+                onChange={event => this.handleTyping(event)}
+                type="text"
+                value={this.state.message}
+              />
+            </FormGroup>
+            <Button onClick={() => this.sendMessage()}>Envoyer</Button>
+          </Form>
+        </div>
       </div>
     );
   }
