@@ -565,7 +565,9 @@ io.on("connection", socket => {
   socket.on("new_message", data => {
     io.sockets.in(room).emit("new_message", {
       message: data.message,
-      username: data.username
+      username: data.username,
+      user_id: data.user_id,
+      user_photo: data.user_photo
     });
   });
 });
@@ -600,7 +602,7 @@ app.get(
   (req, res) => {
     const activity_id = req.params.activity_id;
     connection.query(
-      `SELECT message, user_pseudo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id WHERE activity_id = ?`,
+      `SELECT message, user_pseudo,user_photo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id WHERE activity_id = ?`,
       [activity_id],
       (err, result) => {
         if (err) {
