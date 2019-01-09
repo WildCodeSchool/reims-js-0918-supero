@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
 import "./Chat.css";
 import { toastr } from "react-redux-toastr";
+import groupMessagesByUser from "./groupMessagesByUser";
 
 //make connection
 let socket = null;
@@ -38,7 +39,10 @@ class Chat extends Component {
         }
       })
       .then(res => {
-        this.setState({ messages: res.data });
+        this.setState(
+          { messages: res.data },
+          console.log(groupMessagesByUser(res.data))
+        );
       });
   }
 
@@ -72,7 +76,6 @@ class Chat extends Component {
   }
 
   connection() {
-    const chat = document.getElementById("chat");
     const roomID = { ...this.props.match.params };
     socket = io.connect("http://localhost:3001");
     socket.on("connect", function() {
@@ -81,9 +84,11 @@ class Chat extends Component {
     });
     //listen on new_message
     socket.on("new_message", data => {
-      const message = document.createElement("p"); // is a node
-      message.innerHTML = `${data.username}: ${data.message}`;
-      chat.appendChild(message);
+      const newMessage = {
+        message: data.message,
+        user_pseudo: data.username
+      };
+      this.setState({ messages: [...this.state.messages, newMessage] });
     });
   }
 
@@ -117,8 +122,15 @@ class Chat extends Component {
         >
           <div className="messagesContainer">
             {this.state.messages.map(message => (
-              <p>
-                {message.user_id}: {message.message}
+              <p
+                style={{
+                  textAlign:
+                    message.user_id !== this.props.connectedUser.user_id
+                      ? "left"
+                      : "right"
+                }}
+              >
+                {message.user_pseudo}: {message.message}
               </p>
             ))}
           </div>

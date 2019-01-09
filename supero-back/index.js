@@ -600,7 +600,7 @@ app.get(
   (req, res) => {
     const activity_id = req.params.activity_id;
     connection.query(
-      `SELECT * FROM messages WHERE activity_id = ?`,
+      `SELECT message, user_pseudo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id WHERE activity_id = ?`,
       [activity_id],
       (err, result) => {
         if (err) {
