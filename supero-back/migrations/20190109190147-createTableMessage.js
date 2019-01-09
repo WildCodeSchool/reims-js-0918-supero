@@ -15,26 +15,26 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, callback) {
-  return db.createTable(
-    "activities",
+  db.createTable(
+    "messages",
     {
-      activity_id: { type: "int", primaryKey: true, autoIncrement: true },
-      sport_id: {
+      id: { type: "int", primaryKey: true, autoIncrement: true },
+      activity_id: {
         type: "int",
         foreignKey: {
-          name: "activities_sport_id_fk",
-          table: "sports",
+          name: "activity_id_has_messages_fk",
+          table: "activities",
           rules: {
             onDelete: "CASCADE",
             onUpdate: "RESTRICT"
           },
-          mapping: "sport_id"
+          mapping: "activity_id"
         }
       },
-      creator_id: {
+      user_id: {
         type: "int",
         foreignKey: {
-          name: "activities_creator_id_fk",
+          name: "messages_has_user_id_fk",
           table: "users",
           rules: {
             onDelete: "CASCADE",
@@ -43,20 +43,8 @@ exports.up = function(db, callback) {
           mapping: "user_id"
         }
       },
-      difficulty: "int",
-      activity_description: "text",
-      adresse: "string",
-      city: "string",
-      latitude: "int",
-      longitude: "int",
-      start_time: "datetime",
-      duration: "int",
-      photo: "string",
-      max_participants: "int",
-      creation_time: {
-        type: "timestamp",
-        notNull: true,
-        defaultValue: new String("CURRENT_TIMESTAMP")
+      message: {
+        type: "text"
       }
     },
     callback
@@ -64,7 +52,7 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db) {
-  return db.dropTable("activities");
+  return db.dropTable("messages");
 };
 
 exports._meta = {
