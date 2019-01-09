@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Header from "./Header";
 import { Button, Form, FormGroup, Input } from "reactstrap";
 import io from "socket.io-client";
+import "./Chat.css";
 
 //make connection
 let socket = null;
-let room = "1";
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,7 @@ class Chat extends Component {
 
   componentDidMount() {
     this.connection();
+    this.getUserConnected();
   }
 
   //emit message
@@ -38,10 +40,11 @@ class Chat extends Component {
 
   connection() {
     const chat = document.getElementById("chat");
+    const roomID = { ...this.props.match.params };
     socket = io.connect("http://localhost:3001");
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
-      socket.emit("room", room);
+      socket.emit("room", roomID);
     });
     //listen on new_message
     socket.on("new_message", data => {
@@ -52,6 +55,19 @@ class Chat extends Component {
       chat.appendChild(message);
     });
   }
+
+  getUserConnected = () => {
+    axios
+      .get(`http://localhost:3001/connecteduser`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getConnectedUser(res.data);
+      });
+  };
 
   render() {
     return (
@@ -68,7 +84,7 @@ class Chat extends Component {
           }}
           id="chat"
         >
-          <Form>
+          <Form className="sendMessage">
             <FormGroup>
               <Input
                 onChange={event => this.handleTyping(event)}

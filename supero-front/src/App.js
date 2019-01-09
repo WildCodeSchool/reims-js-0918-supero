@@ -43,7 +43,7 @@ class App extends Component {
             component={UserProfileContainer}
           />
           <Route exact path="/MyActivities" component={MyActivitiesContainer} />
-          <Route exact path="/Chat" component={ChatContainer} />
+          <Route exact path="/Chat/:roomID" component={ChatContainer} />
         </Switch>
         <ReduxToastr
           timeOut={3000}
