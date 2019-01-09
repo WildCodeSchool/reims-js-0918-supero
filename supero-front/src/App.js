@@ -13,6 +13,7 @@ import ReduxToastr from "react-redux-toastr";
 import Avatar from "./Avatar";
 import Redirection from "./Redirection";
 import MyActivitiesContainer from "./containers/MyActivitiesContainer";
+import Chat from "./Chat";
 
 class App extends Component {
   render() {
@@ -42,6 +43,7 @@ class App extends Component {
             component={UserProfileContainer}
           />
           <Route exact path="/MyActivities" component={MyActivitiesContainer} />
+          <Route exact path="/Chat" component={Chat} />
         </Switch>
         <ReduxToastr
           timeOut={3000}
