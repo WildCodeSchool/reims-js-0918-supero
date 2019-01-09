@@ -320,14 +320,14 @@ app
     }
   )
 
-  .post(
-    "/activityDelete/",
+  .delete(
+    "/activity/:activity_id/",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      const id = req.body.activity_id;
+      const activityId = req.params.activity_id;
       connection.query(
         "DELETE FROM activities WHERE activity_id =  ?",
-        id,
+        activityId,
         (err, results) => {
           if (err) {
             console.log(err);

@@ -108,9 +108,9 @@ class ActivityDetail extends React.Component {
 
   deleteActivity() {
     const token = localStorage.getItem("superoUser");
-    const activity_id = { activity_id: this.props.match.params.id };
+    const activity_id = this.props.match.params.id;
     axios
-      .post(`http://localhost:3001/activityDelete/`, activity_id, {
+      .delete(`http://localhost:3001/activity/${activity_id}`, {
         headers: {
           authorization: "Bearer " + token
         }
