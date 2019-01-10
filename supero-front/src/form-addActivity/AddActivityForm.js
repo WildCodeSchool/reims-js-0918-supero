@@ -28,7 +28,7 @@ class AddActivityForm extends Component {
   }
 
   submit = values => {
-    fetch("http://localhost:3001/activities", {
+    fetch(`${process.env.REACT_APP_API}/activities`, {
       method: "POST",
       headers: new Headers({
         accept: "application/json",

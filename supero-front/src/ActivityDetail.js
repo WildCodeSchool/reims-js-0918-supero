@@ -53,7 +53,7 @@ class ActivityDetail extends React.Component {
     const activity_id = this.props.match.params.id;
     this.props.fetchActivity();
     axios
-      .get(`http://localhost:3001/activities/${activity_id}`, {
+      .get(`${process.env.REACT_APP_API}/activities/${activity_id}`, {
         headers: {
           authorization: "Bearer " + token
         }
@@ -65,7 +65,7 @@ class ActivityDetail extends React.Component {
     const token = localStorage.getItem("superoUser");
     const activity_id = { activity_id: this.props.match.params.id };
     axios
-      .post(`http://localhost:3001/subscribe/`, activity_id, {
+      .post(`${process.env.REACT_APP_API}/subscribe/`, activity_id, {
         headers: {
           authorization: "Bearer " + token
         }
@@ -172,7 +172,7 @@ class ActivityDetail extends React.Component {
               <Media left middle href="#">
                 <img
                   className="activity_creator_photo"
-                  src={`http://localhost:3001/images/${
+                  src={`${process.env.REACT_APP_API}/images/${
                     this.props.connectedUser.user_photo
                   }`}
                   alt="sport"

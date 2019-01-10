@@ -68,11 +68,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-app.use("/api", (req, res) => {
-  res.send("hello World 2 !!")
-});
-
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -487,9 +482,4 @@ app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
 
 // USERS -- TERMINE
 
-app.listen(port, err => {
-  if (err) {
-    throw new Error("Something Bad Happened ...");
-  }
-  console.log(`server is listening on ${port}`);
-});
+module.exports=app;
