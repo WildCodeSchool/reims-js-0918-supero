@@ -176,7 +176,24 @@ app
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activityDetail = result[0];
+            connection.query(
+              `SELECT COUNT(id) AS nb_participants
+            FROM user_has_activities WHERE activity_id = ${activityId}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  res.status(200).json({
+                    result: {
+                      nb_participants: result[0].nb_participants,
+                      ...activityDetail
+                    }
+                  });
+                }
+              }
+            );
           }
         }
       );
@@ -293,12 +310,36 @@ app
               .status(500)
               .json({ message: "Erreur lors de la création de l'activité" });
           } else {
-            res.status(200).json({ message: "Nouvelle activité créée" });
+            res.status(200).json({
+              message: "Nouvelle activité créée",
+              activityId: results.insertId
+            });
           }
         }
       );
     }
   )
+
+  .delete(
+    "/activity/:activity_id/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const activityId = req.params.activity_id;
+      connection.query(
+        "DELETE FROM activities WHERE activity_id =  ?",
+        activityId,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de la suppression" });
+          } else {
+            res.status(200).json({ message: "Activité supprimée" });
+          }
+        }
+      );
+    }
+  )
+  // S'inscrire à une activité
   .post(
     "/subscribe",
     passport.authenticate("jwt", { session: false }),
@@ -319,6 +360,28 @@ app
             res.status(500).json({ message: "Erreur lors de l'inscription" });
           } else {
             res.status(200).json({ message: "Vous êtes bien inscrit" });
+          }
+        }
+      );
+    }
+  )
+  // Se désinscrire
+  .post(
+    "/unsubscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const user_id = req.user.id;
+      const activity_id = req.body.activity_id;
+      connection.query(
+        `DELETE FROM user_has_activities WHERE user_id = ${user_id} AND activity_id = ${activity_id}`,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res
+              .status(500)
+              .json({ message: "Erreur lors de la désinscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien désinscrit" });
           }
         }
       );
@@ -398,6 +461,35 @@ app.get(
           res.status(500).send(err);
         } else {
           res.status(200).json(result);
+        }
+      }
+    );
+  }
+);
+
+//USERS -- Récupérer les activités de l'utilisateur connecté
+app.get(
+  "/userActivities",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let idUser = req.user.id;
+    req.query.userId !== undefined && (idUser = req.query.userId);
+    connection.query(
+      `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM user_has_activities JOIN activities ON activities.activity_id = user_has_activities.activity_id JOIN users ON users.user_id = user_has_activities.user_id JOIN sports ON activities.sport_id = sports.sport_id WHERE user_has_activities.user_id = ?`,
+      [idUser],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          const participation = result;
+          connection.query(
+            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            [idUser],
+            (err, result) => {
+              res.status(200).json({ participation, created: result });
+            }
+          );
         }
       }
     );

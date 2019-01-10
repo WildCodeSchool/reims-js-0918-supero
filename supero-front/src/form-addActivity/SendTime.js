@@ -31,11 +31,7 @@ const SendTime = props => {
               />
             </FormGroup>
             <div className="d-flex justify-content-between">
-              <Button
-                type="button "
-                className="previous"
-                onClick={previousPage}
-              >
+              <Button type="button" className="previous" onClick={previousPage}>
                 Précédent
               </Button>
               <Button
@@ -43,7 +39,7 @@ const SendTime = props => {
                 className="valider"
                 disabled={pristine || submitting}
               >
-                Valider
+                Suivant
               </Button>
             </div>
           </Form>
