@@ -1,10 +1,15 @@
 import React, { Component, Fragment } from "react";
 import Header from "./Header";
+import Conversation from "./Conversation";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class MyConversations extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      conversations: []
+    };
     this.goBack = this.goBack.bind(this);
   }
 
@@ -24,7 +29,7 @@ class MyConversations extends Component {
         }
       )
       .then(res => {
-        console.log(res.data);
+        this.setState({ conversations: res.data });
       });
   };
 
@@ -39,7 +44,16 @@ class MyConversations extends Component {
           <Header title="Mes conversations" goBack={this.goBack} />
         </div>
         <Fragment>
-          <div style={{ paddingTop: "80px" }} />
+          <div style={{ paddingTop: "70px" }} />
+          {this.state.conversations.map((activity, index) => (
+            <Link
+              className="conversation_link"
+              key={index}
+              to={`/Chat/${activity.activity_id}`}
+            >
+              <Conversation key={index} {...activity} />
+            </Link>
+          ))}
         </Fragment>
       </div>
     );

@@ -663,7 +663,7 @@ app.get(
   (req, res) => {
     const user_id = req.params.user_id;
     connection.query(
-      `SELECT * FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id WHERE messages.user_id = ${user_id} OR activities.creator_id = ${user_id}`,
+      `SELECT * FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id JOIN sports ON activities.sport_id = sports.sport_id WHERE messages.user_id = ${user_id} OR activities.creator_id = ${user_id}`,
       (err, result) => {
         if (err) {
           console.log(err);
