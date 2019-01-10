@@ -35,7 +35,7 @@ const Conversation = props => {
         - {props.activity_title}
       </p>
       <Button>
-        <Link to={`/ActivityDetail/${props.activity_id}`}>Go</Link>
+        <Link to={`/Chat/${props.activity_id}`}>Go</Link>
       </Button>
     </div>
   );
