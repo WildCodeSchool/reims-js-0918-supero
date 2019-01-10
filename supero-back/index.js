@@ -663,7 +663,31 @@ app.get(
   (req, res) => {
     const user_id = req.params.user_id;
     connection.query(
-      `SELECT * FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id JOIN sports ON activities.sport_id = sports.sport_id WHERE messages.user_id = ${user_id} OR activities.creator_id = ${user_id}`,
+      `SELECT
+      a.activity_id,
+      a.sport_id AS fk_sport_id,
+      a.creator_id,
+      s.sport_name,
+      a.activity_title,
+      a.activity_start_time,
+      a.activity_creation_time
+  FROM
+      messages AS m
+  JOIN
+      users AS u
+  ON
+      m.user_id = u.user_id
+  JOIN
+      activities AS a
+  ON
+      a.activity_id = m.activity_id
+  JOIN
+      sports AS s
+  ON
+      a.sport_id = s.sport_id WHERE m.user_id = ${user_id} OR a.creator_id = ${user_id} GROUP BY
+      a.activity_id,
+      u.user_pseudo,
+      u.user_photo`,
       (err, result) => {
         if (err) {
           console.log(err);
