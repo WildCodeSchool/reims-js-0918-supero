@@ -574,9 +574,4 @@ app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
 
 // USERS -- TERMINE
 
-app.listen(port, err => {
-  if (err) {
-    throw new Error("Something Bad Happened ...");
-  }
-  console.log(`server is listening on ${port}`);
-});
+module.exports=app;

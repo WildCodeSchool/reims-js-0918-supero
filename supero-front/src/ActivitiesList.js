@@ -34,7 +34,7 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `http://localhost:3001/activities?page=${this.props.activePage}&order=${
+        `${process.env.REACT_APP_API}/activities?page=${this.props.activePage}&order=${
           this.props.order
         }`,
         {
@@ -52,7 +52,7 @@ class ActivitiesList extends Component {
   getUserConnected = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/connecteduser`, {
+      .get(`${process.env.REACT_APP_API}/connecteduser`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -81,7 +81,7 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `http://localhost:3001/search/${request}?order=${this.props.order}`,
+        `${process.env.REACT_APP_API}/search/${request}?order=${this.props.order}`,
         {
           headers: {
             accept: "application/json",
