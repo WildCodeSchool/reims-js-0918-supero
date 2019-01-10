@@ -244,7 +244,9 @@ class ActivityDetail extends React.Component {
           </div>
           <div className="activity_creator_right">
             <button className="activity_creator_button">
-              Envoyer un message
+              <Link to={`/Chat/${this.props.activityDetail.activity_id}`}>
+                Envoyer un message
+              </Link>
             </button>
           </div>
         </div>

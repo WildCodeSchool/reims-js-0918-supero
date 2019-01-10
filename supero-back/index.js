@@ -1,16 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const passport = require("passport");
+const http = require("http");
 
 require("./passport-strategy");
 const auth = require("./auth");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const port = 3001;
-
 const app = express();
 const connection = require("./conf");
-
+const SocketIO = require("socket.io");
+//require("socketio");
+const server = http.createServer(app);
+const io = SocketIO(server);
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -35,7 +38,6 @@ app.use(
 app.use(express.static("public"));
 app.use("/auth", auth);
 app.use(cors());
-app.use(express.static("public"));
 
 app.get(
   "/test",
@@ -572,6 +574,92 @@ app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
   });
 });
 
+//Chat
+
+let room = "";
+io.on("connection", socket => {
+  console.log("New user connected");
+  socket.on("room", data => {
+    room = data.roomID;
+    socket.join(room);
+    console.log(`Join room - ${room}`);
+  });
+
+  //default username
+  socket.username = "Anonymous";
+
+  //listen on new_message
+  socket.on("new_message", data => {
+    io.sockets.in(room).emit("new_message", {
+      message: data.message,
+      username: data.username,
+      user_id: data.user_id,
+      user_photo: data.user_photo
+    });
+  });
+});
+
+//Poster un message
+app.post(
+  "/messages",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const formData = req.body;
+    connection.query("INSERT INTO messages SET ?", formData, err => {
+      if (err) {
+        res
+          .status(500)
+          .send(err)
+          .json({
+            toastType: "error",
+            message: "Erreur lors du post d'un message"
+          });
+      } else {
+        res.status(200).json({ message: "Message envoyé" });
+      }
+    });
+  }
+);
+
+//Récupérer les messages
+
+app.get(
+  "/messages/:activity_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const activity_id = req.params.activity_id;
+    connection.query(
+      `SELECT message,user_pseudo,user_photo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id WHERE messages.activity_id = ?`,
+      [activity_id],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          const messages = result;
+          connection.query(
+            `SELECT activity_title,activity_start_time FROM activities WHERE activity_id = ?`,
+            [activity_id],
+            (err, activity) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                res.json({ messages, activity: activity[0] });
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+);
+
 // USERS -- TERMINE
 
-module.exports=app;
+server.listen(port, err => {
+  if (err) {
+    throw new Error("Something Bad Happened ...");
+  }
+  console.log(`server is listening on ${port}`);
+});
