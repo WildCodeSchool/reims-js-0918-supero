@@ -100,7 +100,10 @@ class Header extends React.Component {
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link className="nav-link" to={`/Conversations`}>
+                  <Link
+                    className="nav-link"
+                    to={`/Conversations/${this.props.connectedUser.user_id}`}
+                  >
                     Mes conversations
                   </Link>
                 </NavItem>

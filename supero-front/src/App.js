@@ -47,7 +47,7 @@ class App extends Component {
           <Route exact path="/Chat/:roomID" component={ChatContainer} />
           <Route
             exact
-            path="/Conversations"
+            path="/Conversations/:userID"
             component={MyConversationsContainer}
           />
         </Switch>

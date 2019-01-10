@@ -101,7 +101,7 @@ class UserProfile extends React.Component {
             <img
               style={{ objectFit: "cover", height: "100%", width: "100%" }}
               src={`http://localhost:3001/images/${
-                this.props.connectedUser.user_photo
+                this.props.userProfile.user_photo
               }`}
               alt="avatar"
               align="bottom"

@@ -85,6 +85,7 @@ const columnsRequiredForActivities = `
   a.creator_id,
   s.sport_name,
   u.user_pseudo,
+  u.user_photo,
   a.activity_title,
   a.activity_difficulty,
   a.activity_description,
@@ -649,6 +650,26 @@ app.get(
               }
             }
           );
+        }
+      }
+    );
+  }
+);
+
+//Récupérer conversations d'un utilisateur
+app.get(
+  "/conversations/:user_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const user_id = req.params.user_id;
+    connection.query(
+      `SELECT * FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id WHERE messages.user_id = ${user_id} OR activities.creator_id = ${user_id}`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(result);
         }
       }
     );

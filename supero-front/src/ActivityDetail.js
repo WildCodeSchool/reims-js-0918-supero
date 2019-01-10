@@ -227,7 +227,7 @@ class ActivityDetail extends React.Component {
                 <img
                   className="activity_creator_photo"
                   src={`http://localhost:3001/images/${
-                    this.props.connectedUser.user_photo
+                    this.props.activityDetail.user_photo
                   }`}
                   alt="sport"
                 />
