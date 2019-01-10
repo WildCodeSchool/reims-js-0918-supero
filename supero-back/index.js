@@ -321,6 +321,26 @@ app
       );
     }
   )
+
+  .delete(
+    "/activity/:activity_id/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const activityId = req.params.activity_id;
+      connection.query(
+        "DELETE FROM activities WHERE activity_id =  ?",
+        activityId,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de la suppression" });
+          } else {
+            res.status(200).json({ message: "Activité supprimée" });
+          }
+        }
+      );
+    }
+  )
   // S'inscrire à une activité
   .post(
     "/subscribe",
@@ -464,7 +484,14 @@ app.get(
           console.log(err);
           res.status(500).send(err);
         } else {
-          res.status(200).json(result);
+          const participation = result;
+          connection.query(
+            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            [idUser],
+            (err, result) => {
+              res.status(200).json({ participation, created: result });
+            }
+          );
         }
       }
     );

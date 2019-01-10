@@ -106,6 +106,26 @@ class ActivityDetail extends React.Component {
       .then(this.getActivityDetail());
   }
 
+  deleteActivity() {
+    const token = localStorage.getItem("superoUser");
+    const activity_id = this.props.match.params.id;
+    axios
+      .delete(`http://localhost:3001/activity/${activity_id}`, {
+        headers: {
+          authorization: "Bearer " + token
+        }
+      })
+      .then(res => {
+        if (res.data.toastType !== "error") {
+          toastr.success("Succès", res.data.message);
+        } else {
+          toastr.error("Erreur", res.data.message);
+        }
+      })
+      .then(this.getUserActivities())
+      .then(this.props.history.push("/ActivitiesList"));
+  }
+
   getUserActivities = () => {
     axios
       .get(`http://localhost:3001/userActivities`, {
@@ -193,12 +213,6 @@ class ActivityDetail extends React.Component {
               <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
               {this.props.activityDetail.activity_city}
             </span>
-            {/* {this.props.activityDetail.activity_more_infos && (
-              <span className="activity_detail_icon">
-                <FontAwesomeIcon className="ml-2 mr-1" icon="info-circle" />
-                {this.props.activityDetail.activity_more_infos}
-              </span>
-            )} */}
             <span className="activity_detail_icon">
               <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
               Niveau{" "}
@@ -250,37 +264,51 @@ class ActivityDetail extends React.Component {
           {this.props.activityDetail.nb_participants}/
           {this.props.activityDetail.activity_max_participants} participants
         </span>
-        {this.props.connectedUserActivities.filter(
-          activity =>
-            activity.activity_id === this.props.activityDetail.activity_id
-        ).length > 0 ? (
+        {this.props.activityDetail.creator_id !==
+        this.props.connectedUser.user_id ? (
+          this.props.connectedUserActivities.participation.filter(
+            activity =>
+              activity.activity_id === this.props.activityDetail.activity_id
+          ).length > 0 ? (
+            <button
+              style={{
+                color: "#e57419",
+                backgroundColor: "#fff"
+              }}
+              onClick={() => this.unsubscribeToActivity()}
+              className="activity_participation_button"
+            >
+              Se désinscrire
+            </button>
+          ) : this.props.activityDetail.nb_participants ===
+            this.props.activityDetail.activity_max_participants ? (
+            <button
+              style={{
+                color: "#7c7c7c",
+                backgroundColor: "#fff"
+              }}
+              className="activity_participation_button"
+            >
+              COMPLET
+            </button>
+          ) : (
+            <button
+              onClick={() => this.subscribeToActivity()}
+              className="activity_participation_button"
+            >
+              Participer
+            </button>
+          )
+        ) : (
           <button
             style={{
               color: "#e57419",
               backgroundColor: "#fff"
             }}
-            onClick={() => this.unsubscribeToActivity()}
+            onClick={() => this.deleteActivity()}
             className="activity_participation_button"
           >
-            Se désinscrire
-          </button>
-        ) : this.props.activityDetail.nb_participants ===
-          this.props.activityDetail.activity_max_participants ? (
-          <button
-            style={{
-              color: "#7c7c7c",
-              backgroundColor: "#fff"
-            }}
-            className="activity_participation_button"
-          >
-            COMPLET
-          </button>
-        ) : (
-          <button
-            onClick={() => this.subscribeToActivity()}
-            className="activity_participation_button"
-          >
-            Participer
+            Supprimer
           </button>
         )}
 
