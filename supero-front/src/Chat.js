@@ -25,10 +25,20 @@ class Chat extends Component {
     this.props.history.goBack();
   }
 
+  scrollToBottom = () => {
+    this.messagesContainer.scrollTop === 0
+      ? (this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight)
+      : this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
+
   componentDidMount() {
     this.connection();
     this.getUserConnected();
     this.getMessagesFromAPI();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   getMessagesFromAPI() {
@@ -41,7 +51,10 @@ class Chat extends Component {
       })
       .then(res => {
         this.setState({ ...res.data });
-      });
+      })
+      .then(
+        (this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight)
+      );
   }
 
   //emit message
@@ -139,11 +152,14 @@ class Chat extends Component {
             <h6 style={{ marginBottom: "0" }}>
               {this.state.activity.activity_title}
             </h6>
-            <h7>{formatDate(this.state.activity.activity_start_time)}</h7>
+            <p>{formatDate(this.state.activity.activity_start_time)}</p>
           </div>
           <div
             className="messagesContainer"
-            style={{ marginTop: "75px", height: "64vh", overflowX: "scroll" }}
+            ref={el => {
+              this.messagesContainer = el;
+            }}
+            style={{ marginTop: "75px", height: "64vh", overflowY: "scroll" }}
           >
             {this.state.messages.map((message, index) => (
               <div
@@ -216,6 +232,12 @@ class Chat extends Component {
                 </span>
               </div>
             ))}
+            <div
+              style={{ float: "left", clear: "both" }}
+              ref={el => {
+                this.messagesEnd = el;
+              }}
+            />
           </div>
           <Form className="sendMessage">
             <FormGroup>
