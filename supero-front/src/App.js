@@ -14,6 +14,7 @@ import Avatar from "./Avatar";
 import Redirection from "./Redirection";
 import MyActivitiesContainer from "./containers/MyActivitiesContainer";
 import ChatContainer from "./containers/ChatContainer";
+import MyAccount from "./MyAccount";
 
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
           />
           <Route exact path="/MyActivities" component={MyActivitiesContainer} />
           <Route exact path="/Chat/:roomID" component={ChatContainer} />
+          <Route exact path="/MyAccount" component={MyAccount} />
         </Switch>
         <ReduxToastr
           timeOut={3000}
