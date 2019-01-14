@@ -1,7 +1,7 @@
 import React from "react";
 import { Spring } from "react-spring";
 
-const ComeFromLeft = ({ children, delay }) => {
+const ComeFromTransparent = ({ children, delay }) => {
   return (
     <Spring config={{ delay: delay }} from={{ opacity: 0 }} to={{ opacity: 1 }}>
       {props => <div style={props}>{children}</div>}
@@ -9,4 +9,4 @@ const ComeFromLeft = ({ children, delay }) => {
   );
 };
 
-export default ComeFromLeft;
+export default ComeFromTransparent;

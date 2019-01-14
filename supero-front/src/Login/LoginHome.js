@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "./LoginHome.css";
 import { Link } from "react-router-dom";
-import { Spring } from "react-spring";
 import ComeFromTransparent from "../Animations/ComeFromTransparent";
 import ComeFromLeft from "../Animations/ComeFromLeft";
 const LoginHome = () => {
