@@ -1,5 +1,5 @@
 .loginHome {
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 60px;
   text-align: center;
   color: #fff;
@@ -9,9 +9,6 @@
   font-family: "Open Sans", sans-serif;
   margin: 0;
   font-style: italic;
-}
-
-.loginHome .logo {
 }
 
 .loginHome .button-home {
