@@ -15,9 +15,7 @@ class MyAccount extends Component {
         }
       })
       .then(res => {
-        console.log(res.data);
-        console.log(this.props);
-        // this.props.getConnectedUser(res.data);
+        this.props.getConnectedUser(res.data);
       });
   }
 
@@ -31,8 +29,7 @@ class MyAccount extends Component {
         </div>
         <div className="myAccount-container">
           {this.props.connectedUser ? (
-            // <h3>{this.props.connectedUser.user_pseudo}</h3>
-            <h3>OUI</h3>
+            <h3>{this.props.connectedUser.user_pseudo}</h3>
           ) : (
             <p>TROP PAS</p>
           )}
