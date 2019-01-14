@@ -153,33 +153,35 @@ class ActivitiesList extends Component {
             </div>
           </ComeFromTop>
         </div>
+        <ComeFromTransparent delay={300}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Button
+              className={
+                "orderButton " +
+                (this.props.order === "activity_creation_time" && "active")
+              }
+              onClick={() => this.changeOrder("activity_creation_time")}
+            >
+              Nouveautés
+            </Button>
+            <Button
+              className={
+                "orderButton " +
+                (this.props.order === "activity_start_time" && "active")
+              }
+              onClick={() => this.changeOrder("activity_start_time")}
+            >
+              Prochainement
+            </Button>
+          </div>
+        </ComeFromTransparent>
         {!this.props.loading ? (
           <Fragment>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <Button
-                className={
-                  "orderButton " +
-                  (this.props.order === "activity_creation_time" && "active")
-                }
-                onClick={() => this.changeOrder("activity_creation_time")}
-              >
-                Nouveautés
-              </Button>
-              <Button
-                className={
-                  "orderButton " +
-                  (this.props.order === "activity_start_time" && "active")
-                }
-                onClick={() => this.changeOrder("activity_start_time")}
-              >
-                Prochainement
-              </Button>
-            </div>
             {this.props.activities.activities && (
               <Trail
                 items={this.props.activities.activities}
@@ -196,14 +198,7 @@ class ActivitiesList extends Component {
                 )}
               </Trail>
             )}
-            <Link to="AddActivity">
-              <Button className="addActivityButton">+</Button>
-            </Link>
-            <Link to="ActivitiesOnMap">
-              <Button className="goToGeoloc">
-                <FontAwesomeIcon className="" icon="map-marked-alt" />
-              </Button>
-            </Link>
+
             <Pagination
               hideDisabled
               activePage={this.props.activePage}
@@ -218,6 +213,16 @@ class ActivitiesList extends Component {
             <Loading />
           </Fragment>
         )}
+        <ComeFromTransparent delay={1500}>
+          <Link to="AddActivity">
+            <Button className="addActivityButton">+</Button>
+          </Link>
+          <Link to="ActivitiesOnMap">
+            <Button className="goToGeoloc">
+              <FontAwesomeIcon className="" icon="map-marked-alt" />
+            </Button>
+          </Link>
+        </ComeFromTransparent>
       </div>
     );
   }
