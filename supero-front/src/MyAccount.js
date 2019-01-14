@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Header from "./Header";
 import axios from "axios";
+import Loading from "./Loading";
 // import { Button } from "reactstrap";
 // import { Link } from "react-router-dom";
 import "./myAccount.css";
@@ -28,10 +29,14 @@ class MyAccount extends Component {
           <Header title="Succès !" />
         </div>
         <div className="myAccount-container">
-          {this.props.connectedUser ? (
-            <h3>{this.props.connectedUser.user_pseudo}</h3>
+          {!this.props.loading ? (
+            <Fragment>
+              <h3>{this.props.connectedUser.user_pseudo}</h3>
+            </Fragment>
           ) : (
-            <p>TROP PAS</p>
+            <Fragment>
+              <Loading />
+            </Fragment>
           )}
         </div>
       </div>
