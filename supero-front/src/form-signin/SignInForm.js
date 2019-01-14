@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import "./SignInForm.css";
 import { Button, Container, Col, Row, FormGroup, Form } from "reactstrap";
 import renderField from "./renderField";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import { toastr } from "react-redux-toastr";
 
@@ -24,7 +24,7 @@ const SignInForm = props => {
     <Container fluid>
       <Form
         onSubmit={handleSubmit(values =>
-          axios.post("http://localhost:3001/auth/login", values).then(res => {
+          axios.post(`${process.env.REACT_APP_API}/auth/login`, values).then(res => {
             if (res.data.toastType !== "error") {
               localStorage.setItem("superoUser", res.data.token);
               toastr.success("Succès", res.data.message);
@@ -76,10 +76,14 @@ const SignInForm = props => {
               >
                 Reset
               </Button>
-
               <Button className="button" type="submit" disabled={submitting}>
                 Connection
               </Button>
+            </div>
+            <div className="d-flex justify-content-center">
+              <Link to="UserRegistration" className="password-forgotten">
+                Pas encore inscrit ?
+              </Link>
             </div>
           </Col>
         </Row>

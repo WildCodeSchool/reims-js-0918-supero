@@ -22,7 +22,7 @@ class UserRegistration extends Component {
   submit = values => {
     !values.pseudo &&
       (values.pseudo = `${values.firstName} ${values.lastName}`);
-    fetch("http://localhost:3001/users", {
+    fetch(`${process.env.REACT_APP_API}/users`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json"
@@ -35,16 +35,19 @@ class UserRegistration extends Component {
         user_lastname: values.lastName,
         user_gender: values.gender,
         user_birthdate: values.birthdate,
-        user_photo: values.picture,
         user_level: values.level,
-        user_about: values.about
+        user_about: values.about,
+        user_photo: "logo.png"
       })
     })
       .then(res => res.json())
       .then(
         res => {
           toastr.success("Succès", res.message);
-          this.props.history.push("/SignInForm");
+          this.props.history.push({
+            pathname: "/avatar",
+            state: { email: values.email }
+          });
         },
 
         err => toastr.error("Erreur", err.message)

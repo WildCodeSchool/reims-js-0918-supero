@@ -28,7 +28,7 @@ class AddActivityForm extends Component {
   }
 
   submit = values => {
-    fetch("http://localhost:3001/activities", {
+    fetch(`${process.env.REACT_APP_API}/activities`, {
       method: "POST",
       headers: new Headers({
         accept: "application/json",
@@ -55,7 +55,7 @@ class AddActivityForm extends Component {
       .then(
         res => {
           toastr.success("Succès", res.message);
-          this.props.history.push("/ActivitiesList");
+          this.props.history.push("/Redirection", {activityId : res.activityId});
         },
 
         err => toastr.error("Erreur", err)

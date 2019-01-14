@@ -14,19 +14,12 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db, callback) {
-  db.createTable(
-    "sports",
-    {
-      sport_id: { type: "int", primaryKey: true, autoIncrement: true },
-      sport_name: "string"
-    },
-    callback
-  );
+exports.up = function(db, cb) {
+  db.runSql(`ALTER TABLE users ADD UNIQUE(user_email)`, cb);
 };
 
 exports.down = function(db) {
-  return db.dropTable("sports");
+  return null;
 };
 
 exports._meta = {

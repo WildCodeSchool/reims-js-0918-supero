@@ -33,8 +33,8 @@ exports.up = function(db, callback) {
   );
 };
 
-exports.down = function(db, callback) {
-  return db.dropTable(sports, callback);
+exports.down = function(db) {
+  return db.dropTable("users");
 };
 
 exports._meta = {

@@ -41,11 +41,15 @@ class Header extends React.Component {
             dark
           >
             {!this.props.activitiesView ? (
-              <FontAwesomeIcon
-                onClick={this.props.goBack}
-                style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
-                icon="angle-left"
-              />
+              this.props.redirection ? (
+                <div style={{ width: "38px" }} />
+              ) : (
+                <FontAwesomeIcon
+                  onClick={this.props.goBack}
+                  style={{ fontSize: "28px", color: "rgba(255,255,255,0.5" }}
+                  icon="angle-left"
+                />
+              )
             ) : (
               <Link to="ActivitiesList">
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
@@ -59,6 +63,23 @@ class Header extends React.Component {
         ) : (
           <div className="menu-container">
             <div>
+              <div className="menu-user-container">
+                <div className="avatar rounded-circle">
+                  <img
+                    src={`${process.env.REACT_APP_API}/images/${
+                      this.props.connectedUser.user_photo
+                    }`}
+                    alt="avatar"
+                    align="bottom"
+                    style={{
+                      height: "120px",
+                      width: "120px",
+                      objectFit: "cover"
+                    }}
+                  />
+                </div>
+                <p className="pseudo">{this.props.connectedUser.user_pseudo}</p>
+              </div>
               <FontAwesomeIcon
                 onClick={this.toggleNavbar}
                 className="close-menu-icon"
@@ -66,10 +87,17 @@ class Header extends React.Component {
               />
               <Nav navbar>
                 <NavItem>
-                  <NavLink href="#">Mon Compte</NavLink>
+                  <Link
+                    className="nav-link"
+                    to={`/UserProfile/${this.props.connectedUser.user_id}`}
+                  >
+                    Mon Compte
+                  </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Confidentialité</NavLink>
+                  <Link className="nav-link" to={`/MyActivities`}>
+                    Mes activités
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">Notification</NavLink>
