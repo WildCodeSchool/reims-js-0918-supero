@@ -1,0 +1,42 @@
+.conversation .btn {
+  background-color: #fff;
+  border: none;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  text-transform: uppercase !important;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin: 0 auto;
+  font-family: "Oswald", sans-serif;
+  cursor: pointer;
+}
+
+.conversation .btn a {
+  color: #e57419 !important;
+}
+
+.conversation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.conversation_link {
+  background-color: rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+.conversation_link:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.conversation_link:last-child {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.conversation p {
+  margin-bottom: 0;
+  color: #fff;
+}

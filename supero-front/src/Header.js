@@ -117,6 +117,12 @@ class Header extends React.Component {
                   <ComeFromLeft delay={450}>
                     <NavLink href="#">Notification</NavLink>
                   </ComeFromLeft>
+                  <Link
+                    className="nav-link"
+                    to={`/Conversations/${this.props.connectedUser.user_id}`}
+                  >
+                    Mes conversations
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <ComeFromLeft delay={550}>
