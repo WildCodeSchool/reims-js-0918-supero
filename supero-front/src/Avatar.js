@@ -12,6 +12,8 @@ import {
   Input
 } from "reactstrap";
 import "./avatar.css";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
+import ComeFromLeft from "./Animations/ComeFromLeft";
 class Avatar extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +60,49 @@ class Avatar extends Component {
     return (
       <Container fluid className="avatar-container">
         <Form onSubmit={this.onFormSubmit}>
+          <ComeFromTransparent delay={300}>
+            <Row>
+              <Col xs="12" className="d-flex justify-content-center mb-2">
+                {!this.state.enable ? (
+                  <i
+                    style={{
+                      fontSize: "150px",
+                      color: "rgba(255, 255, 255,0.5)"
+                    }}
+                    className="fas fa-user"
+                  />
+                ) : (
+                  <img
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "150px"
+                    }}
+                    alt="profile"
+                    src={this.preview}
+                  />
+                )}
+              </Col>
+            </Row>
+          </ComeFromTransparent>
+          <ComeFromTransparent delay={300}>
+            <Row>
+              <Col xs="12">
+                <h3 className="text-center mb-5">Avatar</h3>
+              </Col>
+            </Row>
+          </ComeFromTransparent>
+          <ComeFromLeft delay={400}>
+            <Row className="d-flex justify-content-center mb-2">
+              <Col xs="12">
+                <FormGroup>
+                  <Input type="file" onChange={this.onChange} />
+                </FormGroup>
+              </Col>
+            </Row>
+          </ComeFromLeft>
+
+          {/* this row is conflicting */}
           <Row>
             <Col xs="12" className="d-flex justify-content-center mb-2 ">
               {!this.state.enable ? (
@@ -84,34 +129,26 @@ class Avatar extends Component {
           </Row>
 
           <Row>
-            <Col xs="12">
-              <h3 className="text-center mb-5">Avatar</h3>
+            <Col xs="6" className="d-flex justify-content-center">
+              <ComeFromTransparent delay={500}>
+                <Link to="/SignInForm">
+                  <Button disabled={this.state.enable} className="button">
+                    Plus-tard
+                  </Button>
+                </Link>
+              </ComeFromTransparent>
             </Col>
-          </Row>
-          <Row className="d-flex justify-content-center mb-2">
-            <Col xs="12">
-              <FormGroup>
-                <Input type="file" onChange={this.onChange} />
-              </FormGroup>
-            </Col>
-          </Row>
 
-          <Row>
             <Col xs="6" className="d-flex justify-content-center">
-              <Link to="/SignInForm">
-                <Button disabled={this.state.enable} className="button">
-                  Plus-tard
+              <ComeFromTransparent delay={500}>
+                <Button
+                  className="button"
+                  disabled={!this.state.enable}
+                  type="submit"
+                >
+                  Upload
                 </Button>
-              </Link>
-            </Col>
-            <Col xs="6" className="d-flex justify-content-center">
-              <Button
-                className="button"
-                disabled={!this.state.enable}
-                type="submit"
-              >
-                Upload
-              </Button>
+              </ComeFromTransparent>
             </Col>
           </Row>
         </Form>
