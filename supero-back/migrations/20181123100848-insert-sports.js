@@ -19,8 +19,8 @@ exports.up = function(db, callback) {
   db.insert("sports", ["sport_name"], ["vélo"], callback);
   db.insert("sports", ["sport_name"], ["natation"], callback);
   db.insert("sports", ["sport_name"], ["musculation"], callback);
-  db.insert("sports", ["sport_name"], ["exterieur"], callback);
-  db.insert("sports", ["sport_name"], ["interieur"], callback);
+  db.insert("sports", ["sport_name"], ["autres sports ext."], callback);
+  db.insert("sports", ["sport_name"], ["autres sports int."], callback);
 };
 
 exports.down = function(db) {
