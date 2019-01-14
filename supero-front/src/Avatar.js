@@ -59,7 +59,7 @@ class Avatar extends Component {
       <Container fluid className="avatar-container">
         <Form onSubmit={this.onFormSubmit}>
           <Row>
-            <Col xs="12" className="d-flex justify-content-center mb-2 o">
+            <Col xs="12" className="d-flex justify-content-center mb-2 ">
               {!this.state.enable ? (
                 <i
                   style={{
