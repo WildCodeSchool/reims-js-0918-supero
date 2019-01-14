@@ -36,11 +36,11 @@ app.use(
   })
 );
 app.use(express.static("public"));
-app.use("/auth", auth);
+app.use("/api/auth", auth);
 app.use(cors());
 
 app.get(
-  "/test",
+  "/api/test",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.send(
