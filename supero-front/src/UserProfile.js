@@ -54,7 +54,7 @@ class UserProfile extends React.Component {
 
   getUserActivities = user_id => {
     axios
-      .get(`http://localhost:3001/userActivities?userId=${user_id}`, {
+      .get(`${process.env.REACT_APP_API}/userActivities?userId=${user_id}`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")

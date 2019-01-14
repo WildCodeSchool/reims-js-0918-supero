@@ -43,7 +43,7 @@ class Chat extends Component {
 
   getMessagesFromAPI() {
     axios
-      .get(`http://localhost:3001/messages/${this.props.match.params.roomID}`, {
+      .get(`${process.env.REACT_APP_API}/messages/${this.props.match.params.roomID}`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -65,7 +65,7 @@ class Chat extends Component {
       message: this.state.message
     };
     axios
-      .post("http://localhost:3001/messages", newMessage, {
+      .post(`${process.env.REACT_APP_API}/messages`, newMessage, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -93,7 +93,7 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    socket = io.connect("http://localhost:3001");
+    socket = io.connect(`${process.env.REACT_APP_API}`);
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
       socket.emit("room", roomID);
@@ -112,7 +112,7 @@ class Chat extends Component {
 
   getUserConnected = () => {
     axios
-      .get(`http://localhost:3001/connecteduser`, {
+      .get(`${process.env.REACT_APP_API}/connecteduser`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -208,7 +208,7 @@ class Chat extends Component {
                           height: "100%",
                           width: "100%"
                         }}
-                        src={`http://localhost:3001/images/${
+                        src={`${process.env.REACT_APP_API}/images/${
                           message.user_photo
                         }`}
                         alt="avatar"
