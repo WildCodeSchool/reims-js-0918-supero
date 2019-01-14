@@ -180,8 +180,12 @@ class ActivityDetail extends React.Component {
           1/{this.props.activityDetail.activity_max_participants} participants
         </span>
         <button className="activity_participation_button">Participer</button>
+        <span className="activity_detail_icon" style={{ fontWeight: "300" }}>
+          <FontAwesomeIcon className="ml-2 mr-1 mt-3" icon="map-marker-alt" />
+          {this.props.activityDetail.activity_adresse}
+        </span>
         <Map
-          style={{ height: "250px", marginTop: "15px" }}
+          style={{ height: "250px", marginTop: "5px" }}
           // center={latlngValue.latlng}
           center={{
             lat: this.props.activityDetail.activity_latitude,
