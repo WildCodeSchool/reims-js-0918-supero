@@ -127,7 +127,7 @@ class UserProfile extends React.Component {
             </span>
           </div>
           <div>
-            <h5>Activitées</h5>
+            <h5>Activités</h5>
             <p>
               Organisées :{" "}
               <span>
