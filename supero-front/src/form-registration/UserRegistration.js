@@ -27,7 +27,7 @@ class UserRegistration extends Component {
   submit = values => {
     !values.pseudo &&
       (values.pseudo = `${values.firstName} ${values.lastName}`);
-    fetch("http://localhost:3001/users", {
+    fetch(`${process.env.REACT_APP_API}/users`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json"

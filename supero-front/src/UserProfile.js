@@ -44,7 +44,7 @@ class UserProfile extends React.Component {
     this.props.fetchUserProfile();
     const token = localStorage.getItem("superoUser");
     axios
-      .get(`http://localhost:3001/users/${user_id}`, {
+      .get(`${process.env.REACT_APP_API}/users/${user_id}`, {
         headers: {
           authorization: "Bearer " + token
         }
@@ -100,7 +100,7 @@ class UserProfile extends React.Component {
           <div className="avatar rounded-circle">
             <img
               style={{ objectFit: "cover", height: "100%", width: "100%" }}
-              src={`http://localhost:3001/images/${
+              src={`${process.env.REACT_APP_API}/images/${
                 this.props.userProfile.user_photo
               }`}
               alt="avatar"
