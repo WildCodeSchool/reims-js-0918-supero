@@ -22,8 +22,9 @@ const Activity = props => {
       <Card className="activity" inverse>
         {props.sport_name ? (
           <CardImg
+            style={{ objectFit: "cover" }}
             width="100%"
-            src={`./images/${props.sport_name}.jpg`}
+            src={`./images/${props.sport_name.replace(/[. ,:-]+/g, "")}.jpg`}
             alt={props.sport_name}
           />
         ) : (
