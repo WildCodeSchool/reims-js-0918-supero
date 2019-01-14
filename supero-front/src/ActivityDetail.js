@@ -22,7 +22,10 @@ import {
   faInfoCircle,
   faBicycle,
   faCalendarAlt,
-  faSwimmer
+  faSwimmer,
+  faDumbbell,
+  faCity,
+  faCloudSun
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -34,7 +37,10 @@ library.add(
   faBicycle,
   faInfoCircle,
   faCalendarAlt,
-  faSwimmer
+  faSwimmer,
+  faDumbbell,
+  faCity,
+  faCloudSun
 );
 const difficulty = ["Facile", "Intermediaire", "Difficile", "Extrême"];
 
@@ -158,7 +164,10 @@ class ActivityDetail extends React.Component {
               style={{ width: "100%" }}
               src={
                 process.env.PUBLIC_URL +
-                `/images/${this.props.activityDetail.sport_name}.jpg`
+                `/images/${this.props.activityDetail.sport_name.replace(
+                  /[. ,:-]+/g,
+                  ""
+                )}.jpg`
               }
               alt="sport"
               align="bottom"
@@ -166,13 +175,20 @@ class ActivityDetail extends React.Component {
           </div>
           <div className="activity_profile_pastille_orange rounded-circle">
             <FontAwesomeIcon
-              className="ml-2 mr-1"
+              className="pl-1 pr-1"
               icon={`${
                 this.props.activityDetail.sport_name === "velo"
                   ? "bicycle"
                   : this.props.activityDetail.sport_name === "natation"
                   ? "swimmer"
-                  : this.props.activityDetail.sport_name
+                  : this.props.activityDetail.sport_name === "musculation"
+                  ? "dumbbell"
+                  : this.props.activityDetail.sport_name === "running"
+                  ? "running"
+                  : this.props.activityDetail.sport_name ===
+                    "autres sports ext."
+                  ? "cloud-sun"
+                  : "city"
               }`}
             />
           </div>
