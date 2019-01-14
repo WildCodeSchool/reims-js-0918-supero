@@ -8,8 +8,8 @@ import { Link, withRouter } from "react-router-dom";
 import { toastr } from "react-redux-toastr";
 import ComeFromTransparent from "./Animations/ComeFromTransparent";
 import ComeFromLeft from "./Animations/ComeFromLeft";
-
 import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import BounceEffect from "./Animations/BounceEffect";
 
 library.add(faTimes, faAngleLeft);
 
@@ -68,20 +68,22 @@ class Header extends React.Component {
           <div className="menu-container">
             <div>
               <div className="menu-user-container">
-                <div className="avatar rounded-circle">
-                  <img
-                    src={`${process.env.REACT_APP_API}/images/${
-                      this.props.connectedUser.user_photo
-                    }`}
-                    alt="avatar"
-                    align="bottom"
-                    style={{
-                      height: "120px",
-                      width: "120px",
-                      objectFit: "cover"
-                    }}
-                  />
-                </div>
+                <BounceEffect delay={100}>
+                  <div className="avatar rounded-circle">
+                    <img
+                      src={`${process.env.REACT_APP_API}/images/${
+                        this.props.connectedUser.user_photo
+                      }`}
+                      alt="avatar"
+                      align="bottom"
+                      style={{
+                        height: "120px",
+                        width: "120px",
+                        objectFit: "cover"
+                      }}
+                    />
+                  </div>
+                </BounceEffect>
                 <ComeFromTransparent delay={150}>
                   <p className="pseudo">
                     {this.props.connectedUser.user_pseudo}
