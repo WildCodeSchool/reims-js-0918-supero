@@ -1,27 +1,29 @@
 require("dotenv").config();
 const express = require("express");
 const passport = require("passport");
+const http = require("http");
 
 require("./passport-strategy");
 const auth = require("./auth");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const port = 3001;
-
 const app = express();
 const connection = require("./conf");
-
+const SocketIO = require("socket.io");
+//require("socketio");
+const server = http.createServer(app);
+const io = SocketIO(server);
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
   dest: "tmp/",
-  // fileFilter: function(req, file, cb) {
-  //   if (file.mimetype !== "image/png" || file.mimetype !== "image/jpeg") {
-  //     return cb(null, false);
-  //   } else {
-  //     cb(null, true);
-  //   }
-  // },
+  fileFilter: function(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error("Only image files are allowed!"));
+    }
+    cb(null, true);
+  },
   limits: {
     fileSize: 3 * 1024 * 1024
   }
@@ -36,7 +38,6 @@ app.use(
 app.use(express.static("public"));
 app.use("/auth", auth);
 app.use(cors());
-app.use(express.static("public"));
 
 app.get(
   "/test",
@@ -177,7 +178,24 @@ app
             console.log(err);
             res.status(500).send(err);
           } else {
-            res.status(200).json(result);
+            const activityDetail = result[0];
+            connection.query(
+              `SELECT COUNT(id) AS nb_participants
+            FROM user_has_activities WHERE activity_id = ${activityId}`,
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                  res.status(500).send(err);
+                } else {
+                  res.status(200).json({
+                    result: {
+                      nb_participants: result[0].nb_participants,
+                      ...activityDetail
+                    }
+                  });
+                }
+              }
+            );
           }
         }
       );
@@ -294,7 +312,78 @@ app
               .status(500)
               .json({ message: "Erreur lors de la création de l'activité" });
           } else {
-            res.status(200).json({ message: "Nouvelle activité créée" });
+            res.status(200).json({
+              message: "Nouvelle activité créée",
+              activityId: results.insertId
+            });
+          }
+        }
+      );
+    }
+  )
+
+  .delete(
+    "/activity/:activity_id/",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const activityId = req.params.activity_id;
+      connection.query(
+        "DELETE FROM activities WHERE activity_id =  ?",
+        activityId,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de la suppression" });
+          } else {
+            res.status(200).json({ message: "Activité supprimée" });
+          }
+        }
+      );
+    }
+  )
+  // S'inscrire à une activité
+  .post(
+    "/subscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      req.body = Object.assign(
+        {
+          user_id: req.user.id
+        },
+        req.body
+      );
+      const formData = req.body;
+      connection.query(
+        "INSERT INTO user_has_activities SET ?",
+        formData,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json({ message: "Erreur lors de l'inscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien inscrit" });
+          }
+        }
+      );
+    }
+  )
+  // Se désinscrire
+  .post(
+    "/unsubscribe",
+    passport.authenticate("jwt", { session: false }),
+    (req, res) => {
+      const user_id = req.user.id;
+      const activity_id = req.body.activity_id;
+      connection.query(
+        `DELETE FROM user_has_activities WHERE user_id = ${user_id} AND activity_id = ${activity_id}`,
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            res
+              .status(500)
+              .json({ message: "Erreur lors de la désinscription" });
+          } else {
+            res.status(200).json({ message: "Vous êtes bien désinscrit" });
           }
         }
       );
@@ -380,6 +469,35 @@ app.get(
   }
 );
 
+//USERS -- Récupérer les activités de l'utilisateur connecté
+app.get(
+  "/userActivities",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let idUser = req.user.id;
+    req.query.userId !== undefined && (idUser = req.query.userId);
+    connection.query(
+      `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM user_has_activities JOIN activities ON activities.activity_id = user_has_activities.activity_id JOIN users ON users.user_id = user_has_activities.user_id JOIN sports ON activities.sport_id = sports.sport_id WHERE user_has_activities.user_id = ?`,
+      [idUser],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          const participation = result;
+          connection.query(
+            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            [idUser],
+            (err, result) => {
+              res.status(200).json({ participation, created: result });
+            }
+          );
+        }
+      }
+    );
+  }
+);
+
 // USERS -- afficher l'utilisateur connecté
 
 app.get(
@@ -456,9 +574,90 @@ app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
   });
 });
 
+//Chat
+
+let room = "";
+io.on("connection", socket => {
+  console.log("New user connected");
+  socket.on("room", data => {
+    room = data.roomID;
+    socket.join(room);
+    console.log(`Join room - ${room}`);
+  });
+
+  //default username
+  socket.username = "Anonymous";
+
+  //listen on new_message
+  socket.on("new_message", data => {
+    io.sockets.in(room).emit("new_message", {
+      message: data.message,
+      username: data.username,
+      user_id: data.user_id,
+      user_photo: data.user_photo
+    });
+  });
+});
+
+//Poster un message
+app.post(
+  "/messages",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const formData = req.body;
+    connection.query("INSERT INTO messages SET ?", formData, err => {
+      if (err) {
+        res
+          .status(500)
+          .send(err)
+          .json({
+            toastType: "error",
+            message: "Erreur lors du post d'un message"
+          });
+      } else {
+        res.status(200).json({ message: "Message envoyé" });
+      }
+    });
+  }
+);
+
+//Récupérer les messages
+
+app.get(
+  "/messages/:activity_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const activity_id = req.params.activity_id;
+    connection.query(
+      `SELECT message,user_pseudo,user_photo,messages.user_id FROM messages JOIN users ON messages.user_id = users.user_id JOIN activities ON activities.activity_id = messages.activity_id WHERE messages.activity_id = ?`,
+      [activity_id],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          const messages = result;
+          connection.query(
+            `SELECT activity_title,activity_start_time FROM activities WHERE activity_id = ?`,
+            [activity_id],
+            (err, activity) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                res.json({ messages, activity: activity[0] });
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+);
+
 // USERS -- TERMINE
 
-app.listen(port, err => {
+server.listen(port, err => {
   if (err) {
     throw new Error("Something Bad Happened ...");
   }

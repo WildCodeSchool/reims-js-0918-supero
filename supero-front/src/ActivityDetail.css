@@ -110,6 +110,10 @@
   cursor: pointer;
 }
 
+.activity_profile .activity_creator .activity_creator_button a {
+  color: #7c7c7c;
+}
+
 .activity_profile .activity_description {
   margin-top: 5px;
   font-weight: 300;

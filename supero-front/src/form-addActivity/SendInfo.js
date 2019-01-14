@@ -28,14 +28,6 @@ const SendInfo = props => {
                 label="Infos complémentaire"
               />
             </FormGroup>
-            <FormGroup>
-              <Field
-                name="picture"
-                type="text"
-                component={renderField}
-                label="Photo"
-              />
-            </FormGroup>
             <div className="d-flex justify-content-between">
               <Button
                 type="button "

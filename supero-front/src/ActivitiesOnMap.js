@@ -30,7 +30,7 @@ class ActivitiesOnMap extends Component {
   componentDidMount() {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/activities`, {
+      .get(`${process.env.REACT_APP_API}/activities`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")

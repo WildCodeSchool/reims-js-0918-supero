@@ -22,6 +22,8 @@ import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import viewConnectedUserReducer from "./reducers/viewConnectedUserReducer";
 import changePageReducer from "./reducers/changePageReducer";
 import changeActivitiesOrderReducer from "./reducers/changeActivitiesOrderReducer";
+import connectedUserActivitiesReducer from "./reducers/connectedUserActivitiesReducer";
+import userActivitiesReducer from "./reducers/userActivitiesReducer";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -36,7 +38,9 @@ const rootReducer = history =>
     activityDetail: activityReducer,
     userProfile: viewUserProfileReducer,
     connectedUser: viewConnectedUserReducer,
+    connectedUserActivities: connectedUserActivitiesReducer,
     toastr: toastrReducer,
+    userActivities: userActivitiesReducer,
     form: formReducer.plugin({
       addactivity: (state, action) => {
         switch (action.type) {

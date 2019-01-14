@@ -25,7 +25,7 @@ class ActivitiesList extends Component {
     this.changePage = this.changePage.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getAllActivities();
     this.getUserConnected();
   }
@@ -34,7 +34,7 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `http://localhost:3001/activities?page=${this.props.activePage}&order=${
+        `${process.env.REACT_APP_API}/activities?page=${this.props.activePage}&order=${
           this.props.order
         }`,
         {
@@ -52,7 +52,7 @@ class ActivitiesList extends Component {
   getUserConnected = () => {
     this.props.fetchActivities();
     axios
-      .get(`http://localhost:3001/connecteduser`, {
+      .get(`${process.env.REACT_APP_API}/connecteduser`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")
@@ -60,6 +60,20 @@ class ActivitiesList extends Component {
       })
       .then(res => {
         this.props.getConnectedUser(res.data);
+      })
+      .then(this.getConnectedUserActivities());
+  };
+
+  getConnectedUserActivities = () => {
+    axios
+      .get(`http://localhost:3001/userActivities`, {
+        headers: {
+          accept: "application/json",
+          authorization: "Bearer " + localStorage.getItem("superoUser")
+        }
+      })
+      .then(res => {
+        this.props.getConnectedUserActivities(res.data);
       });
   };
 
@@ -67,7 +81,7 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `http://localhost:3001/search/${request}?order=${this.props.order}`,
+        `${process.env.REACT_APP_API}/search/${request}?order=${this.props.order}`,
         {
           headers: {
             accept: "application/json",

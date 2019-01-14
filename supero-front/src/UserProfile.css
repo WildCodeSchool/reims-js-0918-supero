@@ -4,6 +4,7 @@
 }
 
 .user_profile .avatar {
+  background-color: white;
   position: relative;
   bottom: 60px;
   font-size: 45px;
@@ -111,4 +112,9 @@
 
 .user_profile .level i:first-child {
   margin-left: 0;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-color: #fff !important;
 }

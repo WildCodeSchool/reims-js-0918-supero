@@ -41,7 +41,7 @@ class Avatar extends Component {
     this.setState({ enable: true });
   }
   fileUpload(file) {
-    const url = `http://localhost:3001/Avatar/${
+    const url = `${process.env.REACT_APP_API}/Avatar/${
       this.props.location.state.email
     }`;
     const formData = new FormData();

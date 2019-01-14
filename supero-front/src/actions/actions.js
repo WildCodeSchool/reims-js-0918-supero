@@ -8,7 +8,9 @@ import {
   VIEW_USER_PROFILE,
   CONNECTED_USER_RECEIVED,
   CHANGE_ACTIVE_PAGE,
-  CHANGE_ACTIVITIES_ORDER
+  CHANGE_ACTIVITIES_ORDER,
+  CONNECTED_USER_ACTIVITIES_RECEIVED,
+  USER_ACTIVITIES_RECEIVED
 } from "./actionTypes";
 
 export const selectAddressAction = address => ({
@@ -57,4 +59,14 @@ export const changeActivePageAction = page => ({
 export const changeActivitiesOrderAction = order => ({
   type: CHANGE_ACTIVITIES_ORDER,
   order
+});
+
+export const connectedUserActivitiesReceivedAction = connectedUserActivities => ({
+  type: CONNECTED_USER_ACTIVITIES_RECEIVED,
+  connectedUserActivities
+});
+
+export const userActivitiesReceivedAction = userActivities => ({
+  type: USER_ACTIVITIES_RECEIVED,
+  userActivities
 });
