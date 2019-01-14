@@ -74,7 +74,6 @@ class UserProfile extends React.Component {
         style={{ minHeight: "100vh", paddingBottom: "20px" }}
       >
         <Header title="Profil" goBack={this.goBack} />
-
         <div
           style={{
             marginBottom: "-40px",
@@ -195,8 +194,11 @@ class UserProfile extends React.Component {
             </TabPane>
           </TabContent>
         </div>
-
-        <button className="send_message">Envoyer un message</button>
+        {this.props.userProfile.user_id === this.props.connectedUser.user_id ? (
+          <button className="send_message">OK</button>
+        ) : (
+          <button className="send_message">Envoyer un message</button>
+        )}
       </div>
     );
   }
