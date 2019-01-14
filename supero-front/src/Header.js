@@ -6,6 +6,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, withRouter } from "react-router-dom";
 import { toastr } from "react-redux-toastr";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
+import ComeFromLeft from "./Animations/ComeFromLeft";
 
 import { faTimes, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -55,7 +57,9 @@ class Header extends React.Component {
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
               </Link>
             )}
-            <h2>{this.props.title}</h2>
+            <ComeFromTransparent delay={50}>
+              <h2>{this.props.title}</h2>
+            </ComeFromTransparent>
             <NavbarBrand href="/" className="mr-auto">
               Supero
             </NavbarBrand>
@@ -78,7 +82,11 @@ class Header extends React.Component {
                     }}
                   />
                 </div>
-                <p className="pseudo">{this.props.connectedUser.user_pseudo}</p>
+                <ComeFromTransparent delay={150}>
+                  <p className="pseudo">
+                    {this.props.connectedUser.user_pseudo}
+                  </p>
+                </ComeFromTransparent>
               </div>
               <FontAwesomeIcon
                 onClick={this.toggleNavbar}
@@ -87,33 +95,48 @@ class Header extends React.Component {
               />
               <Nav navbar>
                 <NavItem>
-                  <Link
-                    className="nav-link"
-                    to={`/UserProfile/${this.props.connectedUser.user_id}`}
-                  >
-                    Mon Compte
-                  </Link>
+                  <ComeFromLeft delay={250}>
+                    <Link
+                      className="nav-link"
+                      to={`/UserProfile/${this.props.connectedUser.user_id}`}
+                    >
+                      Mon Compte
+                    </Link>
+                  </ComeFromLeft>
                 </NavItem>
                 <NavItem>
-                  <Link className="nav-link" to={`/MyActivities`}>
-                    Mes activités
-                  </Link>
+                  <ComeFromLeft delay={350}>
+                    <Link className="nav-link" to={`/MyActivities`}>
+                      Mes activités
+                    </Link>
+                  </ComeFromLeft>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Notification</NavLink>
+                  <ComeFromLeft delay={450}>
+                    <NavLink href="#">Notification</NavLink>
+                  </ComeFromLeft>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">Aide et assistance</NavLink>
+                  <ComeFromLeft delay={550}>
+                    <NavLink href="#">Aide et assistance</NavLink>
+                  </ComeFromLeft>
                 </NavItem>
                 <NavItem>
-                  <NavLink onClick={() => this.disconnect()}>
-                    Déconnexion
-                  </NavLink>
+                  <ComeFromLeft delay={650}>
+                    <NavLink onClick={() => this.disconnect()}>
+                      Déconnexion
+                    </NavLink>
+                  </ComeFromLeft>
                 </NavItem>
               </Nav>
-              <button onClick={this.toggleNavbar} className="close-menu-button">
-                Fermer le menu
-              </button>
+              <ComeFromTransparent delay={750}>
+                <button
+                  onClick={this.toggleNavbar}
+                  className="close-menu-button"
+                >
+                  Fermer le menu
+                </button>
+              </ComeFromTransparent>
             </div>
           </div>
         )}
