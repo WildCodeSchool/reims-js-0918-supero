@@ -59,7 +59,7 @@ class Avatar extends Component {
       <Container fluid className="avatar-container">
         <Form onSubmit={this.onFormSubmit}>
           <Row>
-            <Col xs="12" className="d-flex justify-content-center mb-2">
+            <Col xs="12" className="d-flex justify-content-center mb-2 o">
               {!this.state.enable ? (
                 <i
                   style={{
@@ -71,6 +71,7 @@ class Avatar extends Component {
               ) : (
                 <img
                   style={{
+                    objectFit: "cover",
                     width: "150px",
                     height: "150px",
                     borderRadius: "150px"
