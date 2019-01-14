@@ -23,7 +23,7 @@ const Activity = props => {
         {props.sport_name ? (
           <CardImg
             width="100%"
-            src={`./images/${props.sport_name}.jpg`}
+            src={`/images/${props.sport_name}.jpg`}
             alt={props.sport_name}
           />
         ) : (
