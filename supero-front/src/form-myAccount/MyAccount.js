@@ -5,8 +5,6 @@ import Loading from "../Loading";
 // import { Button } from "reactstrap";
 // import { Link } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { load as loadAccount } from "./account";
-import { connect } from "react-redux";
 import "./myAccount.css";
 
 class MyAccount extends Component {
@@ -19,12 +17,13 @@ class MyAccount extends Component {
         }
       })
       .then(res => {
-        this.props.getConnectedUser(res.data);
+        // this.props.getConnectedUser(res.data);
+        this.props.TESTOHEY(res.data);
       });
   }
 
   render() {
-    const { handleSubmit, load, pristine, reset, submitting } = this.props;
+    const { handleSubmit, TESTOHEY, pristine, reset, submitting } = this.props;
     return (
       <div
         style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
@@ -40,9 +39,7 @@ class MyAccount extends Component {
                 <div>
                   <button
                     type="button"
-                    onClick={() =>
-                      load(this.props.connectedUser)
-                    }
+                    onClick={() => TESTOHEY(this.props.connectedUser)}
                   >
                     Load Account
                   </button>
@@ -74,12 +71,5 @@ class MyAccount extends Component {
 MyAccount = reduxForm({
   form: "initializeFromState"
 })(MyAccount);
-
-MyAccount = connect(
-  state => ({
-    initialValues: state.account.connectedUser // pull initial values from account reducer
-  }),
-  { load: loadAccount } // bind account loading action creator
-)(MyAccount);
 
 export default MyAccount;
