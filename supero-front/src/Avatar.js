@@ -97,6 +97,16 @@ class Avatar extends Component {
               <Col xs="12">
                 <FormGroup>
                   <Input type="file" onChange={this.onChange} />
+                  <p
+                    style={{
+                      color: "#fff",
+                      fontWeight: 300,
+                      fontSize: "small"
+                    }}
+                    className = "ml-1"
+                  >
+                    Téléchargez une image au format .png, .jpg, .jpeg
+                  </p>
                 </FormGroup>
               </Col>
             </Row>
