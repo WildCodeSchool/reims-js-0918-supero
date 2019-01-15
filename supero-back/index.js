@@ -547,7 +547,11 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/api/avatar/:email", upload.single("avatar"), function(req, res, next) {
+app.post("/api/Avatar/:email", upload.single("avatar"), function(
+  req,
+  res,
+  next
+) {
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
