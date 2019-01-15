@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { connectedUserReceivedAction } from "../actions/actions";
-import MyAccount from "../MyAccount";
+import MyAccount from "../form-myAccount/MyAccount";
 
 const mapStateToProps = state => ({
   userProfile: state.userProfile,
