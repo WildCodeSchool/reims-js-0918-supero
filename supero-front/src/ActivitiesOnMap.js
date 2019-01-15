@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { iconActivityMap } from "./iconActivityMap";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
 require("react-leaflet-markercluster/dist/styles.min.css"); // inside .js file
 
 library.add(faClock);
@@ -46,154 +47,164 @@ class ActivitiesOnMap extends Component {
       <div style={{ textAlign: "center" }}>
         <Header goBack={this.goBack} title="Geolocalisation" />
         {!this.props.isGeolocationAvailable ? (
-          <div
-            style={{
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              alignItems: "center"
-            }}
-          >
-            <div style={{ marginTop: "-71px" }}>
-              <h3 style={{ color: "#fff", width: "100%" }}>
-                Géolocalisation non supportée
-              </h3>
-              <Button
-                onClick={() => this.goBack()}
-                style={{
-                  borderRadius: "41px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  padding: "7px 18px",
-                  textTransform: "uppercase",
-                  border: "1px solid rgba(255, 255, 255, 0.4)"
-                }}
-              >
-                Retour
-              </Button>
-            </div>
-          </div>
-        ) : !this.props.isGeolocationEnabled ? (
-          <div
-            style={{
-              height: "100vh",
-              marginTop: "71px",
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              alignItems: "center"
-            }}
-          >
-            <div style={{ marginTop: "-71px" }}>
-              <h3 style={{ color: "#fff", width: "100%" }}>
-                Géolocalisation non activée
-              </h3>
-              <Button
-                onClick={() => this.goBack()}
-                style={{
-                  borderRadius: "41px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  padding: "7px 18px",
-                  textTransform: "uppercase",
-                  border: "1px solid rgba(255, 255, 255, 0.4)"
-                }}
-              >
-                Retour
-              </Button>
-            </div>
-          </div>
-        ) : this.props.coords ? (
-          <Fragment>
-            <Map
-              className="mapByGeoloc"
-              style={{ height: "100vh" }}
-              center={[this.props.coords.latitude, this.props.coords.longitude]}
-              zoom={13}
-              maxZoom={18}
+          <ComeFromTransparent delay={300}>
+            <div
+              style={{
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                alignItems: "center"
+              }}
             >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              />
-              <MarkerClusterGroup>
-                {this.props.activities.activities.map((activity, index) => (
-                  <Marker
-                    key={index}
-                    position={[
-                      activity.activity_latitude,
-                      activity.activity_longitude
-                    ]}
-                    icon={iconActivityMap}
-                  >
-                    <Popup>
-                      <h3
-                        style={{
-                          textTransform: "uppercase",
-                          marginBottom: "0",
-                          fontWeight: "bold"
-                        }}
-                      >
-                        {activity.sport_name}
-                      </h3>
-
-                      <p style={{ marginTop: "0", marginBottom: "0" }}>
-                        {activity.activity_title}
-                      </p>
-
-                      <p
-                        style={{
-                          textAlign: "center",
-                          marginTop: "5px",
-                          paddingBottom: "12px",
-                          paddingTop: "12px",
-                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
-                          borderTop: "1px solid rgba(0, 0, 0, 0.2)"
-                        }}
-                      >
-                        <span className="activity_detail_icon mr-3">
-                          <FontAwesomeIcon className=" mr-1" icon="clock" />
-                          {DateTime.fromSQL(activity.activity_duration).hour}h
-                          {DateTime.fromSQL(activity.activity_duration).minute >
-                            0 &&
-                            DateTime.fromSQL(activity.activity_duration).minute}
-                        </span>
-                        <span className="activity_detail_icon mr-3">
-                          <FontAwesomeIcon
-                            className="ml-1 mr-1"
-                            icon="calendar-alt"
-                          />
-                          {formatDate(activity.activity_start_time)}
-                        </span>
-                        <span className="activity_detail_icon mr-3">
-                          <FontAwesomeIcon className="ml-1 mr-1" icon="bolt" />
-                          Niveau {difficulty[activity.activity_difficulty - 1]}
-                        </span>
-                      </p>
-                      <p style={{ textAlign: "center" }}>
-                        <Button
+              <div style={{ marginTop: "-71px" }}>
+                <h3 style={{ color: "#fff", width: "100%" }}>
+                  Géolocalisation non supportée
+                </h3>
+                <Button
+                  onClick={() => this.goBack()}
+                  style={{
+                    borderRadius: "41px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    padding: "7px 18px",
+                    textTransform: "uppercase",
+                    border: "1px solid rgba(255, 255, 255, 0.4)"
+                  }}
+                >
+                  Retour
+                </Button>
+              </div>
+            </div>
+            ) : !this.props.isGeolocationEnabled ? (
+            <div
+              style={{
+                height: "100vh",
+                marginTop: "71px",
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                alignItems: "center"
+              }}
+            >
+              <div style={{ marginTop: "-71px" }}>
+                <h3 style={{ color: "#fff", width: "100%" }}>
+                  Géolocalisation non activée
+                </h3>
+                <Button
+                  onClick={() => this.goBack()}
+                  style={{
+                    borderRadius: "41px",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    padding: "7px 18px",
+                    textTransform: "uppercase",
+                    border: "1px solid rgba(255, 255, 255, 0.4)"
+                  }}
+                >
+                  Retour
+                </Button>
+              </div>
+            </div>
+            ) : this.props.coords ? (
+            <Fragment>
+              <Map
+                className="mapByGeoloc"
+                style={{ height: "100vh" }}
+                center={[
+                  this.props.coords.latitude,
+                  this.props.coords.longitude
+                ]}
+                zoom={13}
+                maxZoom={18}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <MarkerClusterGroup>
+                  {this.props.activities.activities.map((activity, index) => (
+                    <Marker
+                      key={index}
+                      position={[
+                        activity.activity_latitude,
+                        activity.activity_longitude
+                      ]}
+                      icon={iconActivityMap}
+                    >
+                      <Popup>
+                        <h3
                           style={{
-                            borderRadius: "41px",
-                            backgroundColor: "#e57419",
-                            padding: "7px 18px",
                             textTransform: "uppercase",
-                            border: "0",
+                            marginBottom: "0",
                             fontWeight: "bold"
                           }}
                         >
-                          <Link
-                            style={{ color: "#fff" }}
-                            to={`ActivityDetail/${activity.activity_id}`}
+                          {activity.sport_name}
+                        </h3>
+
+                        <p style={{ marginTop: "0", marginBottom: "0" }}>
+                          {activity.activity_title}
+                        </p>
+
+                        <p
+                          style={{
+                            textAlign: "center",
+                            marginTop: "5px",
+                            paddingBottom: "12px",
+                            paddingTop: "12px",
+                            borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                            borderTop: "1px solid rgba(0, 0, 0, 0.2)"
+                          }}
+                        >
+                          <span className="activity_detail_icon mr-3">
+                            <FontAwesomeIcon className=" mr-1" icon="clock" />
+                            {DateTime.fromSQL(activity.activity_duration).hour}h
+                            {DateTime.fromSQL(activity.activity_duration)
+                              .minute > 0 &&
+                              DateTime.fromSQL(activity.activity_duration)
+                                .minute}
+                          </span>
+                          <span className="activity_detail_icon mr-3">
+                            <FontAwesomeIcon
+                              className="ml-1 mr-1"
+                              icon="calendar-alt"
+                            />
+                            {formatDate(activity.activity_start_time)}
+                          </span>
+                          <span className="activity_detail_icon mr-3">
+                            <FontAwesomeIcon
+                              className="ml-1 mr-1"
+                              icon="bolt"
+                            />
+                            Niveau{" "}
+                            {difficulty[activity.activity_difficulty - 1]}
+                          </span>
+                        </p>
+                        <p style={{ textAlign: "center" }}>
+                          <Button
+                            style={{
+                              borderRadius: "41px",
+                              backgroundColor: "#e57419",
+                              padding: "7px 18px",
+                              textTransform: "uppercase",
+                              border: "0",
+                              fontWeight: "bold"
+                            }}
                           >
-                            Voir l'activité
-                          </Link>
-                        </Button>
-                      </p>
-                    </Popup>
-                  </Marker>
-                ))}
-              </MarkerClusterGroup>
-            </Map>
-          </Fragment>
+                            <Link
+                              style={{ color: "#fff" }}
+                              to={`ActivityDetail/${activity.activity_id}`}
+                            >
+                              Voir l'activité
+                            </Link>
+                          </Button>
+                        </p>
+                      </Popup>
+                    </Marker>
+                  ))}
+                </MarkerClusterGroup>
+              </Map>
+            </Fragment>
+          </ComeFromTransparent>
         ) : (
           <div
             style={{

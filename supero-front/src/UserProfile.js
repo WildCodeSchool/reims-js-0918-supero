@@ -16,6 +16,7 @@ import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 import ageCalculation from "./ageCalculation";
 import LastFiveActivities from "./LastFiveActivities";
 import classnames from "classnames";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -69,135 +70,141 @@ class UserProfile extends React.Component {
     return !this.props.userProfile ? (
       <Loading />
     ) : (
-      <div
-        className="user_profile"
-        style={{ minHeight: "100vh", paddingBottom: "20px" }}
-      >
-        <Header title="Profil" goBack={this.goBack} />
-
+      <ComeFromTransparent delay={300}>
         <div
-          style={{
-            marginBottom: "-40px",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            display: "flex"
-          }}
+          className="user_profile"
+          style={{ minHeight: "100vh", paddingBottom: "20px" }}
         >
+          <Header title="Profil" goBack={this.goBack} />
+
           <div
             style={{
-              width: "100%",
-              overflow: "hidden",
-              maxHeight: "220px"
+              marginBottom: "-40px",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              display: "flex"
             }}
           >
-            <img
-              style={{ width: "100%" }}
-              src={process.env.PUBLIC_URL + `/images/running.jpg`}
-              alt="sport"
-              align="bottom"
-            />
-          </div>
-          <div className="avatar rounded-circle">
-            <img
-              style={{ objectFit: "cover", height: "100%", width: "100%" }}
-              src={`${process.env.REACT_APP_API}/images/${
-                this.props.userProfile.user_photo
-              }`}
-              alt="avatar"
-              align="bottom"
-            />
-          </div>
-        </div>
-        <div className="user_name">
-          <h2>
-            {this.props.userProfile.user_firstname}{" "}
-            <span>{this.props.userProfile.user_lastname}</span>
-          </h2>
-          <h4 className="user_age">
-            {ageCalculation(this.props.userProfile.user_birthdate)} ans
-          </h4>
-        </div>
-        <div className="user_detail">
-          <div>
-            <h5>Niveau</h5>
-            <span className="level">
-              <DisplayDifficultyIcon
-                difficulty={this.props.userProfile.user_level}
+            <div
+              style={{
+                width: "100%",
+                overflow: "hidden",
+                maxHeight: "220px"
+              }}
+            >
+              <img
+                style={{ width: "100%" }}
+                src={process.env.PUBLIC_URL + `/images/running.jpg`}
+                alt="sport"
+                align="bottom"
               />
-            </span>
+            </div>
+            <div className="avatar rounded-circle">
+              <img
+                style={{ objectFit: "cover", height: "100%", width: "100%" }}
+                src={`${process.env.REACT_APP_API}/images/${
+                  this.props.userProfile.user_photo
+                }`}
+                alt="avatar"
+                align="bottom"
+              />
+            </div>
           </div>
-          <div>
-            <h5>Activités</h5>
-            <p>
-              Organisées :{" "}
-              <span>
-                {this.props.userActivities.created &&
-                  this.props.userActivities.created.length}
-              </span>{" "}
-              | Participées :{" "}
-              <span>
-                {this.props.userActivities.participation &&
-                  this.props.userActivities.participation.length}
+          <div className="user_name">
+            <h2>
+              {this.props.userProfile.user_firstname}{" "}
+              <span>{this.props.userProfile.user_lastname}</span>
+            </h2>
+            <h4 className="user_age">
+              {ageCalculation(this.props.userProfile.user_birthdate)} ans
+            </h4>
+          </div>
+          <div className="user_detail">
+            <div>
+              <h5>Niveau</h5>
+              <span className="level">
+                <DisplayDifficultyIcon
+                  difficulty={this.props.userProfile.user_level}
+                />
               </span>
-            </p>
-          </div>
-        </div>
-        <div className="user_about">{this.props.userProfile.user_about}</div>
-        <div className="lastFiveActivities">
-          {" "}
-          <h5>Dernières activités</h5>
-          <Nav tabs>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "1" })}
-                onClick={() => {
-                  this.toggle("1");
-                }}
-              >
-                Participées
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "2" })}
-                onClick={() => {
-                  this.toggle("2");
-                }}
-              >
-                Organisées
-              </NavLink>
-            </NavItem>
-          </Nav>
-          <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="1">
-              <Row>
-                <Col sm="12">
-                  {this.props.userActivities.participation &&
-                    this.props.userActivities.participation.length > 0 && (
-                      <LastFiveActivities
-                        activities={this.props.userActivities.participation}
-                      />
-                    )}
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <Col sm="12">
+            </div>
+            <div>
+              <h5>Activités</h5>
+              <p>
+                Organisées :{" "}
+                <span>
                   {this.props.userActivities.created &&
-                    this.props.userActivities.created.length > 0 && (
-                      <LastFiveActivities
-                        activities={this.props.userActivities.created}
-                      />
-                    )}
-                </Col>
-              </Row>
-            </TabPane>
-          </TabContent>
-        </div>
+                    this.props.userActivities.created.length}
+                </span>{" "}
+                | Participées :{" "}
+                <span>
+                  {this.props.userActivities.participation &&
+                    this.props.userActivities.participation.length}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className="user_about">{this.props.userProfile.user_about}</div>
+          <div className="lastFiveActivities">
+            {" "}
+            <h5>Dernières activités</h5>
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "1"
+                  })}
+                  onClick={() => {
+                    this.toggle("1");
+                  }}
+                >
+                  Participées
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "2"
+                  })}
+                  onClick={() => {
+                    this.toggle("2");
+                  }}
+                >
+                  Organisées
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <Row>
+                  <Col sm="12">
+                    {this.props.userActivities.participation &&
+                      this.props.userActivities.participation.length > 0 && (
+                        <LastFiveActivities
+                          activities={this.props.userActivities.participation}
+                        />
+                      )}
+                  </Col>
+                </Row>
+              </TabPane>
+              <TabPane tabId="2">
+                <Row>
+                  <Col sm="12">
+                    {this.props.userActivities.created &&
+                      this.props.userActivities.created.length > 0 && (
+                        <LastFiveActivities
+                          activities={this.props.userActivities.created}
+                        />
+                      )}
+                  </Col>
+                </Row>
+              </TabPane>
+            </TabContent>
+          </div>
 
-        <button className="send_message">Envoyer un message</button>
-      </div>
+          <button className="send_message">Envoyer un message</button>
+        </div>
+      </ComeFromTransparent>
     );
   }
 }

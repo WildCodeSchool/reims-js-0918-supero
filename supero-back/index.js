@@ -105,6 +105,7 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      console.log(req.query.page);
       const limit = 5;
       const offset = (req.query.page - 1) * limit;
       const order = req.query.order;

@@ -4,6 +4,8 @@ import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
 import renderField from "../renderField";
 import AddressInput from "./AddressInput";
 import ViewAddressOnMap from "./ViewAddressOnMap";
+import ComeFromTransparent from "../Animations/ComeFromTransparent";
+import ComeFromLeft from "../Animations/ComeFromLeft";
 
 const SendPlace = props => {
   const { handleSubmit, previousPage, selectAddress, addressSelected } = props;
@@ -12,36 +14,51 @@ const SendPlace = props => {
       <Row className="d-flex justify-content-center">
         <Col xs="10">
           <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Où ?</h2>
+            <ComeFromTransparent delay={300}>
+              <h2 className="text-center">Où ?</h2>
+            </ComeFromTransparent>
             <FormGroup>
-              <Field
-                name="address"
-                type="text"
-                component={AddressInput}
-                label="Adresse"
-                selectAddress={selectAddress}
-                adressSelected={addressSelected}
-              />
+              <ComeFromLeft delay={400}>
+                {" "}
+                <Field
+                  name="address"
+                  type="text"
+                  component={AddressInput}
+                  label="Adresse"
+                  selectAddress={selectAddress}
+                  adressSelected={addressSelected}
+                />
+              </ComeFromLeft>
             </FormGroup>
             {addressSelected.x && (
-              <ViewAddressOnMap addressCoordinates={addressSelected} />
+              <ComeFromTransparent delay={0}>
+                <ViewAddressOnMap addressCoordinates={addressSelected} />
+              </ComeFromTransparent>
             )}
             <FormGroup>
-              <Field
-                name="city"
-                type="text"
-                component={renderField}
-                label="Ville"
-              />
+              <ComeFromLeft delay={500}>
+                <Field
+                  name="city"
+                  type="text"
+                  component={renderField}
+                  label="Ville"
+                />
+              </ComeFromLeft>
             </FormGroup>
-            <div className="d-flex justify-content-between">
-              <Button type="button" className="previous" onClick={previousPage}>
-                Précédent
-              </Button>
-              <Button type="submit" className="next">
-                Suivant
-              </Button>
-            </div>
+            <ComeFromTransparent delay={600}>
+              <div className="d-flex justify-content-between">
+                <Button
+                  type="button"
+                  className="previous"
+                  onClick={previousPage}
+                >
+                  Précédent
+                </Button>
+                <Button type="submit" className="next">
+                  Suivant
+                </Button>
+              </div>
+            </ComeFromTransparent>
           </Form>
         </Col>
       </Row>
