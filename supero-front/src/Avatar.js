@@ -101,33 +101,6 @@ class Avatar extends Component {
               </Col>
             </Row>
           </ComeFromLeft>
-
-          {/* this row is conflicting */}
-          <Row>
-            <Col xs="12" className="d-flex justify-content-center mb-2 ">
-              {!this.state.enable ? (
-                <i
-                  style={{
-                    fontSize: "150px",
-                    color: "rgba(255, 255, 255,0.5)"
-                  }}
-                  className="fas fa-user"
-                />
-              ) : (
-                <img
-                  style={{
-                    objectFit: "cover",
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "150px"
-                  }}
-                  alt="profile"
-                  src={this.preview}
-                />
-              )}
-            </Col>
-          </Row>
-
           <Row>
             <Col xs="6" className="d-flex justify-content-center">
               <ComeFromTransparent delay={500}>
