@@ -1,8 +1,8 @@
-import { LOAD } from "../actions/actionTypes";
+import { LOAD_ACCOUNT_ACTION } from "../actions/actionTypes";
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case LOAD:
+    case LOAD_ACCOUNT_ACTION:
       return {
         connectedUser: action.connectedUser
       };
@@ -10,10 +10,5 @@ const reducer = (state = {}, action) => {
       return state;
   }
 };
-
-/**
- * Simulates data loaded into this reducer from somewhere
- */
-export const load = connectedUser => ({ type: LOAD, connectedUser });
 
 export default reducer;

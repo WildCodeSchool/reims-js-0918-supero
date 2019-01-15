@@ -24,7 +24,7 @@ import changePageReducer from "./reducers/changePageReducer";
 import changeActivitiesOrderReducer from "./reducers/changeActivitiesOrderReducer";
 import connectedUserActivitiesReducer from "./reducers/connectedUserActivitiesReducer";
 import userActivitiesReducer from "./reducers/userActivitiesReducer";
-import account from "./form-myAccount/account";
+import accountReducer from "./form-myAccount/account";
 
 const history = createBrowserHistory();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -42,7 +42,7 @@ const rootReducer = history =>
     connectedUserActivities: connectedUserActivitiesReducer,
     toastr: toastrReducer,
     userActivities: userActivitiesReducer,
-    account,
+    account: accountReducer,
     form: formReducer.plugin({
       addactivity: (state, action) => {
         switch (action.type) {

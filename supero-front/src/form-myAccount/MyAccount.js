@@ -17,13 +17,12 @@ class MyAccount extends Component {
         }
       })
       .then(res => {
-        // this.props.getConnectedUser(res.data);
-        this.props.TESTOHEY(res.data);
+        this.props.getConnectedUser(res.data);
       });
   }
 
   render() {
-    const { handleSubmit, TESTOHEY, pristine, reset, submitting } = this.props;
+    const { handleSubmit, getConnectedUser, pristine, reset, submitting } = this.props;
     return (
       <div
         style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
@@ -36,14 +35,6 @@ class MyAccount extends Component {
             <Fragment>
               <form onSubmit={handleSubmit}>
                 <h3>{this.props.connectedUser.user_pseudo}</h3>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => TESTOHEY(this.props.connectedUser)}
-                  >
-                    Load Account
-                  </button>
-                </div>
                 <div>
                   <label>Your pseudo</label>
                   <div>

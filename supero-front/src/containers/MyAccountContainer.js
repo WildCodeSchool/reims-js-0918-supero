@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
-import { connectedUserReceivedAction } from "../actions/actions";
 import MyAccount from "../form-myAccount/MyAccount";
-import { load } from "../form-myAccount/account";
+import { loadAccountAction } from "../actions/actions";
 
 const mapStateToProps = state => ({
   userProfile: state.userProfile,
@@ -12,8 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getConnectedUser: connectedUser =>
-    dispatch(connectedUserReceivedAction(connectedUser)),
-  TESTOHEY: connectedUser => dispatch(load(connectedUser))
+    dispatch(loadAccountAction(connectedUser))
 });
 
 export default connect(

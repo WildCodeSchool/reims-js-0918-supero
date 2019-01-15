@@ -10,7 +10,8 @@ import {
   CHANGE_ACTIVE_PAGE,
   CHANGE_ACTIVITIES_ORDER,
   CONNECTED_USER_ACTIVITIES_RECEIVED,
-  USER_ACTIVITIES_RECEIVED
+  USER_ACTIVITIES_RECEIVED,
+  LOAD_ACCOUNT_ACTION
 } from "./actionTypes";
 
 export const selectAddressAction = address => ({
@@ -69,4 +70,9 @@ export const connectedUserActivitiesReceivedAction = connectedUserActivities => 
 export const userActivitiesReceivedAction = userActivities => ({
   type: USER_ACTIVITIES_RECEIVED,
   userActivities
+});
+
+export const loadAccountAction = connectedUser => ({
+  type: LOAD_ACCOUNT_ACTION,
+  connectedUser
 });
