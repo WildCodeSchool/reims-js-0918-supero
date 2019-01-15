@@ -12,11 +12,16 @@ const SENDINFO_PAGE = 3;
 class UserRegistration extends Component {
   constructor(props) {
     super(props);
+    this.goBack = this.goBack.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.state = {
       page: 1
     };
+  }
+
+  goBack() {
+    this.props.history.goBack();
   }
 
   submit = values => {
@@ -66,7 +71,7 @@ class UserRegistration extends Component {
     const { page } = this.state;
     return (
       <Fragment>
-        <Header title="Nouvel utilisateur" />
+        <Header title="Nouvel utilisateur" goBack={this.goBack} />
         <div className="UserRegistration-container">
           {page === SENDIDENTIFIERS_PAGE && (
             <SendIdentifiers onSubmit={this.nextPage} />
