@@ -82,6 +82,7 @@ class Chat extends Component {
       user_photo: this.props.connectedUser.user_photo,
       user_id: this.props.connectedUser.user_id
     });
+    this.setState({ message: "" });
   }
 
   handleTyping(event) {
