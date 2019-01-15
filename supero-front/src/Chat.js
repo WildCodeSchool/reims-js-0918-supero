@@ -6,6 +6,8 @@ import io from "socket.io-client";
 import "./Chat.css";
 import { toastr } from "react-redux-toastr";
 import formatDate from "./formatDate.js";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
+import ComeFromLeft from "./Animations/ComeFromLeft";
 
 //make connection
 let socket = null;
@@ -130,134 +132,142 @@ class Chat extends Component {
         <div style={{ paddingBottom: "10px" }}>
           <Header title="Chat" goBack={this.goBack} />
         </div>
-        <div
-          style={{
-            paddingTop: "80px",
-            color: "#fff",
-            width: "90%",
-            margin: "0 auto"
-          }}
-          id="chat"
-        >
+        <ComeFromTransparent delay={300}>
           <div
-            className="conversationStatus"
             style={{
-              position: "fixed",
-              top: "100px",
-              width: "100%",
-              textAlign: "center",
-              fontWeight: "300",
-              marginBottom: "15px"
+              paddingTop: "80px",
+              color: "#fff",
+              width: "90%",
+              margin: "0 auto"
             }}
+            id="chat"
           >
-            <h6 style={{ marginBottom: "0" }}>
-              {this.state.activity.activity_title}
-            </h6>
-            <p>{formatDate(this.state.activity.activity_start_time)}</p>
-          </div>
-          <div
-            className="messagesContainer"
-            ref={el => {
-              this.messagesContainer = el;
-            }}
-            style={{ marginTop: "75px", height: "64vh", overflowY: "scroll" }}
-          >
-            {this.state.messages.map((message, index) => (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  paddingBottom: "15px",
-                  justifyContent:
-                    message.user_id !== this.props.connectedUser.user_id
-                      ? "flex-start"
-                      : "flex-end"
-                }}
-              >
-                <span
+            <div
+              className="conversationStatus"
+              style={{
+                position: "fixed",
+                top: "100px",
+                width: "90%",
+                textAlign: "center",
+                fontWeight: "300",
+                marginBottom: "15px"
+              }}
+            >
+              <h6 style={{ marginBottom: "0" }}>
+                {this.state.activity.activity_title}
+              </h6>
+              <p>{formatDate(this.state.activity.activity_start_time)}</p>
+            </div>
+            <div
+              className="messagesContainer"
+              ref={el => {
+                this.messagesContainer = el;
+              }}
+              style={{ marginTop: "75px", height: "64vh", overflowY: "scroll" }}
+            >
+              {this.state.messages.map((message, index) => (
+                <div
+                  key={index}
                   style={{
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
                     display: "flex",
-                    padding: "10px 15px",
-                    borderRadius: "20px",
-                    borderBottomLeftRadius:
+                    paddingBottom: "15px",
+                    justifyContent:
                       message.user_id !== this.props.connectedUser.user_id
-                        ? "0"
-                        : "20px",
-                    borderBottomRightRadius:
-                      message.user_id !== this.props.connectedUser.user_id
-                        ? "20px"
-                        : "0"
+                        ? "flex-start"
+                        : "flex-end"
                   }}
                 >
-                  {this.props.connectedUser.user_id !== message.user_id && (
-                    <div
-                      className="user_photo"
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        backgroundSize: "cover",
-                        borderRadius: "50px",
-                        overflow: "hidden",
-                        objectFit: "cover",
-                        marginRight: "10px"
-                      }}
-                    >
-                      <img
-                        style={{
-                          objectFit: "cover",
-                          height: "100%",
-                          width: "100%"
-                        }}
-                        src={`http://localhost:3001/images/${
-                          message.user_photo
-                        }`}
-                        alt="avatar"
-                        align="bottom"
-                      />
-                    </div>
-                  )}
-                  <p
+                  <span
                     style={{
-                      marginBottom: "0",
-                      textAlign:
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                      display: "flex",
+                      padding: "10px 15px",
+                      borderRadius: "20px",
+                      borderBottomLeftRadius:
                         message.user_id !== this.props.connectedUser.user_id
-                          ? "left"
-                          : "right"
+                          ? "0"
+                          : "20px",
+                      borderBottomRightRadius:
+                        message.user_id !== this.props.connectedUser.user_id
+                          ? "20px"
+                          : "0"
                     }}
                   >
-                    {this.props.connectedUser.user_id !== message.user_id &&
-                      `${message.user_pseudo} | `}
-                    <span style={{ fontWeight: "300" }}>{message.message}</span>
-                  </p>
-                </span>
-              </div>
-            ))}
-            <div
-              style={{ float: "left", clear: "both" }}
-              ref={el => {
-                this.messagesEnd = el;
-              }}
-            />
-          </div>
-          <Form className="sendMessage">
-            <FormGroup>
-              <Input
-                style={{
-                  borderRadius: "41px",
-                  color: "white !important",
-                  border: "1px solid rgba(255, 255, 255, 0.4) !important",
-                  backgroundColor: "rgba(255, 255, 255, 0.1) !important"
+                    {this.props.connectedUser.user_id !== message.user_id && (
+                      <div
+                        className="user_photo"
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          backgroundSize: "cover",
+                          borderRadius: "50px",
+                          overflow: "hidden",
+                          objectFit: "cover",
+                          marginRight: "10px"
+                        }}
+                      >
+                        <img
+                          style={{
+                            objectFit: "cover",
+                            height: "100%",
+                            width: "100%"
+                          }}
+                          src={`http://localhost:3001/images/${
+                            message.user_photo
+                          }`}
+                          alt="avatar"
+                          align="bottom"
+                        />
+                      </div>
+                    )}
+                    <p
+                      style={{
+                        marginBottom: "0",
+                        textAlign:
+                          message.user_id !== this.props.connectedUser.user_id
+                            ? "left"
+                            : "right"
+                      }}
+                    >
+                      {this.props.connectedUser.user_id !== message.user_id &&
+                        `${message.user_pseudo} | `}
+                      <span style={{ fontWeight: "300" }}>
+                        {message.message}
+                      </span>
+                    </p>
+                  </span>
+                </div>
+              ))}
+              <div
+                style={{ float: "left", clear: "both" }}
+                ref={el => {
+                  this.messagesEnd = el;
                 }}
-                onChange={event => this.handleTyping(event)}
-                type="text"
-                value={this.state.message}
-                placeholder="Tapez votre message"
               />
-            </FormGroup>
-            <Button onClick={() => this.sendMessage()}>Envoyer</Button>
-          </Form>
-        </div>
+            </div>
+            <Form className="sendMessage">
+              <ComeFromLeft delay={400}>
+                <FormGroup>
+                  <Input
+                    style={{
+                      borderRadius: "41px",
+                      color: "white !important",
+                      border: "1px solid rgba(255, 255, 255, 0.4) !important",
+                      backgroundColor: "rgba(255, 255, 255, 0.1) !important"
+                    }}
+                    onChange={event => this.handleTyping(event)}
+                    type="text"
+                    value={this.state.message}
+                    placeholder="Tapez votre message"
+                  />
+                </FormGroup>
+              </ComeFromLeft>
+              <ComeFromLeft delay={500}>
+                <Button onClick={() => this.sendMessage()}>Envoyer</Button>
+              </ComeFromLeft>
+            </Form>
+          </div>
+        </ComeFromTransparent>
       </div>
     );
   }
