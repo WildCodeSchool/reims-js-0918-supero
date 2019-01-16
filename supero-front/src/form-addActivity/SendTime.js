@@ -17,6 +17,18 @@ const SendTime = props => {
               <h2 className="text-center">Quand ?</h2>
             </ComeFromTransparent>
 
+            <h2 className="text-center">Quand ?</h2>
+            <FormGroup>
+              <label style={{ color: "#fff" }}>Date de l'activité</label>
+              <Field
+                name="start_time"
+                type="datetime-local"
+                component={renderField}
+                label="Date et heure de début"
+              />
+              <p style={{color:"#fff", fontWeight:300, fontSize:"small"}}>Exemple: 01/02/2019 12:45</p>
+            </FormGroup>
+            <label style={{ color: "#fff" }}>Durée</label>
             <FormGroup>
               <ComeFromLeft delay={400}>
                 <label style={{ color: "#fff" }}>Date de l'activité</label>

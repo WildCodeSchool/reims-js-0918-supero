@@ -323,16 +323,18 @@ class ActivityDetail extends React.Component {
                 color: "#e57419",
                 backgroundColor: "#fff"
               }}
+              length={4}
+              zoom={13}
               onClick={() => this.deleteActivity()}
               className="activity_participation_button"
             >
               Supprimer
             </button>
           )}
-          <span className="activity_detail_icon" style={{ fontWeight: "300" }}>
+          <p className="activity_detail_icon" style={{ fontWeight: "300" }}>
             <FontAwesomeIcon className="ml-2 mr-1 mt-3" icon="map-marker-alt" />
             {this.props.activityDetail.activity_adresse}
-          </span>
+          </p>
           <Map
             style={{ height: "250px", marginTop: "5px" }}
             center={{
