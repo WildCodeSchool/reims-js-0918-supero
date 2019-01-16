@@ -327,10 +327,10 @@ class ActivityDetail extends React.Component {
             Supprimer
           </button>
         )}
-        <span className="activity_detail_icon" style={{ fontWeight: "300" }}>
-          <FontAwesomeIcon className="ml-2 mr-1 mt-3" icon="map-marker-alt" />
+        <p className="activity_detail_icon" style={{ fontWeight: "300", padding: "0 20px" }}>
+          <FontAwesomeIcon className="mr-1 mt-3" icon="map-marker-alt" />
           {this.props.activityDetail.activity_adresse}
-        </span>
+        </p>
         <Map
           style={{ height: "250px", marginTop: "5px" }}
           center={{
