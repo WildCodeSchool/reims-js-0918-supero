@@ -109,16 +109,17 @@ app
       const offset = (req.query.page - 1) * limit;
       const order = req.query.order;
       const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
-      connection.query(
-        `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            res.status(500).send(err);
-          } else {
-            const activitiesTotal = result[0].activitiesTotal;
-            connection.query(
-              `SELECT ${columnsRequiredForActivities}
+      req.query.page !== undefined
+        ? connection.query(
+            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                const activitiesTotal = result[0].activitiesTotal;
+                connection.query(
+                  `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
       JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW()) ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
@@ -130,10 +131,22 @@ app
                   res.status(200).json({ activities: result, activitiesTotal });
                 }
               }
-            );
-          }
-        }
-      );
+            }
+          )
+        : connection.query(
+            `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id `,
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                res.status(200).json({ activities: result });
+              }
+            }
+          );
     }
   )
 
@@ -487,7 +500,7 @@ app.get(
         } else {
           const participation = result;
           connection.query(
-            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
             [idUser],
             (err, result) => {
               res.status(200).json({ participation, created: result });
