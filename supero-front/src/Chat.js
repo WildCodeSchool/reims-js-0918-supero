@@ -58,7 +58,8 @@ class Chat extends Component {
   }
 
   //emit message
-  sendMessage() {
+  sendMessage(event) {
+    event.preventDefault();
     const newMessage = {
       activity_id: this.props.match.params.roomID,
       user_id: this.props.connectedUser.user_id,
@@ -240,7 +241,7 @@ class Chat extends Component {
               }}
             />
           </div>
-          <Form className="sendMessage">
+          <Form onSubmit={e => this.sendMessage(e)} className="sendMessage">
             <FormGroup>
               <Input
                 style={{
@@ -255,7 +256,9 @@ class Chat extends Component {
                 placeholder="Tapez votre message"
               />
             </FormGroup>
-            <Button onClick={() => this.sendMessage()}>Envoyer</Button>
+            <Button type="submit" onClick={event => this.sendMessage(event)}>
+              Envoyer
+            </Button>
           </Form>
         </div>
       </div>
