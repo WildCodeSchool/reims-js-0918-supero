@@ -59,6 +59,16 @@ class ActivityDetail extends React.Component {
     this.getActivityDetail();
   }
 
+  componentDidUpdate(prevState) {
+    if (
+      prevState.connectedUserActivities.participation !==
+      this.props.connectedUserActivities.participation
+    ) {
+      this.getUserActivities();
+      this.getActivityDetail();
+    }
+  }
+
   getActivityDetail() {
     const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
@@ -87,9 +97,7 @@ class ActivityDetail extends React.Component {
         } else {
           toastr.error("Erreur", res.data.message);
         }
-      })
-      .then(this.getUserActivities())
-      .then(this.getActivityDetail());
+      });
   }
 
   unsubscribeToActivity() {
@@ -107,9 +115,7 @@ class ActivityDetail extends React.Component {
         } else {
           toastr.error("Erreur", res.data.message);
         }
-      })
-      .then(this.getUserActivities())
-      .then(this.getActivityDetail());
+      });
   }
 
   deleteActivity() {
