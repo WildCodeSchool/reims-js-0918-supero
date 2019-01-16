@@ -530,7 +530,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE users SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE user_id = ?",
       [formData, idUser],
       err => {
         if (err) {

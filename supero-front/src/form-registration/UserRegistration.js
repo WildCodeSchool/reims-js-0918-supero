@@ -25,6 +25,7 @@ class UserRegistration extends Component {
   }
 
   submit = values => {
+    console.log(values.birthdate)
     !values.pseudo &&
       (values.pseudo = `${values.firstName} ${values.lastName}`);
     fetch(`${process.env.REACT_APP_API}/users`, {

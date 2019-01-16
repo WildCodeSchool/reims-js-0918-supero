@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Header from "../Header";
 // import { Button } from "reactstrap";
 // import { Link } from "react-router-dom";
@@ -14,9 +14,10 @@ import {
   Col
 } from "reactstrap";
 import renderField from "../renderField";
+import { toastr } from "react-redux-toastr";
+import axios from "axios";
 
 const MyAccount = props => {
-  console.log(props)
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}>
@@ -27,8 +28,32 @@ const MyAccount = props => {
         <Container fluid>
           <Row className="d-flex justify-content-center">
             <Col xs="10">
-              <Form onSubmit={handleSubmit}>
-                <h2 className="text-center">Qui êtes-vous ?</h2>
+              <Form
+                onSubmit={handleSubmit(values =>
+                  axios
+                    .put(
+                      `${process.env.REACT_APP_API}/users/${
+                        props.initialValues.user_id
+                      }`,
+                      values,
+                      {
+                        headers: {
+                          accept: "application/json",
+                          authorization:
+                            "Bearer " + localStorage.getItem("superoUser")
+                        }
+                      }
+                    )
+                    .then(res => {
+                      if (res.data.toastType !== "error") {
+                        toastr.success("Succès", res.data.message);
+                      } else {
+                        toastr.error("Erreur", res.data.message);
+                      }
+                    })
+                )}
+              >
+                <h2 className="text-center">Mon compte</h2>
                 <FormGroup>
                   <Field
                     className="Form-Input"
