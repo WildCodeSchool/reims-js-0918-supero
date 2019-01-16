@@ -130,8 +130,8 @@ app
                 } else {
                   res.status(200).json({ activities: result, activitiesTotal });
                 }
-              }
-            }
+              })
+            }}
           )
         : connection.query(
             `SELECT ${columnsRequiredForActivities}
