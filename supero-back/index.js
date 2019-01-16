@@ -504,7 +504,7 @@ app.get(
         } else {
           const participation = result;
           connection.query(
-            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
             [idUser],
             (err, result) => {
               res.status(200).json({ participation, created: result });
