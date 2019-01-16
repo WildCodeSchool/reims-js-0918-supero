@@ -123,13 +123,17 @@ app
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
       JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW()) ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
-              (err, result) => {
-                if (err) {
-                  console.log(err);
-                  res.status(500).send(err);
-                } else {
-                  res.status(200).json({ activities: result, activitiesTotal });
-                }
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                      res.status(500).send(err);
+                    } else {
+                      res
+                        .status(200)
+                        .json({ activities: result, activitiesTotal });
+                    }
+                  }
+                );
               }
             }
           )
