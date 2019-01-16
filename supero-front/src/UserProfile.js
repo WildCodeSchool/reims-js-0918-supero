@@ -102,7 +102,7 @@ class UserProfile extends React.Component {
             <img
               style={{ objectFit: "cover", height: "100%", width: "100%" }}
               src={`${process.env.REACT_APP_API}/images/${
-                this.props.connectedUser.user_photo
+                this.props.userProfile.user_photo
               }`}
               alt="avatar"
               align="bottom"
@@ -128,7 +128,7 @@ class UserProfile extends React.Component {
             </span>
           </div>
           <div>
-            <h5>Activitées</h5>
+            <h5>Activités</h5>
             <p>
               Organisées :{" "}
               <span>
