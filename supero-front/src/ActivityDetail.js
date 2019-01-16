@@ -327,7 +327,7 @@ class ActivityDetail extends React.Component {
             Supprimer
           </button>
         )}
-        <p className="activity_detail_icon" style={{ fontWeight: "300", padding: "0 20px" }}>
+        <p className="activity_detail_icon" style={{ fontWeight: "300", padding: "0 20px", fontFamily:"Open Sans, sans-serif" }}>
           <FontAwesomeIcon className="mr-1 mt-3" icon="map-marker-alt" />
           {this.props.activityDetail.activity_adresse}
         </p>
