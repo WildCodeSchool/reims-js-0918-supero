@@ -76,6 +76,7 @@ class Chat extends Component {
           toastr.error("Erreur", res.data.message);
         }
       });
+	console.log("socket", socket);
     socket.emit("new_message", {
       username: this.props.connectedUser.user_pseudo,
       message: this.state.message,
@@ -93,9 +94,10 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    socket = io.connect(`${process.env.REACT_APP_API}`);
+    socket = io(process.env.REACT_APP_API, {path: 'chat/socket.io'});
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
+	console.log("connect");
       socket.emit("room", roomID);
     });
     //listen on new_message

@@ -13,7 +13,7 @@ const connection = require("./conf");
 const SocketIO = require("socket.io");
 //require("socketio");
 const server = http.createServer(app);
-const io = SocketIO(server);
+const io = SocketIO(server,{path: '/chat/socket.io'});
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -546,7 +546,7 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/api/avatar/:email", upload.single("avatar"), function(req, res, next) {
+app.post("/api/Avatar/:email", upload.single("avatar"), function(req, res, next) {
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
