@@ -20,6 +20,7 @@ const SendTime = props => {
                 component={renderField}
                 label="Date et heure de début"
               />
+              <p style={{color:"#fff", fontWeight:300, fontSize:"small"}}>Exemple: 01/02/2019 12:45</p>
             </FormGroup>
             <label style={{ color: "#fff" }}>Durée</label>
             <FormGroup>

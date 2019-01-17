@@ -43,12 +43,17 @@ class Chat extends Component {
 
   getMessagesFromAPI() {
     axios
-      .get(`${process.env.REACT_APP_API}/messages/${this.props.match.params.roomID}`, {
-        headers: {
-          accept: "application/json",
-          authorization: "Bearer " + localStorage.getItem("superoUser")
+      .get(
+        `${process.env.REACT_APP_API}/messages/${
+          this.props.match.params.roomID
+        }`,
+        {
+          headers: {
+            accept: "application/json",
+            authorization: "Bearer " + localStorage.getItem("superoUser")
+          }
         }
-      })
+      )
       .then(res => {
         this.setState({ ...res.data });
       })
@@ -58,7 +63,8 @@ class Chat extends Component {
   }
 
   //emit message
-  sendMessage() {
+  sendMessage(event) {
+    event.preventDefault();
     const newMessage = {
       activity_id: this.props.match.params.roomID,
       user_id: this.props.connectedUser.user_id,
@@ -76,7 +82,7 @@ class Chat extends Component {
           toastr.error("Erreur", res.data.message);
         }
       });
-	console.log("socket", socket);
+    console.log("socket", socket);
     socket.emit("new_message", {
       username: this.props.connectedUser.user_pseudo,
       message: this.state.message,
@@ -95,10 +101,10 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    socket = io(process.env.REACT_APP_API, {path: 'chat/socket.io'});
+    socket = io(process.env.REACT_APP_API, { path: "chat/socket.io" });
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
-	console.log("connect");
+      console.log("connect");
       socket.emit("room", roomID);
     });
     //listen on new_message
@@ -192,33 +198,35 @@ class Chat extends Component {
                         : "0"
                   }}
                 >
-                  {this.props.connectedUser.user_id !== message.user_id && (
-                    <div
-                      className="user_photo"
-                      style={{
-                        width: "25px",
-                        height: "25px",
-                        backgroundSize: "cover",
-                        borderRadius: "50px",
-                        overflow: "hidden",
-                        objectFit: "cover",
-                        marginRight: "10px"
-                      }}
-                    >
-                      <img
+                  {this.props.connectedUser.user_id !== message.user_id &&
+                    this.state.messages[index - 1].user_id !==
+                      message.user_id && (
+                      <div
+                        className="user_photo"
                         style={{
+                          width: "25px",
+                          height: "25px",
+                          backgroundSize: "cover",
+                          borderRadius: "50px",
+                          overflow: "hidden",
                           objectFit: "cover",
-                          height: "100%",
-                          width: "100%"
+                          marginRight: "10px"
                         }}
-                        src={`${process.env.REACT_APP_API}/images/${
-                          message.user_photo
-                        }`}
-                        alt="avatar"
-                        align="bottom"
-                      />
-                    </div>
-                  )}
+                      >
+                        <img
+                          style={{
+                            objectFit: "cover",
+                            height: "100%",
+                            width: "100%"
+                          }}
+                          src={`${process.env.REACT_APP_API}/images/${
+                            message.user_photo
+                          }`}
+                          alt="avatar"
+                          align="bottom"
+                        />
+                      </div>
+                    )}
                   <p
                     style={{
                       marginBottom: "0",
@@ -229,6 +237,8 @@ class Chat extends Component {
                     }}
                   >
                     {this.props.connectedUser.user_id !== message.user_id &&
+                      this.state.messages[index - 1].user_id !==
+                        message.user_id &&
                       `${message.user_pseudo} | `}
                     <span style={{ fontWeight: "300" }}>{message.message}</span>
                   </p>
@@ -242,7 +252,7 @@ class Chat extends Component {
               }}
             />
           </div>
-          <Form className="sendMessage">
+          <Form onSubmit={e => this.sendMessage(e)} className="sendMessage">
             <FormGroup>
               <Input
                 style={{
@@ -257,7 +267,9 @@ class Chat extends Component {
                 placeholder="Tapez votre message"
               />
             </FormGroup>
-            <Button onClick={() => this.sendMessage()}>Envoyer</Button>
+            <Button type="submit" onClick={event => this.sendMessage(event)}>
+              Envoyer
+            </Button>
           </Form>
         </div>
       </div>
