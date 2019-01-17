@@ -13,7 +13,9 @@ const connection = require("./conf");
 const SocketIO = require("socket.io");
 //require("socketio");
 const server = http.createServer(app);
-const io = SocketIO(server, { path: "/chat/socket.io" });
+const io = require('socket.io')(server, {
+  path: '/chat/socket.io'
+  });
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -599,7 +601,8 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
 });
 
 //Chat
-
+//console.log("socket.path", socket.path);
+console.log("io.path", io.path);
 let room = "";
 io.on("connection", socket => {
   console.log("New user connected");

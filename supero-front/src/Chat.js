@@ -103,10 +103,13 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    socket = io(process.env.REACT_APP_API, { path: "chat/socket.io" });
+    console.log("roomID",roomID);
+    socket = io.connect('/', {secure: false, rejectUnauthorized: false, path: '/chat/socket.io'});
+    console.log("connected", socket.connected);
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
       console.log("connect");
+      console.log("socket.connected", socket.connected)   
       socket.emit("room", roomID);
     });
     //listen on new_message
