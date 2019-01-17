@@ -194,7 +194,8 @@ class Chat extends Component {
                           : "0"
                     }}
                   >
-                    {this.props.connectedUser.user_id !== message.user_id &&
+                    {this.state.messages[index - 1] !== undefined &&
+                      this.props.connectedUser.user_id !== message.user_id &&
                       this.state.messages[index - 1].user_id !==
                         message.user_id && (
                         <div
@@ -232,7 +233,8 @@ class Chat extends Component {
                             : "right"
                       }}
                     >
-                      {this.props.connectedUser.user_id !== message.user_id &&
+                      {this.state.messages[index - 1] !== undefined &&
+                        this.props.connectedUser.user_id !== message.user_id &&
                         this.state.messages[index - 1].user_id !==
                           message.user_id &&
                         `${message.user_pseudo} | `}

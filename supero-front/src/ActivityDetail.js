@@ -329,6 +329,8 @@ class ActivityDetail extends React.Component {
                 color: "#e57419",
                 backgroundColor: "#fff"
               }}
+              length={4}
+              zoom={13}
               onClick={() => this.deleteActivity()}
               className="activity_participation_button"
             >

@@ -16,7 +16,6 @@ const SendTime = props => {
             <ComeFromTransparent delay={300}>
               <h2 className="text-center">Quand ?</h2>
             </ComeFromTransparent>
-
             <FormGroup>
               <ComeFromLeft delay={400}>
                 <label style={{ color: "#fff" }}>Date de l'activité</label>
