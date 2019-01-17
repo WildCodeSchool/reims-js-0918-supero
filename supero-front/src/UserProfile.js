@@ -4,6 +4,7 @@ import Header from "./Header";
 import axios from "axios";
 import Loading from "./Loading";
 import {
+  Button,
   TabContent,
   TabPane,
   Nav,
@@ -16,6 +17,7 @@ import DisplayDifficultyIcon from "./DisplayDifficultyIcon";
 import ageCalculation from "./ageCalculation";
 import LastFiveActivities from "./LastFiveActivities";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -74,7 +76,6 @@ class UserProfile extends React.Component {
         style={{ minHeight: "100vh", paddingBottom: "20px" }}
       >
         <Header title="Profil" goBack={this.goBack} />
-
         <div
           style={{
             marginBottom: "-40px",
@@ -195,10 +196,15 @@ class UserProfile extends React.Component {
             </TabPane>
           </TabContent>
         </div>
-
-        <button className="send_message">Envoyer un message</button>
+        {this.props.userProfile.user_id ===
+          this.props.connectedUser.user_id && (
+          <Button className="send_message" tag={Link} to="/MyAccount">
+            Modifier mes informations
+          </Button>
+        )}
       </div>
     );
   }
 }
+
 export default UserProfile;

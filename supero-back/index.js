@@ -326,9 +326,10 @@ app
         (err, results) => {
           if (err) {
             console.log(err);
-            res
-              .status(500)
-              .json({ message: "Erreur lors de la création de l'activité" });
+            res.status(500).json({
+              toastType: "error",
+              message: "Erreur lors de la création de l'activité"
+            });
           } else {
             res.status(200).json({
               message: "Nouvelle activité créée",
@@ -547,7 +548,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE users SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE user_id = ?",
       [formData, idUser],
       err => {
         if (err) {

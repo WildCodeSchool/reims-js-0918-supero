@@ -52,14 +52,16 @@ class AddActivityForm extends Component {
       })
     })
       .then(res => res.json())
-      .then(
-        res => {
+      .then(res => {
+        if (res.toastType !== "error") {
           toastr.success("Succès", res.message);
-          this.props.history.push("/Redirection", {activityId : res.activityId});
-        },
-
-        err => toastr.error("Erreur", err)
-      );
+          this.props.history.push("/Redirection", {
+            activityId: res.activityId
+          });
+        } else {
+          toastr.error("Erreur", res.message);
+        }
+      });
   };
 
   nextPage() {
