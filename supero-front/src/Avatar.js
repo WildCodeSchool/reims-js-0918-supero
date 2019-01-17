@@ -103,7 +103,7 @@ class Avatar extends Component {
                       fontWeight: 300,
                       fontSize: "small"
                     }}
-                    className = "ml-1"
+                    className="ml-1"
                   >
                     Téléchargez une image au format .png, .jpg, .jpeg
                   </p>
@@ -111,7 +111,6 @@ class Avatar extends Component {
               </Col>
             </Row>
           </ComeFromLeft>
-
           <Row>
             <Col xs="6" className="d-flex justify-content-center">
               <ComeFromTransparent delay={500}>
