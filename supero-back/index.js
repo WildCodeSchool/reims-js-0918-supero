@@ -680,7 +680,7 @@ app.get(
 
 //Récupérer conversations d'un utilisateur
 app.get(
-  "/conversations/:user_id",
+  "/api/conversations/:user_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const user_id = req.params.user_id;
