@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import Activity from "./Activity";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import { Collapse, Button } from "reactstrap";
+import { Collapse } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
 import "./MyActivities.css";
