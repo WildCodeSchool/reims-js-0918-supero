@@ -41,7 +41,7 @@ const SignInForm = props => {
         className="SignIn-container"
       >
         <Row className="d-flex justify-content-center">
-          <ComeFromTransparent delay={600}>
+          <ComeFromTransparent delay={300}>
             <Col xs="6" style={{ margin: "0 auto" }}>
               <div className="logo mb-5">
                 <img
@@ -55,7 +55,7 @@ const SignInForm = props => {
           </ComeFromTransparent>
           <Col xs="10">
             <FormGroup>
-              <ComeFromLeft delay={600}>
+              <ComeFromLeft delay={400}>
                 <Field
                   name="email"
                   type="text"
@@ -67,7 +67,7 @@ const SignInForm = props => {
               </ComeFromLeft>
             </FormGroup>
             <FormGroup>
-              <ComeFromLeft delay={700}>
+              <ComeFromLeft delay={500}>
                 <Field
                   name="password"
                   type="password"
@@ -77,7 +77,7 @@ const SignInForm = props => {
                 />
               </ComeFromLeft>
             </FormGroup>
-            <ComeFromTransparent delay={800}>
+            <ComeFromTransparent delay={600}>
               <div className="d-flex justify-content-center">
                 <Button
                   className="button mr-4"

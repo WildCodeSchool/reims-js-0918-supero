@@ -12,6 +12,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import { toastr } from "react-redux-toastr";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
 
 import {
   faBolt,
@@ -155,213 +156,224 @@ class ActivityDetail extends React.Component {
     return !this.props.activityDetail.sport_name ? (
       <Loading />
     ) : (
-      <div className="activity_profile">
-        <Header title="Détail" goBack={this.goBack} />
+      <ComeFromTransparent delay={300}>
+        <div className="activity_profile">
+          <Header title="Détail" goBack={this.goBack} />
 
-        <div style={{ position: "relative", marginBottom: "40px" }}>
-          <div
-            style={{
-              width: "100%",
-              overflow: "hidden",
-              maxHeight: "220px"
-            }}
-          >
-            <img
-              style={{ width: "100%" }}
-              src={
-                process.env.PUBLIC_URL +
-                `/images/${this.props.activityDetail.sport_name.replace(
-                  /[. ,:-]+/g,
-                  ""
-                )}.jpg`
-              }
-              alt="sport"
-              align="bottom"
-            />
-          </div>
-          <div className="activity_profile_pastille_orange rounded-circle">
-            <FontAwesomeIcon
-              className="pl-1 pr-1"
-              icon={`${
-                this.props.activityDetail.sport_name === "velo"
-                  ? "bicycle"
-                  : this.props.activityDetail.sport_name === "natation"
-                  ? "swimmer"
-                  : this.props.activityDetail.sport_name === "musculation"
-                  ? "dumbbell"
-                  : this.props.activityDetail.sport_name === "running"
-                  ? "running"
-                  : this.props.activityDetail.sport_name ===
-                    "autres sports ext."
-                  ? "cloud-sun"
-                  : "city"
-              }`}
-            />
-          </div>
-        </div>
-        <div className="activity_detail">
-          <div className="activity_detail_left">
-            <div className="difficulty">
-              <DisplayDifficultyIcon
-                difficulty={this.props.activityDetail.activity_difficulty}
+          <div style={{ position: "relative", marginBottom: "40px" }}>
+            <div
+              style={{
+                width: "100%",
+                overflow: "hidden",
+                maxHeight: "220px"
+              }}
+            >
+              <img
+                style={{ width: "100%" }}
+                src={
+                  process.env.PUBLIC_URL +
+                  `/images/${this.props.activityDetail.sport_name.replace(
+                    /[. ,:-]+/g,
+                    ""
+                  )}.jpg`
+                }
+                alt="sport"
+                align="bottom"
               />
             </div>
-
-            <h2>
-              Session{" "}
-              {this.props.activityDetail.sport_name.charAt(0).toUpperCase() +
-                this.props.activityDetail.sport_name.slice(1)}
-            </h2>
-            <h3>{this.props.activityDetail.activity_title}</h3>
-          </div>
-          <div className="activity_detail_right">
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
-              {formatDate(this.props.activityDetail.activity_start_time)}
-            </span>
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
-              {
-                DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                  .hour
-              }
-              h
-              {DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                .minute > 0 &&
-                DateTime.fromSQL(this.props.activityDetail.activity_duration)
-                  .minute}
-            </span>
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
-              {this.props.activityDetail.activity_city}
-            </span>
-            <span className="activity_detail_icon">
-              <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
-              Niveau{" "}
-              {difficulty[this.props.activityDetail.activity_difficulty - 1]}
-            </span>
-          </div>
-        </div>
-        <div className="activity_creator d-flex justify-content-between">
-          <div className="activity_creator_left">
-            <Media className="mt-1">
-              <Media left middle href="#">
-                <img
-                  className="activity_creator_photo"
-                  src={`${process.env.REACT_APP_API}/images/${
-                    this.props.activityDetail.user_photo
-                  }`}
-                  alt="sport"
-                />
-              </Media>
-              <Media className="ml-2" body>
-                <Media heading>Organisé par</Media>
-                <Link
-                  to={`/UserProfile/${this.props.activityDetail.creator_id}`}
-                >
-                  {this.props.activityDetail.user_pseudo}
-                </Link>
-              </Media>
-            </Media>
-          </div>
-          <div className="activity_creator_right">
-            <button className="activity_creator_button">
-              <Link to={`/Chat/${this.props.activityDetail.activity_id}`}>
-                Envoyer un message
-              </Link>
-            </button>
-          </div>
-        </div>
-        <div className="activity_description">
-          {this.props.activityDetail.activity_description}
-          {this.props.activityDetail.activity_more_infos && (
-            <div className="activity_detail_icon">
-              <FontAwesomeIcon className="mr-1" icon="info-circle" />
-              {this.props.activityDetail.activity_more_infos}
+            <div className="activity_profile_pastille_orange rounded-circle">
+              <FontAwesomeIcon
+                className="pl-1 pr-1"
+                icon={`${
+                  this.props.activityDetail.sport_name === "velo"
+                    ? "bicycle"
+                    : this.props.activityDetail.sport_name === "natation"
+                    ? "swimmer"
+                    : this.props.activityDetail.sport_name === "musculation"
+                    ? "dumbbell"
+                    : this.props.activityDetail.sport_name === "running"
+                    ? "running"
+                    : this.props.activityDetail.sport_name ===
+                      "autres sports ext."
+                    ? "cloud-sun"
+                    : "city"
+                }`}
+              />
             </div>
-          )}
-        </div>
+          </div>
+          <div className="activity_detail">
+            <div className="activity_detail_left">
+              <div className="difficulty">
+                <DisplayDifficultyIcon
+                  difficulty={this.props.activityDetail.activity_difficulty}
+                />
+              </div>
 
-        <span className="nb_participants">
-          {this.props.activityDetail.nb_participants}/
-          {this.props.activityDetail.activity_max_participants} participants
-        </span>
-        {this.props.activityDetail.creator_id !==
-        this.props.connectedUser.user_id ? (
-          this.props.connectedUserActivities.participation.filter(
-            activity =>
-              activity.activity_id === this.props.activityDetail.activity_id
-          ).length > 0 ? (
+              <h2>
+                Session{" "}
+                {this.props.activityDetail.sport_name.charAt(0).toUpperCase() +
+                  this.props.activityDetail.sport_name.slice(1)}
+              </h2>
+              <h3>{this.props.activityDetail.activity_title}</h3>
+            </div>
+            <div className="activity_detail_right">
+              <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="calendar-alt" />
+                {formatDate(this.props.activityDetail.activity_start_time)}
+              </span>
+              <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="clock" />
+                {
+                  DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                    .hour
+                }
+                h
+                {DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                  .minute > 0 &&
+                  DateTime.fromSQL(this.props.activityDetail.activity_duration)
+                    .minute}
+              </span>
+              <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="map-marker-alt" />
+                {this.props.activityDetail.activity_city}
+              </span>
+              <span className="activity_detail_icon">
+                <FontAwesomeIcon className="ml-2 mr-1" icon="bolt" />
+                Niveau{" "}
+                {difficulty[this.props.activityDetail.activity_difficulty - 1]}
+              </span>
+            </div>
+          </div>
+          <div className="activity_creator d-flex justify-content-between">
+            <div className="activity_creator_left">
+              <Media className="mt-1">
+                <Media left middle href="#">
+                  <img
+                    className="activity_creator_photo"
+                    src={`${process.env.REACT_APP_API}/images/${
+                      this.props.activityDetail.user_photo
+                    }`}
+                    alt="sport"
+                  />
+                </Media>
+                <Media className="ml-2" body>
+                  <Media heading>Organisé par</Media>
+                  <Link
+                    to={`/UserProfile/${this.props.activityDetail.creator_id}`}
+                  >
+                    {this.props.activityDetail.user_pseudo}
+                  </Link>
+                </Media>
+              </Media>
+            </div>
+            <div className="activity_creator_right">
+              <button className="activity_creator_button">
+                <Link to={`/Chat/${this.props.activityDetail.activity_id}`}>
+                  Envoyer un message
+                </Link>
+              </button>
+            </div>
+          </div>
+          <div className="activity_description">
+            {this.props.activityDetail.activity_description}
+            {this.props.activityDetail.activity_more_infos && (
+              <div className="activity_detail_icon">
+                <FontAwesomeIcon className="mr-1" icon="info-circle" />
+                {this.props.activityDetail.activity_more_infos}
+              </div>
+            )}
+          </div>
+
+          <span className="nb_participants">
+            {this.props.activityDetail.nb_participants}/
+            {this.props.activityDetail.activity_max_participants} participants
+          </span>
+          {this.props.activityDetail.creator_id !==
+          this.props.connectedUser.user_id ? (
+            this.props.connectedUserActivities.participation.filter(
+              activity =>
+                activity.activity_id === this.props.activityDetail.activity_id
+            ).length > 0 ? (
+              <button
+                style={{
+                  color: "#e57419",
+                  backgroundColor: "#fff"
+                }}
+                onClick={() => this.unsubscribeToActivity()}
+                className="activity_participation_button"
+              >
+                Se désinscrire
+              </button>
+            ) : this.props.activityDetail.nb_participants ===
+              this.props.activityDetail.activity_max_participants ? (
+              <button
+                style={{
+                  color: "#7c7c7c",
+                  backgroundColor: "#fff"
+                }}
+                className="activity_participation_button"
+              >
+                COMPLET
+              </button>
+            ) : (
+              <button
+                onClick={() => this.subscribeToActivity()}
+                className="activity_participation_button"
+              >
+                Participer
+              </button>
+            )
+          ) : (
             <button
               style={{
                 color: "#e57419",
                 backgroundColor: "#fff"
               }}
-              onClick={() => this.unsubscribeToActivity()}
+              length={4}
+              zoom={13}
+              onClick={() => this.deleteActivity()}
               className="activity_participation_button"
             >
-              Se désinscrire
+              Supprimer
             </button>
-          ) : this.props.activityDetail.nb_participants ===
-            this.props.activityDetail.activity_max_participants ? (
-            <button
-              style={{
-                color: "#7c7c7c",
-                backgroundColor: "#fff"
-              }}
-              className="activity_participation_button"
-            >
-              COMPLET
-            </button>
-          ) : (
-            <button
-              onClick={() => this.subscribeToActivity()}
-              className="activity_participation_button"
-            >
-              Participer
-            </button>
-          )
-        ) : (
-          <button
+          )}
+          <p
+            className="activity_detail_icon"
             style={{
-              color: "#e57419",
-              backgroundColor: "#fff"
+              fontWeight: "300",
+              padding: "0 20px",
+              fontFamily: "Open Sans, sans-serif"
             }}
-            onClick={() => this.deleteActivity()}
-            className="activity_participation_button"
           >
-            Supprimer
-          </button>
-        )}
-        <p className="activity_detail_icon" style={{ fontWeight: "300", padding: "0 20px", fontFamily:"Open Sans, sans-serif" }}>
-          <FontAwesomeIcon className="mr-1 mt-3" icon="map-marker-alt" />
-          {this.props.activityDetail.activity_adresse}
-        </p>
-        <Map
-          style={{ height: "250px", marginTop: "5px" }}
-          center={{
-            lat: this.props.activityDetail.activity_latitude,
-            lng: this.props.activityDetail.activity_longitude
-          }}
-          length={4}
-          zoom={13}
-        >
-          <TileLayer
-            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker
-            position={[
-              this.props.activityDetail.activity_latitude,
-              this.props.activityDetail.activity_longitude
-            ]}
+            <FontAwesomeIcon className="mr-1 mt-3" icon="map-marker-alt" />
+            {this.props.activityDetail.activity_adresse}
+          </p>
+          <Map
+            style={{ height: "250px", marginTop: "5px" }}
+            center={{
+              lat: this.props.activityDetail.activity_latitude,
+              lng: this.props.activityDetail.activity_longitude
+            }}
+            length={4}
+            zoom={13}
           >
-            <Popup>
-              Votre activité. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </Map>
-      </div>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              position={[
+                this.props.activityDetail.activity_latitude,
+                this.props.activityDetail.activity_longitude
+              ]}
+            >
+              <Popup>
+                Votre activité. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </Map>
+        </div>
+      </ComeFromTransparent>
     );
   }
 }

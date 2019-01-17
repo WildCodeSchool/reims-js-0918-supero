@@ -105,13 +105,14 @@ app
     "/api/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      console.log(req.query.page);
       const limit = 5;
       const offset = (req.query.page - 1) * limit;
       const order = req.query.order;
       const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       req.query.page !== undefined
         ? connection.query(
-            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
+            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities WHERE activity_start_time > DATE(NOW())`,
             (err, result) => {
               if (err) {
                 console.log(err);
@@ -141,7 +142,7 @@ app
             `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id `,
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW())`,
             (err, result) => {
               if (err) {
                 console.log(err);
