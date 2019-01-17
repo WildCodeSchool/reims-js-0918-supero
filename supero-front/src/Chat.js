@@ -60,7 +60,8 @@ class Chat extends Component {
   }
 
   //emit message
-  sendMessage() {
+  sendMessage(event) {
+    event.preventDefault();
     const newMessage = {
       activity_id: this.props.match.params.roomID,
       user_id: this.props.connectedUser.user_id,
@@ -193,33 +194,35 @@ class Chat extends Component {
                           : "0"
                     }}
                   >
-                    {this.props.connectedUser.user_id !== message.user_id && (
-                      <div
-                        className="user_photo"
-                        style={{
-                          width: "25px",
-                          height: "25px",
-                          backgroundSize: "cover",
-                          borderRadius: "50px",
-                          overflow: "hidden",
-                          objectFit: "cover",
-                          marginRight: "10px"
-                        }}
-                      >
-                        <img
+                    {this.props.connectedUser.user_id !== message.user_id &&
+                      this.state.messages[index - 1].user_id !==
+                        message.user_id && (
+                        <div
+                          className="user_photo"
                           style={{
+                            width: "25px",
+                            height: "25px",
+                            backgroundSize: "cover",
+                            borderRadius: "50px",
+                            overflow: "hidden",
                             objectFit: "cover",
-                            height: "100%",
-                            width: "100%"
+                            marginRight: "10px"
                           }}
-                          src={`http://localhost:3001/images/${
-                            message.user_photo
-                          }`}
-                          alt="avatar"
-                          align="bottom"
-                        />
-                      </div>
-                    )}
+                        >
+                          <img
+                            style={{
+                              objectFit: "cover",
+                              height: "100%",
+                              width: "100%"
+                            }}
+                            src={`http://localhost:3001/images/${
+                              message.user_photo
+                            }`}
+                            alt="avatar"
+                            align="bottom"
+                          />
+                        </div>
+                      )}
                     <p
                       style={{
                         marginBottom: "0",
@@ -230,6 +233,8 @@ class Chat extends Component {
                       }}
                     >
                       {this.props.connectedUser.user_id !== message.user_id &&
+                        this.state.messages[index - 1].user_id !==
+                          message.user_id &&
                         `${message.user_pseudo} | `}
                       <span style={{ fontWeight: "300" }}>
                         {message.message}
@@ -245,7 +250,7 @@ class Chat extends Component {
                 }}
               />
             </div>
-            <Form className="sendMessage">
+            <Form onSubmit={e => this.sendMessage(e)} className="sendMessage">
               <ComeFromLeft delay={400}>
                 <FormGroup>
                   <Input
@@ -263,7 +268,12 @@ class Chat extends Component {
                 </FormGroup>
               </ComeFromLeft>
               <ComeFromLeft delay={500}>
-                <Button onClick={() => this.sendMessage()}>Envoyer</Button>
+                <Button
+                  type="submit"
+                  onClick={event => this.sendMessage(event)}
+                >
+                  Envoyer
+                </Button>
               </ComeFromLeft>
             </Form>
           </div>

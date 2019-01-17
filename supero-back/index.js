@@ -110,31 +110,48 @@ app
       const offset = (req.query.page - 1) * limit;
       const order = req.query.order;
       const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
-      connection.query(
-        `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
-        (err, result) => {
-          if (err) {
-            console.log(err);
-            res.status(500).send(err);
-          } else {
-            const activitiesTotal = result[0].activitiesTotal;
-            connection.query(
-              `SELECT ${columnsRequiredForActivities}
+      req.query.page !== undefined
+        ? connection.query(
+            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities WHERE activity_start_time > DATE(NOW())`,
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                const activitiesTotal = result[0].activitiesTotal;
+                connection.query(
+                  `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
-              (err, result) => {
-                if (err) {
-                  console.log(err);
-                  res.status(500).send(err);
-                } else {
-                  res.status(200).json({ activities: result, activitiesTotal });
-                }
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW()) ORDER BY ${order} ${ascDesc} LIMIT ${limit} OFFSET ${offset}`,
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                      res.status(500).send(err);
+                    } else {
+                      res
+                        .status(200)
+                        .json({ activities: result, activitiesTotal });
+                    }
+                  }
+                );
               }
-            );
-          }
-        }
-      );
+            }
+          )
+        : connection.query(
+            `SELECT ${columnsRequiredForActivities}
+      FROM activities AS a 
+      JOIN sports AS s ON a.sport_id = s.sport_id 
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW())`,
+            (err, result) => {
+              if (err) {
+                console.log(err);
+                res.status(500).send(err);
+              } else {
+                res.status(200).json({ activities: result });
+              }
+            }
+          );
     }
   )
 
@@ -310,9 +327,10 @@ app
         (err, results) => {
           if (err) {
             console.log(err);
-            res
-              .status(500)
-              .json({ message: "Erreur lors de la création de l'activité" });
+            res.status(500).json({
+              toastType: "error",
+              message: "Erreur lors de la création de l'activité"
+            });
           } else {
             res.status(200).json({
               message: "Nouvelle activité créée",
@@ -488,7 +506,7 @@ app.get(
         } else {
           const participation = result;
           connection.query(
-            `SELECT activities.activity_id,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
+            `SELECT activities.activity_id,activity_difficulty,activity_city,user_pseudo,creator_id,activity_start_time, activity_title,sport_name FROM activities JOIN users ON users.user_id = activities.creator_id JOIN sports ON activities.sport_id = sports.sport_id WHERE creator_id = ?`,
             [idUser],
             (err, result) => {
               res.status(200).json({ participation, created: result });
@@ -531,7 +549,7 @@ app.put(
     const idUser = req.params.id;
     const formData = req.body;
     connection.query(
-      "UPDATE users SET ? WHERE id = ?",
+      "UPDATE users SET ? WHERE user_id = ?",
       [formData, idUser],
       err => {
         if (err) {

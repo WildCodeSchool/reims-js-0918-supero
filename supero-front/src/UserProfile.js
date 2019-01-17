@@ -4,6 +4,7 @@ import Header from "./Header";
 import axios from "axios";
 import Loading from "./Loading";
 import {
+  Button,
   TabContent,
   TabPane,
   Nav,
@@ -17,6 +18,7 @@ import ageCalculation from "./ageCalculation";
 import LastFiveActivities from "./LastFiveActivities";
 import classnames from "classnames";
 import ComeFromTransparent from "./Animations/ComeFromTransparent";
+import { Link } from "react-router-dom";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -202,10 +204,16 @@ class UserProfile extends React.Component {
             </TabContent>
           </div>
 
-          <button className="send_message">Envoyer un message</button>
+          {this.props.userProfile.user_id ===
+            this.props.connectedUser.user_id && (
+            <Button className="send_message" tag={Link} to="/MyAccount">
+              Modifier mes informations
+            </Button>
+          )}
         </div>
       </ComeFromTransparent>
     );
   }
 }
+
 export default UserProfile;

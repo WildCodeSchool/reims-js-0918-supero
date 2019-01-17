@@ -46,8 +46,8 @@ class ActivitiesOnMap extends Component {
     return (
       <div style={{ textAlign: "center" }}>
         <Header goBack={this.goBack} title="Geolocalisation" />
-        {!this.props.isGeolocationAvailable ? (
-          <ComeFromTransparent delay={300}>
+        <ComeFromTransparent delay={300}>
+          {!this.props.isGeolocationAvailable ? (
             <div
               style={{
                 height: "100vh",
@@ -75,7 +75,7 @@ class ActivitiesOnMap extends Component {
                 </Button>
               </div>
             </div>
-            ) : !this.props.isGeolocationEnabled ? (
+          ) : !this.props.isGeolocationEnabled ? (
             <div
               style={{
                 height: "100vh",
@@ -104,7 +104,7 @@ class ActivitiesOnMap extends Component {
                 </Button>
               </div>
             </div>
-            ) : this.props.coords ? (
+          ) : this.props.coords ? (
             <Fragment>
               <Map
                 className="mapByGeoloc"
@@ -204,23 +204,23 @@ class ActivitiesOnMap extends Component {
                 </MarkerClusterGroup>
               </Map>
             </Fragment>
-          </ComeFromTransparent>
-        ) : (
-          <div
-            style={{
-              height: "100vh",
-              marginTop: "71px",
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              alignItems: "center"
-            }}
-          >
-            <h3 style={{ color: "#fff", width: "100%", marginTop: "-71px" }}>
-              Géolocalisation en attente
-            </h3>
-          </div>
-        )}
+          ) : (
+            <div
+              style={{
+                height: "100vh",
+                marginTop: "71px",
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                alignItems: "center"
+              }}
+            >
+              <h3 style={{ color: "#fff", width: "100%", marginTop: "-71px" }}>
+                Géolocalisation en attente
+              </h3>
+            </div>
+          )}
+        </ComeFromTransparent>
       </div>
     );
   }

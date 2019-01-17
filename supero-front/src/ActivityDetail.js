@@ -60,6 +60,16 @@ class ActivityDetail extends React.Component {
     this.getActivityDetail();
   }
 
+  componentDidUpdate(prevState) {
+    if (
+      prevState.connectedUserActivities.participation !==
+      this.props.connectedUserActivities.participation
+    ) {
+      this.getUserActivities();
+      this.getActivityDetail();
+    }
+  }
+
   getActivityDetail() {
     const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
@@ -88,9 +98,7 @@ class ActivityDetail extends React.Component {
         } else {
           toastr.error("Erreur", res.data.message);
         }
-      })
-      .then(this.getUserActivities())
-      .then(this.getActivityDetail());
+      });
   }
 
   unsubscribeToActivity() {
@@ -108,9 +116,7 @@ class ActivityDetail extends React.Component {
         } else {
           toastr.error("Erreur", res.data.message);
         }
-      })
-      .then(this.getUserActivities())
-      .then(this.getActivityDetail());
+      });
   }
 
   deleteActivity() {
@@ -329,10 +335,17 @@ class ActivityDetail extends React.Component {
               Supprimer
             </button>
           )}
-          <span className="activity_detail_icon" style={{ fontWeight: "300" }}>
-            <FontAwesomeIcon className="ml-2 mr-1 mt-3" icon="map-marker-alt" />
+          <p
+            className="activity_detail_icon"
+            style={{
+              fontWeight: "300",
+              padding: "0 20px",
+              fontFamily: "Open Sans, sans-serif"
+            }}
+          >
+            <FontAwesomeIcon className="mr-1 mt-3" icon="map-marker-alt" />
             {this.props.activityDetail.activity_adresse}
-          </span>
+          </p>
           <Map
             style={{ height: "250px", marginTop: "5px" }}
             center={{
