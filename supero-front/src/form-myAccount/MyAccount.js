@@ -16,6 +16,11 @@ import renderField from "../renderField";
 import { toastr } from "react-redux-toastr";
 import axios from "axios";
 
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? "Invalid email address"
+    : undefined;
+
 const MyAccount = props => {
   const goBack = () => props.history.goBack();
   const { handleSubmit, pristine, submitting } = props;
@@ -112,6 +117,7 @@ const MyAccount = props => {
                     type="text"
                     component={renderField}
                     label="E-mail"
+                    validate={email}
                   />
                 </FormGroup>
                 <p>Infos supplémentaires :</p>
