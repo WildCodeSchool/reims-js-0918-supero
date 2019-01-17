@@ -3,6 +3,7 @@ import Header from "./Header";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./Redirection.css";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
 
 class Redirection extends Component {
   render() {
@@ -13,25 +14,29 @@ class Redirection extends Component {
         <div style={{ paddingBottom: "10px" }}>
           <Header redirection={true} title="Succès !" />
         </div>
-        <div className="redirection-container">
-          <h3>Félicitations !</h3>
-          <h5>Votre activité a bien été ajoutée !</h5>
-          <p>
-            Souhaitez-vous afficher le flux principal ou revoir votre activité ?
-          </p>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button className="button" tag={Link} to="/ActivitiesList">
-              Retour au flux
-            </Button>
-            <Button
-              className="button"
-              tag={Link}
-              to={`/ActivityDetail/${this.props.location.state.activityId}`}
-            >
-              Voir l'activité
-            </Button>
+        <ComeFromTransparent delay={300}>
+          {" "}
+          <div className="redirection-container">
+            <h3>Félicitations !</h3>
+            <h5>Votre activité a bien été ajoutée !</h5>
+            <p>
+              Souhaitez-vous afficher le flux principal ou revoir votre activité
+              ?
+            </p>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <Button className="button" tag={Link} to="/ActivitiesList">
+                Retour au flux
+              </Button>
+              <Button
+                className="button"
+                tag={Link}
+                to={`/ActivityDetail/${this.props.location.state.activityId}`}
+              >
+                Voir l'activité
+              </Button>
+            </div>
           </div>
-        </div>
+        </ComeFromTransparent>
       </div>
     );
   }

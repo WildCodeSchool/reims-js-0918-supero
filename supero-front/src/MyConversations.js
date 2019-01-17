@@ -3,6 +3,7 @@ import Header from "./Header";
 import Conversation from "./Conversation";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
 
 class MyConversations extends Component {
   constructor(props) {
@@ -44,16 +45,18 @@ class MyConversations extends Component {
           <Header title="Mes conversations" goBack={this.goBack} />
         </div>
         <Fragment>
-          <div style={{ paddingTop: "70px" }} />
-          {this.state.conversations.map((activity, index) => (
-            <Link
-              className="conversation_link"
-              key={index}
-              to={`/Chat/${activity.activity_id}`}
-            >
-              <Conversation key={index} {...activity} />
-            </Link>
-          ))}
+          <ComeFromTransparent delay={300}>
+            <div style={{ paddingTop: "70px" }} />
+            {this.state.conversations.map((activity, index) => (
+              <Link
+                className="conversation_link"
+                key={index}
+                to={`/Chat/${activity.activity_id}`}
+              >
+                <Conversation key={index} {...activity} />
+              </Link>
+            ))}
+          </ComeFromTransparent>
         </Fragment>
       </div>
     );

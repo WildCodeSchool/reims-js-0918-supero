@@ -12,6 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Pagination from "react-js-pagination";
 
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons";
+import ComeFromTop from "./Animations/ComeFromTop";
+import ComeFromTransparent from "./Animations/ComeFromTransparent";
+import { Trail } from "react-spring";
 
 library.add(faMapMarkedAlt);
 
@@ -34,9 +37,9 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `${process.env.REACT_APP_API}/activities?page=${this.props.activePage}&order=${
-          this.props.order
-        }`,
+        `${process.env.REACT_APP_API}/activities?page=${
+          this.props.activePage
+        }&order=${this.props.order}`,
         {
           headers: {
             accept: "application/json",
@@ -81,7 +84,9 @@ class ActivitiesList extends Component {
     this.props.fetchActivities();
     axios
       .get(
-        `${process.env.REACT_APP_API}/search/${request}?order=${this.props.order}`,
+        `${process.env.REACT_APP_API}/search/${request}?order=${
+          this.props.order
+        }`,
         {
           headers: {
             accept: "application/json",
@@ -125,68 +130,75 @@ class ActivitiesList extends Component {
             connectedUser={this.props.connectedUser}
             title="Flux"
           />
-          <div style={{ position: "relative" }}>
-            <Input
-              style={{ width: "90%", margin: "0 auto" }}
-              className="Form-Input"
-              onChange={event => this.handleInput(event)}
-              placeholder="Chercher une activité"
-              type="text"
-              name="recherche"
-              value={this.state.activitiesQuery}
-            />
-            <i
-              style={{
-                position: "absolute",
-                top: "10px",
-                right: "35px",
-                color: "rgba(255,255,255,0.4)"
-              }}
-              className="fas fa-search"
-            />
-          </div>
+          <ComeFromTop delay={1000}>
+            <div style={{ position: "relative" }}>
+              <Input
+                style={{ width: "90%", margin: "0 auto" }}
+                className="Form-Input"
+                onChange={event => this.handleInput(event)}
+                placeholder="Chercher une activité"
+                type="text"
+                name="recherche"
+                value={this.state.activitiesQuery}
+              />
+              <i
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  right: "35px",
+                  color: "rgba(255,255,255,0.4)"
+                }}
+                className="fas fa-search"
+              />
+            </div>
+          </ComeFromTop>
         </div>
+        <ComeFromTransparent delay={300}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Button
+              className={
+                "orderButton " +
+                (this.props.order === "activity_creation_time" && "active")
+              }
+              onClick={() => this.changeOrder("activity_creation_time")}
+            >
+              Nouveautés
+            </Button>
+            <Button
+              className={
+                "orderButton " +
+                (this.props.order === "activity_start_time" && "active")
+              }
+              onClick={() => this.changeOrder("activity_start_time")}
+            >
+              Prochainement
+            </Button>
+          </div>
+        </ComeFromTransparent>
         {!this.props.loading ? (
           <Fragment>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <Button
-                className={
-                  "orderButton " +
-                  (this.props.order === "activity_creation_time" && "active")
-                }
-                onClick={() => this.changeOrder("activity_creation_time")}
+            {this.props.activities.activities && (
+              <Trail
+                items={this.props.activities.activities}
+                keys={item => item.activity_id}
+                from={{ transform: "translate3d(-100px,0,0)", opacity: "0" }}
+                to={{ transform: "translate3d(0,0px,0)", opacity: "1" }}
               >
-                Nouveautés
-              </Button>
-              <Button
-                className={
-                  "orderButton " +
-                  (this.props.order === "activity_start_time" && "active")
-                }
-                onClick={() => this.changeOrder("activity_start_time")}
-              >
-                Prochainement
-              </Button>
-            </div>
-            {this.props.activities.activities &&
-              this.props.activities.activities.map((activity, index) => (
-                <Link key={index} to={`ActivityDetail/${activity.activity_id}`}>
-                  <Activity key={index} {...activity} />
-                </Link>
-              ))}
-            <Link to="AddActivity">
-              <Button className="addActivityButton">+</Button>
-            </Link>
-            <Link to="ActivitiesOnMap">
-              <Button className="goToGeoloc">
-                <FontAwesomeIcon className="" icon="map-marked-alt" />
-              </Button>
-            </Link>
+                {activity => props => (
+                  <div style={props}>
+                    <Link to={`ActivityDetail/${activity.activity_id}`}>
+                      <Activity {...activity} />
+                    </Link>
+                  </div>
+                )}
+              </Trail>
+            )}
+
             <Pagination
               hideDisabled
               activePage={this.props.activePage}
@@ -201,6 +213,16 @@ class ActivitiesList extends Component {
             <Loading />
           </Fragment>
         )}
+        <ComeFromTransparent delay={1500}>
+          <Link to="AddActivity">
+            <Button className="addActivityButton">+</Button>
+          </Link>
+          <Link to="ActivitiesOnMap">
+            <Button className="goToGeoloc">
+              <FontAwesomeIcon className="" icon="map-marked-alt" />
+            </Button>
+          </Link>
+        </ComeFromTransparent>
       </div>
     );
   }
