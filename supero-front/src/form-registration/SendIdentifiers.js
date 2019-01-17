@@ -3,6 +3,8 @@ import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Container, Col, Row } from "reactstrap";
 import validate from "./validate";
 import renderField from "../renderField";
+import ComeFromTransparent from "../Animations/ComeFromTransparent";
+import ComeFromLeft from "../Animations/ComeFromLeft";
 
 const SendIdentifiers = props => {
   const { handleSubmit } = props;
@@ -11,47 +13,59 @@ const SendIdentifiers = props => {
       <Row className="d-flex justify-content-center">
         <Col xs="10">
           <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Nouvel utilisateur</h2>
+            <ComeFromTransparent delay={300}>
+              <h2 className="text-center">Nouvel utilisateur</h2>
+            </ComeFromTransparent>
             <FormGroup>
-              <Field
-                className="Form-Input"
-                name="pseudo"
-                type="text"
-                component={renderField}
-                label="Pseudo"
-              />
+              <ComeFromLeft delay={400}>
+                <Field
+                  className="Form-Input"
+                  name="pseudo"
+                  type="text"
+                  component={renderField}
+                  label="Pseudo"
+                />
+              </ComeFromLeft>
             </FormGroup>
             <FormGroup>
-              <Field
-                className="Form-Input"
-                name="email"
-                type="text"
-                component={renderField}
-                label="E-mail"
-              />
+              <ComeFromLeft delay={500}>
+                <Field
+                  className="Form-Input"
+                  name="email"
+                  type="text"
+                  component={renderField}
+                  label="E-mail"
+                />
+              </ComeFromLeft>
             </FormGroup>
             <FormGroup>
-              <Field
-                className="Form-Input"
-                name="password"
-                type="password"
-                component={renderField}
-                label="Mot de passe"
-              />
+              <ComeFromLeft delay={600}>
+                <Field
+                  className="Form-Input"
+                  name="password"
+                  type="password"
+                  component={renderField}
+                  label="Mot de passe"
+                />
+              </ComeFromLeft>
             </FormGroup>
             <FormGroup>
-              <Field
-                name="passwordBis"
-                type="password"
-                component={renderField}
-                label="Mot de passe - confirmation"
-              />
+              <ComeFromLeft delay={700}>
+                <Field
+                  name="passwordBis"
+                  type="password"
+                  component={renderField}
+                  label="Mot de passe - confirmation"
+                />
+              </ComeFromLeft>
             </FormGroup>
-            <div className="d-flex justify-content-end">
-              <Button type="submit" className="next">
-                Suivant
-              </Button>
-            </div>
+            <ComeFromTransparent delay={800}>
+              <div className="d-flex justify-content-end">
+                <Button type="submit" className="next">
+                  Suivant
+                </Button>
+              </div>
+            </ComeFromTransparent>
           </Form>
         </Col>
       </Row>

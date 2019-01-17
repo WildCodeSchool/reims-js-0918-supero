@@ -18,7 +18,7 @@ const LastFiveActivities = props => {
   return (
     <div>
       {props.activities.slice(0, 5).map((activity, index) => (
-        <div className="lastActivity">
+        <div className="lastActivity" key={index}>
           <p>
             <FontAwesomeIcon
               className="mr-1"

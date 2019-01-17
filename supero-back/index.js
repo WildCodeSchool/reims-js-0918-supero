@@ -13,7 +13,7 @@ const connection = require("./conf");
 const SocketIO = require("socket.io");
 //require("socketio");
 const server = http.createServer(app);
-const io = SocketIO(server,{path: '/chat/socket.io'});
+const io = SocketIO(server, { path: "/chat/socket.io" });
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -85,6 +85,7 @@ const columnsRequiredForActivities = `
   a.creator_id,
   s.sport_name,
   u.user_pseudo,
+  u.user_photo,
   a.activity_title,
   a.activity_difficulty,
   a.activity_description,
@@ -546,7 +547,11 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/api/Avatar/:email", upload.single("avatar"), function(req, res, next) {
+app.post("/api/Avatar/:email", upload.single("avatar"), function(
+  req,
+  res,
+  next
+) {
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
@@ -649,6 +654,50 @@ app.get(
               }
             }
           );
+        }
+      }
+    );
+  }
+);
+
+//Récupérer conversations d'un utilisateur
+app.get(
+  "/conversations/:user_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const user_id = req.params.user_id;
+    connection.query(
+      `SELECT
+      a.activity_id,
+      a.sport_id AS fk_sport_id,
+      a.creator_id,
+      s.sport_name,
+      a.activity_title,
+      a.activity_start_time,
+      a.activity_creation_time
+  FROM
+      messages AS m
+  JOIN
+      users AS u
+  ON
+      m.user_id = u.user_id
+  JOIN
+      activities AS a
+  ON
+      a.activity_id = m.activity_id
+  JOIN
+      sports AS s
+  ON
+      a.sport_id = s.sport_id WHERE m.user_id = ${user_id} OR a.creator_id = ${user_id} GROUP BY
+      a.activity_id,
+      u.user_pseudo,
+      u.user_photo`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.json(result);
         }
       }
     );
