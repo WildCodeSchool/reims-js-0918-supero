@@ -152,7 +152,9 @@ class Chat extends Component {
               paddingTop: "80px",
               color: "#fff",
               width: "90%",
-              margin: "0 auto"
+              margin: "0 auto",
+              height: "75vh",
+              overflow: "hidden"
             }}
             id="chat"
           >
