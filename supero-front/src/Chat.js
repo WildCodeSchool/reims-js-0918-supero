@@ -103,13 +103,16 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    console.log("roomID",roomID);
-    socket = io.connect('/', {secure: false, rejectUnauthorized: false, path: '/chat/socket.io'});
+    console.log("roomID", roomID);
+    socket = io.connect(
+      "/",
+      { secure: false, rejectUnauthorized: false, path: "/chat/socket.io" }
+    );
     console.log("connected", socket.connected);
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
       console.log("connect");
-      console.log("socket.connected", socket.connected)   
+      console.log("socket.connected", socket.connected);
       socket.emit("room", roomID);
     });
     //listen on new_message
@@ -188,36 +191,6 @@ class Chat extends Component {
                         : "flex-end"
                   }}
                 >
-                 /* {this.state.messages[index-1] !== undefined && this.props.connectedUser.user_id !== message.user_id &&
-                    this.state.messages[index - 1].user_id !==
-                      message.user_id && (
-                      <div
-                        className="user_photo"
-                        style={{
-                          width: "25px",
-                          height: "25px",
-                          backgroundSize: "cover",
-                          borderRadius: "50px",
-                          overflow: "hidden",
-                          objectFit: "cover",
-                          marginRight: "10px"
-                        }}
-                      >
-                        <img
-                          style={{
-                            objectFit: "cover",
-                            height: "100%",
-                            width: "100%"
-                          }}
-                          src={`${process.env.REACT_APP_API}/images/${
-                            message.user_photo
-                          }`}
-                          alt="avatar"
-                          align="bottom"
-                        />
-                      </div>
-                    )}*/
-
                   <span
                     style={{
                       backgroundColor: "rgba(255, 255, 255, 0.1)",
