@@ -104,7 +104,8 @@ class Chat extends Component {
   connection() {
     const roomID = { ...this.props.match.params };
     console.log("roomID",roomID);
-    socket = io.connect('/', {secure: false, rejectUnauthorized: false, path: '/chat/socket.io'});
+    socket = io('/', {secure: true, rejectUnauthorized: false, path: 'chat/socket.io'})
+;
     console.log("connected", socket.connected);
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
@@ -188,7 +189,7 @@ class Chat extends Component {
                         : "flex-end"
                   }}
                 >
-                 /* {this.state.messages[index-1] !== undefined && this.props.connectedUser.user_id !== message.user_id &&
+                  {this.props.connectedUser.user_id !== message.user_id &&
                     this.state.messages[index - 1].user_id !==
                       message.user_id && (
                       <div
@@ -216,7 +217,7 @@ class Chat extends Component {
                           align="bottom"
                         />
                       </div>
-                    )}*/
+                    )}
 
                   <span
                     style={{
