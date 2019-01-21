@@ -576,28 +576,30 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
-  fs.rename(req.file.path, "public/api/" + req.file.originalname, function(
-    err
-  ) {
-    if (err) {
-      res.send("problème durant le déplacement");
-    } else {
-      connection.query(
-        `UPDATE users SET user_photo = ? WHERE user_email = ?`,
-        [fileName, emailUser],
-        err => {
-          if (err) {
-            console.log(err);
-            res.status(500).json({ toastType: "error" });
-          } else {
-            res
-              .status(200)
-              .json({ toastType: "success", message: "Avatar modifié" });
+  fs.rename(
+    req.file.path,
+    "public/api/images/" + req.file.originalname,
+    function(err) {
+      if (err) {
+        res.send("problème durant le déplacement");
+      } else {
+        connection.query(
+          `UPDATE users SET user_photo = ? WHERE user_email = ?`,
+          [fileName, emailUser],
+          err => {
+            if (err) {
+              console.log(err);
+              res.status(500).json({ toastType: "error" });
+            } else {
+              res
+                .status(200)
+                .json({ toastType: "success", message: "Avatar modifié" });
+            }
           }
-        }
-      );
+        );
+      }
     }
-  });
+  );
 });
 
 //Chat
