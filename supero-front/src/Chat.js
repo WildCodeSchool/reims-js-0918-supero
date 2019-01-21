@@ -231,7 +231,7 @@ class Chat extends Component {
                               height: "100%",
                               width: "100%"
                             }}
-                            src={`http://localhost:3001/images/${
+                            src={`${process.env.REACT_APP_API}/images/${
                               message.user_photo
                             }`}
                             alt="avatar"
