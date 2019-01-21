@@ -13,9 +13,9 @@ const connection = require("./conf");
 const SocketIO = require("socket.io");
 //require("socketio");
 const server = http.createServer(app);
-const io = require('socket.io')(server, {
-  path: '/chat/socket.io'
-  });
+const io = require("socket.io")(server, {
+  path: "/chat/socket.io"
+});
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -576,7 +576,7 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
-  fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
+  fs.rename(req.file.path, "public/api/" + req.file.originalname, function(
     err
   ) {
     if (err) {

@@ -79,4 +79,4 @@ typings/
 .dynamodb/ 
 
 tmp/
-public/images
+public/api
