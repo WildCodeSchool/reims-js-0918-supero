@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 var dbm;
 var type;
 var seed;
 
 /**
- * We receive the dbmigrate dependency from dbmigrate initially.
- * This enables us to not have to rely on NODE_PATH.
- */
+  * We receive the dbmigrate dependency from dbmigrate initially.
+  * This enables us to not have to rely on NODE_PATH.
+  */
 exports.setup = function(options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
@@ -16,13 +16,13 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.createTable(
-    "messages",
+    "user_has_activities",
     {
       id: { type: "int", primaryKey: true, autoIncrement: true },
       activity_id: {
         type: "int",
         foreignKey: {
-          name: "activity_id_has_messages_fk",
+          name: "user_has_activities_activity_id_fk",
           table: "activities",
           rules: {
             onDelete: "CASCADE",
@@ -34,7 +34,7 @@ exports.up = function(db, callback) {
       user_id: {
         type: "int",
         foreignKey: {
-          name: "messages_has_user_id_fk",
+          name: "user_has_activities_user_id_fk",
           table: "users",
           rules: {
             onDelete: "CASCADE",
@@ -42,9 +42,6 @@ exports.up = function(db, callback) {
           },
           mapping: "user_id"
         }
-      },
-      message: {
-        type: "text"
       }
     },
     callback
@@ -52,9 +49,9 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db) {
-  return db.dropTable("messages");
+  return db.dropTable("user_has_activities");
 };
 
 exports._meta = {
-  version: 1
+  "version": 1
 };

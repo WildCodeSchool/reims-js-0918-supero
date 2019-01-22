@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
 var dbm;
 var type;
 var seed;
 
 /**
- * We receive the dbmigrate dependency from dbmigrate initially.
- * This enables us to not have to rely on NODE_PATH.
- */
+  * We receive the dbmigrate dependency from dbmigrate initially.
+  * This enables us to not have to rely on NODE_PATH.
+  */
 exports.setup = function(options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
@@ -43,21 +43,23 @@ exports.up = function(db, callback) {
           mapping: "user_id"
         }
       },
-      difficulty: "int",
+      activity_difficulty: "int",
       activity_description: "text",
-      adresse: "string",
-      city: "string",
-      latitude: "int",
-      longitude: "int",
-      start_time: "datetime",
-      duration: "int",
-      photo: "string",
-      max_participants: "int",
-      creation_time: {
+      activity_adresse: "string",
+      activity_city: "string",
+      activity_latitude: "decimal(10,6)",
+      activity_longitude: "decimal(10,6)",
+      activity_start_time: "datetime",
+      activity_duration: "time",
+      activity_photo: "string",
+      activity_max_participants: "int",
+      activity_creation_time: {
         type: "timestamp",
         notNull: true,
         defaultValue: new String("CURRENT_TIMESTAMP")
-      }
+      },
+      activity_title: "string",
+      activity_more_infos: "string"
     },
     callback
   );
@@ -68,5 +70,5 @@ exports.down = function(db) {
 };
 
 exports._meta = {
-  version: 1
+  "version": 1
 };
