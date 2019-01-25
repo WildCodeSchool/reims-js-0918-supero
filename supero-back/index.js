@@ -105,13 +105,14 @@ app
     "/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
+      console.log(req.query.page);
       const limit = 5;
       const offset = (req.query.page - 1) * limit;
       const order = req.query.order;
       const ascDesc = order === "activity_start_time" ? "ASC" : "DESC";
       req.query.page !== undefined
         ? connection.query(
-            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities`,
+            `SELECT COUNT(activity_id) AS activitiesTotal FROM activities WHERE activity_start_time > DATE(NOW())`,
             (err, result) => {
               if (err) {
                 console.log(err);
@@ -141,7 +142,7 @@ app
             `SELECT ${columnsRequiredForActivities}
       FROM activities AS a 
       JOIN sports AS s ON a.sport_id = s.sport_id 
-      JOIN users AS u ON a.creator_id = u.user_id `,
+      JOIN users AS u ON a.creator_id = u.user_id WHERE activity_start_time > DATE(NOW())`,
             (err, result) => {
               if (err) {
                 console.log(err);
@@ -525,7 +526,7 @@ app.get(
   (req, res) => {
     const idUser = req.user.id;
     connection.query(
-      `SELECT * FROM users WHERE user_id = ${idUser}`,
+      `SELECT * FROM users WHERE user_id = ?`,
       [idUser],
       (err, result) => {
         if (err) {
@@ -702,10 +703,11 @@ app.get(
   JOIN
       sports AS s
   ON
-      a.sport_id = s.sport_id WHERE m.user_id = ${user_id} OR a.creator_id = ${user_id} GROUP BY
+      a.sport_id = s.sport_id WHERE m.user_id = ? OR a.creator_id = ? GROUP BY
       a.activity_id,
       u.user_pseudo,
       u.user_photo`,
+      [user_id, user_id],
       (err, result) => {
         if (err) {
           console.log(err);

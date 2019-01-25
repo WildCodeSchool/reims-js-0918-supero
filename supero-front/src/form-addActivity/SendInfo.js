@@ -3,6 +3,8 @@ import { Field, reduxForm } from "redux-form";
 import { Button, Form, FormGroup, Container, Row, Col } from "reactstrap";
 import validate from "./validate";
 import renderField from "../renderField";
+import ComeFromTransparent from "../Animations/ComeFromTransparent";
+import ComeFromLeft from "../Animations/ComeFromLeft";
 
 const SendInfo = props => {
   const { handleSubmit, pristine, previousPage, submitting } = props;
@@ -11,39 +13,47 @@ const SendInfo = props => {
       <Row className="d-flex justify-content-center">
         <Col xs="10">
           <Form onSubmit={handleSubmit}>
-            <h2 className="text-center">Plus d'infos</h2>
+            <ComeFromTransparent delay={300}>
+              <h2 className="text-center">Plus d'infos</h2>
+            </ComeFromTransparent>
             <FormGroup>
-              <Field
-                name="description"
-                type="textarea"
-                component={renderField}
-                label="Description"
-              />
+              <ComeFromLeft delay={400}>
+                <Field
+                  name="description"
+                  type="textarea"
+                  component={renderField}
+                  label="Description"
+                />
+              </ComeFromLeft>
             </FormGroup>
             <FormGroup>
-              <Field
-                name="more_infos"
-                type="text"
-                component={renderField}
-                label="Infos complémentaire"
-              />
+              <ComeFromLeft delay={500}>
+                <Field
+                  name="more_infos"
+                  type="text"
+                  component={renderField}
+                  label="Infos complémentaire"
+                />
+              </ComeFromLeft>
             </FormGroup>
-            <div className="d-flex justify-content-between">
-              <Button
-                type="button "
-                className="previous"
-                onClick={previousPage}
-              >
-                Précédent
-              </Button>
-              <Button
-                type="submit"
-                className="valider"
-                disabled={pristine || submitting}
-              >
-                Valider
-              </Button>
-            </div>
+            <ComeFromTransparent delay={600}>
+              <div className="d-flex justify-content-between">
+                <Button
+                  type="button "
+                  className="previous"
+                  onClick={previousPage}
+                >
+                  Précédent
+                </Button>
+                <Button
+                  type="submit"
+                  className="valider"
+                  disabled={pristine || submitting}
+                >
+                  Valider
+                </Button>
+              </div>
+            </ComeFromTransparent>
           </Form>
         </Col>
       </Row>
