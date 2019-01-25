@@ -4,6 +4,6 @@
     "user": { "ENV": "DEV_USER" },
     "password": { "ENV": "DEV_PASSWORD" },
     "host": "localhost",
-    "database": "superoTest"
+    "database": { "ENV": "DEV_DB" }
   }
 }

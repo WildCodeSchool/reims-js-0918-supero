@@ -24,7 +24,7 @@ exports.up = function(db, callback) {
       "1980-10-07",
       "be.niveau@hotmail.fr",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "logo.png",
+      "benoit.jpg",
       "3",
       "Plus d'infos perso..."
     ],
@@ -32,11 +32,11 @@ exports.up = function(db, callback) {
       "Raymond",
       "Fabien",
       "Homme",
-      "vortex",
+      "run-to-the-wild",
       "1990-08-09",
-      "voortexxx@gmail.com",
+      "vortexxx@gmail.com",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "logo.png",
+      "fabien.jpg",
       "5",
       "Plus d'infos perso..."
     ],
@@ -48,7 +48,7 @@ exports.up = function(db, callback) {
       "1995-08-02",
       "quentin_51@live.fr",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "logo.png",
+      "quentin.jpg",
       "1",
       "Plus d'infos perso..."
     ],
@@ -60,7 +60,7 @@ exports.up = function(db, callback) {
       "1990-03-21",
       "rb.guerre@gmail.com",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "logo.png",
+      "robin.jpg",
       "2",
       "Plus d'infos perso..."
     ]
