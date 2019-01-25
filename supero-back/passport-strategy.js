@@ -14,7 +14,8 @@ passport.use(
     },
     function(email, password, cb) {
       connection.query(
-        `SELECT * FROM users WHERE user_email = '${email}'`,
+        `SELECT * FROM users WHERE user_email = ?`,
+        [email],
         (err, result) => {
           if (err) {
             return cb(null, false, {
