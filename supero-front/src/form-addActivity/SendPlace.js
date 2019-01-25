@@ -13,7 +13,7 @@ const SendPlace = props => {
     <Container fluid>
       <Row className="d-flex justify-content-center">
         <Col xs="10">
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} autoComplete="off">
             <ComeFromTransparent delay={300}>
               <h2 className="text-center">Où ?</h2>
             </ComeFromTransparent>

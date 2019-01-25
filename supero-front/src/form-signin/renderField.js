@@ -9,6 +9,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
         {...input}
         placeholder={label}
         type={type}
+        autoComplete="off"
       />
       {touched && error && (
         <span className="error">
