@@ -194,7 +194,7 @@ class ActivityDetail extends React.Component {
                     : this.props.activityDetail.sport_name === "running"
                     ? "running"
                     : this.props.activityDetail.sport_name ===
-                      "autres sports ext."
+                      "exterieur"
                     ? "cloud-sun"
                     : "city"
                 }`}
