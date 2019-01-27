@@ -47,7 +47,7 @@ class MyActivities extends Component {
                   active: this.state.collapseParticipation === true
                 })}
               >
-                <span>Participés</span> <i className="fas fa-chevron-up" />
+                <span>Participées</span> <i className="fas fa-chevron-up" />
               </h4>
 
               <Collapse isOpen={this.state.collapseParticipation}>
@@ -72,7 +72,7 @@ class MyActivities extends Component {
                   active: this.state.collapseCreated === true
                 })}
               >
-                <span>Organisés</span> <i className="fas fa-chevron-up" />
+                <span>Organisées</span> <i className="fas fa-chevron-up" />
               </h4>
 
               <Collapse isOpen={this.state.collapseCreated}>
