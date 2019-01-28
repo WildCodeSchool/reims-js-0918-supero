@@ -15,7 +15,14 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db, callback) {
-  db.runSql(`UPDATE sports SET sport_name = "velo" WHERE sport_id = 2`, callback);
+  [
+    ["running"],
+    ["velo"],
+    ["natation"],
+    ["musculation"],
+    ["exterieur"],
+    ["interieur"]
+  ].map(data => db.insert("sports", ["sport_name"], data, callback));
 };
 
 exports.down = function(db) {

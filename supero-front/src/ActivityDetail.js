@@ -193,8 +193,7 @@ class ActivityDetail extends React.Component {
                     ? "dumbbell"
                     : this.props.activityDetail.sport_name === "running"
                     ? "running"
-                    : this.props.activityDetail.sport_name ===
-                      "autres sports ext."
+                    : this.props.activityDetail.sport_name === "exterieur"
                     ? "cloud-sun"
                     : "city"
                 }`}
@@ -257,7 +256,7 @@ class ActivityDetail extends React.Component {
                   />
                 </Media>
                 <Media className="ml-2" body>
-                  <Media heading>Organisé par</Media>
+                  <Media heading>Organisée par</Media>
                   <Link
                     to={`/UserProfile/${this.props.activityDetail.creator_id}`}
                   >

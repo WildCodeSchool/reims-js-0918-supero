@@ -53,16 +53,14 @@ class Header extends React.Component {
                 />
               )
             ) : (
-              <Link to="ActivitiesList">
-                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-              </Link>
+              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             )}
             <ComeFromTransparent delay={50}>
               <h2>{this.props.title}</h2>
             </ComeFromTransparent>
-            <NavbarBrand href="/" className="mr-auto">
-              Supero
-            </NavbarBrand>
+            <Link to="/ActivitiesList">
+              <NavbarBrand className="mr-auto">Supero</NavbarBrand>
+            </Link>
           </Navbar>
         ) : (
           <div className="menu-container">

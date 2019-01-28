@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import formatDate from "./formatDate";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,7 +25,13 @@ const Conversation = props => {
               ? "bicycle"
               : props.sport_name === "natation"
               ? "swimmer"
-              : props.sport_name
+              : props.sport_name === "musculation"
+              ? "dumbbell"
+              : props.sport_name === "running"
+              ? "running"
+              : props.sport_name === "exterieur"
+              ? "cloud-sun"
+              : "city"
           }`}
         />
         <span style={{ fontWeight: 300 }}>
@@ -34,9 +39,7 @@ const Conversation = props => {
         </span>{" "}
         - {props.activity_title}
       </p>
-      <Button>
-        <Link to={`/Chat/${props.activity_id}`}>Go</Link>
-      </Button>
+      <Button>Go</Button>
     </div>
   );
 };
