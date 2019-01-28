@@ -1,0 +1,149 @@
+.activity_profile {
+  background-color: #e4e5e6;
+}
+
+.activity_profile .activity_detail {
+  display: flex;
+  padding: 20px 20px 10px;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.activity_profile .activity_detail h2 {
+  margin-bottom: 0px;
+}
+
+.activity_profile .activity_detail h3 {
+  font-weight: 300;
+}
+
+.activity_profile .activity_detail .activity_detail_right {
+  font-family: "Open Sans", sans-serif;
+}
+
+.activity_profile .activity_profile_pastille_orange {
+  background-color: #e57419;
+  position: absolute;
+  font-size: 45px;
+  bottom: -40px;
+  left: 50%;
+  margin-left: -45px;
+  color: #fff;
+  text-align: center;
+  display: block;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.activity_profile .activity_detail .difficulty {
+  margin: 0 auto 10px;
+  display: flex;
+}
+
+.activity_profile .activity_detail .difficulty i {
+  text-align: center;
+  color: #fff;
+  margin: 0 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  padding: 4px;
+  padding-top: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+.activity_profile .activity_detail .activity_detail_icon {
+  display: block;
+}
+
+.activity_profile .activity_detail .activity_detail_icon svg {
+  width: 20px;
+  text-align: center;
+}
+
+.activity_profile .activity_creator_photo {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  border-radius: 50px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.activity_profile .activity_creator {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 20px;
+}
+
+.activity_profile .activity_creator a {
+  color: #212529;
+}
+
+.activity_profile .activity_creator h4 {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #7c7c7c;
+  margin-bottom: 0;
+}
+
+.activity_profile .activity_creator .activity_creator_button {
+  background-color: #fff;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  color: #7c7c7c;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 7px 20px;
+  margin: 0 auto;
+  font-family: "Oswald", sans-serif;
+  cursor: pointer;
+}
+
+.activity_profile .activity_creator .activity_creator_button a {
+  color: #7c7c7c;
+}
+
+.activity_profile .activity_description {
+  margin-top: 5px;
+  font-weight: 300;
+  font-family: "Open Sans", sans-serif;
+  margin: 10px 20px;
+  padding-top: 10px;
+  border-top: 1px solid #21252936;
+}
+
+.activity_profile .activity_participation_button {
+  background-color: #e57419;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  width: 70%;
+  font-size: 25px;
+  padding: 7px 0;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.nb_participants {
+  font-family: "Open Sans", sans-serif;
+  color: #7c7c7c;
+  font-size: 12px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 5px;
+}

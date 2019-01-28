@@ -1,0 +1,120 @@
+.user_profile {
+  background-color: #e4e5e6;
+  padding-top: 40px;
+}
+
+.user_profile .avatar {
+  background-color: white;
+  position: relative;
+  bottom: 60px;
+  font-size: 45px;
+  color: #fff;
+  text-align: center;
+  display: block;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.user_profile .user_name {
+  padding: 20px 20px 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.user_profile .user_name h2 {
+  margin-bottom: 0px;
+}
+
+.user_profile .user_name span {
+  font-weight: 300;
+}
+
+.user_profile .user_age {
+  font-weight: 300;
+  color: #868787;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.user_profile .user_age:after {
+  content: "";
+  display: block;
+  width: 40px;
+  background-color: #212529;
+  height: 1px;
+  margin: 10px auto;
+}
+.user_profile .user_detail {
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user_profile .user_detail p {
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.user_profile .user_detail p span {
+  font-weight: bold;
+}
+
+.user_profile .user_about {
+  margin-top: 5px;
+  font-weight: 300;
+  font-family: "Open Sans", sans-serif;
+  margin: 10px 20px;
+  padding-top: 10px;
+  border-top: 1px solid #21252936;
+}
+
+.user_profile .send_message {
+  background-color: #e57419;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  color: #fff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  width: 70%;
+  font-size: 25px;
+  padding: 7px 0;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.user_profile .level {
+  margin: 0 auto 10px;
+  display: flex;
+}
+
+.user_profile .level i {
+  text-align: center;
+  color: #fff;
+  margin: 0 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  padding: 4px;
+  padding-top: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+.user_profile .level i:first-child {
+  margin-left: 0;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-color: #fff !important;
+}

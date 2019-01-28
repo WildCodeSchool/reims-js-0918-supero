@@ -1,0 +1,25 @@
+.buttonMyActivities {
+  background: none !important;
+  border: 0 !important;
+  color: #fff;
+  cursor: pointer;
+  width: 90%;
+  margin: 0 18px;
+  font-weight: 400;
+}
+
+.buttonMyActivities .fa-chevron-up {
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.buttonMyActivities.active .fa-chevron-up {
+  transform: rotate(180deg);
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}

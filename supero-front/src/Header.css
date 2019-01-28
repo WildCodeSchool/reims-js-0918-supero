@@ -1,0 +1,114 @@
+.navbar-dark .navbar-brand {
+  margin-right: 0 !important;
+  color: #fff;
+}
+
+.navbar {
+  padding: 10px 5% 10px !important;
+  background-color: #262626;
+  color: #fff;
+}
+
+.navbar .navbar-brand {
+  background-image: url("/images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  text-indent: -9999px;
+  width: 50px;
+  height: 50px;
+}
+
+.navbar h2 {
+  font-family: "Oswald", sans-serif;
+  margin-top: 5px;
+}
+
+.navbar-toggler {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar-collapse {
+  text-align: center;
+}
+
+.menu-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: url("/images/bg_blur.png");
+  background-size: cover;
+  background-position: 25%;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 9999;
+}
+
+.menu-container a {
+  text-align: center;
+  color: #fff !important;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.menu-container .close-menu-icon {
+  color: #fff;
+  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.menu-container .close-menu-button {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255);
+  color: #fff;
+  padding: 5px 40px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+}
+
+.pseudo {
+  color: white;
+  padding: 5px 90px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 20px auto;
+  margin-top: 10px;
+  display: block;
+  font-size: 20px;
+}
+
+.avatar {
+  margin: 0px auto;
+  border: 1px solid rgba(255, 255, 255);
+  bottom: 60px;
+  font-size: 45px;
+  color: #fff;
+  display: block;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  border-radius: 50px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.menu-user-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  margin-bottom: 15px;
+}
