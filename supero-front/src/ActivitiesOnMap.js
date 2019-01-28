@@ -45,7 +45,7 @@ class ActivitiesOnMap extends Component {
   render() {
     return (
       <div style={{ textAlign: "center" }}>
-        <Header goBack={this.goBack} title="Geolocalisation" />
+        <Header goBack={this.goBack} title="Géolocalisation" />
         <ComeFromTransparent delay={300}>
           {!this.props.isGeolocationAvailable ? (
             <div
