@@ -80,3 +80,10 @@ typings/
 
 tmp/
 public/images
+public/api/images/*
+!public/api/images/example-benoit.jpg
+!public/api/images/example-Clement.png
+!public/api/images/example-quentin.jpg
+!public/api/images/example-romain.jpg
+!public/api/images/example-thomas.jpg
+!public/api/images/example-fabien.jpg

@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 var dbm;
 var type;
 var seed;
 
 /**
-  * We receive the dbmigrate dependency from dbmigrate initially.
-  * This enables us to not have to rely on NODE_PATH.
-  */
+ * We receive the dbmigrate dependency from dbmigrate initially.
+ * This enables us to not have to rely on NODE_PATH.
+ */
 exports.setup = function(options, seedLink) {
   dbm = options.dbmigrate;
   type = dbm.dataType;
@@ -24,7 +24,7 @@ exports.up = function(db, callback) {
       "1980-10-07",
       "be.niveau@hotmail.fr",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "benoit.jpg",
+      "example-benoit.jpg",
       "3",
       "Plus d'infos perso..."
     ],
@@ -36,7 +36,7 @@ exports.up = function(db, callback) {
       "1990-08-09",
       "vortexxx@gmail.com",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "fabien.jpg",
+      "example-fabien.jpg",
       "5",
       "Plus d'infos perso..."
     ],
@@ -48,7 +48,7 @@ exports.up = function(db, callback) {
       "1995-08-02",
       "quentin_51@live.fr",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "quentin.jpg",
+      "example-quentin.jpg",
       "1",
       "Plus d'infos perso..."
     ],
@@ -60,7 +60,7 @@ exports.up = function(db, callback) {
       "1990-03-21",
       "rb.guerre@gmail.com",
       "$2b$10$dmcmUtoSaNkIRvXe3S3cx.zhHN97WtbX6MChbSNrDcqYhuG3UN.OK",
-      "robin.jpg",
+      "example-robin.jpg",
       "2",
       "Plus d'infos perso..."
     ]
@@ -90,5 +90,5 @@ exports.down = function(db) {
 };
 
 exports._meta = {
-  "version": 1
+  version: 1
 };
