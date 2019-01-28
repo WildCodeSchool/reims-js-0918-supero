@@ -17,7 +17,7 @@ const SendPlace = props => {
             <ComeFromTransparent delay={300}>
               <h2 className="text-center">Où ?</h2>
             </ComeFromTransparent>
-            <FormGroup>
+            <FormGroup style={{ zIndex: 9999 }}>
               <ComeFromLeft delay={400}>
                 {" "}
                 <Field

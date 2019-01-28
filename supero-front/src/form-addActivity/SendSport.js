@@ -83,7 +83,7 @@ const SendSport = props => {
                   name="participants"
                   type="number"
                   component={renderField}
-                  label="Limite maximum de participants"
+                  label="Limite maximale de participants"
                 />
               </ComeFromLeft>
             </FormGroup>
