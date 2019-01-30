@@ -59,7 +59,7 @@ class Header extends React.Component {
               <h2>{this.props.title}</h2>
             </ComeFromTransparent>
             <Link to="/ActivitiesList">
-              <NavbarBrand className="mr-auto">Supero</NavbarBrand>
+              <span className="mr-auto navbar-brand">Supero</span>
             </Link>
           </Navbar>
         ) : (
