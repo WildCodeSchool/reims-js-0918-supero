@@ -9,13 +9,17 @@ class Redirection extends Component {
   render() {
     return (
       <div
-        style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
       >
         <div style={{ paddingBottom: "10px" }}>
           <Header redirection={true} title="Succès !" />
         </div>
         <ComeFromTransparent delay={300}>
-          {" "}
           <div className="redirection-container">
             <h3>Félicitations !</h3>
             <h5>Votre activité a bien été ajoutée !</h5>
