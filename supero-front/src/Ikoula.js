@@ -81,7 +81,7 @@ export class Ikoula extends Component {
               right: "5px"
             }}
           >
-            <i class="fas fa-times" />
+            <i className="fas fa-times" />
           </span>
         </div>
       )
