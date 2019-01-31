@@ -576,19 +576,10 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
-  const date = new Date()
-    .toLocaleString()
-    .split("/")
-    .join("")
-    .split(":")
-    .join("")
-    .replace("à", "")
-    .replace(" ", "")
-    .replace(" ", "");
-  console.log(date + req.file.originalname);
+  const uuidv1 = require("uuid/v1");
   fs.rename(
     req.file.path,
-    `public/api/images/${date}-${req.file.originalname}`,
+    `public/api/images/${uuidv1()}-${req.file.originalname}`,
     function(err) {
       if (err) {
         console.log("deplacement", err);
