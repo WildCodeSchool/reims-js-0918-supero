@@ -27,7 +27,7 @@ const LoginHome = () => {
             <p style={{ fontWeight: "bold" }}>Le Dieu du sport</p>
           </ComeFromTransparent>
           <ComeFromLeft delay={1000}>
-            <button className="button-home facebook">
+            <button disabled className="button-home facebook">
               Se connecter avec <span>Facebook</span>
             </button>
           </ComeFromLeft>
@@ -45,11 +45,6 @@ const LoginHome = () => {
               </button>
             </Link>
           </ComeFromLeft>
-          <ComeFromTransparent delay={1400}>
-            <a className="password-forgotten" href="#">
-              Mot de passe oublié ?
-            </a>
-          </ComeFromTransparent>
         </Col>
       </Row>
     </Container>

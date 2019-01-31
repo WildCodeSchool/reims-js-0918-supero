@@ -27,7 +27,7 @@ const upload = multer({
     cb(null, true);
   },
   limits: {
-    fileSize: 3 * 1024 * 1024
+    fileSize: 6 * 1024 * 1024
   }
 });
 const bodyParser = require("body-parser");
