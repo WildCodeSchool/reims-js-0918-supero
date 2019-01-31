@@ -104,7 +104,7 @@ class UserProfile extends React.Component {
             <div className="avatar rounded-circle">
               <img
                 style={{ objectFit: "cover", height: "100%", width: "100%" }}
-                src={`${process.env.REACT_APP_API}/images/${
+                src={`${process.env.REACT_APP_API_IMAGES}/images/${
                   this.props.userProfile.user_photo
                 }`}
                 alt="avatar"

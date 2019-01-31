@@ -69,7 +69,7 @@ class Header extends React.Component {
                 <BounceEffect delay={100}>
                   <div className="avatar rounded-circle">
                     <img
-                      src={`${process.env.REACT_APP_API}/images/${
+                      src={`${process.env.REACT_APP_API_IMAGES}/images/${
                         this.props.connectedUser.user_photo
                       }`}
                       alt="avatar"
