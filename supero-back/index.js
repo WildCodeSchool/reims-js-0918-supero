@@ -576,14 +576,16 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
-  const date = new Date();
-  date
+  const date = new Date()
     .toLocaleString()
-    .split("-")
+    .split("/")
     .join("")
     .split(":")
     .join("")
+    .replace("à", "")
+    .replace(" ", "")
     .replace(" ", "");
+  console.log(date + req.file.originalname);
   fs.rename(
     req.file.path,
     `public/api/images/${date}-${req.file.originalname}`,
