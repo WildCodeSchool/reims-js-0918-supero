@@ -581,8 +581,10 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
     "public/api/images/" + req.file.originalname,
     function(err) {
       if (err) {
+        console.log("deplacement", err);
         res.send("problème durant le déplacement");
       } else {
+        console.log("connection");
         connection.query(
           `UPDATE users SET user_photo = ? WHERE user_email = ?`,
           [fileName, emailUser],
