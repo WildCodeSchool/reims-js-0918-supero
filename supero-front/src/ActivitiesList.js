@@ -69,7 +69,7 @@ class ActivitiesList extends Component {
 
   getConnectedUserActivities = () => {
     axios
-      .get(`http://localhost:3001/userActivities`, {
+      .get(`${process.env.REACT_APP_API}/userActivities`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")

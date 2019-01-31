@@ -105,7 +105,7 @@ class ActivityDetail extends React.Component {
     const token = localStorage.getItem("superoUser");
     const activity_id = { activity_id: this.props.match.params.id };
     axios
-      .post(`http://localhost:3001/unsubscribe/`, activity_id, {
+      .post(`${process.env.REACT_APP_API}/unsubscribe/`, activity_id, {
         headers: {
           authorization: "Bearer " + token
         }
@@ -123,7 +123,7 @@ class ActivityDetail extends React.Component {
     const token = localStorage.getItem("superoUser");
     const activity_id = this.props.match.params.id;
     axios
-      .delete(`http://localhost:3001/activity/${activity_id}`, {
+      .delete(`${process.env.REACT_APP_API}/activity/${activity_id}`, {
         headers: {
           authorization: "Bearer " + token
         }
@@ -141,7 +141,7 @@ class ActivityDetail extends React.Component {
 
   getUserActivities = () => {
     axios
-      .get(`http://localhost:3001/userActivities`, {
+      .get(`${process.env.REACT_APP_API}/userActivities`, {
         headers: {
           accept: "application/json",
           authorization: "Bearer " + localStorage.getItem("superoUser")

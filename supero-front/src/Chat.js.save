@@ -103,16 +103,14 @@ class Chat extends Component {
 
   connection() {
     const roomID = { ...this.props.match.params };
-    console.log("roomID", roomID);
-    socket = io.connect(
-      "/",
-      { secure: false, rejectUnauthorized: false, path: "/chat/socket.io" }
-    );
+    console.log("roomID",roomID);
+    socket = io('/', {secure: true, rejectUnauthorized: false, path: 'chat/socket.io'})
+;
     console.log("connected", socket.connected);
     socket.on("connect", function() {
       // Connected, let's sign-up for to receive messages for this room
       console.log("connect");
-      console.log("socket.connected", socket.connected);
+      console.log("socket.connected", socket.connected)   
       socket.emit("room", roomID);
     });
     //listen on new_message
@@ -152,9 +150,7 @@ class Chat extends Component {
               paddingTop: "80px",
               color: "#fff",
               width: "90%",
-              margin: "0 auto",
-              height: "75vh",
-              overflow: "hidden"
+              margin: "0 auto"
             }}
             id="chat"
           >
@@ -193,6 +189,36 @@ class Chat extends Component {
                         : "flex-end"
                   }}
                 >
+                  {this.props.connectedUser.user_id !== message.user_id &&
+                    this.state.messages[index - 1].user_id !==
+                      message.user_id && (
+                      <div
+                        className="user_photo"
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          backgroundSize: "cover",
+                          borderRadius: "50px",
+                          overflow: "hidden",
+                          objectFit: "cover",
+                          marginRight: "10px"
+                        }}
+                      >
+                        <img
+                          style={{
+                            objectFit: "cover",
+                            height: "100%",
+                            width: "100%"
+                          }}
+                          src={`${process.env.REACT_APP_API}/images/${
+                            message.user_photo
+                          }`}
+                          alt="avatar"
+                          align="bottom"
+                        />
+                      </div>
+                    )}
+
                   <span
                     style={{
                       backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -209,64 +235,36 @@ class Chat extends Component {
                           : "0"
                     }}
                   >
-                    {this.state.messages[index - 1] !== undefined
-                      ? this.props.connectedUser.user_id !== message.user_id &&
-                        this.state.messages[index - 1].user_id !==
-                          message.user_id && (
-                          <div
-                            className="user_photo"
+                    {this.state.messages[index - 1] !== undefined &&
+                      this.props.connectedUser.user_id !== message.user_id &&
+                      this.state.messages[index - 1].user_id !==
+                        message.user_id && (
+                        <div
+                          className="user_photo"
+                          style={{
+                            width: "25px",
+                            height: "25px",
+                            backgroundSize: "cover",
+                            borderRadius: "50px",
+                            overflow: "hidden",
+                            objectFit: "cover",
+                            marginRight: "10px"
+                          }}
+                        >
+                          <img
                             style={{
-                              width: "25px",
-                              height: "25px",
-                              backgroundSize: "cover",
-                              borderRadius: "50px",
-                              overflow: "hidden",
                               objectFit: "cover",
-                              marginRight: "10px"
+                              height: "100%",
+                              width: "100%"
                             }}
-                          >
-                            <img
-                              style={{
-                                objectFit: "cover",
-                                height: "100%",
-                                width: "100%"
-                              }}
-                              src={`${process.env.REACT_APP_API}/images/${
-                                message.user_photo
-                              }`}
-                              alt="avatar"
-                              align="bottom"
-                            />
-                          </div>
-                        )
-                      : this.props.connectedUser.user_id !==
-                          message.user_id && (
-                          <div
-                            className="user_photo"
-                            style={{
-                              width: "25px",
-                              height: "25px",
-                              backgroundSize: "cover",
-                              borderRadius: "50px",
-                              overflow: "hidden",
-                              objectFit: "cover",
-                              marginRight: "10px"
-                            }}
-                          >
-                            <img
-                              style={{
-                                objectFit: "cover",
-                                height: "100%",
-                                width: "100%"
-                              }}
-                              src={`${process.env.REACT_APP_API}/images/${
-                                message.user_photo
-                              }`}
-                              alt="avatar"
-                              align="bottom"
-                            />
-                          </div>
-                        )}
+                            src={`http://localhost:3001/images/${
+                              message.user_photo
+                            }`}
+                            alt="avatar"
+                            align="bottom"
+                          />
+                        </div>
+                      )}
                     <p
                       style={{
                         marginBottom: "0",
@@ -276,14 +274,11 @@ class Chat extends Component {
                             : "right"
                       }}
                     >
-                      {this.state.messages[index - 1] !== undefined
-                        ? this.props.connectedUser.user_id !==
-                            message.user_id &&
-                          this.state.messages[index - 1].user_id !==
-                            message.user_id &&
-                          `${message.user_pseudo} | `
-                        : this.props.connectedUser.user_id !==
-                            message.user_id && `${message.user_pseudo} | `}
+                      {this.state.messages[index - 1] !== undefined &&
+                        this.props.connectedUser.user_id !== message.user_id &&
+                        this.state.messages[index - 1].user_id !==
+                          message.user_id &&
+                        `${message.user_pseudo} | `}
                       <span style={{ fontWeight: "300" }}>
                         {message.message}
                       </span>
