@@ -59,7 +59,7 @@ class Header extends React.Component {
               <h2>{this.props.title}</h2>
             </ComeFromTransparent>
             <Link to="/ActivitiesList">
-              <NavbarBrand className="mr-auto">Supero</NavbarBrand>
+              <span className="mr-auto navbar-brand">Supero</span>
             </Link>
           </Navbar>
         ) : (
@@ -141,6 +141,21 @@ class Header extends React.Component {
                 >
                   Fermer le menu
                 </button>
+              </ComeFromTransparent>
+              <ComeFromTransparent delay={850}>
+                <a
+                  style={{ display: "block" }}
+                  href="https://www.ikoula.com"
+                  title="Ikoula Hébergement web, serveurs dédiés et solutions sur mesure"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="https://www.ikoula.com/img/hosted_by_ikoula_150_blanc.png"
+                    alt="Ikoula"
+                    border="0"
+                  />
+                </a>
               </ComeFromTransparent>
             </div>
           </div>

@@ -16,6 +16,7 @@ import MyActivitiesContainer from "./containers/MyActivitiesContainer";
 import ChatContainer from "./containers/ChatContainer";
 import MyAccountContainer from "./containers/MyAccountContainer";
 import MyConversationsContainer from "./containers/MyConversationsContainer";
+import Ikoula from "./Ikoula";
 
 class App extends Component {
   render() {
@@ -53,6 +54,7 @@ class App extends Component {
             component={MyConversationsContainer}
           />
         </Switch>
+        <Ikoula />
         <ReduxToastr
           timeOut={3000}
           newestOnTop={false}

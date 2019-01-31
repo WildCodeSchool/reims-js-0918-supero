@@ -13,7 +13,9 @@ const connection = require("./conf");
 const SocketIO = require("socket.io");
 //require("socketio");
 const server = http.createServer(app);
-const io = SocketIO(server);
+const io = require("socket.io")(server, {
+  path: "/chat/socket.io"
+});
 const fs = require("fs");
 const multer = require("multer");
 const upload = multer({
@@ -36,11 +38,11 @@ app.use(
   })
 );
 app.use(express.static("public"));
-app.use("/auth", auth);
+app.use("/api/auth", auth);
 app.use(cors());
 
 app.get(
-  "/test",
+  "/api/test",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.send(
@@ -70,7 +72,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Hello World!");
 });
 
@@ -102,7 +104,7 @@ const columnsRequiredForActivities = `
 
 app
   .get(
-    "/activities",
+    "/api/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       console.log(req.query.page);
@@ -156,7 +158,7 @@ app
   )
 
   .get(
-    "/search/:request",
+    "/api/search/:request",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const request = req.params.request;
@@ -183,7 +185,7 @@ app
   )
 
   .get(
-    "/activities/:activity_id",
+    "/api/activities/:activity_id",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const activityId = req.params.activity_id;
@@ -221,7 +223,7 @@ app
     }
   )
   .get(
-    "/activities/sports/:sports_id",
+    "/api/activities/sports/:sports_id",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const sportId = req.params.sports_id;
@@ -244,7 +246,7 @@ app
     }
   )
   .get(
-    "/activities/creators/:creator_id",
+    "/api/activities/creators/:creator_id",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const creatorId = req.params.creator_id;
@@ -267,7 +269,7 @@ app
     }
   )
   .get(
-    "/activities/city/:city",
+    "/api/activities/city/:city",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const city = req.params.city;
@@ -290,7 +292,7 @@ app
     }
   )
   .get(
-    "/activities/geolocalisation",
+    "/api/activities/geolocalisation",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const latitude = req.query.latitude;
@@ -315,7 +317,7 @@ app
   )
 
   .post(
-    "/activities",
+    "/api/activities",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       req.body = Object.assign({ creator_id: req.user.id }, req.body);
@@ -343,7 +345,7 @@ app
   )
 
   .delete(
-    "/activity/:activity_id/",
+    "/api/activity/:activity_id/",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const activityId = req.params.activity_id;
@@ -363,7 +365,7 @@ app
   )
   // S'inscrire à une activité
   .post(
-    "/subscribe",
+    "/api/subscribe",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       req.body = Object.assign(
@@ -389,7 +391,7 @@ app
   )
   // Se désinscrire
   .post(
-    "/unsubscribe",
+    "/api/unsubscribe",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const user_id = req.user.id;
@@ -410,7 +412,7 @@ app
     }
   )
   .put(
-    "/activities/:activity_id",
+    "/api/activities/:activity_id",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const idActivity = req.params.activity_id;
@@ -433,7 +435,7 @@ app
 // USERS -- Liste utilisateurs
 
 app.get(
-  "/users",
+  "/api/users",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     connection.query(`SELECT * FROM users`, (err, result) => {
@@ -449,7 +451,7 @@ app.get(
 
 // USERS -- créer un utilisateur
 
-app.post("/users", (req, res) => {
+app.post("/api/users", (req, res) => {
   const formData = req.body;
   formData.user_password = bcrypt.hashSync(formData.user_password, 10);
   connection.query("INSERT INTO users SET ?", formData, err => {
@@ -470,7 +472,7 @@ app.post("/users", (req, res) => {
 // USERS -- afficher le profil d'un utilisateur
 
 app.get(
-  "/users/:user_id",
+  "/api/users/:user_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const idUser = req.params.user_id;
@@ -491,7 +493,7 @@ app.get(
 
 //USERS -- Récupérer les activités de l'utilisateur connecté
 app.get(
-  "/userActivities",
+  "/api/userActivities",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let idUser = req.user.id;
@@ -521,7 +523,7 @@ app.get(
 // USERS -- afficher l'utilisateur connecté
 
 app.get(
-  "/connecteduser",
+  "/api/connecteduser",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const idUser = req.user.id;
@@ -543,7 +545,7 @@ app.get(
 // USERS -- modifier le profil d'un utilisateur
 
 app.put(
-  "/users/:id",
+  "/api/users/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const idUser = req.params.id;
@@ -566,36 +568,43 @@ app.put(
 );
 
 // USER -- AJOUT AVATAR
-app.post("/avatar/:email", upload.single("avatar"), function(req, res, next) {
+app.post("/api/Avatar/:email", upload.single("avatar"), function(
+  req,
+  res,
+  next
+) {
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
-  fs.rename(req.file.path, "public/images/" + req.file.originalname, function(
-    err
-  ) {
-    if (err) {
-      res.send("problème durant le déplacement");
-    } else {
-      connection.query(
-        `UPDATE users SET user_photo = ? WHERE user_email = ?`,
-        [fileName, emailUser],
-        err => {
-          if (err) {
-            console.log(err);
-            res.status(500).json({ toastType: "error" });
-          } else {
-            res
-              .status(200)
-              .json({ toastType: "success", message: "Avatar modifié" });
+  fs.rename(
+    req.file.path,
+    "public/api/images/" + req.file.originalname,
+    function(err) {
+      if (err) {
+        res.send("problème durant le déplacement");
+      } else {
+        connection.query(
+          `UPDATE users SET user_photo = ? WHERE user_email = ?`,
+          [fileName, emailUser],
+          err => {
+            if (err) {
+              console.log(err);
+              res.status(500).json({ toastType: "error" });
+            } else {
+              res
+                .status(200)
+                .json({ toastType: "success", message: "Avatar modifié" });
+            }
           }
-        }
-      );
+        );
+      }
     }
-  });
+  );
 });
 
 //Chat
-
+//console.log("socket.path", socket.path);
+console.log("io.path", io.path);
 let room = "";
 io.on("connection", socket => {
   console.log("New user connected");
@@ -621,7 +630,7 @@ io.on("connection", socket => {
 
 //Poster un message
 app.post(
-  "/messages",
+  "/api/messages",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const formData = req.body;
@@ -644,7 +653,7 @@ app.post(
 //Récupérer les messages
 
 app.get(
-  "/messages/:activity_id",
+  "/api/messages/:activity_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const activity_id = req.params.activity_id;
@@ -677,7 +686,7 @@ app.get(
 
 //Récupérer conversations d'un utilisateur
 app.get(
-  "/conversations/:user_id",
+  "/api/conversations/:user_id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const user_id = req.params.user_id;
