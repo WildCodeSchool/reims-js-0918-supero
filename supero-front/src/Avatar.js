@@ -74,6 +74,7 @@ class Avatar extends Component {
                 ) : (
                   <img
                     style={{
+                      objectFit: "cover",
                       width: "150px",
                       height: "150px",
                       borderRadius: "150px"

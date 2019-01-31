@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ikoula p.withBorder::after {
+  content: "";
+  display: block;
+  margin: 5px auto 0;
+  width: 40px;
+  background: none;
+  height: 1px;
+  border-bottom: 1px solid #321656;
+}
