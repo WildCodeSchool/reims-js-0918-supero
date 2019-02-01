@@ -207,7 +207,7 @@ class UserProfile extends React.Component {
           {this.props.userProfile.user_id ===
             this.props.connectedUser.user_id && (
             <Button className="send_message" tag={Link} to="/MyAccount">
-              Modifier mes informations
+              Modifier
             </Button>
           )}
         </div>

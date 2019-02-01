@@ -27,7 +27,7 @@ const upload = multer({
     cb(null, true);
   },
   limits: {
-    fileSize: 3 * 1024 * 1024
+    fileSize: 6 * 1024 * 1024
   }
 });
 const bodyParser = require("body-parser");
@@ -576,13 +576,16 @@ app.post("/api/Avatar/:email", upload.single("avatar"), function(
   const emailUser = req.params.email;
   const fileName = req.file.originalname;
   console.log(req.file.originalname);
+  const uuidv1 = require("uuid/v1");
   fs.rename(
     req.file.path,
-    "public/api/images/" + req.file.originalname,
+    `public/api/images/${uuidv1()}-${req.file.originalname}`,
     function(err) {
       if (err) {
+        console.log("deplacement", err);
         res.send("problème durant le déplacement");
       } else {
+        console.log("connection");
         connection.query(
           `UPDATE users SET user_photo = ? WHERE user_email = ?`,
           [fileName, emailUser],
