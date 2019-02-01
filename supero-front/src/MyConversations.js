@@ -21,7 +21,9 @@ class MyConversations extends Component {
   getAllConversations = () => {
     axios
       .get(
-        `http://localhost:3001/conversations/${this.props.match.params.userID}`,
+        `${process.env.REACT_APP_API}/conversations/${
+          this.props.match.params.userID
+        }`,
         {
           headers: {
             accept: "application/json",
